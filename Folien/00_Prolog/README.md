@@ -35,35 +35,28 @@ Folgendes Vorwissen ist für diesen Kurs notwendig:
 
 ---
 
-![bg contain right:15%](./Lernziele.jpg)
+![bg contain right:30%](./Lernziele.jpg)
 
 ## Lernziele
 
-Teilnehmer*innen können nach erfolgreichem bestehen dieses Kurses ...
+Teilnehmer*innen können nach Absolvieren des Kurses:
 
-- **Anforderungen** mit der *MATLAB Requirements Toolbox* erfassen
-- **Architekturen** mit dem *MATLAB System Composer* definieren
-- **Verhalten** mit *MATLAB Simulink* und *Stateflow* beschreiben
-- **Animationen** mit *MATLAB Simulink 3D Animation* erstellen
-- **Verifikationen** mit *MATLAB Simulink Test* und *Coverage* durchführen
-- **Fehlverhalten** mit *MATLAB Simulink Fault Analyzer* analysieren
-- **Optimierungen** mit *MATLAB Simulink Design Optimizer* vornehmen
+- **cyber-physische Systeme** mit einem gängigen modellbasierten Werkzeug **entwickeln**,
+- die **Modellkonzepte** dieses Werkzeugs für gegebene Aufgabenstellungen geeignet **anwenden**,
+- die **Funktionen** des Werkzeugs für Simulation und Verifikation gezielt **einsetzen**, und
+- **3D-Animationen** der Systeme unter gegebenen Betriebsbedingungen **erstellen**.
 
 ---
 
-![bg contain right:20%](./Kursinhalte.jpg)
+![bg contain right:30%](./Kursinhalte.jpg)
 
 ## Kursinhalte
 
-Dieser Kurs umfasst die folgenden sieben Kapitel:
+Dieser Kurs umfasst die folgenden drei Kapitel:
 
-1. **Anforderungen** (Welche Funktionen soll das System erfüllen?)
-1. **Architekturen** (Wie soll das System aufgebaut sein?)
-1. **Verhalten** (Wie soll sich das System verhalten?)
-1. **Animationen** (Wie soll das System aussehen?)
-1. **Verifikationen** (Wie gut funktioniert das System?)
-1. **Fehlverhalten** (Wie reagiert das System in Sonderfällen?)
-1. **Optimierungen** (Wie kann das System optimiert werden?)
+- **Kapitel 1: Anforderungen und Architekturen** (Welche Funktionen soll das System erfüllen und wie soll das System strukturiert sein?)
+- **Kapitel 2: Verhalten und Animationen**<br/>(Wie soll sich das System bei gegebenen Stimuli verhalten und wie soll das System aussehen?)
+- **Kapitel 3: Verifikationen und Störungen**<br/>(Wie gut funktioniert das System und wie reagiert das System bei Störungen?)
 
 ---
 

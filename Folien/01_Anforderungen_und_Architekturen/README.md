@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: fhooe
-header: MSE - Kapitel 1: Anforderungen
+header: MSE - Kapitel 1: Anforderungen und Architekturen
 footer: Dr. Georg Hackenberg, Professor für Informatik und Industriesysteme
 paginate: true
 math: mathjax
@@ -9,7 +9,7 @@ math: mathjax
 
 ![bg right](./Titelbild.jpg)
 
-# Kapitel 1: Anforderungen
+# Kapitel 1: Anforderungen und Architekturen
 
 TODO
 
