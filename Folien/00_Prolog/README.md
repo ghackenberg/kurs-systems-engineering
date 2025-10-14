@@ -280,30 +280,9 @@ Mit MATLAB Add-Ons kann der **Funktionsumfang** der MATLAB Entwick-lungsumgebung
 <div class="columns">
 <div>
 
-### MATLAB Add-On Manager
-
-Der Add-On Manager beitet eine **Übersicht** über die bereits **installierten Add-Ons** sowie **verfügbare Updates**.
-
-Des Weiteren kann für **jedes Add-On** die **Dokumentation** aufgerufen werden, und das Add-On auf Wunsch wieder **deinstalliert** werden.
-
-*Achten Sie darauf, dass Sie alle notwen-digen Add-Ons installiert haben!*
-
-</div>
-<div>
-
-![](./MATLAB_Add-On_Manager.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
 ### MATLAB Add-On Explorer
 
-Der Add-On Explorer bietet hingegen Zugriff auf die Welt **aller verfügbaren Add-Ons** im **MATLAB-Universum**.
+Der Add-On Explorer bietet Zugriff auf die Welt **aller verfügbaren Add-Ons** im **MATLAB-Universum**.
 
 Es stehen Add-Ons für **verschiedenste Anwendungsgebiete** von **Modellierung** und **Simulation** bis **Datenanalyse** und **maschinelles Lernen** zur Auswahl.
 
@@ -463,6 +442,44 @@ Das **Simulink 3D Animation** Add-On basiert beispielsweise auf dem MATLAB Kern 
 
 </div>
 </div>
+
+---
+
+<div class="columns">
+<div>
+
+### MATLAB Add-On Manager
+
+Der Add-On Manager bietet eine **Übersicht** über die bereits **installierten Add-Ons** sowie **verfügbare Updates**.
+
+Des Weiteren kann für **jedes Add-On** die **Dokumentation** aufgerufen werden, und das Add-On auf Wunsch wieder **deinstalliert** werden.
+
+*Achten Sie darauf, dass Sie alle notwen-digen Add-Ons installiert haben!*
+
+</div>
+<div>
+
+![](./MATLAB_Add-On_Manager.png)
+
+</div>
+</div>
+
+---
+
+![bg right](./Checkliste.jpg)
+
+### MATLAB Add-On Liste
+
+Wir benötigen diese Add-Ons:
+
+- Simulink
+- Simulink 3D Animation
+- Simulink Test
+- Simulink Coverage
+- Simulink Fault Analyzer
+- Requirements Toolbox
+- System Composer
+- Stateflow
 
 ---
 
