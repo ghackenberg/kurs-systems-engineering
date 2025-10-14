@@ -470,3 +470,87 @@ Das **Simulink 3D Animation** Add-On basiert beispielsweise auf dem MATLAB Kern 
 
 </div>
 </div>
+
+---
+
+<div class="columns">
+<div>
+
+### MATLAB Simulink
+
+Nachdem das Simulink Add-On installiert wurde, kann Simulink über den Reiter `Home` gestartet werden.
+
+Simulink selbst bietet eine komplett **eigenständige Benutzerschnittstell**e an, welche auf **Modellierung** und **Simulation** zugeschnitten ist.
+
+*Die klassische Benutzerschnittstelle von MATLAB ist hingegen für das Schreiben von Skripten ausgelegt!*
+
+</div>
+<div>
+
+![](./MATLAB_Simulink.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### MATLAB Simulink **Start**
+
+Über den **Startbildschirm** können neue Modelle erstellt werden, Beispiele geladen werden, oder Lernprogramme gestartet werden.
+
+Für die Erstellung neuer Modelle stehen **unterschiedliche Vorlagen** zur Auswahl, welche von **zusätzlichen Add-Ons** bereitgestellt werden.
+
+*Der Screenshot zeigt die Vorlagen von Simulink selbst!*
+
+</div>
+<div>
+
+![](./MATLAB_Simulink_Start.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### MATLAB Simulink **Beispiele**
+
+Der Reiter `Beispiele` beitet eine Übersicht über eine lange Liste von **Beispielmodellen**.
+
+Die Beispielmodelle sind wiederum **nach Add-On gruppiert** (z.B. *Simulink 3D Animation* im Screenshot).
+
+*Beispiele sind eine gute Quelle der Inspiration, um neue Add-Ons kennen zu lernen und weiter einzutauchen!*
+
+</div>
+<div>
+
+![](./MATLAB_Simulink_Beispiele.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### MATLAB Simulink **Lernen**
+
+Der Reiter `Lernen` bietet schließlich Zugriff auf eine Reihe von **geführten Lernmodulen**.
+
+Die Lernmodule sind direkt **in MATLAB integriert** und führen den Nutzer systematisch durch einen **vordefinierten Entwicklungsprozess**.
+
+*Die Lernmodule sind gut um die Nutzung der Add-Ons wirklich zu erlenen!*
+
+</div>
+<div>
+
+![](./MATLAB_Simulink_Lernen.png)
+
+</div>
+</div>
