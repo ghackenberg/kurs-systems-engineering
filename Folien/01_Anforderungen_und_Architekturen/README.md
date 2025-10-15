@@ -11,19 +11,37 @@ math: mathjax
 
 # Kapitel 1: Anforderungen und Architekturen
 
-In diesem Kapitel nutzen wir die folgenden Add-Ons:
+Dieses Kapitel umfasst die folgenden drei Abschnitte:
 
-1. System Composer
-1. Requirements Toolbox
+1. Anforderungen sammeln
+1. Architekturen festlegen
+1. Profile anwenden
+
+---
+
+![bg right](./Anforderungen.jpg)
+
+## 1. Anforderungen sammeln
+
+In diesem ersten Abschnitt lernen wir die folgenden Dinge:
+
+1. **Architekturmodelle erstellen**<br/>(System Composer)
+1. **Requirement Sets erstellen**<br/>(Requirement Manager)
+1. **Requirements erstellen**<br/>(3 Requirement-Typen)
+1. **Requirements verknüpfen**<br/>(6 Link-Typen)
 
 ---
 
 <div class="columns">
 <div>
 
-## Der Start-Bildschirm
+### Der Start-Bildschirm
 
-TODO
+Zuerst starten wir Simulink und erstellen eine neues Architekturmodell für den System Composer.
+
+Der System Composer stellt als Vorlage ein Architekturmodell, ein Software-Architekturmodell, und ein Aktivitäts-diagramm bereit.
+
+*Wir erwenden das einfache Architektur-modell an dieser Stelle!*
 
 </div>
 <div>
@@ -38,9 +56,13 @@ TODO
 <div class="columns">
 <div>
 
-## Die Architektur-Ansicht
+### Die Architektur-Ansicht
 
-TODO
+Nachdem das neue Architekturmodell erstellt wurde, wechselt MATLAB in die Modellierungsansicht.
+
+In der Modellierungsansicht können die Komponenten der Architektur definiert und miteinander verknüpft werden.
+
+*Im initialen Zustand ist die Architektur leer, das heißt die Architektur beinhaltet keine Komponenten.*
 
 </div>
 <div>
@@ -55,9 +77,13 @@ TODO
 <div class="columns">
 <div>
 
-## Der Apps-Reiter
+### Der Apps-Reiter
 
-TODO
+Komponenten modellieren wir auch erst später; jetzt laden wir zunächst Mal die Requirements Manager Ansicht.
+
+Denn im ersten Schritt wollen wir die Anforderungen an das System beschreiben.
+
+*Um die Umsetzung der Anforderungen und die Verifikation der Umsetzung kümmern wir uns später!*
 
 </div>
 <div>
@@ -72,9 +98,13 @@ TODO
 <div class="columns">
 <div>
 
-## Requirement Set hinzufügen
+### Requirement Set hinzufügen
 
-TODO
+In der Requirements Manager Ansicht definieren wir zunächst ein sogenanntes Requirement Set.
+
+In einem Requirement Set können wir mehrere Anforderungen sammeln und gemeinsam verwalten.
+
+*Requirement Sets werden in einer eigenen Datei gespeichert und können auch wiederverwendet werden!*
 
 </div>
 <div>
@@ -89,9 +119,13 @@ TODO
 <div class="columns">
 <div>
 
-## Requirement hinzufügen
+### Requirement hinzufügen
 
-TODO
+Im nächsten Schritt fügen wir einzelne Requirements dem zuvor erstellten Requirement Set hinzu.
+
+Die Requirements repräsentieren die Anforderungen an das System und können hierarchisch strukturiert werden.
+
+*Identifikation und Sammlung von Anforderungen erfolgt durch unterstützende Kreativtechniken!*
 
 </div>
 <div>
@@ -106,9 +140,13 @@ TODO
 <div class="columns">
 <div>
 
-## Der Property Inspector
+### Der Property Inspector
 
-TODO
+Die Eigenschaften der einzelnen Requirements können in der Property Inspector Ansicht verwaltet werden.
+
+Die Eigenschaften umfassen einen Typ, eine Zusammenfassung, und eine detaillierte Beschreibung.
+
+*Die Requirements Toolbox erzwingt keine spezielle Art der Beschreibung (z.B. definierte Satzmuster)!*
 
 </div>
 <div>
@@ -123,7 +161,7 @@ TODO
 <div class="columns">
 <div>
 
-## Die Requirement-Typen
+### Die Requirement-Typen
 
 Wir unterscheiden diese Typen:
 
@@ -143,7 +181,7 @@ Wir unterscheiden diese Typen:
 
 ![bg contain right:20%](./Requirement_Typen_Container.jpg)
 
-### Requirement-Typ **Container**
+#### Requirement-Typ **Container**
 
 **Zweck:** Diese dienen primär der Strukturierung und Hierarchisierung der Anforderungen. Sie fungieren als Ordner oder Überschriften, um logische Gruppen zu bilden.
 
@@ -155,7 +193,7 @@ Wir unterscheiden diese Typen:
 
 ![bg contain right:20%](./Requirement_Typen_Functional.jpg)
 
-### Requirement-Typ **Functional**
+#### Requirement-Typ **Functional**
 
 **Zweck:** Diese Anforderungen sind das Kernstück der Spezifikation. Sie beschreiben direkt die erforderlichen Fähigkeiten und das Verhalten des zu entwickelnden Systems oder Produkts.
 
@@ -167,7 +205,7 @@ Wir unterscheiden diese Typen:
 
 ![bg contain right:20%](./Requirement_Typen_Informational.jpg)
 
-### Requirement-Typ **Informational**
+#### Requirement-Typ **Informational**
 
 **Zweck:** Dient der Erfassung von Anforderungen oder Informationen, die kein direktes funktionales Verhalten darstellen oder die das System nicht direkt implementieren muss, wie nicht-funktionale Anforderungen und zusätzliche Erklärungen.
 
@@ -180,9 +218,13 @@ Wir unterscheiden diese Typen:
 <div class="columns">
 <div>
 
-## Der Requirements Editor
+### Der Requirements Editor
 
-TODO
+Neben dem Requirements Manager bietet die Requirements Toolbox auch den sogenannten Requirements Editor.
+
+Der Requirements Editor kann über den Reiter **Requirements** im oberen Menü-band geöffnet werden.
+
+*Der Requirements Editor kann insbesondere für die Verknüpfung von Anforderungen verwenden wertden!*
 
 </div>
 <div>
@@ -197,9 +239,13 @@ TODO
 <div class="columns">
 <div>
 
-## Die Tabellen-Ansicht
+### Die Tabellen-Ansicht
 
-TODO
+Der Requirements Editor bietet zunächst die gewohnte tabellarische Ansicht der Anforderungen.
+
+Die Details der einzelnen Anforderungen wiederum auch im Property Inspector dargestellt.
+
+*Neben der tabellarischen Darstellung bietet der Requirements Editor auch eine Dokumentendarstellung.*
 
 </div>
 <div>
@@ -214,9 +260,13 @@ TODO
 <div class="columns">
 <div>
 
-## Die Dokumenten-Ansicht
+### Die Dokumenten-Ansicht
 
-TODO
+Die Dokumentendarstellung zeigt neben der Zusammenfassung auch die Beschrei-bung der einzelnen Anforderungen.
+
+Diese Darstellung beim Durchlesen der Anforderungsspezifikation aufgrund des höheren Detaillierungsgrades.
+
+*Eine Bearbeitung der Inhalte ist in der Dokumentenansicht direkt jedoch nicht möglich!*
 
 </div>
 <div>
@@ -231,9 +281,13 @@ TODO
 <div class="columns">
 <div>
 
-## Link erstellen (1 / 2)
+### Link erstellen (1 / 2)
 
-TODO
+Ein mächtiges Werkzeug in der System-entwicklung ist die Nachverfolgung von Anforderungen (*Tracing*).
+
+Vor die Nachverfolgung bietet die Requirements Toolbox die Möglichkeit, sogenannte **Links** einzufügen.
+
+*Im Requirements Editor kann dazu zunächst die zu vernüpfende Anforder-ung ausgewählt werden!*
 
 </div>
 <div>
@@ -248,9 +302,13 @@ TODO
 <div class="columns">
 <div>
 
-## Link erstellen (2 / 2)
+### Link erstellen (2 / 2)
 
-TODO
+Danach muss eine weitere Anforderung ausgewählt werden, die mit der vorigen verknüpft werden soll.
+
+Schließlich kann die Erstellung des Links bestätigt werden und so ein neue Ver-küpfung geschaffen werden.
+
+*Beachte, das Anforderungen auch mit Komponenten und anderen Modell-elementen verknüpft werden können!*
 
 </div>
 <div>
@@ -265,9 +323,13 @@ TODO
 <div class="columns">
 <div>
 
-## Der Link-Abschnitt
+### Der Link-Abschnitt
 
-TODO
+Nach Erstellen einer neuer Verknüpfung ist der Link im Property Inspector rechts unten zu sehen.
+
+Die Ansicht zeigt für die gewählte Anforderung alle damit verknüpften Modellelemente.
+
+*Somit kann bei Änderung der Anforderung schnell untersucht werden, welche Folgen die Änderung hat!*
 
 </div>
 <div>
@@ -282,9 +344,13 @@ TODO
 <div class="columns">
 <div>
 
-## Die Links-Ansicht
+### Die Links-Ansicht
 
-TODO
+Zudem gibt es eine eigene Links-Ansicht, welche eine Übersicht über alle Verknüpfungen im Modell gibt.
+
+Die Ansicht zeigt auch Vernüpfungen zu anderen Modellen (d.h. anderen Modell-dateien).
+
+*In dieser Ansicht können einzelne Links ausgewählt und deren Eigenschaften im Property Inspector bearbeitet werden!*
 
 </div>
 <div>
@@ -299,11 +365,13 @@ TODO
 <div class="columns">
 <div>
 
-## Die Link-Typen
+### Die Link-Typen
 
-TODO
+Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs Link-Typen:
 
-**Confirmed by**, **Derives**, **Implements**, **Refines**, **Related to**, **Verifies**
+**Confirmed by**, **Derives**, **Implements**, **Refines**, **Related to**, und **Verifies**.
+
+*Im Folgenden betrachten wir die einzelnen Typen, deren Bedeutung, und typische Anwendungsfälle.*
 
 </div>
 <div>
@@ -317,7 +385,7 @@ TODO
 
 ![bg contain right:40%](./Link_Typen_Confirmed.jpg)
 
-### Link-Typ **Confirmed by** (*Bestätigt durch*)
+#### Link-Typ **Confirmed by** (*Bestätigt durch*)
 
 *Dieser Link-Typ wird verwendet, um eine Anforderung mit einem Testfall oder Testergebnis zu verknüpfen.*
 
@@ -329,7 +397,7 @@ TODO
 
 ![bg contain right:30%](./Link_Typen_Derives.jpg)
 
-### Link-Typ **Derives** (*Leitet ab*)
+#### Link-Typ **Derives** (*Leitet ab*)
 
 *Dieser Typ stellt eine Hierarchie oder einen Abstammungsverlauf zwischen Anforderungen her.*
 
@@ -341,7 +409,7 @@ TODO
 
 ![bg contain right:35%](./Link_Typen_Implements.jpg)
 
-### Link-Typ **Implements** (*Implementiert*)
+#### Link-Typ **Implements** (*Implementiert*)
 
 *Dieser Link-Typ verbindet eine Anforderung mit dem Code oder Design-Modell, das sie erfüllt.*
 
@@ -353,7 +421,7 @@ TODO
 
 ![bg contain right:25%](./Link_Typen_Refines.jpg)
 
-### Link-Typ **Refines** (*Verfeinert*)
+#### Link-Typ **Refines** (*Verfeinert*)
 
 *Dieser Typ wird ähnlich wie "Derives" zur Spezifizierung verwendet, liegt aber oft auf derselben Ebene oder dient dazu, eine Anforderung detaillierter oder präziser zu machen, ohne eine strenge Eltern-Kind-Beziehung zu implizieren.*
 
@@ -365,7 +433,7 @@ TODO
 
 ![bg contain right:25%](./Link_Typen_Related.jpg)
 
-### Link-Typ **Related to** (*Bezogen auf*)
+#### Link-Typ **Related to** (*Bezogen auf*)
 
 *Dies ist der generischste Link-Typ und wird für alle Verbindungen verwendet, die nicht in die spezifischeren Kategorien fallen.*
 
@@ -377,10 +445,60 @@ TODO
 
 ![bg contain right:35%](./Link_Typen_Verifies.jpg)
 
-### Link-Typ **Verifies** (*Überprüft*)
+#### Link-Typ **Verifies** (*Überprüft*)
 
 *Dieser Link-Typ stellt eine Verbindung zwischen einem Test und der Anforderung her, die er validieren soll. Es ist oft die umgekehrte Richtung von "Confirmed by".*
 
 **Bedeutung:** Das verknüpfte Element (in der Regel ein Test oder ein Test-Artefakt) dient dazu, zu beweisen, dass die Anforderung erfüllt ist. Es zeigt die Testabdeckung der Anforderung.
 
 **Beispiel:** Ein Unittest überprüft die Anforderung "Die Bremsfunktion muss bei <10 km/h aktiviert werden."
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### Übungsaufgabe
+
+Sammle Anforderungen an den 3D-Drucker und dokumentiere die Anforderungen mithilfe der MATLAB Requirements Toolbox.
+
+*Achte auf sinnvolle Container-Hierarchien, Zusammenfassungen, Beschreibungen, und Begründungen!*
+
+---
+
+![bg right](./Architekturen.jpg)
+
+## 2. Architekturen festlegen
+
+In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
+
+1. **Komponenten erstellen**<br/>(Reference, Variant, Adapter)
+1. **Ports erstellen / verknüpfen**<br/>(Input, Output, Physical)
+1. **Interfaces erstellen / zuweisen**<br/>(Value, Composite  Data, Physical)
+1. **Anforderungen verknüpfen**<br/>(Tracability Matrix)
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### Übungsaufgabe
+
+TODO
+
+---
+
+![bg right](./Stereotypen.jpg)
+
+## 3. Profile anwenden
+
+In diesem dritten Abschnitt lernen wir die folgenden Dinge:
+
+1. **Profil erstellen / anwenden**<br/>(Stereotype, Property)
+1. **Views erstellen / nutzen**<br/>(Component Filter, Port Filter)
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### Übungsaufgabe
+
+TODO
