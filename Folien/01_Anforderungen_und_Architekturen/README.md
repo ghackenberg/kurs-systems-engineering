@@ -600,6 +600,57 @@ TODO
 <div class="columns">
 <div>
 
+### Referenz-Komponenten hinzufügen
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Referenz.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Datei für Speicherung von Referenz-Komponente auswählen
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Referenz_Auswahl.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Einfache Komponente in Referenz-Komponente verwandeln
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Referenz_Refactor.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
 ### Akku-Schauber (Beispiel)
 
 - **Energieversorgung** - liefert elektrische Energie
@@ -652,57 +703,6 @@ Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät
 <div>
 
 ![](./Architektur_Modell_Komponente_Beispiel_Energie.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### Referenz-Komponenten hinzufügen
-
-TODO
-
-</div>
-<div>
-
-![](./Architektur_Modell_Komponente_Referenz.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### Datei für Speicherung von Referenz-Komponente auswählen
-
-TODO
-
-</div>
-<div>
-
-![](./Architektur_Modell_Komponente_Referenz_Auswahl.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### Einfache Komponente in Referenz-Komponente verwandeln
-
-TODO
-
-</div>
-<div>
-
-![](./Architektur_Modell_Komponente_Referenz_Refactor.png)
 
 </div>
 </div>
