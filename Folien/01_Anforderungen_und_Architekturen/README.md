@@ -483,7 +483,7 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 ### Haupt-Komponenten hinzufügen
 
-TODO
+TODO: Komponenten auf oberster Ebebe
 
 </div>
 <div>
@@ -500,7 +500,7 @@ TODO
 
 ### Unter-Komponenten hinzufügen
 
-TODO
+TODO: Komponenten auf tieferen Ebenen
 
 </div>
 <div>
@@ -517,7 +517,7 @@ TODO
 
 ### System-Ports definieren
 
-TODO
+TODO: Schnittstelle des Gesamtsystems
 
 </div>
 <div>
@@ -534,7 +534,7 @@ TODO
 
 ### System-Ports auf Haupt-Kompontenten weiterleiten
 
-TODO
+TODO: Schnittstelle der Teilsysteme
 
 </div>
 <div>
@@ -551,7 +551,7 @@ TODO
 
 ### Haupt-Komponenten untereinander verknüpfen
 
-TODO
+TODO: Interaktion der Teilsysteme
 
 </div>
 <div>
@@ -568,7 +568,7 @@ TODO
 
 ### Ports von Haupt-Komponenten auf Unter-Komponenten weiterleiten
 
-TODO
+TODO: Realisierung der Teilsysteme durch Module
 
 </div>
 <div>
@@ -585,7 +585,7 @@ TODO
 
 ### Unter-Komponenten untereinander verknüpfen
 
-TODO
+TODO: Interaktion der Module untereinander
 
 </div>
 <div>
@@ -602,7 +602,7 @@ TODO
 
 ### Referenz-Komponenten hinzufügen
 
-TODO
+TODO: Wiederverwendung von Teilarchitekturen
 
 </div>
 <div>
@@ -619,7 +619,7 @@ TODO
 
 ### Datei für Speicherung von Referenz-Komponente auswählen
 
-TODO
+TODO: Speicherung der Teilarchitekturen in separater Architekturmodell-Datei
 
 </div>
 <div>
@@ -636,7 +636,7 @@ TODO
 
 ### Einfache Komponente in Referenz-Komponente verwandeln
 
-TODO
+TODO: Umwandlung einer einfachen Komponente in eine Referenz-Komponente einfach möglich
 
 </div>
 <div>
