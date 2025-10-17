@@ -478,6 +478,237 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
+<div class="columns">
+<div>
+
+### Haupt-Komponenten hinzufügen
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Haupt.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Unter-Komponenten hinzufügen
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Unter.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### System-Ports definieren
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_System.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### System-Ports auf Haupt-Kompontenten weiterleiten
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_Haupt.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Haupt-Komponenten untereinander verknüpfen
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_System_Intern.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Ports von Haupt-Komponenten auf Unter-Komponenten weiterleiten
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_Haupt_Unter.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Unter-Komponenten untereinander verknüpfen
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_Unter_Unter.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Akku-Schauber (Beispiel)
+
+- **Energieversorgung** - liefert elektrische Energie
+- **Antriebssystem** - generiert mechanische Energie
+- **Steuerung & Betätigung** - Schnittstelle zum Benutzer
+- **Werkzeugaufnahme** - hält das Werkzeug (Bit, Bohrer)
+- **Gehäuse & Ergonomie** - Schutz und Schnittstelle zum Benutzer
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Beispiel.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Energieversorgung (Beispiel)
+
+Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät identifizieren:
+
+- **Akku** - Speicherung und Bereit-stellung elektrischer Energie, Temp-eraturmessung, Leistungsregelung
+- **Lagegerät** - Bereitstellung elektrischer Energie für die Speicherung im Akku
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Beispiel_Energie.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Antriebssystem (Beispiel)
+
+Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät identifizieren:
+
+- **Motor** - Wandlung von elektrischer Energie aus der Energieversorgung in mechanische Energie
+- **Getriebe** - Reduktion der Drehzahl des Motors und Steigerung des Drehmoments
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Beispiel_Energie.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Referenz-Komponenten hinzufügen
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Referenz.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Datei für Speicherung von Referenz-Komponente auswählen
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Referenz_Auswahl.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+### Einfache Komponente in Referenz-Komponente verwandeln
+
+TODO
+
+</div>
+<div>
+
+![](./Architektur_Modell_Komponente_Referenz_Refactor.png)
+
+</div>
+</div>
+
+---
+
 ![bg right](../Übungsaufgabe.jpg)
 
 ### Übungsaufgabe
