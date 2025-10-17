@@ -483,7 +483,11 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 ### Haupt-Komponenten hinzufügen
 
-TODO: Komponenten auf oberster Ebebe
+Im nächsten Schritt fügen wir dem Architekturmodell Komponenten hinzu, um die oberste Ebene der Systemstruktur darzustellen.
+
+Diese Komponenten repräsentieren die Haupt-Teilsysteme, aus denen das Gesamtsystem besteht.
+
+*Die Komponenten können später weiter detailliert werden, indem Unter-Komponenten hinzugefügt werden!*
 
 </div>
 <div>
@@ -500,7 +504,11 @@ TODO: Komponenten auf oberster Ebebe
 
 ### Unter-Komponenten hinzufügen
 
-TODO: Komponenten auf tieferen Ebenen
+Komponenten können hierarchisch strukturiert werden, um eine detailliertere Systemarchitektur zu schaffen.
+
+Durch das Hinzufügen von Unter-Komponenten kann die Komplexität des Systems besser verwaltet werden.
+
+*Jede Komponente kann eine eigene, in sich geschlossene Architektur von Unter-Komponenten enthalten!*
 
 </div>
 <div>
@@ -512,12 +520,28 @@ TODO: Komponenten auf tieferen Ebenen
 
 ---
 
+### Wann hört man mit der Zerlegung auf?
+
+Hier sind ein paar Kriterien, die dabei helfen zu entscheiden, ob die Zerlegung weit genug fortschritten ist oder weiter Schritte notwendig sind:
+
+- **Verständlichkeit:** Die Komponenten sollten so granular sein, dass sie von einem einzelnen Entwicklerteam verstanden und implementiert werden können.
+- **Testbarkeit:** Einzelne Komponenten sollten unabhängig voneinander getestet werden können.
+- **Anforderungen:** Die Zerlegung sollte so weit gehen, dass alle Anforderungen eindeutig einer oder mehreren Komponenten zugeordnet werden können.
+
+*Es gibt aber keine allgemeingültige Regel, wann die Zerlegung abgeschlossen ist; dies ist oft eine iterative Entscheidung, die im Laufe des Entwicklungsprozesses getroffen wird!*
+
+---
+
 <div class="columns">
 <div>
 
 ### System-Ports definieren
 
-TODO: Schnittstelle des Gesamtsystems
+System-Ports definieren die Schnittstelle des Gesamtsystems und ermöglichen die Kommunikation mit der Systemumge-bung.
+
+Es gibt verschiedene Arten von Ports, z.B. für Daten, Ereignisse oder physische Verbindungen.
+
+*Ports können allgemein an den Grenzen von Komponenten platziert werden, um deren Schnittstellen klar zu definieren!*
 
 </div>
 <div>
@@ -534,7 +558,11 @@ TODO: Schnittstelle des Gesamtsystems
 
 ### System-Ports auf Haupt-Kompontenten weiterleiten
 
-TODO: Schnittstelle der Teilsysteme
+System-Ports werden auf die Ports der Haupt-Komponenten weitergeleitet (er-möglicht Interaktion mit der Außenwelt).
+
+Diese Weiterleitung stellt sicher, dass externe Signale die richtigen Teilsysteme erreichen.
+
+*Eine klare Schnittstellendefinition auf Systemebene erleichtert die Integration und den Test des Gesamtsystems!*
 
 </div>
 <div>
@@ -551,7 +579,11 @@ TODO: Schnittstelle der Teilsysteme
 
 ### Haupt-Komponenten untereinander verknüpfen
 
-TODO: Interaktion der Teilsysteme
+Die Haupt-Komponenten werden unter-einander verknüpft, um die Interaktion und den Datenaustausch zwischen den Teilsystemen zu modellieren.
+
+Diese Verknüpfungen stellen die internen Kommunikationswege des Systems dar.
+
+*Durch die explizite Modellierung der Interaktionen wird die Systemstruktur klar und nachvollziehbar!*
 
 </div>
 <div>
@@ -568,7 +600,11 @@ TODO: Interaktion der Teilsysteme
 
 ### Ports von Haupt-Komponenten auf Unter-Komponenten weiterleiten
 
-TODO: Realisierung der Teilsysteme durch Module
+Die Ports der Haupt- werden auf die Ports der Unter-Komponenten weiter-geleitet, um die Funktionalität der Teilsysteme zu realisieren.
+
+Diese hierarchische Port-Weiterleitung ermöglicht eine detaillierte und modulare Systemgestaltung.
+
+*So kann die Implementierung eines Teilsystems gekapselt werden!*
 
 </div>
 <div>
@@ -585,7 +621,11 @@ TODO: Realisierung der Teilsysteme durch Module
 
 ### Unter-Komponenten untereinander verknüpfen
 
-TODO: Interaktion der Module untereinander
+Die Unter-Komponenten werden unter-einander verknüpft, um die Interaktion und den Datenaustausch zu modellieren.
+
+Auf dieser Ebene wird die Funktionsweise eines Teilsystems durch das Zusammen-spiel seiner Module beschrieben.
+
+*Die interne Verdrahtung der Module bleibt dabei für andere Teile der Architektur verborgen!*
 
 </div>
 <div>
@@ -602,7 +642,11 @@ TODO: Interaktion der Module untereinander
 
 ### Referenz-Komponenten hinzufügen
 
-TODO: Wiederverwendung von Teilarchitekturen
+Referenz-Komponenten ermöglichen die Wiederverwendung von Teilarchitekturen in verschiedenen Modellen und Projekten.
+
+Änderungen an der Referenz-Komponente werden automatisch an allen Verwendungsstellen übernommen.
+
+*Die Wiederverwendung von Komponenten reduziert den Entwicklungsaufwand und erhöht die Konsistenz!*
 
 </div>
 <div>
@@ -619,7 +663,11 @@ TODO: Wiederverwendung von Teilarchitekturen
 
 ### Datei für Speicherung von Referenz-Komponente auswählen
 
-TODO: Speicherung der Teilarchitekturen in separater Architekturmodell-Datei
+Beim Erstellen einer Referenz-Kompo-nente wird eine separate Architektur-modell-Datei angelegt.
+
+Diese Datei kann dann unabhängig verwaltet und in anderen Projekten wiederverwendet werden.
+
+*Die Auswahl des Speicherorts ist entscheidend für die Organisation und Auffindbarkeit!*
 
 </div>
 <div>
@@ -636,7 +684,11 @@ TODO: Speicherung der Teilarchitekturen in separater Architekturmodell-Datei
 
 ### Einfache Komponente in Referenz-Komponente verwandeln
 
-TODO: Umwandlung einer einfachen Komponente in eine Referenz-Komponente einfach möglich
+Eine bestehende, einfache Komponente kann mit wenigen Klicks in eine wiederverwendbare Referenz-Komponente umgewandelt werden.
+
+Dies ermöglicht eine nachträgliche Modularisierung und Wiederverwendung von bereits modellierten Komponenten.
+
+*Der Refactoring-Prozess ist einfach und unterstützt die Evolution der Architektur!*
 
 </div>
 <div>
@@ -694,7 +746,7 @@ Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät
 
 ### Antriebssystem (Beispiel)
 
-Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät identifizieren:
+Beim Antriebssystem können wir zum Beispiel einen Motor und ein Getriebe identifizieren:
 
 - **Motor** - Wandlung von elektrischer Energie aus der Energieversorgung in mechanische Energie
 - **Getriebe** - Reduktion der Drehzahl des Motors und Steigerung des Drehmoments
@@ -704,16 +756,13 @@ Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät
 
 ![](./Architektur_Modell_Komponente_Beispiel_Energie.png)
 
-</div>
-</div>
-
 ---
 
 ![bg right](../Übungsaufgabe.jpg)
 
 ### Übungsaufgabe
 
-TODO
+Erstelle eine Architektur für den 3D-Drucker und dokumentiere die Architektur mithilfe des MATLAB System Composers. Verknüpfe anschließend die Anforderungen mit den Architektur-Elementen.
 
 ---
 
@@ -728,8 +777,12 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
+TODO
+
+---
+
 ![bg right](../Übungsaufgabe.jpg)
 
 ### Übungsaufgabe
 
-TODO
+Erstelle ein Profil für den 3D-Drucker und weise den Komponenten Stereotypen zu. Erstelle anschließend eine View, die nur die mechanischen Komponenten anzeigt.
