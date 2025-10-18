@@ -839,11 +839,25 @@ TODO: Kurze Einführung - was sind und interfaces in Matlab System Composer und 
 
 ---
 
+<div class="columns">
+<div>
+
 #### Der *Interface Editor*
 
 TODO: Anlegen und Bearbeiten von Schnittstellenspezifikationen
 
+</div>
+<div>
+
+![](./Interface_Editor.png)
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### Schnittstellen-Typen
 
@@ -852,6 +866,14 @@ Es werden die folgenden Typen von Schnittstellen unterschieden:
 - **Value Type** - TODO
 - **Composite Data Interface** - TODO
 - **Physical Interface** -TODO
+
+</div>
+<div>
+
+![](./Interface_Typen.png)
+
+</div>
+</div>
 
 ---
 
@@ -863,6 +885,23 @@ TODO: Kurze Erklärung und Anwendungsbeispiel
 
 ---
 
+<div class="columns">
+<div>
+
+##### **Value Type** Konfiguration
+
+TODO: Kurze Erklärung der Datentypen (Wahrheitswert, Ganzzahl, Fließpunktzahl)
+
+</div>
+<div>
+
+![](./Interface_Value_Screenshot.png)
+
+</div>
+</div>
+
+---
+
 ![bg contain right:40%](./Interface_Composite.jpg)
 
 ##### Schnittstellen-Typ **Composite Data Interface**
@@ -871,9 +910,20 @@ TODO: Kurze Erklärung und Anwendungsbeispiel
 
 ---
 
-##### **Composite Data Interface** Elemente
+<div class="columns">
+<div>
+
+##### **Composite Data Interface** Konfiguration
 
 TODO: Kurze Beschreibung von Elementen eines Composite Data Interface und ihrer Datentypen
+
+</div>
+<div>
+
+![](./Interface_Composite_Screenshot.png)
+
+</div>
+</div>
 
 ---
 
@@ -885,15 +935,37 @@ TODO: Kurze Erklärung und Anwendungsbeispiel
 
 ---
 
-##### **Physical Interface** Elemente
+<div class="columns">
+<div>
+
+##### **Physical Interface** Konfiguration
 
 TODO: Kurze Beschreibung von Elementen eines Physical Interface und ihrer "Datentypen"
 
+</div>
+<div>
+
+![](./Interface_Physical_Screenshot.png)
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### Schnittstellen zuweisen
 
 TODO: Auswahl der Schnittstelle im Interface Editor. Rechtsklick auf die Komponente und Schnittstelle zuweisen.
+
+</div>
+<div>
+
+![](./Interface_Apply.png)
+
+</div>
+</div>
 
 ---
 
@@ -917,7 +989,7 @@ TODO: Kurze Beschreibung der Warnmechanismen in System Composer
 
 #### Behebung der Inkompatibilitäten durch Adapter-Komponenten
 
-TODO: Text
+TODO: Kurze Beschreibung der Konfiguration einer Adapter-Komponente.
 
 ---
 
@@ -1145,6 +1217,159 @@ TODO: Kurz - was sind Profile (und deren Stereotypen) und wofür brauchen wir si
 
 ---
 
+<div class="columns">
+<div>
+
+#### Der **Profile Editor**
+
+TODO: Kurze Erklärung des Profile Editor.
+
+</div>
+<div>
+
+![](./Profile_Editor.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Profil anlegen
+
+TODO: Erster Schritt - Profil anlegen (wird in eigener Datei gepeichert!)
+
+</div>
+<div>
+
+![](./Profile_Create.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Stereotypen anlegen
+
+TODO: Nun können die Stereotypen im Profil definiert werden.
+
+</div>
+<div>
+
+![](./Profile_Stereotype_Create.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Anwendung von Stereotypen auf Modellelemente einschränken
+
+TODO: Man kann einschränken, auf welche Modellelemente ein Stereotyp angewendet werden darf (z.B. nur auf Komponenten).
+
+</div>
+<div>
+
+![](./Profile_Stereotype_Applies.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Vererbungsbeziehung zwischen Stereotypen definieren
+
+TODO: Stereotypen können auch von anderen Stereotypen erben (wie in der objektorientierten Programmierung)
+
+</div>
+<div>
+
+![](./Profile_Stereotype_Base.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Eigenschaften der einzelnen Stereotypen festlegen
+
+TODO: Nun können wir die Eigenschaften von Stereotypen festlegen. Eigenschaften werden vererbt!
+
+</div>
+<div>
+
+![](./Profile_Stereotype_Properties.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Profil auf Architekturmodell anwenden
+
+TODO: Schließlich muss das Profil noch auf das Architekturmodell angewendet werden. Erst dann sind die Stereotypen verfügbar.
+
+</div>
+<div>
+
+![](./Profile_Applies.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Stereotypen auf Komponenten anwenden
+
+TODO: Nun können wir die Stereotypen auf die Komponente anwenden.
+
+</div>
+<div>
+
+![](./Stereotyp_Komponente_Anwenden.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Eigenschaften des Stereotypen für Komponente festlegen
+
+TODO: Nachdem die Stereotypen mit den Komponenten verknüpft sind, können wir Werte für die Stereotyp-Eigenschaften festlegen.
+
+</div>
+<div>
+
+![](./Stereotyp_Komponente_Anwenden.png)
+
+</div>
+</div>
+
+---
+
 ![bg contain right:40%](./Sichten.jpg)
 
 ### 3.2. Sichten (*Views*)
@@ -1153,41 +1378,126 @@ TODO: Kurz - was sind Architektursichten und warum brauchen wir sie?
 
 ---
 
+<div class="columns">
+<div>
+
 #### Der **Architecture Views Editor**
 
-TODO: Wie öffnet man den Architecture Views Editor?
+TODO: Wie ist der Architecture Views Editor aufgebaut und wie legt man eine neue Sicht an?
+
+</div>
+<div>
+
+![](./Views_Editor.png)
+
+</div>
+</div>
 
 ---
+
+<div class="columns">
+<div>
 
 #### Sicht anlegen
 
 TODO: Wie ist der Architecture Views Editor aufgebaut und wie legt man eine neue Sicht an?
 
----
+</div>
+<div>
 
-#### Filter konfigurieren
+![](./Views_Create.png)
 
-TODO: Was sind Filter und wie funktionieren sie?
-
----
-
-##### **Component**-Filter
-
-TODO: Was ist ein Component-Filter und welche Arten von Filtern gibt es?
+</div>
+</div>
 
 ---
 
-##### **Port**-Filter
+<div class="columns">
+<div>
 
-TODO: Was ist ein Port-Filter und welche Arten von Filtern gibt es?
+#### **Component**-Filter anlegen
+
+TODO: Was ist ein Component-Filter und was bewirken Sie in der Sicht?
+
+</div>
+<div>
+
+![](./Views_Filter_Component_Create.png)
+
+</div>
+</div>
 
 ---
+
+<div class="columns">
+<div>
+
+#### **Component**-Filter konfigurieren
+
+TODO: Zum Beispiel Filterung nach Name oder Stereotyp. Wir filtern im Beispiel ach Stereotyp A.
+
+</div>
+<div>
+
+![](./Views_Filter_Component_Create.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### **Port**-Filter anlegen
+
+TODO: Was ist ein Port-Filter und was bewirkt er in der Sicht?
+
+</div>
+<div>
+
+![](./Views_Filter_Port_Create.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### **Port**-Filter konfigurieren
+
+TODO: Wieder Filterung nach Stereotyp oder Name möglich. Wir filtern im Beispiel nach Name.
+
+</div>
+<div>
+
+![](./Views_Filter_Port_Stereotype.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
 
 #### Filter anwenden
 
-TODO: Klick auf Button *Apply*. Verbergen von Komponenten, die nicht sichtbar sein sollen.
+TODO: Klick auf Button *Apply*. Verbergen von Komponenten, Ports, und Konnektoren, die nicht sichtbar sein sollen.
+
+</div>
+<div>
+
+![](./Views_Filter_Apply.png)
+
+</div>
+</div>
 
 ---
+
+![bg contain right:40%](./Profile_Case.jpg)
 
 ### 3.3. Fallbeispiel
 
