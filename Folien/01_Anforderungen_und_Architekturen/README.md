@@ -26,16 +26,24 @@ Dieses Kapitel umfasst die folgenden drei Abschnitte:
 In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
 1. **Architekturmodelle erstellen**<br/>(System Composer)
-1. **Requirement Sets erstellen**<br/>(Requirement Manager)
-1. **Requirements erstellen**<br/>(3 Requirement-Typen)
-1. **Requirements verknüpfen**<br/>(6 Link-Typen)
+1. **Anforderungslisten erstellen**<br/>(Requirement Manager)
+1. **Anforderungen erstellen**<br/>(3 Requirement-Typen)
+1. **Verknüpfungen erstellen**<br/>(6 Link-Typen)
+
+---
+
+![bg contain right:40%](./Architekturmodelle.jpg)
+
+### 1.1. Architekturmodelle
+
+TODO: Kurze Einführung - was ist ein Architekturmodell und warum wird es erstellt?
 
 ---
 
 <div class="columns">
 <div>
 
-### Der Start-Bildschirm
+#### Der Start-Bildschirm
 
 Zuerst starten wir Simulink und erstellen eine neues Architekturmodell für den System Composer.
 
@@ -56,7 +64,7 @@ Der System Composer stellt als Vorlage ein Architekturmodell, ein Software-Archi
 <div class="columns">
 <div>
 
-### Die Architektur-Ansicht
+#### Die Architektur-Ansicht
 
 Nachdem das neue Architekturmodell erstellt wurde, wechselt MATLAB in die Modellierungsansicht.
 
@@ -74,10 +82,18 @@ In der Modellierungsansicht können die Komponenten der Architektur definiert un
 
 ---
 
+![bg contain right:40%](./Anforderungsliste.jpg)
+
+### 1.2. Anforderungsliste (*Requirement Sets*)
+
+TODO: Kurze Einführung - was ist eine Anforderung und warum wird sie im Modell erfasst?
+
+---
+
 <div class="columns">
 <div>
 
-### Der Apps-Reiter
+#### Der Apps-Reiter
 
 Komponenten modellieren wir auch erst später; jetzt laden wir zunächst Mal die Requirements Manager Ansicht.
 
@@ -98,7 +114,7 @@ Denn im ersten Schritt wollen wir die Anforderungen an das System beschreiben.
 <div class="columns">
 <div>
 
-### Requirement Set hinzufügen
+#### Requirement Set hinzufügen
 
 In der Requirements Manager Ansicht definieren wir zunächst ein sogenanntes Requirement Set.
 
@@ -116,10 +132,18 @@ In einem Requirement Set können wir mehrere Anforderungen sammeln und gemeinsam
 
 ---
 
+![bg contain right:40%](./Anforderung.jpg)
+
+### 1.3. Anforderungen (*Requirements*)
+
+TODO: Kurze Einführung - was ist eine Anforderung und warum wird sie im Modell erfasst?
+
+---
+
 <div class="columns">
 <div>
 
-### Requirement hinzufügen
+#### Requirement hinzufügen
 
 Im nächsten Schritt fügen wir einzelne Requirements dem zuvor erstellten Requirement Set hinzu.
 
@@ -140,7 +164,7 @@ Die Requirements repräsentieren die Anforderungen an das System und können hie
 <div class="columns">
 <div>
 
-### Der Property Inspector
+#### Eigenschaften eines Requirement
 
 Die Eigenschaften der einzelnen Requirements können in der Property Inspector Ansicht verwaltet werden.
 
@@ -161,7 +185,7 @@ Die Eigenschaften umfassen einen Typ, eine Zusammenfassung, und eine detailliert
 <div class="columns">
 <div>
 
-### Die Requirement-Typen
+#### Die Requirement-Typen
 
 Wir unterscheiden diese Typen:
 
@@ -181,7 +205,7 @@ Wir unterscheiden diese Typen:
 
 ![bg contain right:20%](./Requirement_Typen_Container.jpg)
 
-#### Requirement-Typ **Container**
+##### Requirement-Typ **Container**
 
 **Zweck:** Diese dienen primär der Strukturierung und Hierarchisierung der Anforderungen. Sie fungieren als Ordner oder Überschriften, um logische Gruppen zu bilden.
 
@@ -193,7 +217,7 @@ Wir unterscheiden diese Typen:
 
 ![bg contain right:20%](./Requirement_Typen_Functional.jpg)
 
-#### Requirement-Typ **Functional**
+##### Requirement-Typ **Functional**
 
 **Zweck:** Diese Anforderungen sind das Kernstück der Spezifikation. Sie beschreiben direkt die erforderlichen Fähigkeiten und das Verhalten des zu entwickelnden Systems oder Produkts.
 
@@ -205,7 +229,7 @@ Wir unterscheiden diese Typen:
 
 ![bg contain right:20%](./Requirement_Typen_Informational.jpg)
 
-#### Requirement-Typ **Informational**
+##### Requirement-Typ **Informational**
 
 **Zweck:** Dient der Erfassung von Anforderungen oder Informationen, die kein direktes funktionales Verhalten darstellen oder die das System nicht direkt implementieren muss, wie nicht-funktionale Anforderungen und zusätzliche Erklärungen.
 
@@ -218,7 +242,7 @@ Wir unterscheiden diese Typen:
 <div class="columns">
 <div>
 
-### Der Requirements Editor
+#### Der Requirements Editor
 
 Neben dem Requirements Manager bietet die Requirements Toolbox auch den sogenannten Requirements Editor.
 
@@ -239,7 +263,7 @@ Der Requirements Editor kann über den Reiter **Requirements** im oberen Menü-b
 <div class="columns">
 <div>
 
-### Die Tabellen-Ansicht
+##### Die Tabellen-Ansicht
 
 Der Requirements Editor bietet zunächst die gewohnte tabellarische Ansicht der Anforderungen.
 
@@ -260,7 +284,7 @@ Die Details der einzelnen Anforderungen wiederum auch im Property Inspector darg
 <div class="columns">
 <div>
 
-### Die Dokumenten-Ansicht
+##### Die Dokumenten-Ansicht
 
 Die Dokumentendarstellung zeigt neben der Zusammenfassung auch die Beschrei-bung der einzelnen Anforderungen.
 
@@ -278,10 +302,18 @@ Diese Darstellung beim Durchlesen der Anforderungsspezifikation aufgrund des hö
 
 ---
 
+![bg contain right:40%](./Verknüpfung.jpg)
+
+### 1.4. Verknüpfungen (*Links*)
+
+TODO: Kurse Einführung - Was ist ein Link zwischen Anforderungen und warum wird er im Modell hinterlegt?
+
+---
+
 <div class="columns">
 <div>
 
-### Link erstellen (1 / 2)
+#### Link erstellen (1 / 2)
 
 Ein mächtiges Werkzeug in der System-entwicklung ist die Nachverfolgung von Anforderungen (*Tracing*).
 
@@ -302,7 +334,7 @@ Vor die Nachverfolgung bietet die Requirements Toolbox die Möglichkeit, sogenan
 <div class="columns">
 <div>
 
-### Link erstellen (2 / 2)
+#### Link erstellen (2 / 2)
 
 Danach muss eine weitere Anforderung ausgewählt werden, die mit der vorigen verknüpft werden soll.
 
@@ -323,7 +355,7 @@ Schließlich kann die Erstellung des Links bestätigt werden und so ein neue Ver
 <div class="columns">
 <div>
 
-### Der Link-Abschnitt
+#### Der Link-Abschnitt
 
 Nach Erstellen einer neuer Verknüpfung ist der Link im Property Inspector rechts unten zu sehen.
 
@@ -344,7 +376,7 @@ Die Ansicht zeigt für die gewählte Anforderung alle damit verknüpften Modelle
 <div class="columns">
 <div>
 
-### Die Links-Ansicht
+#### Die Links-Ansicht
 
 Zudem gibt es eine eigene Links-Ansicht, welche eine Übersicht über alle Verknüpfungen im Modell gibt.
 
@@ -365,7 +397,7 @@ Die Ansicht zeigt auch Vernüpfungen zu anderen Modellen (d.h. anderen Modell-da
 <div class="columns">
 <div>
 
-### Die Link-Typen
+#### Die Link-Typen
 
 Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs Link-Typen:
 
@@ -385,7 +417,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ![bg contain right:40%](./Link_Typen_Confirmed.jpg)
 
-#### Link-Typ **Confirmed by** (*Bestätigt durch*)
+##### Link-Typ **Confirmed by** (*Bestätigt durch*)
 
 *Dieser Link-Typ wird verwendet, um eine Anforderung mit einem Testfall oder Testergebnis zu verknüpfen.*
 
@@ -397,7 +429,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ![bg contain right:30%](./Link_Typen_Derives.jpg)
 
-#### Link-Typ **Derives** (*Leitet ab*)
+##### Link-Typ **Derives** (*Leitet ab*)
 
 *Dieser Typ stellt eine Hierarchie oder einen Abstammungsverlauf zwischen Anforderungen her.*
 
@@ -409,7 +441,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ![bg contain right:35%](./Link_Typen_Implements.jpg)
 
-#### Link-Typ **Implements** (*Implementiert*)
+##### Link-Typ **Implements** (*Implementiert*)
 
 *Dieser Link-Typ verbindet eine Anforderung mit dem Code oder Design-Modell, das sie erfüllt.*
 
@@ -421,7 +453,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ![bg contain right:25%](./Link_Typen_Refines.jpg)
 
-#### Link-Typ **Refines** (*Verfeinert*)
+##### Link-Typ **Refines** (*Verfeinert*)
 
 *Dieser Typ wird ähnlich wie "Derives" zur Spezifizierung verwendet, liegt aber oft auf derselben Ebene oder dient dazu, eine Anforderung detaillierter oder präziser zu machen, ohne eine strenge Eltern-Kind-Beziehung zu implizieren.*
 
@@ -433,7 +465,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ![bg contain right:25%](./Link_Typen_Related.jpg)
 
-#### Link-Typ **Related to** (*Bezogen auf*)
+##### Link-Typ **Related to** (*Bezogen auf*)
 
 *Dies ist der generischste Link-Typ und wird für alle Verbindungen verwendet, die nicht in die spezifischeren Kategorien fallen.*
 
@@ -445,7 +477,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ![bg contain right:35%](./Link_Typen_Verifies.jpg)
 
-#### Link-Typ **Verifies** (*Überprüft*)
+##### Link-Typ **Verifies** (*Überprüft*)
 
 *Dieser Link-Typ stellt eine Verbindung zwischen einem Test und der Anforderung her, die er validieren soll. Es ist oft die umgekehrte Richtung von "Confirmed by".*
 
@@ -455,9 +487,65 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ---
 
+![bg contain right:40%](./Case_Study_Requirements.jpg)
+
+### 1.5. Fallbeispiel
+
+TODO: Kurze Beschreibung des Fallbeispiels
+
+---
+
+#### **Container**-Requirements
+
+TODO: Liste von möglichen Container-Requirements
+
+---
+
+#### **Functional**-Requirements
+
+TODO: Liste von möglichen funktionalen Anforderungen
+
+---
+
+#### **Informational**-Requirements
+
+TODO: Liste von möglichen nicht-funktionalen Anforderungen
+
+----
+
+#### Requirement-**Beschreibung** und **Begründung**
+
+TODO: Bespiel einer Description und eines Rationales für ein Requirement
+
+---
+
+#### **Derives**-Links
+
+TODO: Liste möglicher Drives Verknüpfungen
+
+---
+
+#### **Refines**-Links
+
+TODO: Liste möglicher Refines Verknüpfungen
+
+---
+
+#### **Related To**-Links
+
+TODO: Liste möglicher Related To Verknüpfungen zwischen den Anforderungen
+
+---
+
+#### Link-**Beschreibung** und **Begründung**
+
+TODO: Beispiel einer Description und eines Rationales für einen Link
+
+---
+
 ![bg right](../Übungsaufgabe.jpg)
 
-### Übungsaufgabe
+### 1.6. Übungsaufgabe
 
 Sammle Anforderungen an den 3D-Drucker und dokumentiere die Anforderungen mithilfe der MATLAB Requirements Toolbox.
 
@@ -478,10 +566,18 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
+![bg contain right:40%](./Komponenten.jpg)
+
+### 2.1. Komponenten
+
+TODO: Kurze Einführung, was Komponenten sind und warum wir Systeme in Form von Komponenten modellieren.
+
+---
+
 <div class="columns">
 <div>
 
-### Haupt-Komponenten hinzufügen
+#### Haupt-Komponenten hinzufügen
 
 Im nächsten Schritt fügen wir dem Architekturmodell Komponenten hinzu, um die oberste Ebene der Systemstruktur darzustellen.
 
@@ -502,7 +598,7 @@ Diese Komponenten repräsentieren die Haupt-Teilsysteme, aus denen das Gesamtsys
 <div class="columns">
 <div>
 
-### Unter-Komponenten hinzufügen
+#### Unter-Komponenten hinzufügen
 
 Komponenten können hierarchisch strukturiert werden, um eine detailliertere Systemarchitektur zu schaffen.
 
@@ -520,7 +616,7 @@ Durch das Hinzufügen von Unter-Komponenten kann die Komplexität des Systems be
 
 ---
 
-### Wann hört man mit der Zerlegung auf?
+#### Wann hört man mit der Zerlegung auf?
 
 Hier sind ein paar Kriterien, die dabei helfen zu entscheiden, ob die Zerlegung weit genug fortschritten ist oder weiter Schritte notwendig sind:
 
@@ -535,112 +631,7 @@ Hier sind ein paar Kriterien, die dabei helfen zu entscheiden, ob die Zerlegung 
 <div class="columns">
 <div>
 
-### System-Ports definieren
-
-System-Ports definieren die Schnittstelle des Gesamtsystems und ermöglichen die Kommunikation mit der Systemumge-bung.
-
-Es gibt verschiedene Arten von Ports, z.B. für Daten, Ereignisse oder physische Verbindungen.
-
-*Ports können allgemein an den Grenzen von Komponenten platziert werden, um deren Schnittstellen klar zu definieren!*
-
-</div>
-<div>
-
-![](./Architektur_Modell_Port_System.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### System-Ports auf Haupt-Kompontenten weiterleiten
-
-System-Ports werden auf die Ports der Haupt-Komponenten weitergeleitet (er-möglicht Interaktion mit der Außenwelt).
-
-Diese Weiterleitung stellt sicher, dass externe Signale die richtigen Teilsysteme erreichen.
-
-*Eine klare Schnittstellendefinition auf Systemebene erleichtert die Integration und den Test des Gesamtsystems!*
-
-</div>
-<div>
-
-![](./Architektur_Modell_Port_Haupt.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### Haupt-Komponenten untereinander verknüpfen
-
-Die Haupt-Komponenten werden unter-einander verknüpft, um die Interaktion und den Datenaustausch zwischen den Teilsystemen zu modellieren.
-
-Diese Verknüpfungen stellen die internen Kommunikationswege des Systems dar.
-
-*Durch die explizite Modellierung der Interaktionen wird die Systemstruktur klar und nachvollziehbar!*
-
-</div>
-<div>
-
-![](./Architektur_Modell_Port_System_Intern.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### Ports von Haupt-Komponenten auf Unter-Komponenten weiterleiten
-
-Die Ports der Haupt- werden auf die Ports der Unter-Komponenten weiter-geleitet, um die Funktionalität der Teilsysteme zu realisieren.
-
-Diese hierarchische Port-Weiterleitung ermöglicht eine detaillierte und modulare Systemgestaltung.
-
-*So kann die Implementierung eines Teilsystems gekapselt werden!*
-
-</div>
-<div>
-
-![](./Architektur_Modell_Port_Haupt_Unter.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### Unter-Komponenten untereinander verknüpfen
-
-Die Unter-Komponenten werden unter-einander verknüpft, um die Interaktion und den Datenaustausch zu modellieren.
-
-Auf dieser Ebene wird die Funktionsweise eines Teilsystems durch das Zusammen-spiel seiner Module beschrieben.
-
-*Die interne Verdrahtung der Module bleibt dabei für andere Teile der Architektur verborgen!*
-
-</div>
-<div>
-
-![](./Architektur_Modell_Port_Unter_Unter.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div>
-
-### Referenz-Komponenten hinzufügen
+#### Referenz-Komponenten
 
 Referenz-Komponenten ermöglichen die Wiederverwendung von Teilarchitekturen in verschiedenen Modellen und Projekten.
 
@@ -661,7 +652,7 @@ Referenz-Komponenten ermöglichen die Wiederverwendung von Teilarchitekturen in 
 <div class="columns">
 <div>
 
-### Datei für Speicherung von Referenz-Komponente auswählen
+#### Sparate Dateien für Speicherung von Referenz-Komponenten
 
 Beim Erstellen einer Referenz-Kompo-nente wird eine separate Architektur-modell-Datei angelegt.
 
@@ -682,7 +673,7 @@ Diese Datei kann dann unabhängig verwaltet und in anderen Projekten wiederverwe
 <div class="columns">
 <div>
 
-### Einfache Komponente in Referenz-Komponente verwandeln
+#### Umwandlung von Komponenten in Referenz-Komponenten
 
 Eine bestehende, einfache Komponente kann mit wenigen Klicks in eine wiederverwendbare Referenz-Komponente umgewandelt werden.
 
@@ -700,10 +691,223 @@ Dies ermöglicht eine nachträgliche Modularisierung und Wiederverwendung von be
 
 ---
 
+![bg contain right:40%](./Ports_und_Konnektoren.jpg)
+
+### 2.2. Ports und Konnektoren (*Connectors*)
+
+TODO: Was sind Ports und Konnektoren und warum modellieren wir sie?
+
+---
+
 <div class="columns">
 <div>
 
-### Akku-Schauber (Beispiel)
+#### System-Ports definieren
+
+System-Ports definieren die Schnittstelle des Gesamtsystems und ermöglichen die Kommunikation mit der Systemumge-bung.
+
+Es gibt verschiedene Arten von Ports, z.B. für Daten, Ereignisse oder physische Verbindungen.
+
+*Ports können allgemein an den Grenzen von Komponenten platziert werden, um deren Schnittstellen klar zu definieren!*
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_System.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### System-Ports auf Haupt-Kompontenten weiterleiten
+
+System-Ports werden auf die Ports der Haupt-Komponenten weitergeleitet (er-möglicht Interaktion mit der Außenwelt).
+
+Diese Weiterleitung stellt sicher, dass externe Signale die richtigen Teilsysteme erreichen.
+
+*Eine klare Schnittstellendefinition auf Systemebene erleichtert die Integration und den Test des Gesamtsystems!*
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_Haupt.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Haupt-Komponenten untereinander verknüpfen
+
+Die Haupt-Komponenten werden unter-einander verknüpft, um die Interaktion und den Datenaustausch zwischen den Teilsystemen zu modellieren.
+
+Diese Verknüpfungen stellen die internen Kommunikationswege des Systems dar.
+
+*Durch die explizite Modellierung der Interaktionen wird die Systemstruktur klar und nachvollziehbar!*
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_System_Intern.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Ports von Haupt-Komponenten auf Unter-Komponenten weiterleiten
+
+Die Ports der Haupt- werden auf die Ports der Unter-Komponenten weiter-geleitet, um die Funktionalität der Teilsysteme zu realisieren.
+
+Diese hierarchische Port-Weiterleitung ermöglicht eine detaillierte und modulare Systemgestaltung.
+
+*So kann die Implementierung eines Teilsystems gekapselt werden!*
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_Haupt_Unter.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Unter-Komponenten untereinander verknüpfen
+
+Die Unter-Komponenten werden unter-einander verknüpft, um die Interaktion und den Datenaustausch zu modellieren.
+
+Auf dieser Ebene wird die Funktionsweise eines Teilsystems durch das Zusammen-spiel seiner Module beschrieben.
+
+*Die interne Verdrahtung der Module bleibt dabei für andere Teile der Architektur verborgen!*
+
+</div>
+<div>
+
+![](./Architektur_Modell_Port_Unter_Unter.png)
+
+</div>
+</div>
+
+---
+
+![bg contain right:40%](./Schnittstellen.jpg)
+
+### 1.3. Wörterbücher und Schnittstellen (*Dictionaries* und *Interfaces*)
+
+TODO: Kurze Einführung - was sind dictionaries und interfaces in Matlab System Composer und wafür werden sie verwendet?
+
+---
+
+#### Wörterbuch anlegen
+
+TODO
+
+---
+
+#### Schnittstellen anlegen
+
+Es werden die folgenden Typen von Schnittstellen unterschieden:
+
+- **Composite Data Interface** - TODO
+- **Value Type** - TODO
+- **Physical Interface** -TODO
+
+---
+
+##### Schnittstellen-Typ **Composite Data Interface**
+
+TODO: Kurze Erklärung und Anwendungsbeispiel
+
+---
+
+##### Elemente anlegen
+
+TODO: Kurze Beschreibung von Elementen eines Composite Data Interface und ihrer Datentypen
+
+---
+
+##### Schnittstellen-Typ **Value Type**
+
+TODO: Kurze Erklärung und Anwendungsbeispiel
+
+---
+
+##### Schnittstellen-Typ **Physical Interface**
+
+TODO: Kurze Erklärung und Anwendungsbeispiel
+
+---
+
+![bg contain right:40%](./Verknüpfung_Komponente.jpg)
+
+### 1.4. Verknüpfungen (*Links*)
+
+TODO: Kurze Einführung - was sind Links zwischen Komponenten oder anderen Architekturmodellelementen und Anforderungen und warum werden sie modelliert?
+
+---
+
+#### Link anlegen
+
+TODO: Drag und Drop der Anforderung aus dem Requirement Manager auf die Komponente
+
+---
+
+#### Links pro Requirement anzeigen
+
+TODO: Darstellung der Links im Property Inspektor
+
+---
+
+#### Alle Links anzeigen
+
+TODO: Darstellung der Links im Link Editor und *Show Links*
+
+---
+
+#### Die *Tracability Matrix*
+
+TODO: Konzept der Tracability Matrix beschreiben
+
+---
+
+#### Erstellung der Matrix
+
+TODO: Erstellung im Requirement Editor
+
+---
+
+#### Einstellungen der Matrix
+
+TODO: Konfiguration der Zeilen und Spalten
+
+---
+
+![bg contain right:40%](./Case_Study.jpg)
+
+### 1.5. Fallbeispiel
+
+TODO: Kurze einführung des Akku-Schrauber-Beispiels.
+
+---
+
+<div class="columns">
+<div>
+
+#### Gesamtsystem **Akku-Schauber**
 
 - **Energieversorgung** - liefert elektrische Energie
 - **Antriebssystem** - generiert mechanische Energie
@@ -724,7 +928,7 @@ Dies ermöglicht eine nachträgliche Modularisierung und Wiederverwendung von be
 <div class="columns">
 <div>
 
-### Energieversorgung (Beispiel)
+#### Komponente **Energieversorgung**
 
 Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät identifizieren:
 
@@ -744,7 +948,7 @@ Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät
 <div class="columns">
 <div>
 
-### Antriebssystem (Beispiel)
+#### Komponente **Antriebssystem**
 
 Beim Antriebssystem können wir zum Beispiel einen Motor und ein Getriebe identifizieren:
 
@@ -760,7 +964,7 @@ Beim Antriebssystem können wir zum Beispiel einen Motor und ein Getriebe identi
 
 ![bg right](../Übungsaufgabe.jpg)
 
-### Übungsaufgabe
+### 2.6. Übungsaufgabe
 
 Erstelle eine Architektur für den 3D-Drucker und dokumentiere die Architektur mithilfe des MATLAB System Composers. Verknüpfe anschließend die Anforderungen mit den Architektur-Elementen.
 
@@ -777,12 +981,8 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
-TODO
-
----
-
 ![bg right](../Übungsaufgabe.jpg)
 
-### Übungsaufgabe
+### 3.x. Übungsaufgabe
 
 Erstelle ein Profil für den 3D-Drucker und weise den Komponenten Stereotypen zu. Erstelle anschließend eine View, die nur die mechanischen Komponenten anzeigt.
