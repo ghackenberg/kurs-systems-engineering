@@ -560,8 +560,8 @@ Sammle Anforderungen an den 3D-Drucker und dokumentiere die Anforderungen mithil
 In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 1. **Komponenten erstellen**<br/>(Reference, Variant, Adapter)
-1. **Ports erstellen / verknüpfen**<br/>(Input, Output, Physical)
-1. **Interfaces erstellen / zuweisen**<br/>(Value, Composite  Data, Physical)
+1. **Anschlüsse erstellen**<br/>(Input, Output, Physical)
+1. **Schnittstellen erstellen**<br/>(Value, Composite  Data, Physical)
 1. **Anforderungen verknüpfen**<br/>(Tracability Matrix)
 
 ---
@@ -649,24 +649,15 @@ Referenz-Komponenten ermöglichen die Wiederverwendung von Teilarchitekturen in 
 
 ---
 
-<div class="columns">
-<div>
+![bg contain right](./Architektur_Modell_Komponente_Referenz_Auswahl.png)
 
-#### Sparate Dateien für Speicherung von Referenz-Komponenten
+#### Separate Dateien für Speicherung von Referenz-Komponenten
 
 Beim Erstellen einer Referenz-Kompo-nente wird eine separate Architektur-modell-Datei angelegt.
 
 Diese Datei kann dann unabhängig verwaltet und in anderen Projekten wiederverwendet werden.
 
 *Die Auswahl des Speicherorts ist entscheidend für die Organisation und Auffindbarkeit!*
-
-</div>
-<div>
-
-![](./Architektur_Modell_Komponente_Referenz_Auswahl.png)
-
-</div>
-</div>
 
 ---
 
@@ -675,7 +666,7 @@ Diese Datei kann dann unabhängig verwaltet und in anderen Projekten wiederverwe
 
 #### Umwandlung von Komponenten in Referenz-Komponenten
 
-Eine bestehende, einfache Komponente kann mit wenigen Klicks in eine wiederverwendbare Referenz-Komponente umgewandelt werden.
+Eine bestehende Komponente kann außerdem mit wenigen Klicks in eine wiederverwendbare Referenz-Komponente umgewandelt werden.
 
 Dies ermöglicht eine nachträgliche Modularisierung und Wiederverwendung von bereits modellierten Komponenten.
 
@@ -693,9 +684,45 @@ Dies ermöglicht eine nachträgliche Modularisierung und Wiederverwendung von be
 
 ![bg contain right:40%](./Ports_und_Konnektoren.jpg)
 
-### 2.2. Ports und Konnektoren (*Connectors*)
+### 2.2. Anschlüsse und Konnektoren (*Ports* und *Connectors*)
 
 TODO: Was sind Ports und Konnektoren und warum modellieren wir sie?
+
+---
+
+![bg contain right:40%](./Port_Typen.png)
+
+#### Port-Typen
+
+Sytem Composer unterscheidet die folgende drei Port-Typen:
+
+- **Input** - TODO
+- **Output** - TODO
+- **Physical** - TODO
+
+---
+
+![bg contain right:30%](./Port_Typen_Input.jpg)
+
+##### Port-Typ **Input**
+
+TODO: Kurze Beschreibung von Input Ports und ein Anwendungsbeispiel
+
+---
+
+![bg contain right:30%](./Port_Typen_Output.jpg)
+
+##### Port-Typ **Output**
+
+TODO: Kurze Beschreibung von Output Ports und ein Anwendungsbeispiel
+
+---
+
+![bg contain right:30%](./Port_Typen_Physical.jpg)
+
+##### Port-Typ **Physical**
+
+TODO: Kurze Beschreibung von Physical Ports und ein Anwendungsbeispiel
 
 ---
 
@@ -706,9 +733,9 @@ TODO: Was sind Ports und Konnektoren und warum modellieren wir sie?
 
 System-Ports definieren die Schnittstelle des Gesamtsystems und ermöglichen die Kommunikation mit der Systemumge-bung.
 
-Es gibt verschiedene Arten von Ports, z.B. für Daten, Ereignisse oder physische Verbindungen.
+Ports können allgemein an den Grenzen von Komponenten platziert werden, um deren Schnittstellen klar zu definieren.
 
-*Ports können allgemein an den Grenzen von Komponenten platziert werden, um deren Schnittstellen klar zu definieren!*
+*Input Ports werden häufig auf der linken seite platziert, Output Ports dagen auf der rechten, um die Lesbarkeit zu erleichtern!*
 
 </div>
 <div>
@@ -725,11 +752,11 @@ Es gibt verschiedene Arten von Ports, z.B. für Daten, Ereignisse oder physische
 
 #### System-Ports auf Haupt-Kompontenten weiterleiten
 
-System-Ports werden auf die Ports der Haupt-Komponenten weitergeleitet (er-möglicht Interaktion mit der Außenwelt).
+System-Ports werden auf per Drag und Drop die Ports der Haupt-Komponenten weitergeleitet.
 
 Diese Weiterleitung stellt sicher, dass externe Signale die richtigen Teilsysteme erreichen.
 
-*Eine klare Schnittstellendefinition auf Systemebene erleichtert die Integration und den Test des Gesamtsystems!*
+*Durch die Weiterleitung obliegt die Verarbeitung oder Generierung des Signals der Haupt-Komponente!*
 
 </div>
 <div>
@@ -750,7 +777,7 @@ Die Haupt-Komponenten werden unter-einander verknüpft, um die Interaktion und d
 
 Diese Verknüpfungen stellen die internen Kommunikationswege des Systems dar.
 
-*Durch die explizite Modellierung der Interaktionen wird die Systemstruktur klar und nachvollziehbar!*
+*Wenn die Signale nicht nach außen weitergeleitet werden, entstehen so rein interne Signale und Interaktionen!*
 
 </div>
 <div>
@@ -792,7 +819,7 @@ Die Unter-Komponenten werden unter-einander verknüpft, um die Interaktion und d
 
 Auf dieser Ebene wird die Funktionsweise eines Teilsystems durch das Zusammen-spiel seiner Module beschrieben.
 
-*Die interne Verdrahtung der Module bleibt dabei für andere Teile der Architektur verborgen!*
+*Die interne Verdrahtung der Module bleibt dabei wieder für andere Teile der Architek-tur verborgen!*
 
 </div>
 <div>
@@ -806,39 +833,29 @@ Auf dieser Ebene wird die Funktionsweise eines Teilsystems durch das Zusammen-sp
 
 ![bg contain right:40%](./Schnittstellen.jpg)
 
-### 1.3. Wörterbücher und Schnittstellen (*Dictionaries* und *Interfaces*)
+### 1.3. Schnittstellen (*Interfaces*)
 
-TODO: Kurze Einführung - was sind dictionaries und interfaces in Matlab System Composer und wafür werden sie verwendet?
-
----
-
-#### Wörterbuch anlegen
-
-TODO
+TODO: Kurze Einführung - was sind und interfaces in Matlab System Composer und wafür werden sie verwendet?
 
 ---
 
-#### Schnittstellen anlegen
+#### Der *Interface Editor*
+
+TODO: Anlegen und Bearbeiten von Schnittstellenspezifikationen
+
+---
+
+#### Schnittstellen-Typen
 
 Es werden die folgenden Typen von Schnittstellen unterschieden:
 
-- **Composite Data Interface** - TODO
 - **Value Type** - TODO
+- **Composite Data Interface** - TODO
 - **Physical Interface** -TODO
 
 ---
 
-##### Schnittstellen-Typ **Composite Data Interface**
-
-TODO: Kurze Erklärung und Anwendungsbeispiel
-
----
-
-##### Elemente anlegen
-
-TODO: Kurze Beschreibung von Elementen eines Composite Data Interface und ihrer Datentypen
-
----
+![bg contain right:40%](./Interface_Value.jpg)
 
 ##### Schnittstellen-Typ **Value Type**
 
@@ -846,9 +863,61 @@ TODO: Kurze Erklärung und Anwendungsbeispiel
 
 ---
 
+![bg contain right:40%](./Interface_Composite.jpg)
+
+##### Schnittstellen-Typ **Composite Data Interface**
+
+TODO: Kurze Erklärung und Anwendungsbeispiel
+
+---
+
+##### **Composite Data Interface** Elemente
+
+TODO: Kurze Beschreibung von Elementen eines Composite Data Interface und ihrer Datentypen
+
+---
+
+![bg contain right:40%](./Interface_Physical.jpg)
+
 ##### Schnittstellen-Typ **Physical Interface**
 
 TODO: Kurze Erklärung und Anwendungsbeispiel
+
+---
+
+##### **Physical Interface** Elemente
+
+TODO: Kurze Beschreibung von Elementen eines Physical Interface und ihrer "Datentypen"
+
+---
+
+#### Schnittstellen zuweisen
+
+TODO: Auswahl der Schnittstelle im Interface Editor. Rechtsklick auf die Komponente und Schnittstelle zuweisen.
+
+---
+
+![bg contain right:40%](./Interface_Compatibility.jpg)
+
+#### Kompatibilität von Schnittstellen
+
+TODO: Schnittstellen von verbundenen Ports müssen zusammenpassen!
+
+---
+
+![bg contain right](./Interface_Incompatibility.png)
+
+#### Warnung bei Inkompatibilitäten
+
+TODO: Kurze Beschreibung der Warnmechanismen in System Composer
+
+---
+
+![bg contain right](./Interface_Adapter.png)
+
+#### Behebung der Inkompatibilitäten durch Adapter-Komponenten
+
+TODO: Text
 
 ---
 
@@ -878,9 +947,24 @@ TODO: Darstellung der Links im Link Editor und *Show Links*
 
 ---
 
+<div class="columns">
+<div class="three">
+
 #### Die *Tracability Matrix*
 
 TODO: Konzept der Tracability Matrix beschreiben
+
+</div>
+<div>
+
+| | C1 | C2 | C3 |
+|-|-|-|-|
+| R1 | ✅ | | ✅ |
+| R2 | ✅ | | |
+| R3 | | ✅ | |
+
+</div>
+</div>
 
 ---
 
@@ -981,8 +1065,89 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
+![bg contain right:40%](./Profile.jpg)
+
+### 3.1. Profile
+
+TODO: Kurz - was sind Profile (und deren Stereotypen) und wofür brauchen wir sie?
+
+---
+
+![bg contain right:40%](./Sichten.jpg)
+
+### 3.2. Sichten (*Views*)
+
+TODO: Kurz - was sind Architektursichten und warum brauchen wir sie?
+
+---
+
+#### Der **Architecture Views Editor**
+
+TODO: Wie öffnet man den Architecture Views Editor?
+
+---
+
+#### Sicht anlegen
+
+TODO: Wie ist der Architecture Views Editor aufgebaut und wie legt man eine neue Sicht an?
+
+---
+
+#### Filter konfigurieren
+
+TODO: Was sind Filter und wie funktionieren sie?
+
+---
+
+##### **Component**-Filter
+
+TODO: Was ist ein Component-Filter und welche Arten von Filtern gibt es?
+
+---
+
+##### **Port**-Filter
+
+TODO: Was ist ein Port-Filter und welche Arten von Filtern gibt es?
+
+---
+
+#### Filter anwenden
+
+TODO: Klick auf Button *Apply*. Verbergen von Komponenten, die nicht sichtbar sein sollen.
+
+---
+
+### 3.3. Fallbeispiel
+
+TODO: Nun wenden wir Profile und Sichten auf unseren Akku-Schauber an.
+
+---
+
+#### Die Stereotypen unseren Profils
+
+Für unser Fallbeispiel arbeiten wir mit den folgenden vier Stereotypen:
+
+- **Mechatronische Komponente** - TODO
+- **Mechanische Komponente** - TODO
+- **Elektrische Komponente** - TODO
+- **Softwaretechnische Komponenten** - TODO
+
+---
+
+#### Zuweisung der Sterotypen zu Komponenten
+
+TODO: Kurze Auswahl von Komponenten und deren Stereotypen plus Begründung
+
+---
+
+#### Nutzer von Architektursichten
+
+TODO: Was sehen wir in einer Architektursicht, welche nur die elektrischen Komponenten zeigt?
+
+---
+
 ![bg right](../Übungsaufgabe.jpg)
 
-### 3.x. Übungsaufgabe
+### 3.4. Übungsaufgabe
 
 Erstelle ein Profil für den 3D-Drucker und weise den Komponenten Stereotypen zu. Erstelle anschließend eine View, die nur die mechanischen Komponenten anzeigt.
