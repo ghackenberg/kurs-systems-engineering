@@ -36,7 +36,11 @@ In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
 ### 1.1. Architekturmodelle
 
-TODO: Kurze Einführung - was ist ein Architekturmodell und warum wird es erstellt?
+Ein Architekturmodell ist eine vereinfachte, abstrakte Darstellung eines Systems.
+
+Es beschreibt die Struktur des Systems, seine Komponenten und deren Beziehungen zueinander.
+
+Architekturmodelle helfen dabei, komplexe Systeme zu verstehen, zu analysieren und zu dokumentieren.
 
 ---
 
@@ -86,7 +90,11 @@ In der Modellierungsansicht können die Komponenten der Architektur definiert un
 
 ### 1.2. Anforderungsliste (*Requirement Sets*)
 
-TODO: Kurze Einführung - was ist eine Anforderung und warum wird sie im Modell erfasst?
+Eine Anforderung ist eine dokumentierte, nachprüfbare Aussage über eine Eigenschaft oder Funktion eines Systems.
+
+Anforderungen werden erfasst, um sicherzustellen, dass das entwickelte System die Bedürfnisse der Stakeholder erfüllt.
+
+Die Erfassung im Modell ermöglicht die Nachverfolgbarkeit von der Anforderung bis zur Implementierung und zum Test.
 
 ---
 
@@ -136,7 +144,11 @@ In einem Requirement Set können wir mehrere Anforderungen sammeln und gemeinsam
 
 ### 1.3. Anforderungen (*Requirements*)
 
-TODO: Kurze Einführung - was ist eine Anforderung und warum wird sie im Modell erfasst?
+Eine Anforderung beschreibt, was ein System tun soll oder welche Eigenschaften es haben muss.
+
+Sie werden im Modell erfasst, um eine klare, nachvollziehbare Grundlage für Design, Implementierung und Test zu schaffen.
+
+Dies stellt sicher, dass das Endprodukt die Erwartungen erfüllt.
 
 ---
 
@@ -306,7 +318,11 @@ Diese Darstellung beim Durchlesen der Anforderungsspezifikation aufgrund des hö
 
 ### 1.4. Verknüpfungen (*Links*)
 
-TODO: Kurse Einführung - Was ist ein Link zwischen Anforderungen und warum wird er im Modell hinterlegt?
+Ein Link ist eine Verbindung zwischen zwei Modellelementen, zum Beispiel zwischen zwei Anforderungen.
+
+Links werden erstellt, um Beziehungen wie Ableitung, Verfeinerung oder Abhängigkeit darzustellen.
+
+Sie sind die Grundlage für die Nachverfolgbarkeit (*Traceability*) und helfen bei der Analyse der Auswirkungen von Änderungen.
 
 ---
 
@@ -491,55 +507,87 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ### 1.5. Fallbeispiel
 
-TODO: Kurze Beschreibung des Fallbeispiels
+In diesem Fallbeispiel betrachten wir die Anforderungen an einen Akku-Schrauber.
+
+Wir werden funktionale und nicht-funktionale Anforderungen definieren.
+
+Anschließend werden wir diese Anforderungen strukturieren und miteinander verknüpfen.
 
 ---
 
 #### **Container**-Requirements
 
-TODO: Liste von möglichen Container-Requirements
+Mögliche Container für den Akku-Schrauber könnten sein:
+- **Allgemeine Anforderungen**
+- **Mechanische Anforderungen**
+- **Elektrische Anforderungen**
+- **Software-Anforderungen**
+- **Sicherheitsanforderungen**
 
 ---
 
 #### **Functional**-Requirements
 
-TODO: Liste von möglichen funktionalen Anforderungen
+Beispiele für funktionale Anforderungen sind:
+- Der Akku-Schrauber muss Schrauben eindrehen können.
+- Der Akku-Schrauber muss Schrauben ausdrehen können.
+- Die Drehzahl muss einstellbar sein.
+- Das Drehmoment muss begrenzbar sein.
+- Der Ladezustand des Akkus muss angezeigt werden.
 
 ---
 
 #### **Informational**-Requirements
 
-TODO: Liste von möglichen nicht-funktionalen Anforderungen
+Beispiele für nicht-funktionale (informationale) Anforderungen sind:
+- Das Gerät muss ergonomisch gestaltet sein.
+- Das Gewicht des Geräts darf 1.5 kg nicht überschreiten.
+- Der Akku muss für mindestens 500 Ladezyklen ausgelegt sein.
+- Das Gehäuse muss aus recycelbarem Kunststoff bestehen.
 
 ----
 
 #### Requirement-**Beschreibung** und **Begründung**
 
-TODO: Bespiel einer Description und eines Rationales für ein Requirement
+**Requirement:** Die Drehzahl muss einstellbar sein.
+
+**Description:** Der Benutzer muss die Möglichkeit haben, die maximale Drehzahl des Motors stufenlos oder in vordefinierten Stufen zu regulieren.
+
+**Rationale:** Unterschiedliche Materialien und Schraubengrößen erfordern unterschiedliche Drehzahlen, um ein optimales Arbeitsergebnis zu erzielen und Materialschäden zu vermeiden.
 
 ---
 
 #### **Derives**-Links
 
-TODO: Liste möglicher Drives Verknüpfungen
+Eine allgemeine Anforderung wie "Der Akku-Schrauber muss sicher sein" kann spezifischere Anforderungen ableiten:
+- Die Anforderung "Das Gerät muss über einen Überlastschutz verfügen" **leitet sich ab von** "Der Akku-Schrauber muss sicher sein".
+- Die Anforderung "Die Elektronik muss gegen Kurzschluss geschützt sein" **leitet sich ab von** "Das Gerät muss über einen Überlastschutz verfügen".
 
 ---
 
 #### **Refines**-Links
 
-TODO: Liste möglicher Refines Verknüpfungen
+Eine Anforderung kann eine andere verfeinern:
+- Die Anforderung "Die Drehzahl muss in 3 Stufen einstellbar sein" **verfeinert** die Anforderung "Die Drehzahl muss einstellbar sein".
+- Die Anforderung "Die Drehmomentbegrenzung muss in 5 Stufen von 5 Nm bis 25 Nm einstellbar sein" **verfeinert** die Anforderung "Das Drehmoment muss begrenzbar sein".
 
 ---
 
 #### **Related To**-Links
 
-TODO: Liste möglicher Related To Verknüpfungen zwischen den Anforderungen
+Manche Anforderungen stehen in einem losen Zusammenhang:
+- Die Anforderung "Das Gewicht des Geräts darf 1.5 kg nicht überschreiten" **steht in Beziehung zu** "Der Akku muss eine Kapazität von mindestens 2Ah haben".
+- Ein größerer Akku erhöht das Gewicht, daher müssen diese beiden Anforderungen gegeneinander abgewogen werden.
 
 ---
 
 #### Link-**Beschreibung** und **Begründung**
 
-TODO: Beispiel einer Description und eines Rationales für einen Link
+**Link:** `[Gewicht < 1.5kg]` **Related to** `[Akku-Kapazität > 2Ah]`
+
+**Description:** Verknüpft die Anforderung an das maximale Gewicht mit der Anforderung an die minimale Akkukapazität.
+
+**Rationale:** Diese Anforderungen sind konkurrierend. Ein Akku mit höherer Kapazität wiegt in der Regel mehr. Der Link dokumentiert diese Abhängigkeit, um bei der Komponentenauswahl einen bewussten Kompromiss zu finden.
 
 ---
 
@@ -570,7 +618,11 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 ### 2.1. Komponenten
 
-TODO: Kurze Einführung, was Komponenten sind und warum wir Systeme in Form von Komponenten modellieren.
+Komponenten sind die Bausteine eines Systems.
+
+Sie kapseln eine bestimmte Funktionalität und interagieren miteinander über definierte Schnittstellen.
+
+Wir modellieren Systeme als Komponenten, um die Komplexität zu reduzieren, die Wiederverwendbarkeit zu fördern und die Arbeit im Team zu erleichtern.
 
 ---
 
@@ -686,7 +738,13 @@ Dies ermöglicht eine nachträgliche Modularisierung und Wiederverwendung von be
 
 ### 2.2. Anschlüsse und Konnektoren (*Ports* und *Connectors*)
 
-TODO: Was sind Ports und Konnektoren und warum modellieren wir sie?
+Ports sind die Interaktionspunkte einer Komponente, über die sie mit anderen Komponenten kommuniziert.
+
+Konnektoren sind die Verbindungen zwischen den Ports.
+
+Wir modellieren sie, um die Schnittstellen und die Kommunikationspfade im System explizit zu machen.
+
+Dies hilft, die Systemstruktur klar zu definieren und Abhängigkeiten zu verstehen.
 
 ---
 
@@ -696,9 +754,9 @@ TODO: Was sind Ports und Konnektoren und warum modellieren wir sie?
 
 Sytem Composer unterscheidet die folgende drei Port-Typen:
 
-- **Input** - TODO
-- **Output** - TODO
-- **Physical** - TODO
+- **Input** - Empfängt Daten oder Signale.
+- **Output** - Sendet Daten oder Signale.
+- **Physical** - Modelliert physikalische Verbindungen (z.B. mechanisch, elektrisch).
 
 ---
 
@@ -706,7 +764,11 @@ Sytem Composer unterscheidet die folgende drei Port-Typen:
 
 ##### Port-Typ **Input**
 
-TODO: Kurze Beschreibung von Input Ports und ein Anwendungsbeispiel
+Ein Input-Port empfängt Informationen von anderen Komponenten oder von außerhalb des Systems.
+
+Er definiert einen Eingangspunkt für Daten oder Steuersignale.
+
+**Beispiel:** Ein Port an einer Motorkomponente, der ein Geschwindigkeitssignal als Sollwert empfängt.
 
 ---
 
@@ -714,7 +776,11 @@ TODO: Kurze Beschreibung von Input Ports und ein Anwendungsbeispiel
 
 ##### Port-Typ **Output**
 
-TODO: Kurze Beschreibung von Output Ports und ein Anwendungsbeispiel
+Ein Output-Port sendet Informationen an andere Komponenten oder nach außerhalb des Systems.
+
+Er definiert einen Ausgangspunkt für Daten oder Statusmeldungen.
+
+**Beispiel:** Ein Port an einem Sensor, der den gemessenen Temperaturwert ausgibt.
 
 ---
 
@@ -722,7 +788,11 @@ TODO: Kurze Beschreibung von Output Ports und ein Anwendungsbeispiel
 
 ##### Port-Typ **Physical**
 
-TODO: Kurze Beschreibung von Physical Ports und ein Anwendungsbeispiel
+Ein Physical-Port repräsentiert eine physikalische Verbindung, über die Energie oder Materie ausgetauscht wird.
+
+Im Gegensatz zu Input/Output-Ports ist die Richtung des Flusses nicht immer festgelegt.
+
+**Beispiel:** Ein Port, der eine mechanische Welle repräsentiert, über die Drehmoment und Drehzahl übertragen werden.
 
 ---
 
@@ -833,9 +903,13 @@ Auf dieser Ebene wird die Funktionsweise eines Teilsystems durch das Zusammen-sp
 
 ![bg contain right:40%](./Schnittstellen.jpg)
 
-### 1.3. Schnittstellen (*Interfaces*)
+### 2.3. Schnittstellen (*Interfaces*)
 
-TODO: Kurze Einführung - was sind und interfaces in Matlab System Composer und wafür werden sie verwendet?
+Schnittstellen (Interfaces) im System Composer definieren die Art der Daten, die über einen Port ausgetauscht werden.
+
+Sie legen die "Sprache" fest, die Komponenten für die Kommunikation verwenden.
+
+Sie werden verwendet, um die Kompatibilität zwischen Ports sicherzustellen und die Datenstruktur explizit zu machen.
 
 ---
 
@@ -844,7 +918,11 @@ TODO: Kurze Einführung - was sind und interfaces in Matlab System Composer und 
 
 #### Der *Interface Editor*
 
-TODO: Anlegen und Bearbeiten von Schnittstellenspezifikationen
+Der Interface Editor ist das Werkzeug zur Definition und Verwaltung von Schnittstellen.
+
+Hier können neue Schnittstellen angelegt und bestehende bearbeitet werden.
+
+Man kann den Datentyp, die Einheiten, Dimensionen und andere Eigenschaften der ausgetauschten Daten festlegen.
 
 </div>
 <div>
@@ -863,9 +941,9 @@ TODO: Anlegen und Bearbeiten von Schnittstellenspezifikationen
 
 Es werden die folgenden Typen von Schnittstellen unterschieden:
 
-- **Value Type** - TODO
-- **Composite Data Interface** - TODO
-- **Physical Interface** -TODO
+- **Value Type** - Für einfache, atomare Datenwerte.
+- **Composite Data Interface** - Für strukturierte Daten, die aus mehreren Elementen bestehen.
+- **Physical Interface** - Für physikalische Domänen und deren Variablen.
 
 </div>
 <div>
@@ -881,7 +959,11 @@ Es werden die folgenden Typen von Schnittstellen unterschieden:
 
 ##### Schnittstellen-Typ **Value Type**
 
-TODO: Kurze Erklärung und Anwendungsbeispiel
+Ein Value Type Interface beschreibt einen einzelnen, einfachen Datenwert.
+
+Dies kann eine Zahl, ein Wahrheitswert oder eine Aufzählung sein.
+
+**Beispiel:** Eine Schnittstelle `Temperatur`, die einen Fließkommawert mit der Einheit "Grad Celsius" definiert.
 
 ---
 
@@ -890,7 +972,10 @@ TODO: Kurze Erklärung und Anwendungsbeispiel
 
 ##### **Value Type** Konfiguration
 
-TODO: Kurze Erklärung der Datentypen (Wahrheitswert, Ganzzahl, Fließpunktzahl)
+Bei der Konfiguration eines Value Type kann man den genauen Datentyp festlegen:
+- **Wahrheitswert (boolean):** Für logische Signale (true/false).
+- **Ganzzahl (integer):** Für Zähler oder diskrete Werte.
+- **Fließkommazahl (double/single):** Für kontinuierliche, physikalische Größen.
 
 </div>
 <div>
@@ -906,7 +991,11 @@ TODO: Kurze Erklärung der Datentypen (Wahrheitswert, Ganzzahl, Fließpunktzahl)
 
 ##### Schnittstellen-Typ **Composite Data Interface**
 
-TODO: Kurze Erklärung und Anwendungsbeispiel
+Ein Composite Data Interface (auch Bus genannt) bündelt mehrere unterschiedliche Datenelemente zu einer einzigen Schnittstelle.
+
+Dies ist nützlich, um zusammengehörige Daten gemeinsam zu übertragen.
+
+**Beispiel:** Eine Schnittstelle `GPS_Signal`, die die Elemente `Latitude`, `Longitude` und `Altitude` enthält.
 
 ---
 
@@ -915,7 +1004,11 @@ TODO: Kurze Erklärung und Anwendungsbeispiel
 
 ##### **Composite Data Interface** Konfiguration
 
-TODO: Kurze Beschreibung von Elementen eines Composite Data Interface und ihrer Datentypen
+Innerhalb eines Composite Data Interface definiert man einzelne Elemente.
+
+Jedes Element hat einen Namen und einen eigenen Datentyp (z.B. `double`, `int32`).
+
+Man kann auch andere Interfaces (Value Types oder andere Composite Interfaces) als Elemente verschachteln, um komplexe Datenstrukturen zu erstellen.
 
 </div>
 <div>
@@ -931,7 +1024,11 @@ TODO: Kurze Beschreibung von Elementen eines Composite Data Interface und ihrer 
 
 ##### Schnittstellen-Typ **Physical Interface**
 
-TODO: Kurze Erklärung und Anwendungsbeispiel
+Ein Physical Interface definiert die Eigenschaften einer physikalischen Domäne.
+
+Es wird an Physical Ports verwendet, um den Austausch von Energie oder Materie zu modellieren.
+
+**Beispiel:** Eine Schnittstelle `Elektrisch`, die die Variablen `Spannung` und `Strom` definiert.
 
 ---
 
@@ -940,7 +1037,13 @@ TODO: Kurze Erklärung und Anwendungsbeispiel
 
 ##### **Physical Interface** Konfiguration
 
-TODO: Kurze Beschreibung von Elementen eines Physical Interface und ihrer "Datentypen"
+Ein Physical Interface besteht aus "Through"- und "Across"-Variablen.
+
+"Across"-Variablen beschreiben eine Potenzialdifferenz (z.B. Spannung, Druckdifferenz).
+
+"Through"-Variablen beschreiben einen Fluss (z.B. Strom, Volumenstrom).
+
+Diese Elemente werden nicht mit klassischen Datentypen, sondern mit physikalischen Domänen verknüpft.
 
 </div>
 <div>
@@ -957,7 +1060,11 @@ TODO: Kurze Beschreibung von Elementen eines Physical Interface und ihrer "Daten
 
 #### Schnittstellen zuweisen
 
-TODO: Auswahl der Schnittstelle im Interface Editor. Rechtsklick auf die Komponente und Schnittstelle zuweisen.
+Um eine Schnittstelle zuzuweisen, wählt man einen Port im Architekturmodell aus.
+
+Im Property Inspector kann man dann aus der Liste der im Interface Editor definierten Schnittstellen die passende auswählen.
+
+Die Zuweisung stellt sicher, dass der Port nur kompatible Daten sendet oder empfängt.
 
 </div>
 <div>
@@ -973,7 +1080,11 @@ TODO: Auswahl der Schnittstelle im Interface Editor. Rechtsklick auf die Kompone
 
 #### Kompatibilität von Schnittstellen
 
-TODO: Schnittstellen von verbundenen Ports müssen zusammenpassen!
+Damit zwei Ports miteinander verbunden werden können, müssen ihre Schnittstellen kompatibel sein.
+
+Das bedeutet, sie müssen entweder die exakt gleiche Schnittstelle verwenden oder die Datentypen müssen implizit konvertierbar sein.
+
+System Composer prüft diese Kompatibilität automatisch.
 
 ---
 
@@ -981,7 +1092,11 @@ TODO: Schnittstellen von verbundenen Ports müssen zusammenpassen!
 
 #### Warnung bei Inkompatibilitäten
 
-TODO: Kurze Beschreibung der Warnmechanismen in System Composer
+Wenn zwei verbundene Ports inkompatible Schnittstellen haben, zeigt System Composer eine Warnung an.
+
+Die Verbindungslinie wird typischerweise rot oder gestrichelt dargestellt.
+
+Zusätzlich erscheint eine Fehlermeldung im Diagnostic Viewer, die das Problem genau beschreibt.
 
 ---
 
@@ -989,15 +1104,23 @@ TODO: Kurze Beschreibung der Warnmechanismen in System Composer
 
 #### Behebung der Inkompatibilitäten durch Adapter-Komponenten
 
-TODO: Kurze Beschreibung der Konfiguration einer Adapter-Komponente.
+Ein Adapter ist eine spezielle Komponente, die zwischen zwei inkompatiblen Schnittstellen vermittelt.
+
+Man fügt eine Komponente zwischen die beiden Ports ein und implementiert darin die Logik zur Konvertierung der Daten.
+
+*Beispiel: Mapping der Datenelemente!*
 
 ---
 
 ![bg contain right:40%](./Verknüpfung_Komponente.jpg)
 
-### 1.4. Verknüpfungen (*Links*)
+### 2.4. Verknüpfungen (*Links*)
 
-TODO: Kurze Einführung - was sind Links zwischen Komponenten oder anderen Architekturmodellelementen und Anforderungen und warum werden sie modelliert?
+Links können nicht nur Anforderungen untereinander, sondern auch Anforderungen mit Architekturelementen wie Komponenten oder Ports verbinden.
+
+Diese Verknüpfung ist entscheidend für die Nachverfolgbarkeit.
+
+Sie zeigt, welche Komponente eine bestimmte Anforderung umsetzt (*Implementierung*) und ermöglicht die Analyse der Auswirkungen von Anforderungsänderungen auf die Architektur.
 
 ---
 
@@ -1006,7 +1129,11 @@ TODO: Kurze Einführung - was sind Links zwischen Komponenten oder anderen Archi
 
 #### Link anlegen
 
-TODO: Drag und Drop der Anforderung aus dem Requirement Manager auf die Komponente
+Einen Link zwischen einer Anforderung und einer Komponente erstellt man am einfachsten per Drag & Drop.
+
+Man zieht die gewünschte Anforderung aus dem Requirements Manager Fenster direkt auf die Ziel-Komponente im Architekturmodell.
+
+System Composer erstellt dann automatisch einen Link vom Typ `Implements`.
 
 </div>
 <div>
@@ -1023,7 +1150,11 @@ TODO: Drag und Drop der Anforderung aus dem Requirement Manager auf die Komponen
 
 #### Links pro Requirement anzeigen
 
-TODO: Darstellung der Links im Property Inspektor
+Wenn man eine Anforderung im Requirements Manager auswählt, zeigt der Property Inspector im Bereich "Links" alle verknüpften Elemente an.
+
+Dort sieht man, mit welchen Komponenten, Ports oder anderen Anforderungen diese Anforderung verlinkt ist.
+
+Dies ermöglicht eine schnelle Navigation zwischen den Artefakten.
 
 </div>
 <div>
@@ -1040,7 +1171,11 @@ TODO: Darstellung der Links im Property Inspektor
 
 #### Alle Links anzeigen
 
-TODO: Darstellung der Links im Link Editor und *Show Links*
+Der Link Editor bietet eine globale Übersicht über alle Verknüpfungen im Projekt.
+
+Man kann die Ansicht "Show Links" im Requirements-Reiter verwenden, um alle Links für das aktuell geöffnete Modell grafisch hervorzuheben.
+
+Dies hilft, die Vollständigkeit der Verknüpfungen zu überprüfen.
 
 </div>
 <div>
@@ -1057,7 +1192,11 @@ TODO: Darstellung der Links im Link Editor und *Show Links*
 
 #### Die *Tracability Matrix*
 
-TODO: Konzept der Tracability Matrix beschreiben
+Die Nachverfolgbarkeitsmatrix (Traceability Matrix) ist eine tabellarische Darstellung, die die Beziehungen zwischen zwei Arten von Artefakten zeigt.
+
+Typischerweise werden Anforderungen in den Zeilen und Architekturelemente (Komponenten, etc.) in den Spalten dargestellt.
+
+Eine Markierung in einer Zelle zeigt an, dass eine Verknüpfung zwischen dem Zeilen- und Spaltenelement besteht.
 
 </div>
 <div>
@@ -1078,7 +1217,11 @@ TODO: Konzept der Tracability Matrix beschreiben
 
 #### Erstellung der Matrix
 
-TODO: Button im Reiter Requirements. Matrix wird immer neu erstellt. Keine Speicherung möglich.
+Die Matrix kann über den "Traceability Matrix"-Button im Requirements-Reiter generiert werden.
+
+Die Erstellung erfolgt dynamisch auf Basis der aktuell im Projekt vorhandenen Links.
+
+Es handelt sich um eine temporäre Ansicht, die nicht als separate Datei gespeichert, sondern bei Bedarf immer wieder neu generiert wird.
 
 </div>
 <div>
@@ -1095,7 +1238,11 @@ TODO: Button im Reiter Requirements. Matrix wird immer neu erstellt. Keine Speic
 
 #### Initiale Form der Matrix
 
-TODO: Alle Anforderungen und Elemente der Systemarchitektur (Komponenten, Ports, ...) sichtbar.
+In ihrer initialen Form zeigt die Matrix alle Anforderungen aus den geladenen Requirement Sets in den Zeilen.
+
+In den Spalten werden alle Elemente des Architekturmodells aufgelistet, einschließlich Komponenten, Ports und Konnektoren.
+
+Die Matrix kann dadurch anfangs sehr groß und unübersichtlich sein.
 
 </div>
 <div>
@@ -1112,7 +1259,11 @@ TODO: Alle Anforderungen und Elemente der Systemarchitektur (Komponenten, Ports,
 
 #### Einstellungen der Matrix
 
-TODO: Filterung z.B. nach Requirement-Typ (Funktional, Nicht-Funktional) oder Architekturelement (z.B. Komponent, Port, ...).
+Um die Übersichtlichkeit zu verbessern, bietet die Matrix umfangreiche Filteroptionen.
+
+Man kann die angezeigten Zeilen nach Anforderungstyp (z.B. nur funktionale Anforderungen) filtern.
+
+Ebenso können die Spalten gefiltert werden, um beispielsweise nur Komponenten oder nur Ports anzuzeigen.
 
 </div>
 <div>
@@ -1126,9 +1277,13 @@ TODO: Filterung z.B. nach Requirement-Typ (Funktional, Nicht-Funktional) oder Ar
 
 ![bg contain right:40%](./Case_Study.jpg)
 
-### 1.5. Fallbeispiel
+### 2.5. Fallbeispiel
 
-TODO: Kurze einführung des Akku-Schrauber-Beispiels.
+Wir modellieren nun die Architektur für unser Akku-Schrauber-Beispiel.
+
+Basierend auf den zuvor definierten Anforderungen zerlegen wir das Gesamtsystem in logische Hauptkomponenten.
+
+Anschließend verfeinern wir die Struktur durch die Definition von Unter-Komponenten.
 
 ---
 
@@ -1213,7 +1368,13 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 ### 3.1. Profile
 
-TODO: Kurz - was sind Profile (und deren Stereotypen) und wofür brauchen wir sie?
+Profile ermöglichen es, die Modellelemente mit benutzerdefinierten Metadaten anzureichern.
+
+Ein Profil enthält eine Sammlung von Stereotypen.
+
+Ein Stereotyp ist wie eine "Schablone", die zusätzliche Eigenschaften (Properties) zu Komponenten, Ports oder anderen Elementen hinzufügt.
+
+*Wir brauchen sie, um domänenspezifische Informationen zu modellieren, z.B. Gewicht!*
 
 ---
 
@@ -1222,7 +1383,9 @@ TODO: Kurz - was sind Profile (und deren Stereotypen) und wofür brauchen wir si
 
 #### Der **Profile Editor**
 
-TODO: Kurze Erklärung des Profile Editor.
+Der Profile Editor ist das Werkzeug zum Erstellen und Bearbeiten von Profilen und deren Stereotypen.
+
+Er bietet eine grafische Oberfläche, um neue Stereotypen zu definieren, ihnen Eigenschaften (Properties) hinzuzufügen und festzulegen, auf welche Modellelemente sie anwendbar sind.
 
 </div>
 <div>
@@ -1239,7 +1402,11 @@ TODO: Kurze Erklärung des Profile Editor.
 
 #### Profil anlegen
 
-TODO: Erster Schritt - Profil anlegen (wird in eigener Datei gepeichert!)
+Der erste Schritt ist das Anlegen eines neuen Profils.
+
+Ein Profil wird als separate XML-Datei (`.xml`) gespeichert.
+
+Dadurch kann es versioniert und in verschiedenen Projekten wiederverwendet werden, um konsistente Metadaten sicherzustellen.
 
 </div>
 <div>
@@ -1256,7 +1423,11 @@ TODO: Erster Schritt - Profil anlegen (wird in eigener Datei gepeichert!)
 
 #### Stereotypen anlegen
 
-TODO: Nun können die Stereotypen im Profil definiert werden.
+Nachdem das Profil erstellt ist, können innerhalb des Profils Stereotypen angelegt werden.
+
+Jeder Stereotyp erhält einen eindeutigen Namen.
+
+Beispiele für Stereotypen könnten `MechanischeKomponente`, `SoftwareModul` oder `ExternZugekauft` sein.
 
 </div>
 <div>
@@ -1273,7 +1444,11 @@ TODO: Nun können die Stereotypen im Profil definiert werden.
 
 #### Anwendung von Stereotypen auf Modellelemente einschränken
 
-TODO: Man kann einschränken, auf welche Modellelemente ein Stereotyp angewendet werden darf (z.B. nur auf Komponenten).
+Für jeden Stereotyp kann man festlegen, für welche Arten von Modellelementen er gültig ist.
+
+Man kann die Anwendung beispielsweise auf `Component`, `Port`, `Connector` oder `Interface` beschränken.
+
+So wird sichergestellt, dass Stereotypen nur dort verwendet werden, wo sie semantisch sinnvoll sind.
 
 </div>
 <div>
@@ -1290,7 +1465,11 @@ TODO: Man kann einschränken, auf welche Modellelemente ein Stereotyp angewendet
 
 #### Vererbungsbeziehung zwischen Stereotypen definieren
 
-TODO: Stereotypen können auch von anderen Stereotypen erben (wie in der objektorientierten Programmierung)
+Stereotypen können in einer Vererbungshierarchie organisiert werden.
+
+Ein untergeordneter Stereotyp erbt alle Eigenschaften seines übergeordneten Stereotyps.
+
+Beispiel: `ElektrischerSensor` könnte von `Sensor` erben und zusätzliche elektrische Eigenschaften hinzufügen.
 
 </div>
 <div>
@@ -1307,7 +1486,11 @@ TODO: Stereotypen können auch von anderen Stereotypen erben (wie in der objekto
 
 #### Eigenschaften der einzelnen Stereotypen festlegen
 
-TODO: Nun können wir die Eigenschaften von Stereotypen festlegen. Eigenschaften werden vererbt!
+Jedem Stereotyp können wir beliebig viele Eigenschaften hinzugefügen.
+
+Für jede Eigenschaft legt man einen Namen, einen Datentyp (z.B. `string`, `double`, `enum`) und optional einen Standardwert fest.
+
+Eigenschaften, die in einem Basis-Stereotyp definiert sind, werden an alle abgeleiteten Stereotypen vererbt.
 
 </div>
 <div>
@@ -1324,7 +1507,11 @@ TODO: Nun können wir die Eigenschaften von Stereotypen festlegen. Eigenschaften
 
 #### Profil auf Architekturmodell anwenden
 
-TODO: Schließlich muss das Profil noch auf das Architekturmodell angewendet werden. Erst dann sind die Stereotypen verfügbar.
+Damit die definierten Stereotypen in einem Architekturmodell verwendet werden können, muss das Profil zunächst auf dieses Modell angewendet werden.
+
+Dies geschieht über die Modelleigenschaften.
+
+Nach der Anwendung stehen die Stereotypen im Property Inspector zur Auswahl bereit.
 
 </div>
 <div>
@@ -1341,7 +1528,11 @@ TODO: Schließlich muss das Profil noch auf das Architekturmodell angewendet wer
 
 #### Stereotypen auf Komponenten anwenden
 
-TODO: Nun können wir die Stereotypen auf die Komponente anwenden.
+Um einen Stereotyp anzuwenden, wählt man ein Modellelement (z.B. eine Komponente) aus.
+
+Im Property Inspector kann man dann den gewünschten Stereotyp aus der Liste der verfügbaren Stereotypen auswählen.
+
+Einem Element können auch mehrere Stereotypen zugewiesen werden.
 
 </div>
 <div>
@@ -1358,7 +1549,11 @@ TODO: Nun können wir die Stereotypen auf die Komponente anwenden.
 
 #### Eigenschaften des Stereotypen für Komponente festlegen
 
-TODO: Nachdem die Stereotypen mit den Komponenten verknüpft sind, können wir Werte für die Stereotyp-Eigenschaften festlegen.
+Sobald einer Komponente ein Stereotyp zugewiesen ist, erscheinen dessen Eigenschaften im Property Inspector.
+
+Hier können nun die spezifischen Werte für die Komponente eingetragen werden.
+
+Zum Beispiel kann man für eine Komponente mit dem Stereotyp `Hardware` den Wert für die Eigenschaft `Kosten` auf `15.50` setzen.
 
 </div>
 <div>
@@ -1374,7 +1569,11 @@ TODO: Nachdem die Stereotypen mit den Komponenten verknüpft sind, können wir W
 
 ### 3.2. Sichten (*Views*)
 
-TODO: Kurz - was sind Architektursichten und warum brauchen wir sie?
+Architektursichten (Views) sind gefilterte Darstellungen des Gesamtmodells.
+
+Sie reduzieren die Komplexität, indem sie nur die Teile der Architektur zeigen, die für eine bestimmte Fragestellung oder einen bestimmten Stakeholder relevant sind.
+
+Wir brauchen sie, um verschiedene Aspekte des Systems isoliert zu betrachten, z.B. die mechanische Struktur, die Software-Kommunikation oder die Energieflüsse.
 
 ---
 
@@ -1383,7 +1582,11 @@ TODO: Kurz - was sind Architektursichten und warum brauchen wir sie?
 
 #### Der **Architecture Views Editor**
 
-TODO: Wie ist der Architecture Views Editor aufgebaut und wie legt man eine neue Sicht an?
+Der Architecture Views Editor ist das Werkzeug zur Erstellung und Verwaltung von Sichten.
+
+Er wird über den Reiter "Views" geöffnet.
+
+Eine neue Sicht wird durch Klick auf "New View" angelegt. Jede Sicht besteht aus einer Reihe von Filtern, die festlegen, was angezeigt wird.
 
 </div>
 <div>
@@ -1400,7 +1603,11 @@ TODO: Wie ist der Architecture Views Editor aufgebaut und wie legt man eine neue
 
 #### Sicht anlegen
 
-TODO: Wie ist der Architecture Views Editor aufgebaut und wie legt man eine neue Sicht an?
+Das Anlegen einer neuen Sicht erfolgt im Architecture Views Editor.
+
+Man gibt der Sicht einen aussage-kräftigen Namen, z.B. "Mechanische Sicht" oder "Software-Sicht".
+
+Initial ist die Sicht leer; sie wird durch das Hinzufügen von Filtern und Abfragen definiert.
 
 </div>
 <div>
@@ -1417,7 +1624,11 @@ TODO: Wie ist der Architecture Views Editor aufgebaut und wie legt man eine neue
 
 #### **Component**-Filter anlegen
 
-TODO: Was ist ein Component-Filter und was bewirken Sie in der Sicht?
+Ein Component-Filter dient dazu, gezielt Komponenten basierend auf ihren Eigenschaften auszuwählen oder auszublenden.
+
+Man kann Komponenten nach ihrem Namen, ihrem Pfad oder den ihnen zugewiesenen Stereotypen filtern.
+
+Dies ist die primäre Methode, um zu steuern, welche Teile der Architektur in der Sicht sichtbar sind.
 
 </div>
 <div>
@@ -1434,7 +1645,11 @@ TODO: Was ist ein Component-Filter und was bewirken Sie in der Sicht?
 
 #### **Component**-Filter konfigurieren
 
-TODO: Zum Beispiel Filterung nach Name oder Stereotyp. Wir filtern im Beispiel ach Stereotyp A.
+Bei der Konfiguration eines Component-Filters gibt man die Kriterien an.
+
+Man kann beispielsweise festlegen: "Zeige alle Komponenten, denen der Stereotyp 'Mechanisch' zugewiesen ist".
+
+Oder man filtert nach einem Namensmuster, z.B. "Zeige alle Komponenten, deren Name mit 'Sensor_' beginnt".
 
 </div>
 <div>
@@ -1451,7 +1666,11 @@ TODO: Zum Beispiel Filterung nach Name oder Stereotyp. Wir filtern im Beispiel a
 
 #### **Port**-Filter anlegen
 
-TODO: Was ist ein Port-Filter und was bewirkt er in der Sicht?
+Ein Port-Filter steuert die Sichtbarkeit von Ports und den damit verbundenen Konnektoren.
+
+Auch wenn eine Komponente sichtbar ist, können ihre Ports durch einen Port-Filter ausgeblendet werden.
+
+Dies ist nützlich, um nur bestimmte Arten von Verbindungen anzuzeigen, z.B. nur elektrische Signale.
 
 </div>
 <div>
@@ -1468,7 +1687,11 @@ TODO: Was ist ein Port-Filter und was bewirkt er in der Sicht?
 
 #### **Port**-Filter konfigurieren
 
-TODO: Wieder Filterung nach Stereotyp oder Name möglich. Wir filtern im Beispiel nach Name.
+Die Konfiguration eines Port-Filters funktioniert analog zum Component-Filter.
+
+Man kann Ports nach ihrem Namen, dem Stereotyp des Ports oder dem Stereotyp der zugehörigen Schnittstelle filtern.
+
+Beispiel: "Blende alle Ports aus, deren Name 'debug' enthält".
 
 </div>
 <div>
@@ -1485,7 +1708,11 @@ TODO: Wieder Filterung nach Stereotyp oder Name möglich. Wir filtern im Beispie
 
 #### Filter anwenden
 
-TODO: Klick auf Button *Apply*. Verbergen von Komponenten, Ports, und Konnektoren, die nicht sichtbar sein sollen.
+Nachdem die Filter für eine Sicht konfiguriert sind, wendet man sie mit dem "Apply"-Button an.
+
+System Composer analysiert daraufhin das gesamte Modell und blendet alle Elemente aus, die nicht den Filterkriterien entsprechen.
+
+Das Ergebnis ist eine vereinfachte, fokussierte Darstellung der Architektur.
 
 </div>
 <div>
@@ -1501,7 +1728,11 @@ TODO: Klick auf Button *Apply*. Verbergen von Komponenten, Ports, und Konnektore
 
 ### 3.3. Fallbeispiel
 
-TODO: Nun wenden wir Profile und Sichten auf unseren Akku-Schauber an.
+Für unser Akku-Schrauber-Beispiel definieren wir nun ein Profil, um die Komponenten zu klassifizieren.
+
+Anschließend erstellen wir eine Sicht, die nur die mechanischen Komponenten und deren Verbindungen anzeigt.
+
+Dies hilft uns, die mechanische Funktionsweise des Geräts isoliert zu analysieren.
 
 ---
 
@@ -1509,22 +1740,31 @@ TODO: Nun wenden wir Profile und Sichten auf unseren Akku-Schauber an.
 
 Für unser Fallbeispiel arbeiten wir mit den folgenden vier Stereotypen:
 
-- **Mechatronische Komponente** - TODO
-- **Mechanische Komponente** - TODO
-- **Elektrische Komponente** - TODO
-- **Softwaretechnische Komponenten** - TODO
+- **Mechatronische Komponente** - Kombiniert Mechanik, Elektronik und Software (z.B. die Motorsteuerung).
+- **Mechanische Komponente** - Rein mechanisches Bauteil (z.B. das Getriebe, Gehäuse).
+- **Elektrische Komponente** - Rein elektrisches/elektronisches Bauteil (z.B. der Akku, Schalter).
+- **Softwaretechnische Komponenten** - Reine Software-Logik (z.B. ein Algorithmus zur Drehmomentregelung).
 
 ---
 
 #### Zuweisung der Sterotypen zu Komponenten
 
-TODO: Kurze Auswahl von Komponenten und deren Stereotypen plus Begründung
+- **Motor:** Mechatronische Komponente, da er elektrische Energie in mechanische umwandelt und eine Ansteuerungselektronik besitzt.
+- **Getriebe:** Mechanische Komponente, da es rein mechanisch die Drehzahl und das Drehmoment wandelt.
+- **Akku:** Elektrische Komponente, da er elektrische Energie speichert und liefert.
+- **Steuerung:** Softwaretechnische Komponente, da hier die Logik für Drehzahl und Drehmoment implementiert ist.
 
 ---
 
 #### Nutzer von Architektursichten
 
-TODO: Was sehen wir in einer Architektursicht, welche nur die elektrischen Komponenten zeigt?
+Eine Sicht, die nur elektrische Komponenten zeigt, würde den Energiefluss im System visualisieren.
+
+Wir würden den **Akku**, das **Ladegerät** und die Verbindungen zum **Motor** und zur **Steuerungselektronik** sehen.
+
+Mechanische Komponenten wie das **Getriebe** oder das **Gehäuse** wären ausgeblendet.
+
+Dies hilft Elektroingenieuren, sich auf die für sie relevanten Teile des Systems zu konzentrieren.
 
 ---
 
