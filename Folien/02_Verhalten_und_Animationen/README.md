@@ -13,22 +13,26 @@ math: mathjax
 
 Dieses Kapitel umfasst die folgenden vier Abschnitte:
 
-1. Verhaltensmodellierung mit Simulink
-2. Verhaltensmodellierung mit Simscape
-3. Verhaltensmodellierung mit Stateflow
-4. 3D-Animation mit Simulink 3D Animation
+1. **Simulink Signalmodelle**
+2. **Simscape Physikmodelle**
+3. **Stateflow Logikmodelle**
+4. **Simulink 3D Animation**
+
+---
+
+TODO: Warum unterschiedliche Modellierungstechniken? Kausal versus akausal...
 
 ---
 
 ![bg right](./Simulink.jpg)
 
-## 2.1 Verhaltensmodellierung mit Simulink
+## 2.1 Simulink **Signalmodelle**
 
 In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
-1. **Grundlagen der Verhaltensmodellierung**<br/>(Signalbasierte Modellierung)
+1. **Grundlagen der Verhaltens-modellierung** (Signalbasierte Modellierung)
 2. **Wichtige Blöcke in Simulink**<br/>(Quellen, Senken, Kontinuierlich)
-3. **Einfache Verhaltensmodelle erstellen**<br/>(Integration eines konstanten Signals)
+3. **Einfache Verhaltensmodelle erstellen** (Integration eines konstanten Signals)
 
 ---
 
@@ -42,17 +46,25 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
+TODO: Blöcke und Signale allgemein. Signale als Zeitfunktionen.
+
+---
+
+TODO: Code hinter einem Block.
+
+---
+
 <div class="columns">
 <div>
 
 #### Die Simulink-Bibliothek
 
-Die Simulink-Bibliothek (Library Browser) enthält eine riesige Sammlung von vordefinierten Blöcken, die in verschiedene Kategorien unterteilt sind.
+Vordefinierten Blöcken, die in verschiedene Kategorien unterteilt sind:
 
 - **Sources (Quellen):** Erzeugen Signale (z.B. `Constant`, `Step`, `Sine Wave`).
-- **Sinks (Senken):** Visualisieren oder speichern Signale (z.B. `Scope`, `Display`).
-- **Math Operations:** Führen mathematische Operationen durch (z.B. `Add`, `Gain`).
-- **Continuous:** Implementieren kontinuierliche Systeme (z.B. `Integrator`).
+- **Sinks (Senken):** Visualisieren Signale (z.B. `Scope`, `Display`).
+- **Math Operations:** Einfache Berechnungen  (z.B. `Add`, `Gain`).
+- **Continuous:** Kontinuierliche Funktionen (z.B. `Integrator`).
 
 </div>
 <div>
@@ -64,21 +76,24 @@ Die Simulink-Bibliothek (Library Browser) enthält eine riesige Sammlung von vor
 
 ---
 
-#### Wichtige Blöcke: Quellen (Sources)
+#### Wichtige Blöcke: **Quellen** (*Sources*)
 
 Quellen sind der Ausgangspunkt für Signale in einem Simulink-Modell.
 
-<div class="columns">
-<div class="one">
+<div class="columns top">
+<div>
 
 **Constant**
 Erzeugt einen konstanten Wert.
+
+</div>
+<div>
 
 **Step**
 Erzeugt eine Sprungfunktion zu einer bestimmten Zeit.
 
 </div>
-<div class="two">
+<div>
 
 **Sine Wave**
 Erzeugt ein sinusförmiges Signal mit einstellbarer Amplitude, Frequenz und Phase.
@@ -88,18 +103,18 @@ Erzeugt ein sinusförmiges Signal mit einstellbarer Amplitude, Frequenz und Phas
 
 ---
 
-#### Wichtige Blöcke: Senken (Sinks)
+#### Wichtige Blöcke: **Senken** (*Sinks*)
 
 Senken dienen zur Analyse und Anzeige von Signalen während und nach der Simulation.
 
-<div class="columns">
-<div class="one">
+<div class="columns top">
+<div>
 
 **Scope**
 Zeigt Signale in einem Oszilloskop-ähnlichen Diagramm über die Zeit an. Das wichtigste Werkzeug zur Visualisierung.
 
 </div>
-<div class="two">
+<div>
 
 **Display**
 Zeigt den numerischen Wert eines Signals am Ende der Simulation an.
@@ -109,7 +124,13 @@ Zeigt den numerischen Wert eines Signals am Ende der Simulation an.
 
 ---
 
-#### Wichtige Blöcke: Kontinuierliche Systeme
+#### Wichtige Blöcke: **Mathematische Operationen**
+
+TODO
+
+---
+
+#### Wichtige Blöcke: **Kontinuierliche Funktionen**
 
 Diese Blöcke sind das Herzstück für die Modellierung von physikalischen Systemen, die durch Differentialgleichungen beschrieben werden.
 
@@ -141,6 +162,22 @@ Das `Scope` zeigt das Eingangssignal (konstant 1) und das Ausgangssignal (die Ra
 
 ---
 
+TODO: Untermodelle mit Simulink. Komplexität beherrschen. Wiederverwendung ermöglichen.
+
+---
+
+TODO: Simulationsalgorithmus
+
+---
+
+TODO: Numerische Eigenschaften
+
+---
+
+TODO: Problematische Situationen (wann macht der Algorithmus fehler?)
+
+---
+
 ![bg contain right:40%](../01_Anforderungen_und_Architekturen/Case_Study.jpg)
 
 ### 2.1.2. Fallbeispiel: Akku-Schrauber
@@ -168,7 +205,7 @@ Stellen Sie die Vorschubgeschwindigkeit mit einem `Step`-Block dar und visualisi
 
 ![bg right](./Simscape.jpg)
 
-## 2.2 Verhaltensmodellierung mit Simscape
+## 2.2 Simscape **Physikmodelle**
 
 In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
@@ -287,7 +324,7 @@ Modellieren Sie mit Simscape das Heizbett des 3D-Druckers.
 
 ![bg right](./Stateflow.jpg)
 
-## 2.3 Verhaltensmodellierung mit Stateflow
+## 2.3 Stateflow **Logikmodelle**
 
 In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
@@ -383,7 +420,7 @@ Definieren Sie die Eingänge (z.B. `start_print_button`, `target_temp_reached`) 
 
 ![bg right](./Simulink3D.jpg)
 
-## 2.4 3D-Animation mit Simulink 3D Animation
+## 2.4 Simulink 3D Animation
 
 In diesem vierten Abschnitt lernen wir die folgenden Dinge:
 
