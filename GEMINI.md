@@ -38,7 +38,7 @@ Schließlich enthalten die Kapitel nach jedem Abschnitt auch immer die Beschreib
 
 Für die Präsentationsfolien (bzw. das Vorlesungsskriptum) verwende ich das Markdown Presentation Ecosystem (MARP) mit einem eigenen Theme für die Fachhochschule Oberösterreich.
 
-Der Grundlegende Aufbau der MARP-Dateien für die Präsentationsfolien umfasst eine Kapitelüberschrift, Abschnittsüberschriften und Inhaltsfolien auf drei Unterebenen wie im folgenden Beispiel dargestellt.
+Der Grundlegende Aufbau der MARP-Dateien für die Präsentationsfolien umfasst eine Kapitel-, Abschnitts- und Unterabschnittsüberschriften und Inhaltsfolien auf zwei Unterebenen wie im folgenden Beispiel dargestellt.
 
 ```md
 ---
@@ -50,7 +50,7 @@ paginate: true
 math: mathjax
 ---
 
-<!-- Beschreibung des Inhalts des Titelbildes für das Kapitel -->
+<!-- Detaillierte Beschreibung des Inhalts des Titelbildes für das Kapitel -->
 
 ![bg right](relativer Dateipfad des Titelbild für das Kapitel)
 
@@ -63,11 +63,11 @@ In diesem Kapitel lernen wir das Folgende:
 
 ---
 
-<!-- Beschreibung des Inhalts des Titelbildes für den Abschnitt -->
+<!-- Detaillierte Beschreibung des Inhalts des Titelbildes für den Abschnitt -->
 
 ![bg right](relativer Dateipfad des Titelbild für den Abschnitt)
 
-## Abschnitt N.M: Abschnittüberschrift
+## N.M: Abschnittsüberschrift
 
 Dieser Abschnitt umfasst die folgenden Inhalte:
 
@@ -76,15 +76,28 @@ Dieser Abschnitt umfasst die folgenden Inhalte:
 
 ---
 
-### Inhaltsfolie (erste Ebene)
+<!-- Detaillierte Beschreibung des Inhalts des Titelbildes für den Unterabschnitt -->
+
+![bg right](relativer Dateipfad des Titelbild für den Unterabschnitt)
+
+## N.M.K: Unterabschnittsüberschrift
+
+Dieser Unterabschnitt umfasst die folgenden Inhalte:
+
+1. ...
+2. ...
 
 ---
 
-#### Inhaltsfolie (zweite Ebene)
+#### Inhaltsfolie (erste Ebene)
+
+...
 
 ---
 
-##### Inhaltsfolie (dritte Ebene)
+##### Inhaltsfolie (zweite Ebene)
+
+...
 ```
 
 Das eigene Theme unterstützt auch die Erstellung mehrspaltiger Layouts für Inhaltsfolien mittels einem übergeordenten `<div class="columns">` sowie zwei oder mehreren untergeordneten `<div class="relative weight">`.
@@ -105,7 +118,7 @@ Inhalt der zweiten Spalte
 </div>
 ```
 
-Der Inhalt einer Spalte kann ein Text mit Überschrift, Absätzen und wahlweise Listen sein, eine Tabelle, ein Mermaid-Diagramm, oder eine Referenz auf eine Bilddatei mit Beschreibung der Bildinhalte.
+Der Inhalt einer Spalte kann ein Text mit Überschrift, Absätzen und wahlweise Listen und Formeln sein, eine Tabelle, ein Code-Beispiel, ein Mermaid-Diagramm, oder eine Referenz auf eine Bilddatei mit Beschreibung der Bildinhalte.
 
 ````md
 <div class="columns">
@@ -113,7 +126,7 @@ Der Inhalt einer Spalte kann ein Text mit Überschrift, Absätzen und wahlweise 
 
 ### Folientitel
 
-Folientext (inklusive nummerierten oder unnummerierten Listen)
+Folientext (inklusive nummerierten oder unnummerierten Listen und mathematischen Formeln)
 
 </div>
 <div class="one|two|three|four|five|six">
@@ -126,16 +139,21 @@ Folientext (inklusive nummerierten oder unnummerierten Listen)
 </div>
 <div class="one|two|three|four|five|six">
 
-```mermaid
-flowchart TB|LR
-    A --> B --> C
-    ...
+```programmiersprache
+code-snippet
 ```
 
 </div>
 <div class="one|two|three|four|five|six">
 
-![Beschreibung des Folienbildes](relativer Pfad des Folienbildes)
+```mermaid
+diagram-as-code
+```
+
+</div>
+<div class="one|two|three|four|five|six">
+
+![Detaillierte Beschreibung des Inhalts des Folienbildes](relativer Pfad des Folienbildes)
 
 </div>
 </div>
