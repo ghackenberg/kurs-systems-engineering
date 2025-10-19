@@ -6,3 +6,468 @@ footer: Dr. Georg Hackenberg, Professor für Informatik und Industriesysteme
 paginate: true
 math: mathjax
 ---
+
+![bg right](./Titelbild.jpg)
+
+# Kapitel 2: Verhalten und Animationen
+
+Dieses Kapitel umfasst die folgenden vier Abschnitte:
+
+1. Verhaltensmodellierung mit Simulink
+2. Verhaltensmodellierung mit Simscape
+3. Verhaltensmodellierung mit Stateflow
+4. 3D-Animation mit Simulink 3D Animation
+
+---
+
+![bg right](./Simulink.jpg)
+
+## 2.1 Verhaltensmodellierung mit Simulink
+
+In diesem ersten Abschnitt lernen wir die folgenden Dinge:
+
+1. **Grundlagen der Verhaltensmodellierung**<br/>(Signalbasierte Modellierung)
+2. **Wichtige Blöcke in Simulink**<br/>(Quellen, Senken, Kontinuierlich)
+3. **Einfache Verhaltensmodelle erstellen**<br/>(Integration eines konstanten Signals)
+
+---
+
+### 2.1.1. Was ist Simulink?
+
+Simulink ist eine grafische Programmierumgebung für die Modellierung, Simulation und Analyse von dynamischen Systemen.
+
+Es basiert auf dem Prinzip des **signalbasierten Designs**, bei dem Blöcke durch Linien verbunden werden, die den Signalfluss repräsentieren. Jede Linie transportiert ein Signal, z.B. einen Messwert oder einen Sollwert, von einem Block zum nächsten.
+
+Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems zu verstehen.
+
+---
+
+<div class="columns">
+<div>
+
+#### Die Simulink-Bibliothek
+
+Die Simulink-Bibliothek (Library Browser) enthält eine riesige Sammlung von vordefinierten Blöcken, die in verschiedene Kategorien unterteilt sind.
+
+- **Sources (Quellen):** Erzeugen Signale (z.B. `Constant`, `Step`, `Sine Wave`).
+- **Sinks (Senken):** Visualisieren oder speichern Signale (z.B. `Scope`, `Display`).
+- **Math Operations:** Führen mathematische Operationen durch (z.B. `Add`, `Gain`).
+- **Continuous:** Implementieren kontinuierliche Systeme (z.B. `Integrator`).
+
+</div>
+<div>
+
+![Beschreibung: Screenshot des Simulink Library Browsers](./Simulink_Bibliothek.png)
+
+</div>
+</div>
+
+---
+
+#### Wichtige Blöcke: Quellen (Sources)
+
+Quellen sind der Ausgangspunkt für Signale in einem Simulink-Modell.
+
+<div class="columns">
+<div class="one">
+
+**Constant**
+Erzeugt einen konstanten Wert.
+
+**Step**
+Erzeugt eine Sprungfunktion zu einer bestimmten Zeit.
+
+</div>
+<div class="two">
+
+**Sine Wave**
+Erzeugt ein sinusförmiges Signal mit einstellbarer Amplitude, Frequenz und Phase.
+
+</div>
+</div>
+
+---
+
+#### Wichtige Blöcke: Senken (Sinks)
+
+Senken dienen zur Analyse und Anzeige von Signalen während und nach der Simulation.
+
+<div class="columns">
+<div class="one">
+
+**Scope**
+Zeigt Signale in einem Oszilloskop-ähnlichen Diagramm über die Zeit an. Das wichtigste Werkzeug zur Visualisierung.
+
+</div>
+<div class="two">
+
+**Display**
+Zeigt den numerischen Wert eines Signals am Ende der Simulation an.
+
+</div>
+</div>
+
+---
+
+#### Wichtige Blöcke: Kontinuierliche Systeme
+
+Diese Blöcke sind das Herzstück für die Modellierung von physikalischen Systemen, die durch Differentialgleichungen beschrieben werden.
+
+**Integrator**
+Der `Integrator`-Block integriert ein Eingangssignal über die Zeit. Er ist fundamental, um das Verhalten von dynamischen Systemen zu modellieren (z.B. aus einer Beschleunigung eine Geschwindigkeit zu berechnen).
+
+`x(t) = ∫ u(t) dt`
+
+---
+
+<div class="columns">
+<div>
+
+#### Einfaches Beispiel
+
+Wir modellieren ein einfaches System: Ein konstantes Signal mit dem Wert `1` wird über die Zeit integriert.
+
+Das Ergebnis ist eine Rampe, die linear ansteigt (`y = t`).
+
+Das `Scope` zeigt das Eingangssignal (konstant 1) und das Ausgangssignal (die Rampe) an.
+
+</div>
+<div>
+
+![Beschreibung: Simulink-Modell mit Constant, Integrator und Scope](./Simulink_Beispiel.png)
+
+</div>
+</div>
+
+---
+
+![bg contain right:40%](../01_Anforderungen_und_Architekturen/Case_Study.jpg)
+
+### 2.1.2. Fallbeispiel: Akku-Schrauber
+
+Wir modellieren das vereinfachte Verhalten des Motors. Annahme: Die Drehzahl des Motors ist direkt proportional zur angelegten Spannung, abzüglich eines Lastmoments.
+
+- Ein `Constant`-Block repräsentiert die Spannung vom Akku.
+- Ein `Gain`-Block modelliert den Motor (wandelt Spannung in Drehzahl um).
+- Ein `Subtract`-Block reduziert die Drehzahl durch ein Lastmoment.
+- Ein `Scope` zeigt die resultierende Motordrehzahl an.
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### 2.1.3. Übungsaufgabe
+
+Modellieren Sie mit Simulink das Verhalten des Extruders eines 3D-Druckers.
+
+Vereinfachte Annahme: Die Menge des extrudierten Filaments pro Sekunde ist direkt proportional zur Geschwindigkeit des Vorschubmotors.
+
+Stellen Sie die Vorschubgeschwindigkeit mit einem `Step`-Block dar und visualisieren Sie die Gesamtlänge des extrudierten Filaments über die Zeit mit einem `Scope`.
+
+---
+
+![bg right](./Simscape.jpg)
+
+## 2.2 Verhaltensmodellierung mit Simscape
+
+In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
+
+1. **Grundlagen der physikalischen Modellierung**<br/>(Akausale Modellierung)
+2. **Wichtige Blöcke in Simscape**<br/>(Elektrisch, Mechanisch)
+3. **Einfache physikalische Modelle erstellen**<br/>(Ein einfacher RC-Kreis)
+
+---
+
+### 2.2.1. Was ist Simscape?
+
+Simscape ist eine Erweiterung von Simulink für die Modellierung von **physikalischen Systemen**.
+
+Im Gegensatz zu Simulink (Signalfluss) verwendet Simscape ein **akausales, physikalisches Netzwerk-Konzept**. Man verbindet Komponenten so, wie sie in der Realität verbunden wären (z.B. elektrische Bauteile). Die Gleichungen werden vom Solver automatisch aufgestellt.
+
+Verbindungen repräsentieren den Austausch von Energie. Jede Domäne (z.B. elektrisch, mechanisch) hat ihre eigenen Verbindungsarten.
+
+---
+
+<div class="columns">
+<div>
+
+#### Domänen und Referenzen
+
+Simscape-Modelle benötigen für jede physikalische Domäne einen `Solver Configuration`-Block und einen Referenzblock.
+
+- **Solver Configuration:** Konfiguriert den spezialisierten Solver für die physikalischen Gleichungen.
+- **Referenzblock:** Definiert den Bezugspunkt für die physikalischen Größen (z.B. elektrische Masse `GND` oder ein mechanisches Gehäuse).
+
+</div>
+<div>
+
+![Beschreibung: Simscape-Modell mit Solver Configuration und Electrical Reference](./Simscape_Solver.png)
+
+</div>
+</div>
+
+---
+
+#### Wichtige Blöcke: Elektrisch
+
+Die `Foundation Library` enthält grundlegende Blöcke für verschiedene Domänen.
+
+<div class="columns">
+<div class="one">
+
+**DC Voltage Source**
+Eine ideale Gleichspannungsquelle.
+
+**Resistor**
+Ein ohmscher Widerstand.
+
+**Capacitor**
+Ein Kondensator.
+
+</div>
+<div class="two">
+
+**Electrical Reference**
+Der Massepunkt (0V) für elektrische Schaltkreise.
+
+**Sensor/Actuator**
+Blöcke wie `Current Sensor` oder `Voltage Sensor` messen physikalische Größen und geben sie als Simulink-Signal aus.
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Einfaches Beispiel: RC-Kreis
+
+Wir modellieren einen einfachen RC-Tiefpass. Eine Spannungsquelle lädt einen Kondensator über einen Widerstand.
+
+- Die Blöcke werden wie in einem Schaltplan verbunden.
+- Ein `Voltage Sensor` misst die Spannung am Kondensator.
+- Das Ergebnis wird mit einem `Scope` angezeigt. Die Spannung am Kondensator folgt einer e-Funktion.
+
+</div>
+<div>
+
+![Beschreibung: Simscape-Modell eines RC-Kreises](./Simscape_Beispiel_RC.png)
+
+</div>
+</div>
+
+---
+
+![bg contain right:40%](../01_Anforderungen_und_Architekturen/Case_Study.jpg)
+
+### 2.2.2. Fallbeispiel: Akku-Schrauber
+
+Wir modellieren den Gleichstrommotor des Akku-Schraubers als physikalisches System.
+
+- **Elektrischer Teil:** Eine `DC Voltage Source` (der Akku) wird an einen `Resistor` (der Wicklungswiderstand) angeschlossen.
+- **Mechanischer Teil:** Der `DC Motor`-Block wandelt die elektrische Energie in eine mechanische Rotation um. Ein `Inertia`-Block repräsentiert die Trägheit des Rotors.
+- Ein `Rotational Motion Sensor` misst die Drehzahl und gibt sie als Simulink-Signal aus.
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### 2.2.3. Übungsaufgabe
+
+Modellieren Sie mit Simscape das Heizbett des 3D-Druckers.
+
+- Verwenden Sie die thermische Domäne von Simscape.
+- Modellieren Sie das Heizbett als `Thermal Mass`.
+- Fügen Sie eine `Controlled Heat Flow Rate Source` hinzu, um die Heizleistung zu steuern.
+- Messen Sie die Temperatur mit einem `Temperature Sensor` und zeigen Sie den Verlauf in einem `Scope` an.
+- Fügen Sie einen `Convective Heat Transfer`-Block hinzu, um den Wärmeverlust an die Umgebung zu modellieren.
+
+---
+
+![bg right](./Stateflow.jpg)
+
+## 2.3 Verhaltensmodellierung mit Stateflow
+
+In diesem dritten Abschnitt lernen wir die folgenden Dinge:
+
+1. **Grundlagen der logischen Modellierung**<br/>(Zustandsautomaten)
+2. **Wichtige Elemente in Stateflow**<br/>(Zustände, Transitionen, Aktionen)
+3. **Einfache Logikmodelle erstellen**<br/>(Ein einfacher Lichtschalter)
+
+---
+
+### 2.3.1. Was ist Stateflow?
+
+Stateflow ist eine Umgebung zur Modellierung von **ereignisgesteuerter Logik** basierend auf **Zustandsautomaten** und **Flussdiagrammen**.
+
+Es eignet sich hervorragend, um komplexe Entscheidungslogik, Betriebsmodi oder Ablaufsteuerungen zu modellieren, die in reiner Signalverarbeitung mit Simulink nur schwer darstellbar wären.
+
+Ein Stateflow-Diagramm (Chart) wird als Block in ein Simulink-Modell eingefügt und interagiert mit diesem über Ein- und Ausgangssignale.
+
+---
+
+<div class="columns">
+<div>
+
+#### Elemente eines Stateflow-Charts
+
+- **Zustände (States):** Repräsentieren einen bestimmten Modus des Systems. Ein System kann sich immer nur in einem Zustand befinden.
+- **Transitionen (Transitions):** Pfeile, die den Übergang von einem Zustand in einen anderen definieren.
+- **Bedingungen (Conditions):** Logische Ausdrücke an Transitionen, die wahr sein müssen, damit der Übergang stattfindet (z.B. `input > 5`).
+- **Aktionen (Actions):** Befehle, die beim Eintreten, Verlassen oder während eines Zustands ausgeführt werden (`entry`, `exit`, `during`).
+
+</div>
+<div>
+
+![Beschreibung: Ein einfacher Stateflow-Chart mit zwei Zuständen und Transitionen](./Stateflow_Elemente.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Einfaches Beispiel: Lichtschalter
+
+Wir modellieren einen einfachen Schalter mit zwei Zuständen: `On` und `Off`.
+
+- Ein Eingangssignal `switch_pos` steuert den Zustand.
+- **Transition `Off` -> `On`:** Wird ausgelöst, wenn `switch_pos == 1`.
+- **Transition `On` -> `Off`:** Wird ausgelöst, wenn `switch_pos == 0`.
+- In jedem Zustand wird ein Ausgang `light_status` auf `1` (On) oder `0` (Off) gesetzt.
+
+</div>
+<div>
+
+![Beschreibung: Stateflow-Chart für einen Lichtschalter](./Stateflow_Beispiel_Schalter.png)
+
+</div>
+</div>
+
+---
+
+![bg contain right:40%](../01_Anforderungen_und_Architekturen/Case_Study.jpg)
+
+### 2.3.2. Fallbeispiel: Akku-Schrauber
+
+Wir modellieren die Steuerungslogik des Akku-Schraubers.
+
+- **Zustände:** `Off`, `Forward`, `Reverse`.
+- **Eingänge:** `trigger_pressed` (boolean), `direction_switch` (enum).
+- **Logik:**
+    - Von `Off` nach `Forward`, wenn `trigger_pressed` wahr ist und `direction_switch` auf "vorwärts" steht.
+    - Von `Off` nach `Reverse`, wenn `trigger_pressed` wahr ist und `direction_switch` auf "rückwärts" steht.
+    - Von `Forward` oder `Reverse` zurück nach `Off`, wenn `trigger_pressed` losgelassen wird.
+- **Ausgänge:** Ein Signal `motor_voltage`, das im Zustand `Off` 0 ist und sonst der Akkuspannung entspricht.
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### 2.3.3. Übungsaufgabe
+
+Modellieren Sie mit Stateflow die Betriebslogik des 3D-Druckers.
+
+Erstellen Sie einen Zustandsautomaten mit den folgenden Zuständen:
+- `Idle` (Leerlauf)
+- `Heating` (Aufheizen von Druckbett und Düse)
+- `Printing` (Druckvorgang)
+- `Finished` (Druck beendet)
+
+Definieren Sie die Eingänge (z.B. `start_print_button`, `target_temp_reached`) und die Transitionen zwischen den Zuständen.
+
+---
+
+![bg right](./Simulink3D.jpg)
+
+## 2.4 3D-Animation mit Simulink 3D Animation
+
+In diesem vierten Abschnitt lernen wir die folgenden Dinge:
+
+1. **Grundlagen der 3D-Visualisierung**<br/>(VRML/X3D-Welten)
+2. **Verbindung von Modell und Animation**<br/>(Der VR Sink Block)
+3. **Einfache Animationen erstellen**<br/>(Bewegung eines Würfels)
+
+---
+
+### 2.4.1. Was ist Simulink 3D Animation?
+
+Simulink 3D Animation ermöglicht die Visualisierung von Simulink- und Simscape-Simulationen in einer **virtuellen 3D-Umgebung**.
+
+Es verbindet das dynamische Modell mit einer 3D-Welt, die im **VRML**- oder **X3D**-Format beschrieben ist. Dadurch kann man die Bewegungen und das Verhalten von mechanischen Systemen, Fahrzeugen oder Robotern realistisch darstellen.
+
+Die Verbindung wird durch spezielle Simulink-Blöcke hergestellt, die Simulationsdaten an die Objekte in der 3D-Welt senden.
+
+---
+
+<div class="columns">
+<div>
+
+#### Der VR Sink Block
+
+Der `VR Sink`-Block ist die Brücke zwischen Simulink und der virtuellen Welt.
+
+- Er nimmt Simulink-Signale als Eingang.
+- Diese Signale werden verwendet, um Eigenschaften (Felder) von Objekten (Nodes) in der 3D-Welt zu manipulieren.
+- Typische Eigenschaften sind `translation` (Position), `rotation` (Drehung) oder `color`.
+
+Man wählt im Block das Zielobjekt und die zu steuernde Eigenschaft aus.
+
+</div>
+<div>
+
+![Beschreibung: Der VR Sink Block mit seinen Parametern](./VR_Sink.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Einfaches Beispiel: Würfel bewegen
+
+Wir animieren einen einfachen Würfel in einer vordefinierten 3D-Welt.
+
+- Ein `Sine Wave`-Block in Simulink erzeugt ein sinusförmiges Signal.
+- Dieses Signal wird auf den Eingang des `VR Sink`-Blocks gegeben.
+- Der `VR Sink` ist so konfiguriert, dass er die `translation` (Position) des Würfels auf der X-Achse steuert.
+- Ergebnis: Der Würfel bewegt sich in der 3D-Ansicht harmonisch hin und her.
+
+</div>
+<div>
+
+![Beschreibung: Simulink-Modell zur Steuerung eines Würfels in 3D](./Simulink_3D_Beispiel.png)
+
+</div>
+</div>
+
+---
+
+![bg contain right:40%](../01_Anforderungen_und_Architekturen/Case_Study.jpg)
+
+### 2.4.2. Fallbeispiel: Akku-Schrauber
+
+Wir visualisieren die Rotation des Bohrfutters (Chuck) unseres Akku-Schrauber-Modells.
+
+- Das Simscape-Modell des Motors berechnet die Winkelgeschwindigkeit.
+- Ein `Integrator`-Block berechnet daraus den Rotationswinkel über die Zeit.
+- Dieses Winkelsignal wird an einen `VR Sink`-Block übergeben.
+- Der `VR Sink` steuert das `rotation`-Feld des Bohrfutter-Objekts in der 3D-Welt des Akku-Schraubers.
+- Ergebnis: Das Bohrfutter dreht sich in der 3D-Ansicht entsprechend der simulierten Motordrehzahl.
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### 2.4.3. Übungsaufgabe
+
+Animieren Sie die Bewegung des Druckkopfes Ihres 3D-Drucker-Modells.
+
+- Erstellen Sie ein einfaches Simulink-Modell, das die X- und Y-Position des Druckkopfes über die Zeit generiert (z.B. mit `Ramp`-Blöcken).
+- Verwenden Sie einen `VR Sink`-Block, um die `translation`-Eigenschaft des Druckkopf-Objekts in einer bereitgestellten 3D-Welt zu steuern.
+- Stellen Sie sicher, dass sich der Druckkopf auf der XY-Ebene bewegt.
