@@ -20,7 +20,7 @@ Dieses Kapitel umfasst die folgenden vier Abschnitte:
 
 ---
 
-TODO: Warum unterschiedliche Modellierungstechniken? Kausal versus akausal...
+TODO: Folie - Warum unterschiedliche Modellierungstechniken? Kausal versus akausal. Diskret versus kontinuierlich.
 
 ---
 
@@ -46,95 +46,182 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
-TODO: Blöcke und Signale allgemein. Signale als Zeitfunktionen.
+TODO: Folie - Blöcke und Signale allgemein. Signale als Zeitfunktionen.
 
 ---
 
-TODO: Code hinter einem Block.
+TODO: Folie - Diskrete und kontinuierliche Signale.
 
 ---
 
-<div class="columns">
-<div>
+TODO: Folie - MATLAB-Code hinter einem block
+
+---
+
+![bg contain right](./Simulink_Bibliothek.png)
 
 #### Die Simulink-Bibliothek
 
-Vordefinierten Blöcken, die in verschiedene Kategorien unterteilt sind:
-
-- **Sources (Quellen):** Erzeugen Signale (z.B. `Constant`, `Step`, `Sine Wave`).
-- **Sinks (Senken):** Visualisieren Signale (z.B. `Scope`, `Display`).
+- **Sources:** Erzeugen Signale (z.B. `Constant`, `Step`, `Sine Wave`).
+- **Sinks:** Visualisieren Signale (z.B. `Scope`, `Display`).
 - **Math Operations:** Einfache Berechnungen  (z.B. `Add`, `Gain`).
-- **Continuous:** Kontinuierliche Funktionen (z.B. `Integrator`).
-
-</div>
-<div>
-
-![Beschreibung: Screenshot des Simulink Library Browsers](./Simulink_Bibliothek.png)
-
-</div>
-</div>
+- **Discrete:** Diskrete Zeitfunktionen (z.B. `DiscreteIntegrator`)
+- **Continuous:** Kontinuierliche Zeit-funktionen (z.B. `Integrator`).
 
 ---
 
-#### Wichtige Blöcke: **Quellen** (*Sources*)
+#### Wichtige Blöcke: **Sources**
 
 Quellen sind der Ausgangspunkt für Signale in einem Simulink-Modell.
 
 <div class="columns top">
 <div>
 
-**Constant**
-Erzeugt einen konstanten Wert.
+![height:175px](./Simulink_Block_Constant.png)
+
+*Erzeugt einen konstanten Wert.*
 
 </div>
 <div>
 
-**Step**
-Erzeugt eine Sprungfunktion zu einer bestimmten Zeit.
+![height:175px](./Simulink_Block_Step.png)
+
+*Erzeugt eine Sprungfunk-tion zu einer bestimmten Zeit.*
 
 </div>
 <div>
 
-**Sine Wave**
-Erzeugt ein sinusförmiges Signal mit einstellbarer Amplitude, Frequenz und Phase.
+![height:175px](./Simulink_Block_Sine_Wave.png)
+
+*Erzeugt ein sinusförmiges Signal mit einstellbarer Amplitude, Frequenz und Phase.*
 
 </div>
 </div>
 
 ---
 
-#### Wichtige Blöcke: **Senken** (*Sinks*)
+#### Wichtige Blöcke: **Sinks**
 
 Senken dienen zur Analyse und Anzeige von Signalen während und nach der Simulation.
 
 <div class="columns top">
 <div>
 
-**Scope**
-Zeigt Signale in einem Oszilloskop-ähnlichen Diagramm über die Zeit an. Das wichtigste Werkzeug zur Visualisierung.
+![height:175px](./Simulink_Block_Display.png)
+
+*Zeigt den numerischen Wert eines Signals am Ende der Simulation an.*
 
 </div>
 <div>
 
-**Display**
-Zeigt den numerischen Wert eines Signals am Ende der Simulation an.
+![height:175px](./Simulink_Block_Scope.png)
+
+*Zeigt Signale in einem Oszilloskop-ähnlichen Diagramm über die Zeit an.*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_To_File.png)
+
+*TODO Kurzbeschreibung*
 
 </div>
 </div>
 
 ---
 
-#### Wichtige Blöcke: **Mathematische Operationen**
+#### Wichtige Blöcke: **Math Operations**
 
-TODO
+TODO Kurzbeschreibung der Kategorie
+
+<div class="columns top">
+<div>
+
+![height:175px](./Simulink_Block_Gain.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Add.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Polynomial.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+</div>
 
 ---
 
-#### Wichtige Blöcke: **Kontinuierliche Funktionen**
+#### Wichtige Blöcke: **Discrete**
+
+TODO Kurzbeschreibung der Kategorie
+
+<div class="columns top">
+<div>
+
+![height:175px](./Simulink_Block_Memory.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Discrete_Time_Integrator.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Discrete_Derivative.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+</div>
+
+---
+
+#### Wichtige Blöcke: **Continuous**
 
 Diese Blöcke sind das Herzstück für die Modellierung von physikalischen Systemen, die durch Differentialgleichungen beschrieben werden.
 
-**Integrator**
+<div class="columns">
+<div>
+
+![height:175px](./Simulink_Block_Transport_Delay.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Integrator.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Integrator_Second_Order.png)
+
+*TODO Kurzbeschreibung des Blocks*
+
+</div>
+</div>
+
+---
+
+##### Der `Interator`-Block
+
 Der `Integrator`-Block integriert ein Eingangssignal über die Zeit. Er ist fundamental, um das Verhalten von dynamischen Systemen zu modellieren (z.B. aus einer Beschleunigung eine Geschwindigkeit zu berechnen).
 
 `x(t) = ∫ u(t) dt`
