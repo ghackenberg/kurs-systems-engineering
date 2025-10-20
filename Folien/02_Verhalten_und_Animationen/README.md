@@ -96,12 +96,16 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
+TODO Folie - Signal ist eine Zeitverlaufsfunktion
+
+---
+
 <div class="columns">
 <div class="four">
 
 #### ***Einfache* zustandslose** Blöcke
 
-Im einfachsten Fall ist das Ausgabesignal $y$ zum Zeitpunkt $t$ ausschließlich abhäng-ig vom Eingabessignal $u$ zum Zeitpunkt $t$.
+Im einfachsten Fall ist das Ausgabesignal $y$ zum Zeitpunkt $t$ ausschließlich abhängig vom Eingabessignal $u$ zum Zeitpunkt $t$.
 
 Allgemein ergibt sich daraus folgender **mathematischer Zusammenhang** zwischen den beiden Signalfunktionen:
 
@@ -116,6 +120,10 @@ Das Beispiel auf der rechten Seite zeigt eine konkrete Formulierung für die Fun
 
 </div>
 </div>
+
+---
+
+TODO: Gain-Modell, Input Chart, Output Chart
 
 ---
 
@@ -145,6 +153,21 @@ Das Beispiel auf der rechten Seite zeigt wieder eine konkrete Formulierung der F
 <div class="columns">
 <div class="four">
 
+TODO Input und Output Chart
+
+</div>
+<div>
+
+![](./Diagramme/Block_Delay.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="four">
+
 #### Blöcke mit ***kontinuierlichen* Zuständen**
 
 **Zustandsfunktion** beschreibt den Zustand des Blocks über die Zeit kontinuierlich und lückenlos
@@ -158,6 +181,21 @@ $\dot{x}_c(t) = f_d(t, x_c, u)$
 **Ausgabefunktion** beschreibt die Ausgabesignale des Systems unter Berücksichtigung der Eingabesignale und des Zustands
 
 $y(t) = f_o(t, x_c, u)$
+
+</div>
+<div>
+
+![](./Diagramme/Block_Integrator.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="four">
+
+TODO Input und Output Chart
 
 </div>
 <div>
@@ -197,6 +235,21 @@ $y(t) = f_o(t, x_{d_k}, u)$
 ---
 
 <div class="columns">
+<div class="four">
+
+TODO Input und Output Chart
+
+</div>
+<div>
+
+![](./Diagramme/Block_Discrete_Time_Integrator.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
 <div class="three">
 
 #### Blöcke mit ***hybriden* Zuständen**
@@ -216,6 +269,21 @@ $\dot{x}_c(t) = f_d(t,x_c,x_{d_k},u)$
 **Ausgabefunktion** (mit $t_k \leq t < t_{k+1}$) auch abschnittsweise
 
 $y(t) = f_o(t,x_c,x_{d_k},u)$
+
+</div>
+<div>
+
+![](./Diagramme/Block_Hybrid.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+TODO Input und Output Chart
 
 </div>
 <div>
