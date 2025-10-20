@@ -74,6 +74,9 @@ In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
+<div class="columns">
+<div class="three">
+
 ### 2.1.1. Was ist Simulink?
 
 Simulink ist eine grafische Programmierumgebung für die Modellierung, Simulation und Analyse von dynamischen Systemen.
@@ -81,6 +84,15 @@ Simulink ist eine grafische Programmierumgebung für die Modellierung, Simulatio
 Es basiert auf dem Prinzip des **signalbasierten Designs**, bei dem Blöcke durch Linien verbunden werden, die den Signalfluss repräsentieren. Jede Linie transportiert ein Signal, z.B. einen Messwert oder einen Sollwert, von einem Block zum nächsten.
 
 Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems zu verstehen.
+
+</div>
+<div>
+
+
+![](https://upload.wikimedia.org/wikipedia/commons/3/36/Simulink_Logo_%28non-wordmark%29.png)
+
+</div>
+</div>
 
 ---
 
@@ -92,148 +104,68 @@ Ein Simulink-Modell besteht aus zwei grundlegenden Elementen:
 <div>
 
 **Blöcke**
-- Repräsentieren Systemkomponen-ten, von einfachen mathematischen Operationen (`+`, `*`, `/`) bis hin zu komplexen Subsystemen.
-- Jeder Block hat eine definierte An-zahl von Ein- und Ausgängen.
-- Die Funktion eines Blocks ist durch seine internen Gleichungen oder Algorithmen bestimmt.
+
+TODO Kurzbeschreibung
 
 </div>
 <div>
 
 **Signale**
-- Repräsentieren den Informations-fluss zwischen Blöcken.
-- Werden als Linien gezeichnet, die einen Ausgangsport mit einem Eingangsport verbinden.
-- Jedes Signal ist eine **Funktion der Zeit** `s(t)`. Es kann ein Skalar, ein Vektor oder eine Matrix sein.
 
-</div>
-</div>
-
----
-
-#### Kontinuierliche vs. Diskrete Signale
-
-Simulink unterscheidet zwischen zwei Haupttypen von Signalen:
-
-<div class="columns top">
-<div>
-
-**Kontinuierliche Signale**
-- Sind für **jeden** Zeitpunkt `t` definiert.
-- Repräsentieren typischerweise physikalische Größen, die sich stetig ändern (z.B. Position, Temperatur).
-- Werden mit **Solvern für Differential-gleichungen** berechnet.
-- Sind das Herzstück der Simulation physikalischer Dynamik.
+TODO Kurzbeschreibung
 
 </div>
 <div>
 
-**Diskrete Signale**
-- Sind nur zu **bestimmten Zeitpunkten** definiert (den Abtastzeitpunkten, *Sample Times*).
-- Repräsentieren digitale Logik, abgetastete Daten oder Steuersignale von Controllern.
-- Werden durch **Differenzen-gleichungen** beschrieben.
+**Zustände**
+
+TODO Kurzbeschreibung
 
 </div>
 </div>
 
---- 
+---
 
-#### Differentialgleichung vs. Differenzengleichung
+TODO: Folie - Eingangs- und Ausgangssignale
 
-<div class="columns top">
+---
+
+TODO: Folie - Zustandslose Funktion
+
+---
+
+TODO: Folie - Kontinuierliche und diskrete Zustände
+
+---
+
+<div class="columns">
+<div class="two">
+
+TODO: Folie - S-Funktion (mit Zustand)
+
+</div>
 <div>
 
-##### Differentialgleichungen
+![](https://de.mathworks.com/help/simulink/sfg/sfun_intro2.png)
 
-- Beschreiben das Verhalten **kontinuierlicher** Systeme.
-- Beziehen eine Funktion auf ihre **Ableitungen**.
-- Beispiel: Die Bewegungsgleichung eines Masse-Feder-Dämpfer-Systems.
+**Outputs**
+$y = f_o(t,x_c,x_d,u)$
 
-  `m*d²x/dt² + d*dx/dt + k*x = F(t)`
+**Derivatives**
+$x_c' = f_d(t,x_c,x_d,u)$
 
-</div>
-<div>
+**Update**
+$x_{d_{k+1}} = f_u(t,x_c,x_{d_k},u)$
 
-##### Differenzengleichungen
-
-- Beschreiben das Verhalten **diskreter** Systeme.
-- Beziehen den Wert eines Signals zum Zeitpunkt `k` auf Werte zu früheren Zeitpunkten (z.B. `k-1`).
-- Beispiel: Ein einfacher Zähler, der bei jedem Zeitschritt `T` um 1 erhöht.
-
-  `y[k] = y[k-1] + 1`
+**States**
+$x = (x_c,x_d)$
 
 </div>
 </div>
 
 ---
 
-#### MATLAB-Code: **Kontinuierliche** Blöcke
-
-Ein Block mit kontinuierlichem Zustand (z.B. ein Integrator) muss im Wesentlichen zwei Dinge in seinem Code definieren:
-1.  **`output`**: Den Wert seiner Ausgänge basierend auf dem aktuellen Zustand.
-2.  **`derivatives`**: Die Ableitungen seiner Zustände für den Solver.
-
-```matlab
-% 1. Ausgangs-Funktion
-function y = output(state)
-    y = state; % Ausgang ist der aktuelle Zustand
-end
-
-% 2. Ableitungs-Funktion
-function d_state = derivatives(input)
-    d_state = input; % Die Änderung des Zustands ist das Eingangssignal
-end
-```
-
----
-
-#### MATLAB-Code: **Diskrete** Blöcke
-
-Ein rein diskreter Block (z.B. ein Verzögerungsglied) wird nur zu bestimmten Zeitpunkten aktiv und hat zwei Kernfunktionen:
-1.  **`output`**: Berechnet den Ausgang aus dem gespeicherten Zustand.
-2.  **`update`**: Aktualisiert den internen Zustand für den nächsten Zeitschritt.
-
-```matlab
-% 1. Ausgangs-Funktion
-function y = output(state)
-    y = state; % Gib den gespeicherten Zustand aus
-end
-
-% 2. Update-Funktion
-function new_state = update(input)
-    new_state = input; % Speichere den Eingang als neuen Zustand
-end
-```
-
----
-
-#### MATLAB-Code: **Hybride** Blöcke
-
-Hybride Systeme kombinieren beide Verhaltensweisen. Ihr Code enthält Logik für kontinuierliche und diskrete Anteile, die oft miteinander interagieren (z.B. ein diskretes Ereignis setzt einen kontinuierlichen Zustand zurück).
-
-```matlab
-% Diskretes Update (z.B. bei einem Event)
-function state = update(continuous_state, input)
-    if continuous_state > 10
-        state = 0; % Setze kontinuierlichen Zustand zurück
-    else
-        state = continuous_state;
-    end
-end
-% Kontinuierliche Ableitung
-function d_state = derivatives(input)
-    d_state = input;
-end
-```
-
----
-
-TODO: Folie zu Funktion `output`
-
----
-
-TODO: Folie zu Funktion `drivatives`
-
----
-
-TODO: Folie zu Funktion `update`
+TODO: Folie - Simulink.MSFcnRunTimeBlock (inklusive uml-klassendiagramm)
 
 ---
 
@@ -438,15 +370,38 @@ TODO
 
 ---
 
-TODO: Simulationsalgorithmus
+<div class="columns">
+<div class="two">
+
+TODO Simulationsphasen
+
+</div>
+<div>
+
+![](https://de.mathworks.com/help/simulink/ug/simulationphasesloop.png)
+
+</div>
+</div>
 
 ---
 
-TODO: Numerische Eigenschaften
+TODO Folie - Solverarten
 
 ---
 
-TODO: Problematische Situationen (wann macht der Algorithmus fehler?)
+TODO Folie - Kontinuierliche und diskrete Solver
+
+---
+
+TODO Folie - Explizite und implizite kontinuierliche Solver
+
+---
+
+TODO Folie - Kontinuierliche Ein-Schritt und Mehr-Schritt-Solver
+
+---
+
+TODO Folie - Kontinuierliche Solver erster und variable Ordnung
 
 ---
 
