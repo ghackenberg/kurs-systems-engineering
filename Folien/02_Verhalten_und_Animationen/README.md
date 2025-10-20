@@ -20,7 +20,45 @@ Dieses Kapitel umfasst die folgenden vier Abschnitte:
 
 ---
 
-TODO: Folie - Warum unterschiedliche Modellierungstechniken? Kausal versus akausal. Diskret versus kontinuierlich.
+#### Das richtige Werkzeug für jede Aufgabe
+
+Mechatronische Systeme sind oft *hybride* Systeme, die unterschiedliche Arten von Verhalten kombinieren. MATLAB & Simulink bieten spezialisierte Werkzeuge für jede dieser Aufgaben, die oft im selben Modell kombiniert werden.
+
+<div class="columns top">
+<div>
+
+##### Simulink: Signalfluss
+
+Kausale Modellierung
+
+*(Blöcke berechnen Ausgangsignale aus Eingangssignalen)*
+
+`Input > Block > Output`
+
+</div>
+<div>
+
+##### Simscape: Physik
+
+Akausale Modellierung
+
+*(Blöcke definieren ein Gleichungssystem, das gelöst werden muss)*
+
+`x(t) = y(t)`
+
+</div>
+<div>
+
+##### Stateflow: Logik
+
+Zustandsautomaten
+
+*(Diskerete Zustände und Zustandsübergänge zu definierten Ereignissen)*
+
+`On <-[Guard]-> Off`
+
+</div>
+</div>
 
 ---
 
@@ -46,21 +84,162 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
-TODO: Folie - Blöcke und Signale allgemein. Signale als Zeitfunktionen.
+#### Blöcke und Signale
+
+Ein Simulink-Modell besteht aus zwei grundlegenden Elementen:
+
+<div class="columns top">
+<div>
+
+**Blöcke**
+- Repräsentieren Systemkomponen-ten, von einfachen mathematischen Operationen (`+`, `*`, `/`) bis hin zu komplexen Subsystemen.
+- Jeder Block hat eine definierte An-zahl von Ein- und Ausgängen.
+- Die Funktion eines Blocks ist durch seine internen Gleichungen oder Algorithmen bestimmt.
+
+</div>
+<div>
+
+**Signale**
+- Repräsentieren den Informations-fluss zwischen Blöcken.
+- Werden als Linien gezeichnet, die einen Ausgangsport mit einem Eingangsport verbinden.
+- Jedes Signal ist eine **Funktion der Zeit** `s(t)`. Es kann ein Skalar, ein Vektor oder eine Matrix sein.
+
+</div>
+</div>
 
 ---
 
-TODO: Folie - Diskrete und kontinuierliche Signale.
+#### Kontinuierliche vs. Diskrete Signale
+
+Simulink unterscheidet zwischen zwei Haupttypen von Signalen:
+
+<div class="columns top">
+<div>
+
+**Kontinuierliche Signale**
+- Sind für **jeden** Zeitpunkt `t` definiert.
+- Repräsentieren typischerweise physikalische Größen, die sich stetig ändern (z.B. Position, Temperatur).
+- Werden mit **Solvern für Differential-gleichungen** berechnet.
+- Sind das Herzstück der Simulation physikalischer Dynamik.
+
+</div>
+<div>
+
+**Diskrete Signale**
+- Sind nur zu **bestimmten Zeitpunkten** definiert (den Abtastzeitpunkten, *Sample Times*).
+- Repräsentieren digitale Logik, abgetastete Daten oder Steuersignale von Controllern.
+- Werden durch **Differenzen-gleichungen** beschrieben.
+
+</div>
+</div>
+
+--- 
+
+#### Differentialgleichung vs. Differenzengleichung
+
+<div class="columns top">
+<div>
+
+##### Differentialgleichungen
+
+- Beschreiben das Verhalten **kontinuierlicher** Systeme.
+- Beziehen eine Funktion auf ihre **Ableitungen**.
+- Beispiel: Die Bewegungsgleichung eines Masse-Feder-Dämpfer-Systems.
+
+  `m*d²x/dt² + d*dx/dt + k*x = F(t)`
+
+</div>
+<div>
+
+##### Differenzengleichungen
+
+- Beschreiben das Verhalten **diskreter** Systeme.
+- Beziehen den Wert eines Signals zum Zeitpunkt `k` auf Werte zu früheren Zeitpunkten (z.B. `k-1`).
+- Beispiel: Ein einfacher Zähler, der bei jedem Zeitschritt `T` um 1 erhöht.
+
+  `y[k] = y[k-1] + 1`
+
+</div>
+</div>
 
 ---
 
-TODO: Folie - MATLAB-Code hinter einem block
+#### MATLAB-Code: **Kontinuierliche** Blöcke
+
+Ein Block mit kontinuierlichem Zustand (z.B. ein Integrator) muss im Wesentlichen zwei Dinge in seinem Code definieren:
+1.  **`output`**: Den Wert seiner Ausgänge basierend auf dem aktuellen Zustand.
+2.  **`derivatives`**: Die Ableitungen seiner Zustände für den Solver.
+
+```matlab
+% 1. Ausgangs-Funktion
+function y = output(state)
+    y = state; % Ausgang ist der aktuelle Zustand
+end
+
+% 2. Ableitungs-Funktion
+function d_state = derivatives(input)
+    d_state = input; % Die Änderung des Zustands ist das Eingangssignal
+end
+```
+
+---
+
+#### MATLAB-Code: **Diskrete** Blöcke
+
+Ein rein diskreter Block (z.B. ein Verzögerungsglied) wird nur zu bestimmten Zeitpunkten aktiv und hat zwei Kernfunktionen:
+1.  **`output`**: Berechnet den Ausgang aus dem gespeicherten Zustand.
+2.  **`update`**: Aktualisiert den internen Zustand für den nächsten Zeitschritt.
+
+```matlab
+% 1. Ausgangs-Funktion
+function y = output(state)
+    y = state; % Gib den gespeicherten Zustand aus
+end
+
+% 2. Update-Funktion
+function new_state = update(input)
+    new_state = input; % Speichere den Eingang als neuen Zustand
+end
+```
+
+---
+
+#### MATLAB-Code: **Hybride** Blöcke
+
+Hybride Systeme kombinieren beide Verhaltensweisen. Ihr Code enthält Logik für kontinuierliche und diskrete Anteile, die oft miteinander interagieren (z.B. ein diskretes Ereignis setzt einen kontinuierlichen Zustand zurück).
+
+```matlab
+% Diskretes Update (z.B. bei einem Event)
+function state = update(continuous_state, input)
+    if continuous_state > 10
+        state = 0; % Setze kontinuierlichen Zustand zurück
+    else
+        state = continuous_state;
+    end
+end
+% Kontinuierliche Ableitung
+function d_state = derivatives(input)
+    d_state = input;
+end
+```
+
+---
+
+TODO: Folie zu Funktion `output`
+
+---
+
+TODO: Folie zu Funktion `drivatives`
+
+---
+
+TODO: Folie zu Funktion `update`
 
 ---
 
 ![bg contain right](./Simulink_Bibliothek.png)
 
-#### Die Simulink-Bibliothek
+### 2.1.2. Die Simulink-Bibliothek
 
 - **Sources:** Erzeugen Signale (z.B. `Constant`, `Step`, `Sine Wave`).
 - **Sinks:** Visualisieren Signale (z.B. `Scope`, `Display`).
@@ -253,6 +432,12 @@ TODO: Untermodelle mit Simulink. Komplexität beherrschen. Wiederverwendung erm�
 
 ---
 
+### 2.1.3. Berechnung von Simulink-Modellen
+
+TODO
+
+---
+
 TODO: Simulationsalgorithmus
 
 ---
@@ -267,9 +452,15 @@ TODO: Problematische Situationen (wann macht der Algorithmus fehler?)
 
 ![bg contain right:40%](../01_Anforderungen_und_Architekturen/Case_Study.jpg)
 
-### 2.1.2. Fallbeispiel: Akku-Schrauber
+### 2.1.4. Fallbeispiel: Akku-Schrauber
 
 Wir modellieren das vereinfachte Verhalten des Motors. Annahme: Die Drehzahl des Motors ist direkt proportional zur angelegten Spannung, abzüglich eines Lastmoments.
+
+---
+
+#### TODO Folienüberschrift
+
+TODO kurzer Text
 
 - Ein `Constant`-Block repräsentiert die Spannung vom Akku.
 - Ein `Gain`-Block modelliert den Motor (wandelt Spannung in Drehzahl um).
@@ -280,7 +471,7 @@ Wir modellieren das vereinfachte Verhalten des Motors. Annahme: Die Drehzahl des
 
 ![bg right](../Übungsaufgabe.jpg)
 
-### 2.1.3. Übungsaufgabe
+### 2.1.5. Übungsaufgabe
 
 Modellieren Sie mit Simulink das Verhalten des Extruders eines 3D-Druckers.
 
