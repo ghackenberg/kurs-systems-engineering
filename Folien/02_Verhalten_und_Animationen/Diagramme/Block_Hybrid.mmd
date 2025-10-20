@@ -1,0 +1,16 @@
+flowchart TB
+    subgraph "Hybrid Integrator"
+        direction TB
+
+        f("<b>y(t<sub>k</sub>) = x<sub>c</sub>(t<sub>k</sub>)</b><br/>x<sub>c</sub>(t<sub>k</sub>)/dt<sub>k</sub> = x<sub>d<sub>k</sub></sub><br/>if u<sub>1</sub>(t<sub>k+1</sub>) > u<sub>2</sub>(t<sub>k+1</sub>)<br/>x<sub>d<sub>k+1</sub></sub> = u<sub>1</sub>(t<sub>k+1</sub>) else<br/>x<sub>d<sub>k+1</sub></sub> = u<sub>2</sub>(t<sub>k+1</sub>)")
+
+        u1(("u<sub>1</sub>(t)"))
+        u2(("u<sub>2</sub>(t)"))
+         
+        y(("y(t)"))
+    end
+
+    u1 --> f
+    u2 --> f
+    
+    f --> y

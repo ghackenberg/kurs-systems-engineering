@@ -1,0 +1,12 @@
+flowchart TB
+    subgraph "Discrete Time Integrator"
+        direction TB
+
+        f("<b>y(t<sub>k+1</sub>) = x<sub>d<sub>k+1</sub></sub></b><br/>x<sub>d<sub>k+1</sub></sub> = x<sub>d<sub>k</sub></sub> + Δx<sub>k</sub><br/>Δx<sub>k</sub> = Δt<sub>k</sub> * u(t<sub>k</sub>)<br/>Δt<sub>k</sub> = t<sub>k+1</sub> - t<sub>k</sub>")
+
+        u(("u(t)"))
+        
+        y(("y(t)"))
+    end
+
+    u --> f --> y

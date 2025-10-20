@@ -1,0 +1,15 @@
+classDiagram
+  class MSFcnRunTimeBlock {
+    +InputPort: Port[]
+    +OutputPort: Port[]
+    +ContStates: double[]
+    +Derivatives: double[]
+    +Dwork: any[]
+    +SampleTimes: double[]
+    +Setup()
+    +PostPropagationSetup()
+    +InitConditions()
+    +Outputs()
+    +Derivatives()
+    +Update()
+  }

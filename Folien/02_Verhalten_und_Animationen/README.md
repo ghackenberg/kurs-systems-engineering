@@ -33,7 +33,7 @@ Kausale Modellierung
 
 *(Blöcke berechnen Ausgangsignale aus Eingangssignalen)*
 
-`Input > Block > Output`
+`u(t) > Block > y(t)`
 
 </div>
 <div>
@@ -44,7 +44,7 @@ Akausale Modellierung
 
 *(Blöcke definieren ein Gleichungssystem, das gelöst werden muss)*
 
-`x(t) = y(t)`
+`F(u(t), y(t)) = 0`
 
 </div>
 <div>
@@ -96,76 +96,134 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
-#### Blöcke und Signale
+<div class="columns">
+<div class="four">
 
-Ein Simulink-Modell besteht aus zwei grundlegenden Elementen:
+#### ***Einfache* zustandslose** Blöcke
 
-<div class="columns top">
-<div>
+Im einfachsten Fall ist das Ausgabesignal $y$ zum Zeitpunkt $t$ ausschließlich abhäng-ig vom Eingabessignal $u$ zum Zeitpunkt $t$.
 
-**Blöcke**
+Allgemein ergibt sich daraus folgender **mathematischer Zusammenhang** zwischen den beiden Signalfunktionen:
 
-TODO Kurzbeschreibung
+$y(t) = f(u(t))$
 
-</div>
-<div>
-
-**Signale**
-
-TODO Kurzbeschreibung
+Das Beispiel auf der rechten Seite zeigt eine konkrete Formulierung für die Funktion $f$ für einen `Gain`-Block.
 
 </div>
 <div>
 
-**Zustände**
-
-TODO Kurzbeschreibung
+![](./Diagramme/Block_Gain.svg)
 
 </div>
 </div>
-
----
-
-TODO: Folie - Eingangs- und Ausgangssignale
-
----
-
-TODO: Folie - Zustandslose Funktion
-
----
-
-TODO: Folie - Kontinuierliche und diskrete Zustände
 
 ---
 
 <div class="columns">
-<div class="two">
+<div class="four">
 
-TODO: Folie - S-Funktion (mit Zustand)
+#### ***Allgemeine* zustandslose** Blöcke
+
+Im etwas allgemeineren Fall ist das Ausgabesignal $y$ weiterhin ausschließlich abhängig von Eingangssignal $u$.
+
+Jedoch kann der Zusammenhang hier z.B. auch **zeitversetzt** sein, woraus sich folgende Formulierung ergibt:
+
+$y(t) = f(t, u)$
+
+Das Beispiel auf der rechten Seite zeigt wieder eine konkrete Formulierung der Funktion $f$ für einen `Delay`-Block.
 
 </div>
 <div>
 
-![](https://de.mathworks.com/help/simulink/sfg/sfun_intro2.png)
-
-**Outputs**
-$y = f_o(t,x_c,x_d,u)$
-
-**Derivatives**
-$x_c' = f_d(t,x_c,x_d,u)$
-
-**Update**
-$x_{d_{k+1}} = f_u(t,x_c,x_{d_k},u)$
-
-**States**
-$x = (x_c,x_d)$
+![](./Diagramme/Block_Delay.svg)
 
 </div>
 </div>
 
 ---
 
-TODO: Folie - Simulink.MSFcnRunTimeBlock (inklusive uml-klassendiagramm)
+<div class="columns">
+<div class="four">
+
+#### Blöcke mit ***kontinuierlichen* Zuständen**
+
+**Zustandsfunktion** beschreibt den Zustand des Blocks über die Zeit kontinuierlich und lückenlos
+
+$x_c(t) = \int\dot{x}_c(t)dt$
+
+**Ableitungsfunktion** beschreibt die Änderung des Zustands über die Zeit ebenfalls kontinierlich und lückenlos
+
+$\dot{x}_c(t) = f_d(t, x_c, u)$
+
+**Ausgabefunktion** beschreibt die Ausgabesignale des Systems unter Berücksichtigung der Eingabesignale und des Zustands
+
+$y(t) = f_o(t, x_c, u)$
+
+</div>
+<div>
+
+![](./Diagramme/Block_Integrator.svg)
+
+</div>
+</div>
+
+----
+
+<div class="columns">
+<div class="four">
+
+#### Blöcke mit ***diskreten* Zuständen**
+
+**Zustandssequenz** repräsentiert den Zustands des Blocks ausschließlich zu bestimmten *Zeitpunkten*
+
+$x_d$
+
+**Aktualisierungsfunktion** beschreibt die Berechnung der jeweiligen *Folgezustände* aus den *Vorgängerzuständen*
+
+$x_{d_{k+1}} = f_u(t_{k+1}, x_c, x_{d_k}, u)$
+
+**Ausgabefunktion** (mit $t_k \leq t < t_{k+1}$) beschreibt die Ausgabe *abschnittsweise* zwischen den Zustanssprüngen
+
+$y(t) = f_o(t, x_{d_k}, u)$
+
+</div>
+<div>
+
+![](./Diagramme/Block_Discrete_Time_Integrator.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+#### Blöcke mit ***hybriden* Zuständen**
+
+**Zustandsfunktion** und **-sequenz** kombiniert in einem Tupel
+
+$x = (x_c,x_d)$
+
+**Aktualisierungsfunktion** für diskrete Zustandssprünge
+
+$x_{d_{k+1}} = f_u(t_{k+1},x_c,x_{d_k},u)$
+
+**Ableitungfunktion** (mit $t_k \leq t < t_{k+1}$) nun abschnittsweise
+
+$\dot{x}_c(t) = f_d(t,x_c,x_{d_k},u)$
+
+**Ausgabefunktion** (mit $t_k \leq t < t_{k+1}$) auch abschnittsweise
+
+$y(t) = f_o(t,x_c,x_{d_k},u)$
+
+</div>
+<div>
+
+![](./Diagramme/Block_Hybrid.svg)
+
+</div>
+</div>
 
 ---
 
@@ -325,35 +383,6 @@ Diese Blöcke sind das Herzstück für die Modellierung von physikalischen Syste
 ![height:175px](./Simulink_Block_Integrator_Second_Order.png)
 
 *TODO Kurzbeschreibung des Blocks*
-
-</div>
-</div>
-
----
-
-##### Der `Interator`-Block
-
-Der `Integrator`-Block integriert ein Eingangssignal über die Zeit. Er ist fundamental, um das Verhalten von dynamischen Systemen zu modellieren (z.B. aus einer Beschleunigung eine Geschwindigkeit zu berechnen).
-
-`x(t) = ∫ u(t) dt`
-
----
-
-<div class="columns">
-<div>
-
-#### Einfaches Beispiel
-
-Wir modellieren ein einfaches System: Ein konstantes Signal mit dem Wert `1` wird über die Zeit integriert.
-
-Das Ergebnis ist eine Rampe, die linear ansteigt (`y = t`).
-
-Das `Scope` zeigt das Eingangssignal (konstant 1) und das Ausgangssignal (die Rampe) an.
-
-</div>
-<div>
-
-![Beschreibung: Simulink-Modell mit Constant, Integrator und Scope](./Simulink_Beispiel.png)
 
 </div>
 </div>

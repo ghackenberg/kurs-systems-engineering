@@ -1,0 +1,12 @@
+flowchart TB
+    subgraph "Integrator"
+        direction TB
+
+        f("<b>y(t) = x<sub>c</sub>(t)</b><br/>x<sub>c</sub>(t)/dt = u(t)")
+
+        u(("u(t)"))
+        
+        y(("y(t)"))
+    end
+
+    u --> f --> y

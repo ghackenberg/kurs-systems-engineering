@@ -1,0 +1,12 @@
+flowchart TB
+    subgraph "Delay"
+        direction TB
+        
+        f("y(t) = u(t - Δt)")
+
+        u(("u(t)"))
+        
+        y(("y(t)"))
+    end
+
+    u --> f --> y
