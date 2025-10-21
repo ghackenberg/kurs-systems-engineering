@@ -611,7 +611,17 @@ TODO
 <div class="columns">
 <div class="two">
 
-### TODO Folie - Simulationsphasen
+#### Simulationsphasen
+
+Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
+
+1.  **Initialisierungsphase:**
+    -   Simulink wertet Blockparameter aus, berechnet Anfangszustände und bestimmt die Abtastzeiten.
+    -   Der Solver wird initialisiert.
+
+2.  **Simulationsschleife (Execution Phase):**
+    -   Der Solver berechnet die Zustände und Ausgänge des Modells für jeden Zeitschritt.
+    -   Diese Phase wiederholt sich, bis die Simulationszeit endet oder ein Abbruchkriterium erfüllt ist.
 
 </div>
 <div>
@@ -623,51 +633,86 @@ TODO
 
 ---
 
-### TODO Folie - Abtastzeiten
+### Abtastzeiten
+
+Die Abtastzeit (Sample Time) definiert, wann ein Block seine Ausgänge berechnet und seine Zustände aktualisiert. Sie ist entscheidend für das Verhalten von diskreten Systemen und die Interaktion zwischen kontinuierlichen und diskreten Teilen eines Modells.
 
 ---
 
-#### TODO Folie - **Diskrete** Abtastzeiten
+#### **Diskrete** Abtastzeiten
+
+-   **Feste Abtastzeit:** Der Block wird in regelmäßigen, festen Zeitintervallen ausgeführt (z.B. alle 0.1 Sekunden).
+-   **Vererbte Abtastzeit (-1):** Der Block erbt seine Abtastzeit von dem Block, der ihn antreibt.
+-   **Triggered:** Der Block wird nur ausgeführt, wenn er ein Triggersignal erhält.
 
 ---
 
-#### TODO Folie - **Mehrratige** diskrete Abtastzeiten
+#### **Mehrratige** diskrete Abtastzeiten
+
+-   In Systemen mit mehreren diskreten Abtastzeiten, die Vielfache voneinander sind (z.B. 0.1s und 0.2s).
+-   Simulink plant die Ausführung der Blöcke so, dass alle Abtastzeiten korrekt berücksichtigt werden.
 
 ---
 
-#### TODO Folie - **Kontinuierliche** Abtastzeiten
+#### **Kontinuierliche** Abtastzeiten
+
+-   Für Blöcke, die kontinuierliche Zustände oder Ausgänge haben (z.B. Integratoren).
+-   Diese Blöcke werden vom Solver zu jedem Zeitpunkt ausgewertet, um die Differentialgleichungen zu lösen.
 
 ---
 
-#### TODO Folie - Kontinuierliche Abtastzeiten **mit festgelegten Unterschritten**
+#### Kontinuierliche Abtastzeiten **mit festgelegten Unterschritten**
+
+-   Der Solver verwendet eine feste Anzahl von Unterschritten pro Hauptzeitschritt, um die Genauigkeit zu erhöhen.
+-   Dies ist eine Form der festen Schrittweite für kontinuierliche Solver.
 
 ---
 
-#### TODO Folie - **Variable** kontinuierliche Abtastzeiten
+#### **Variable** kontinuierliche Abtastzeiten
+
+-   Der Solver passt die Schrittweite dynamisch an, um die vorgegebene Fehlertoleranz einzuhalten.
+-   Effizient für Systeme mit schnellen und langsamen Dynamiken.
 
 ---
 
-#### TODO Folie - **Asynchrone** Abtastzeiten
+#### **Asynchrone** Abtastzeiten
+
+-   Blöcke werden durch externe Ereignisse oder Interrupts ausgeführt, nicht durch eine feste Taktfrequenz.
+-   Relevant für ereignisgesteuerte Systeme und Echtzeitanwendungen.
 
 ---
 
-### TODO Folie - Solverarten
+### Solverarten
+
+Simulink bietet eine Vielzahl von Solvern, die für unterschiedliche Modelltypen und Genauigkeitsanforderungen optimiert sind. Die Wahl des richtigen Solvers ist entscheidend für die Effizienz und Genauigkeit der Simulation.
 
 ---
 
-#### TODO Folie - Kontinuierliche und diskrete Solver
+#### Kontinuierliche und diskrete Solver
+
+-   **Kontinuierliche Solver:** Für Modelle mit kontinuierlichen Zuständen (Differentialgleichungen). Sie integrieren die Zustände über die Zeit.
+-   **Diskrete Solver:** Für Modelle, die nur diskrete Zustände haben. Sie aktualisieren die Zustände nur zu den diskreten Abtastzeiten.
 
 ---
 
-#### TODO Folie - Explizite und implizite kontinuierliche Solver
+#### Explizite und implizite kontinuierliche Solver
+
+-   **Explizite Solver:** Berechnen den nächsten Zustand direkt aus dem aktuellen Zustand und der Ableitung. Einfacher, aber weniger stabil für "steife" Systeme.
+-   **Implizite Solver:** Lösen ein Gleichungssystem, um den nächsten Zustand zu finden. Komplexer, aber stabiler für steife Systeme.
 
 ---
 
-#### TODO Folie - Kontinuierliche Ein-Schritt und Mehr-Schritt-Solver
+#### Kontinuierliche Ein-Schritt und Mehr-Schritt-Solver
+
+-   **Ein-Schritt-Solver:** Verwenden nur Informationen vom aktuellen Zeitschritt, um den nächsten zu berechnen (z.B. `ode45`).
+-   **Mehr-Schritt-Solver:** Verwenden Informationen von mehreren vorherigen Zeitschritten, um den nächsten zu berechnen (z.B. `ode113`).
 
 ---
 
-#### TODO Folie - Kontinuierliche Solver erster und variabler Ordnung
+#### Kontinuierliche Solver fester und variabler Ordnung
+
+-   **Solver fester Ordnung:** Verwenden immer die gleiche Ordnung für die Integration (z.B. `ode4` ist ein Solver 4. Ordnung).
+-   **Solver variabler Ordnung:** Passen die Ordnung der Integration dynamisch an, um die Effizienz und Genauigkeit zu optimieren (z.B. `ode45`).
 
 ---
 
