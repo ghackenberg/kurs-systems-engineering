@@ -228,7 +228,7 @@ Blockarten und -funktionsweisen und die Simulink-Bibliothek:
 3. Blöcke mit kontinuierlichen Zuständen
 4. Blöcke mit diskreten Zuständen
 5. Blöcke mit hybriden Zuständen
-6. Die Simulink-Bibliothek und wichtige Blöcke
+6. Die Simulink-Bibliothek
 
 ---
 
@@ -445,8 +445,8 @@ $y(t) = f_o(t,x_c,x_{d_k},u)$
 - **Sources:** Erzeugen Signale (z.B. `Constant`, `Step`, `Sine Wave`).
 - **Sinks:** Visualisieren Signale (z.B. `Scope`, `Display`).
 - **Math Operations:** Einfache Berechnungen  (z.B. `Add`, `Gain`).
-- **Discrete:** Diskrete Zeitfunktionen (z.B. `DiscreteIntegrator`)
 - **Continuous:** Kontinuierliche Zeit-funktionen (z.B. `Integrator`).
+- **Discrete:** Diskrete Zeitfunktionen (z.B. `DiscreteIntegrator`)
 
 ---
 
@@ -496,14 +496,14 @@ Senken dienen zur Analyse und Anzeige von Signalen während und nach der Simulat
 
 ![height:175px](./Simulink_Block_Scope.png)
 
-*Zeigt Signale in einem Oszilloskop-ähnlichen Diagramm über die Zeit an.*
+*Zeigt Signale in einem Oszilloskop-ähnlichen Diagramm an.*
 
 </div>
 <div>
 
 ![height:175px](./Simulink_Block_To_File.png)
 
-*TODO Kurzbeschreibung*
+*Schreibt Signaldaten in eine MAT-Datei zur späteren Analyse.*
 
 </div>
 </div>
@@ -512,58 +512,28 @@ Senken dienen zur Analyse und Anzeige von Signalen während und nach der Simulat
 
 ##### Wichtige Blöcke: **Math Operations**
 
-TODO Kurzbeschreibung der Kategorie
+Diese Blöcke führen grundlegende mathematische Operationen mit Signalen durch.
 
 <div class="columns top">
 <div>
 
 ![height:175px](./Simulink_Block_Gain.png)
 
-*TODO Kurzbeschreibung des Blocks*
+*Multipliziert ein Signal mit einem konstanten Faktor (Verstärkung).*
 
 </div>
 <div>
 
 ![height:175px](./Simulink_Block_Add.png)
 
-*TODO Kurzbeschreibung des Blocks*
+*Addiert oder subtrahiert zwei oder mehr Signale elementweise.*
 
 </div>
 <div>
 
 ![height:175px](./Simulink_Block_Polynomial.png)
 
-*TODO Kurzbeschreibung des Blocks*
-
-</div>
-</div>
-
----
-
-##### Wichtige Blöcke: **Discrete**
-
-TODO Kurzbeschreibung der Kategorie
-
-<div class="columns top">
-<div>
-
-![height:175px](./Simulink_Block_Memory.png)
-
-*TODO Kurzbeschreibung des Blocks*
-
-</div>
-<div>
-
-![height:175px](./Simulink_Block_Discrete_Time_Integrator.png)
-
-*TODO Kurzbeschreibung des Blocks*
-
-</div>
-<div>
-
-![height:175px](./Simulink_Block_Discrete_Derivative.png)
-
-*TODO Kurzbeschreibung des Blocks*
+*Berechnet einen Polynomwert für das Eingangssignal.*
 
 </div>
 </div>
@@ -579,28 +549,54 @@ Diese Blöcke sind das Herzstück für die Modellierung von physikalischen Syste
 
 ![height:175px](./Simulink_Block_Transport_Delay.png)
 
-*TODO Kurzbeschreibung des Blocks*
+*Verzögert das Eingangssignal um eine bestimmte Zeit.*
 
 </div>
 <div>
 
 ![height:175px](./Simulink_Block_Integrator.png)
 
-*TODO Kurzbeschreibung des Blocks*
+*Führt eine kontinuierliche Integration des Eingangssignals durch.*
 
 </div>
 <div>
 
 ![height:175px](./Simulink_Block_Integrator_Second_Order.png)
 
-*TODO Kurzbeschreibung des Blocks*
+*Führt eine doppelte kontinuierliche Integration des Eingangssignals durch.*
 
 </div>
 </div>
 
 ---
 
-TODO: Untermodelle mit Simulink. Komplexität beherrschen. Wiederverwendung ermöglichen.
+##### Wichtige Blöcke: **Discrete**
+
+Diese Blöcke modellieren diskrete Systeme oder diskrete Anteile in hybriden Systemen.
+
+<div class="columns top">
+<div>
+
+![height:175px](./Simulink_Block_Memory.png)
+
+*Speichert den Wert des Eingangssignals vom vorherigen Zeitschritt.*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Discrete_Time_Integrator.png)
+
+*Führt eine diskrete Integration des Eingangssignals durch.*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Discrete_Derivative.png)
+
+*Berechnet die diskrete Ableitung des Eingangssignals.*
+
+</div>
+</div>
 
 ---
 
@@ -615,7 +611,7 @@ TODO
 <div class="columns">
 <div class="two">
 
-TODO Folie - Simulationsphasen
+### TODO Folie - Simulationsphasen
 
 </div>
 <div>
@@ -627,23 +623,51 @@ TODO Folie - Simulationsphasen
 
 ---
 
-TODO Folie - Solverarten
+### TODO Folie - Abtastzeiten
 
 ---
 
-TODO Folie - Kontinuierliche und diskrete Solver
+#### TODO Folie - **Diskrete** Abtastzeiten
 
 ---
 
-TODO Folie - Explizite und implizite kontinuierliche Solver
+#### TODO Folie - **Mehrratige** diskrete Abtastzeiten
 
 ---
 
-TODO Folie - Kontinuierliche Ein-Schritt und Mehr-Schritt-Solver
+#### TODO Folie - **Kontinuierliche** Abtastzeiten
 
 ---
 
-TODO Folie - Kontinuierliche Solver erster und variable Ordnung
+#### TODO Folie - Kontinuierliche Abtastzeiten **mit festgelegten Unterschritten**
+
+---
+
+#### TODO Folie - **Variable** kontinuierliche Abtastzeiten
+
+---
+
+#### TODO Folie - **Asynchrone** Abtastzeiten
+
+---
+
+### TODO Folie - Solverarten
+
+---
+
+#### TODO Folie - Kontinuierliche und diskrete Solver
+
+---
+
+#### TODO Folie - Explizite und implizite kontinuierliche Solver
+
+---
+
+#### TODO Folie - Kontinuierliche Ein-Schritt und Mehr-Schritt-Solver
+
+---
+
+#### TODO Folie - Kontinuierliche Solver erster und variabler Ordnung
 
 ---
 
