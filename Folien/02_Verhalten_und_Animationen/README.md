@@ -68,8 +68,8 @@ Zustandsautomaten
 
 In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
-1. TODO Signale
-2. TODO Blöcke
+1. Grundlagen von Signalen (Zeitverlauf, Stetigkeit, Differenzierbarkeit)
+2. Wichtige Simulink-Blöcke (zustandslos, mit Zuständen, Bibliothek)
 3. TODO Solver
 
 ---
@@ -96,14 +96,17 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
+![bg contain right](./Simulink_Signale.jpg)
+
 ### 2.1.1. Signale
 
-TODO
+Signale und deren mathematische Eigenschaften:
 
-- TODO Zeitverlaufsfunktion
-- TODO Stetigkeit
-- TODO Differenzierbarkeit
-- TODO Abschnittsweise Differenzierbarkeit
+- Signale als Zeitverlaufs-funktionen
+- Stetigkeit und Nicht-Stetigkeit von Signalen
+- Differenzierbarkeit von Signalen
+- Abschnittsweise Differenzierbarkeit von Signalen
+- Eingangs- und Ausgangssignale
 
 ---
 
@@ -214,15 +217,18 @@ Simulink-Blöcke verarbeiten Signale. Dabei wird zwischen Ein- und Ausgangssigna
 
 ---
 
+![bg contain right](./Simulink_Blöcke.jpg)
+
 ### 2.1.2. Blöcke
 
-TODO
+Blockarten und -funktionsweisen und die Simulink-Bibliothek:
 
-1. TODO Einfache zustandslose Blöcke
-2. TODO Allgemeine zustanslose Blöcke
-3. TODO Blöcke mit kontinuierlichen Zuständen
-4. TODO Blöcke mit diskreten Zuständen
-5. TODO Blöcke mit hybriden Zuständen
+1. Einfache zustandslose Blöcke
+2. Allgemeine zustandslose Blöcke
+3. Blöcke mit kontinuierlichen Zuständen
+4. Blöcke mit diskreten Zuständen
+5. Blöcke mit hybriden Zuständen
+6. Die Simulink-Bibliothek und wichtige Blöcke
 
 ---
 
@@ -597,6 +603,8 @@ Diese Blöcke sind das Herzstück für die Modellierung von physikalischen Syste
 TODO: Untermodelle mit Simulink. Komplexität beherrschen. Wiederverwendung ermöglichen.
 
 ---
+
+![bg contain right](./Simulink_Solver.jpg)
 
 ### 2.1.3. Solver
 
