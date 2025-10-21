@@ -33,7 +33,7 @@ Kausale Modellierung
 
 *(Blöcke berechnen Ausgangsignale aus Eingangssignalen)*
 
-`u(t) > Block > y(t)`
+`y(t) = f(t, u)`
 
 </div>
 <div>
@@ -44,7 +44,7 @@ Akausale Modellierung
 
 *(Blöcke definieren ein Gleichungssystem, das gelöst werden muss)*
 
-`F(u(t), y(t)) = 0`
+`F(t, u, y) = 0`
 
 </div>
 <div>
@@ -96,7 +96,48 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
-TODO Folie - Signal ist eine Zeitverlaufsfunktion
+<div class="columns">
+<div>
+
+TODO Folie - Signal aus Zeitverlaufsfunktion. Skalar, Vektor, Matrix.
+
+</div>
+<div>
+
+![width:1000px](./Diagramme/Signal.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+TODO Folie - Unterscheidung zwischen Eingangs- und Ausgangssignalen.
+
+</div>
+<div>
+
+![width:1000px](./Diagramme/Signal_IO.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+TODO Folie - Unterscheidung zwischen stetigen und nicht-stetigen Signalen. Nicht-stetige Signale z.B. für Digitaltechnik.
+
+</div>
+<div>
+
+![width:1000px](./Diagramme/Signal_Stetigkeit.svg)
+
+</div>
+</div>
 
 ---
 
@@ -123,7 +164,18 @@ Das Beispiel auf der rechten Seite zeigt eine konkrete Formulierung für die Fun
 
 ---
 
-TODO: Gain-Modell, Input Chart, Output Chart
+<div class="columns">
+<div class="four">
+
+![width:1000px](./Diagramme/Signal_Gain.svg)
+
+</div>
+<div>
+
+![](./Diagramme/Block_Gain.svg)
+
+</div>
+</div>
 
 ---
 
@@ -153,7 +205,7 @@ Das Beispiel auf der rechten Seite zeigt wieder eine konkrete Formulierung der F
 <div class="columns">
 <div class="four">
 
-TODO Input und Output Chart
+![width:1000px](./Diagramme/Signal_Delay.svg)
 
 </div>
 <div>
@@ -195,7 +247,7 @@ $y(t) = f_o(t, x_c, u)$
 <div class="columns">
 <div class="four">
 
-TODO Input und Output Chart
+![width:1000px](./Diagramme/Signal_Integrator.svg)
 
 </div>
 <div>
@@ -237,7 +289,7 @@ $y(t) = f_o(t, x_{d_k}, u)$
 <div class="columns">
 <div class="four">
 
-TODO Input und Output Chart
+![width:1000px](./Diagramme/Signal_Discrete_Time_Integrator.svg)
 
 </div>
 <div>
@@ -283,7 +335,7 @@ $y(t) = f_o(t,x_c,x_{d_k},u)$
 <div class="columns">
 <div class="three">
 
-TODO Input und Output Chart
+![width:1000px](./Diagramme/Signal_Hybrid.svg)
 
 </div>
 <div>
