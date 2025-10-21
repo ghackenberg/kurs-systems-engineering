@@ -68,16 +68,16 @@ Zustandsautomaten
 
 In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
-1. **Grundlagen der Verhaltens-modellierung** (Signalbasierte Modellierung)
-2. **Wichtige Blöcke in Simulink**<br/>(Quellen, Senken, Kontinuierlich)
-3. **Einfache Verhaltensmodelle erstellen** (Integration eines konstanten Signals)
+1. TODO Signale
+2. TODO Blöcke
+3. TODO Solver
 
 ---
 
 <div class="columns">
 <div class="three">
 
-### 2.1.1. Was ist Simulink?
+### Was ist Simulink?
 
 Simulink ist eine grafische Programmierumgebung für die Modellierung, Simulation und Analyse von dynamischen Systemen.
 
@@ -96,10 +96,29 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
-<div class="columns">
-<div>
+### 2.1.1. Signale
 
-TODO Folie - Signal aus Zeitverlaufsfunktion. Skalar, Vektor, Matrix.
+TODO
+
+- TODO Zeitverlaufsfunktion
+- TODO Stetigkeit
+- TODO Differenzierbarkeit
+- TODO Abschnittsweise Differenzierbarkeit
+
+---
+
+<div class="columns">
+<div class="two">
+
+#### Was ist ein Signal?
+
+Ein **Signal** ist eine Funktion, die eine physikalische Größe über die Zeit beschreibt. Es repräsentiert den zeitlichen Verlauf von Informationen in einem System.
+
+Mathematisch wird ein Signal als Funktion $s(t)$ ausgedrückt, wobei $t$ die Zeit ist. Der Wert des Signals zu einem Zeitpunkt $t$ kann sein:
+
+- **Skalar:** Ein einzelner Wert (z.B. Temperatur).
+- **Vektor:** Mehrere Werte (z.B. 3D-Position).
+- **Matrix:** Eine Tabelle von Werten (z.B. Bilddaten).
 
 </div>
 <div>
@@ -112,9 +131,78 @@ TODO Folie - Signal aus Zeitverlaufsfunktion. Skalar, Vektor, Matrix.
 ---
 
 <div class="columns">
+<div class="two">
+
+#### **Stetigkeit** von Signalen
+
+Eine erste wichtige mathematische Eigenschaften der Signalfunktionen ist deren **Stetigkeit**:
+
+- **Stetige Signale:** Ein Signal ist stetig, wenn sein Verlauf keine Sprünge aufweist. Viele physika-lische Größen wie die Geschwindigkeit und Position eines Körpers werden so modelliert.
+
+- **Nicht-stetige Signale:** Diese Signale weisen Sprungstellen auf, wie z.B. das Signal eines `Step`-Blocks. Sie sind entscheidend für die Model-lierung von Schaltvorgängen und Ereignissen.
+
+</div>
 <div>
 
-TODO Folie - Unterscheidung zwischen Eingangs- und Ausgangssignalen.
+![width:1000px](./Diagramme/Signal_Stetigkeit.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+#### **Differenzierbarkeit** von Signalen
+
+Eine zweite wichtige mathematische Eigenschaft ist deren **Differenzierbarkeit:**
+
+- **Differenzierbare Signale:** Sind "glatt" und stetig, d.h. sie besitzen an jedem Punkt eine eindeutige Ableitung. Dies ist ideal für die Modellierung von Systemen durch Differentialgleichungen.
+
+- **Nicht-differenzierbare Signale:** Haben "Knick"-Stellen oder Sprünge, an denen keine eindeutige Ableitung existiert. Beispiele sind Rechtecksignale oder Signale mit abrupten Änderungen.
+
+</div>
+<div>
+
+![width:1000px](./Diagramme/Signal_Differenzierbarkeit.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+#### ***Abschnittsweise* Differenzierbarkeit** von Signalen
+
+- Viele technische Signale sind nicht über ihren gesamten Verlauf differenzierbar, aber in einzelnen Abschnitten ("stückweise") schon.
+
+- An den Übergangsstellen zwischen diesen Abschnitten (z.B. bei Sprüngen oder Knicken) ist das Signal nicht differenzierbar.
+
+- Simulink-Solver sind darauf ausgelegt, solche abschnittsweise differenzierbaren Signale zu verarbeiten, indem sie die Integrationsschritte an den Unstetigkeitsstellen anpassen.
+
+</div>
+<div>
+
+![width:1000px](./Diagramme/Signal_Abschnittsweise_Differenzierbarkeit.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+#### Eingangs- und Ausgangssignale
+
+Simulink-Blöcke verarbeiten Signale. Dabei wird zwischen Ein- und Ausgangssignalen unterschieden:
+
+- **Eingangssignale (Inputs):** Signale, die in einen Block hineinfließen. Sie sind die "Ursache" oder die Information, die der Block zur Druchführung seiner Berechnung benötigt.
+
+- **Ausgangssignale (Outputs):** Signale, die von einem Block erzeugt und ausgegeben werden. Sie sind die "Wirkung" oder das Ergebnis der blockinternen Berechnung.
 
 </div>
 <div>
@@ -126,18 +214,15 @@ TODO Folie - Unterscheidung zwischen Eingangs- und Ausgangssignalen.
 
 ---
 
-<div class="columns">
-<div>
+### 2.1.2. Blöcke
 
-TODO Folie - Unterscheidung zwischen stetigen und nicht-stetigen Signalen. Nicht-stetige Signale z.B. für Digitaltechnik.
+TODO
 
-</div>
-<div>
-
-![width:1000px](./Diagramme/Signal_Stetigkeit.svg)
-
-</div>
-</div>
+1. TODO Einfache zustandslose Blöcke
+2. TODO Allgemeine zustanslose Blöcke
+3. TODO Blöcke mit kontinuierlichen Zuständen
+4. TODO Blöcke mit diskreten Zuständen
+5. TODO Blöcke mit hybriden Zuständen
 
 ---
 
@@ -349,7 +434,7 @@ $y(t) = f_o(t,x_c,x_{d_k},u)$
 
 ![bg contain right](./Simulink_Bibliothek.png)
 
-### 2.1.2. Die Simulink-Bibliothek
+#### Die Simulink-Bibliothek
 
 - **Sources:** Erzeugen Signale (z.B. `Constant`, `Step`, `Sine Wave`).
 - **Sinks:** Visualisieren Signale (z.B. `Scope`, `Display`).
@@ -359,7 +444,7 @@ $y(t) = f_o(t,x_c,x_{d_k},u)$
 
 ---
 
-#### Wichtige Blöcke: **Sources**
+##### Wichtige Blöcke: **Sources**
 
 Quellen sind der Ausgangspunkt für Signale in einem Simulink-Modell.
 
@@ -389,7 +474,7 @@ Quellen sind der Ausgangspunkt für Signale in einem Simulink-Modell.
 
 ---
 
-#### Wichtige Blöcke: **Sinks**
+##### Wichtige Blöcke: **Sinks**
 
 Senken dienen zur Analyse und Anzeige von Signalen während und nach der Simulation.
 
@@ -419,7 +504,7 @@ Senken dienen zur Analyse und Anzeige von Signalen während und nach der Simulat
 
 ---
 
-#### Wichtige Blöcke: **Math Operations**
+##### Wichtige Blöcke: **Math Operations**
 
 TODO Kurzbeschreibung der Kategorie
 
@@ -449,7 +534,7 @@ TODO Kurzbeschreibung der Kategorie
 
 ---
 
-#### Wichtige Blöcke: **Discrete**
+##### Wichtige Blöcke: **Discrete**
 
 TODO Kurzbeschreibung der Kategorie
 
@@ -479,7 +564,7 @@ TODO Kurzbeschreibung der Kategorie
 
 ---
 
-#### Wichtige Blöcke: **Continuous**
+##### Wichtige Blöcke: **Continuous**
 
 Diese Blöcke sind das Herzstück für die Modellierung von physikalischen Systemen, die durch Differentialgleichungen beschrieben werden.
 
@@ -513,7 +598,7 @@ TODO: Untermodelle mit Simulink. Komplexität beherrschen. Wiederverwendung erm�
 
 ---
 
-### 2.1.3. Berechnung von Simulink-Modellen
+### 2.1.3. Solver
 
 TODO
 
@@ -522,7 +607,7 @@ TODO
 <div class="columns">
 <div class="two">
 
-TODO Simulationsphasen
+TODO Folie - Simulationsphasen
 
 </div>
 <div>
