@@ -1,8 +1,23 @@
 flowchart TD
+    subgraph "<b>Initialisierungsphase</b>"
+        A
+    end
+    subgraph "<b>Ausführungsphase</b>"
+        B
+        C
+        D
+        E
+    end
+
     Start((Start)) --> A[Modell-Initialisierung];
-    A --> B{Schleife über Zeitschritte};
+    A --> B{Schleife über<br/>Zeitschritte};
     B -- nächster Zeitschritt --> C[1. Ausgänge berechnen];
     C --> D[2. Ableitungen berechnen];
     D --> E[3. Zustände aktualisieren];
     E --> B;
     B -- Simulationsende --> End((Ende));
+
+    E ~~~ End
+
+    style Start fill:black,color:white
+    style End fill:black,color:White

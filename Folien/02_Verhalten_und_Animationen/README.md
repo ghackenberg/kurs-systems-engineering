@@ -748,9 +748,10 @@ In diesem Abschnitt betrachten wir die folgenden Arten von Abtastzeiten für Sim
 
 ### Was sind Abtastzeiten?
 
-Die **Abtastzeit** (`Sample Time`) eines Blocks legt fest, zu welchen Zeitpunkten der Block während der Simulation ausgeführt wird, d.h. wann seine Ausgänge und (falls vorhanden) sein interner Zustand aktualisiert werden.
+Die **Abtastzeit** (`Sample Time`) eines Blocks legt fest, zu welchen Zeitpunkten er ausge-führt wird, d.h. wann seine Ausgänge und sein interner Zustand aktualisiert werden.
 
-- **Effizienz:** Eine korrekte Konfiguration der Abtastzeiten ist entscheidend für die Genauigkeit und Geschwindigkeit der Simulation.
+- **Effizienz:** Eine korrekte Konfiguration der Abtastzeiten ist entscheidend für die Geschwindigkeit der Simulation.
+- **Genauigkeit**: Die Konfiguration hat außerdem eine Auswirkung auf die Genaugkeit der Simualtionsergebnisse.
 - **Definition:** Die Abtastzeit wird typischerweise als zweidimensionaler Vektor `[Periode, Offset]` definiert.
 - **Typen**: Konstant, variabel, diskret, mehrratig, kontinuierlich, kontinuierlich mit festem kleinen Zeitschritt, und vererbt
 
@@ -783,11 +784,11 @@ Blöcke mit konstanter Abtastzeit werden nur **einmal zu Beginn** der Simulation
 
 #### **Variable** Abtastzeiten `[-2, Tvo]`
 
-Blöcke mit variabler Abtastzeit bestimmen zur Laufzeit selbst, wann ihr nächster Ausführungs-zeitpunkt liegt.
+Blöcke mit variabler Abtastzeit bestimmen zur Laufzeit selbst, wann ihr nächster Ausführungs-zeitpunkt liegt (`NextTimeHit`).
 
 -  Nützlich für Blöcke, die auf unregelmäßige Ereignisse reagieren müssen.
 
-**Beispiel:** Der `Hit Crossing`-Block überwacht ein Signal und weist den Solver an, genau dann einen Zeitschritt auszuführen, wenn das Signal einen Schwellenwert kreuzt (z.B. zur präzisen Modellierung von mechanischen Anschlägen).
+**Beispiel:** Der `Hit Crossing`-Block überwacht ein Signal und weist den Solver an, genau dann einen Zeitschritt auszuführen, wenn das Signal einen Schwellenwert kreuzt (`ZeroCrossings`), z.B. präzise mechanische Anschläge.
 
 </div>
 <div class="two">
@@ -849,7 +850,7 @@ Blöcke mit dieser Abtastzeit werden in jedem Simulationszeitschritt ausgeführt
 
 - **Anwendung:** Wird für Blöcke verwendet, die kontinuierliche Zustände haben (z.B. `Integrator`) und deren Verhalten durch Differentialgleichungen beschrieben wird.
 - **Festlegung:** Erfordert einen Solver für kontinuierliche Systeme (z.B. `ode45`), der die Schrittweite dynamisch anpasst, um die Genauigkeit zu gewährleisten.
-- **Aufteilung:** Solver arbeiten mit großem und kleinem Zeitschritt, um die Genauigkeit zu verbessern.
+- **Aufteilung:** Solver arbeiten mit *großen* Zeitschritten zur Signalaufzeichnung sowie mit *kleinen* Zeitschritten, um die Genauigkeit zu verbessern.
 
 **Beispiel:** Ein `Integrator`-Block, der die *Geschwindigkeit* eines Fahrzeugs integriert, um dessen *Position* zu berechnen. Da die Bewegung ein kontinuierlicher physikalischer Prozess ist, muss der Block kontinuierlich arbeiten, um eine Positionskurve zu erhalten.
 
@@ -869,8 +870,8 @@ Diese spezielle Einstellung signalisiert, dass der Block zwar kontinuierlich ist
 
 Dies ist die Standardeinstellung für viele Blöcke. Der Block **erbt** seine Abtastzeit von dem Block, der mit seinem Eingang verbunden ist.
 
-- **Vorteil:** Sorgt für Konsistenz im Signalfluss und reduziert den Konfigurationsaufwand.
-- **Best Practice:** Wird verwendet, um sicherzustellen, dass zusammengehörige Operationen mit der gleichen Rate ausgeführt werden.
+- **Vorteil:** Sorgt für Konsistenz der Abtastzeiten entlang des Signalflusses und reduziert den Konfigurationsaufwand.
+- **Konsistenz:** Ausgangssignale werden mit exakt derselben Abtastzeit neu berechnet wie Eingangssignale eines Blocks.
 
 **Beispiel:** Ein `Gain`-Block, der mit dem Ausgang eines `Sine Wave`-Blocks verbunden ist, der mit einer Abtastzeit von 0.01s konfiguriert ist. Der `Gain`-Block erbt automatisch die Abtastzeit von 0.01s und wird somit mit der gleichen Frequenz wie die Sinuswelle aktualisiert.
 
@@ -904,7 +905,11 @@ Simulink kann die verschiedenen Abtastzeiten im Modell farblich hervorheben, um 
 
 ### 2.1.4. Solver
 
-TODO
+In diesem Abschnitt betrachten wir die folgenden Themen:
+
+- **Simulationsphasen** (die große Klammer um die jeweilige Simulationsrechnung)
+- **Solver-Arten** (die Logik zur Bestimmung der Zeitschritte und Berechnung von Werten)
+- **Nulldurchgangserkennung** (eine wichtige Methode für eine hohe Genauigkeit)
 
 ---
 
@@ -916,7 +921,7 @@ TODO
 Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
 
 1.  **Initialisierungsphase:** Simulink wertet Blockparameter aus, berechnet Anfangszustände und bestimmt die Abtastzeiten.
-2.  **Simulationsschleife (Ausführungsphase):** Der Solver berechnet die Ableitungen, Zustände und Ausgänge des Modells für jeden Zeitschritt. Diese Phase wiederholt sich, bis die Simulationszeit endet oder ein Abbruchkriterium erfüllt ist.
+2.  **Simulationsschleife (Ausführungsphase):** Der Solver bestimmt die größe der Zeitschritte und berechnet die Ausgänge, Zustände und Ableitungen des Modells. Diese Phase wiederholt sich, bis die Simulationszeit endet oder ein Abbruchkriterium erfüllt ist.
 
 </div>
 <div>
@@ -930,17 +935,30 @@ Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
 
 ### Solverarten
 
-Simulink bietet eine Vielzahl von Solvern, die für unterschiedliche Modelltypen und Genauigkeitsanforderungen optimiert sind. Die Wahl des richtigen Solvers ist entscheidend für die Effizienz und Genauigkeit der Simulation.
+Simulink bietet eine Vielzahl von Solvern, die für unterschiedliche Modelltypen und Genauigkeitsanforderungen optimiert sind:
+
+- **Kontinuierliche** und **diskrete** Solver
+- **Explizite** und **implizite** kontinuierliche Solver
+- Kontinuierliche **Ein-** und **Mehr-Schritt**-Solver
+- Kontinuierliche Solver **fester** und **variabler Ordnung**
+
+Die Wahl des richtigen Solvers für das jeweilige Modell ist entscheidend für die Effizienz und Genauigkeit der Simulationsrechnung.
+
 
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
 #### **Kontinuierliche** und **diskrete** Solver
 
-- **Kontinuierliche Solver:** Für Modelle mit kontinuierlichen Zuständen (Differentialgleichungen). Sie integrieren die Zustände über die Zeit.
-- **Diskrete Solver:** Für Modelle, die nur diskrete Zustände haben. Sie aktualisieren die Zustände nur zu den diskreten Abtastzeiten.
+**Kontinuierliche Solver:** Für Modelle mit konti-nuierlichen Zuständen (Differentialgleichungen). Sie integrieren die Zustände über die Zeit.
+
+*Können Signale mit diskreten Abtastzeiten genau berechnen und berücksigtigen.*
+
+**Diskrete Solver:** Für Modelle, die nur diskrete Zustände haben. Sie aktualisieren die Zustände nur zu den diskreten Abtastzeiten.
+
+*Nutzen relativ ungenaue Schätzungen von Signalen mit kontinuierlichen Abtastzeiten.*
 
 </div>
 <div>
@@ -952,13 +970,22 @@ TODO
 
 ---
 
+TODO fixed-step discrete Pseudocode
+
+---
+
 <div class="columns">
-<div>
+<div class="two">
 
 #### **Explizite** und **implizite** kontinuierliche Solver
 
-- **Explizite Solver:** Berechnen den nächsten Zustand direkt aus dem aktuellen Zustand und der Ableitung. Einfacher, aber weniger stabil für "steife" Systeme.
-- **Implizite Solver:** Lösen ein Gleichungssystem, um den nächsten Zustand zu finden. Komplexer, aber stabiler für steife Systeme.
+**Explizite Solver:** Berechnen den nächsten Zustand direkt aus dem aktuellen Zustand und der Ableitung. Einfacher, aber weniger stabil für steife Systeme.
+
+*Der Folgezustand ergibt sich direkt aus dem aktuellen Zustand und der aktuellen Ableitung.*
+
+**Implizite Solver:** Lösen ein Gleichungssystem, um den nächsten Zustand zu finden. Komplexer, aber stabiler für steife Systeme.
+
+*Der Folgezustand ergibt sich indirekt aus dem aktuellen Zustand un der folgenden Ableitung.*
 
 </div>
 <div>
@@ -970,13 +997,26 @@ TODO
 
 ---
 
+TODO: Folie - Explizite Solver (inklusive Formalisierung und Illustration)
+
+---
+
+TODO: Folie - Implizite Solver (inklusive Formalisierung und Illustration)
+
+---
+
 <div class="columns">
-<div>
+<div class="two">
 
-#### Kontinuierliche **Ein-Schritt** und **Mehr-Schritt**-Solver
+#### Kontinuierliche **Ein-** und **Mehr-Schritt**-Solver
 
-- **Ein-Schritt-Solver:** Verwenden nur Informationen vom aktuellen Zeitschritt, um den nächsten zu berechnen (z.B. `ode45`).
-- **Mehr-Schritt-Solver:** Verwenden Informationen von mehreren vorherigen Zeitschritten, um den nächsten zu berechnen (z.B. `ode113`).
+**Ein-Schritt-Solver:** Verwenden nur Informationen vom aktuellen Zeitschritt, um den nächsten zu berechnen (z.B. `ode45`).
+
+*Die Zustandshistorie hat somit keinen direkten Einfluss auf das Berechnungsergebnis.*
+
+**Mehr-Schritt-Solver:** Verwenden Informationen von mehreren vorherigen Zeitschritten, um den nächsten zu berechnen (z.B. `ode113`).
+
+*Die Zustandshistorie wird bei der Berechnung des Folgezustands berücksichtigt.*
 
 </div>
 <div>
@@ -988,13 +1028,26 @@ TODO
 
 ---
 
+TODO Folie - ode45 Pseudocode
+
+---
+
+TODO Folie - ode113 Pseudocode
+
+---
+
 <div class="columns">
-<div>
+<div class="three">
 
 #### Kontinuierliche Solver **fester** und **variabler Ordnung**
 
-- **Solver fester Ordnung:** Verwenden immer die gleiche Ordnung für die Integration (z.B. `ode4` ist ein Solver 4. Ordnung).
-- **Solver variabler Ordnung:** Passen die Ordnung der Integration dynamisch an, um die Effizienz und Genauigkeit zu optimieren (z.B. `ode45`).
+**Solver fester Ordnung:** Verwenden immer die gleiche Ordnung für die Integration (z.B. `ode4` ist ein Solver 4. Ordnung).
+
+*TODO*
+
+**Solver variabler Ordnung:** Passen die Ordnung der Integration dynamisch an, um die Effizienz und Genauigkeit zu optimieren (z.B. `ode45`).
+
+*TODO*
 
 </div>
 <div>
@@ -1003,6 +1056,10 @@ TODO
 
 </div>
 </div>
+
+---
+
+TODO Folie - ode4 Pseudocode
 
 ---
 
