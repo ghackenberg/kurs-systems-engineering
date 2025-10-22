@@ -989,7 +989,7 @@ Simulink-Solver sind darauf ausgelegt, solche Gleichungssysteme numerisch zu lö
 
 ---
 
-#### Beispiel: Vertikaler Wurf (Mathematik)
+#### Beispiel: Vertikaler Wurf eines Balls
 
 Wir betrachten den vertikalen Wurf eines Balls in einem Gravitationsfeld ohne Berücksichtigung des Luftwiderstands. Die Bewegung des Balls kann durch eine gewöhnliche Differentialgleichung beschrieben werden.
 
@@ -1006,7 +1006,7 @@ $\dot{v} = -g$
 
 ![bg contain right](./Simulink_ODE.png)
 
-#### Beispiel: Vertikaler Wurf (Simulink)
+#### Umsetzung als Simulink-Modell
 
 Im Simulink-Modell würde man:
 1.  Drei `Constant`-Blöcke verwenden, um $-g$, $v_0$ und $y_0$ zu definieren.
@@ -1026,7 +1026,7 @@ Das bedeutet, das System hat Komponenten, die sich **sehr schnell** ändern, und
 **Lösung:** Implizite (steife) Solver wie `ode15s` sind für solche Probleme konzipiert. Sie sind pro Schritt rechenintensiver, können aber deutlich größere Zeitschritte stabil bewältigen, was die Gesamtsimulationszeit drastisch reduziert.
 
 ---
-### Beispiel : RC-Schaltung (Allgemein)
+### Beispiel : RC-Schaltung mit unterschiedlich schnellen Gliedern
 
 Ein klassisches Beispiel für ein steifes System ist eine elektrische Schaltung, die Komponenten mit sehr unterschiedlichen Zeitkonstanten enthält. Betrachten wir zwei RC-Glieder in Reihe:
 
@@ -1040,7 +1040,7 @@ Wenn $\tau_1 \ll \tau_2$ ist, ist das System steif. Ein expliziter Solver müsst
 <div class="columns">
 <div class="two">
 
-#### Beispiel: RC-Schaltung (Mathematik)
+#### Mathematisches Modell der RC-Schaltung
 
 **Differentialgleichungen:**
 
@@ -1064,7 +1064,7 @@ Ein steifer Solver kann die schnelle Anfangsphase mit kleinen Schritten und die 
 
 ![bg contain right:40%](./Simulink_Steif.png)
 
-#### Beispiel: RC-Schaltung (Simulink)
+#### Umsetzung des Modells in Simulink
 
 1.  **Sources:** Ein `Step`-Block liefert die Eingangsspannung $V_{in}$, `Constant`-Blöcke definieren die  Wiederstände $(R_1, R_2)$ und Kapazitäten $(C_1, C_2)$.
 3.  **Math Operations:** `Subtract`-, `Product`- und `Divide`-Blöcke werden verwendet, um die Terme $\frac{1}{R_1 C_1}(V_{in} - V_1)$ und $\frac{1}{R_2 C_2}(V_1 - V_2)$ zu bilden.
@@ -1085,11 +1085,27 @@ $F(t, x, \dot{x}) = 0$
 
 ---
 
-TODO Beispiel für einfaches DAE
+### Beispiel: Integration zweier Variablen mit Randbedingung
+
+Betrachten wir ein einfaches System, das sowohl eine Differentialgleichung als auch eine algebraische Gleichung enthält:
+
+**Gleichungssystem:**
+$\dot{x} = -x + y$
+$0 = x - y^2$
+
+Hier ist $x$ eine Differentialvariable, deren Ableitung $\dot{x}$ in der ersten Gleichung vorkommt. $y$ ist eine algebraische Variable, die durch die zweite Gleichung an $x$ gekoppelt ist.
+
+Dieses System kann nicht direkt in die Form $\dot{z} = f(t, z)$ gebracht werden, ohne die algebraische Gleichung explizit nach $y$ aufzulösen (was hier $y = \pm\sqrt{x}$ wäre).
 
 ---
 
-TODO Umsetzung des einfachen DAE in Simulink
+![bg contain right:40%](./Simulink_DAE.png)
+
+
+### Umsetzung des einfachen DAE in Simulink
+
+1. **Differentialgleichung:** Ein `Integrator`-Block wird für $x$ verwendet. Sein Eingang ist $-x + y$. Dies erfordert einen `Difference`-Block mit Eingängen $y$ und $x$.
+2. **Algebraische Gleichung:** Man kann einen `Algebraic Constraint`-Block verwenden, der die Gleichung $x - y^2 = 0$ löst, um $y$ zu finden. Der Eingang des Blocks ist $x-y^2$ und der Ausgang ist $y$.
 
 ---
 
