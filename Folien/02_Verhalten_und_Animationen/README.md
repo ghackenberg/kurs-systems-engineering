@@ -1262,6 +1262,61 @@ Simulink kann die Ausgänge der Blöcke in einer algebraischen Schleife nicht di
 
 ---
 
+#### Newton-Raphson-Verfahren
+
+Das **Newton-Raphson-Verfahren** ist ein effizientes iteratives Verfahren zur numerischen Bestimmung von Nullstellen einer reellwertigen Funktion $f(x)$. In Simulink wird es häufig zur Lösung von algebraischen Schleifen eingesetzt, indem es iterativ die Werte findet, die die algebraischen Gleichungen erfüllen.
+
+**Mathematische Formulierung:**
+Die Iterationsvorschrift lautet:
+$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$
+
+- $x_n$: Die aktuelle Näherung der Nullstelle.
+- $f(x_n)$: Der Funktionswert an der Stelle $x_n$.
+- $f'(x_n)$: Die erste Ableitung der Funktion an der Stelle $x_n$.
+
+---
+
+<div class="columns">
+<div>
+
+#### **Funktionsweise** des Newton-Raphson-Verfahrens
+
+- Man beginnt mit einem Startwert $x_0$.
+- In jedem Schritt wird eine Tangente an die Funktion $f(x)$ im Punkt $(x_n, f(x_n))$ gelegt.
+- Der Schnittpunkt dieser Tangente mit der x-Achse liefert die nächste, verbesserte Näherung $x_{n+1}$.
+- Iteration endet, wenn Fehlerschwelle unterschritten wurde.
+
+</div>
+<div>
+
+![Newton-Raphson-Verfahren](https://upload.wikimedia.org/wikipedia/commons/e/e0/NewtonIteration_Ani.gif)
+
+</div>
+</div>
+
+---
+
+#### **Pseudocode** für das Newton-Raphson-Verfahren
+
+Und so könnte eine Implementierung des Verfahren in MATLAB (oder eine anderen Programmiersprache) aussehen:
+
+```
+function newton_raphson(f, f_prime, x0, tolerance, max_iterations):
+  x = x0
+  for i from 1 to max_iterations:
+    fx = f(x)
+    if abs(fx) < tolerance:
+      return x
+    f_prime_x = f_prime(x)
+    if f_prime_x == 0:
+      error "Division by zero"
+    x = x - fx / f_prime_x
+  return x // Konvergenz nicht erreicht
+```
+
+
+---
+
 #### **Zero Crossings** in Solvern
 
 **Beschreibung:**
@@ -1272,11 +1327,54 @@ Kontinuierliche Solver könnten solche Ereignisse überspringen, wenn ihre Schri
 
 ---
 
-#### Verfahren zur Bestimmung von Nulldurchgängen in Simulink
+#### *Verfahren* zur Bestimmung von Nulldurchgängen in Simulink
 
-1. **Erkennung:** Simulink-Solver (insbesondere variable-step Continuous Solver) verfügen über integrierte Mechanismen zur Erkennung von Zero Crossings.
+1. **Erkennung:** Simulink-Solver (insbesondere *Variable-Step Continuous Solver*) verfügen über integrierte Mechanismen zur Erkennung von Zero Crossings.
 2. **Ereignis-Lokalisierung:** Wenn ein potenzieller Nulldurchgang erkannt wird, reduziert der Solver seine Schrittweite, um den genauen Zeitpunkt des Ereignisses präzise zu lokalisieren.
 3. **Zustandsanpassung:** Am exakten Zeitpunkt des Nulldurchgangs wird die Integration angehalten, die diskreten Zustände des Modells werden aktualisiert (falls das Ereignis eine diskrete Änderung auslöst), und die Integration wird von diesem neuen Punkt aus fortgesetzt.
+
+---
+
+<div class="columns">
+<div class="four">
+
+#### **Funktionsweise** der Lokalisierung von Nulldurchgängen
+
+1.  **Intervall-Identifikation:** Der Solver identifiziert ein Zeitintervall $[t_a, t_b]$, in dem ein Signal sein Vorzeichen wechselt (d.h., $sign(f(t_a)) \neq sign(f(t_b))$).
+2.  **Intervall-Halbierung:** Das Intervall wird dann in der Mitte geteilt ($t_m = (t_a + t_b) / 2$).
+3.  **Vorzeichenprüfung:** Das Vorzeichen von $f(t_m)$ wird überprüft. Das neue Intervall wird auf die Hälfte reduziert, in der der Vorzeichenwechsel weiterhin stattfindet.
+4.  **Iteration:** Dieser Prozess wird wiederholt, bis die Länge des Intervalls eine vorgegebene Toleranz unterschreitet.
+
+</div>
+<div>
+
+![Bisektionsverfahren](https://upload.wikimedia.org/wikipedia/commons/8/8c/Bisection_method.svg)
+
+</div>
+</div>
+
+---
+
+#### **Pseudocode** für die Lokalisierung von Nulldurchgängen
+
+Und so könnte die Implementierung des Verfahren in MATLAB aussehen:
+
+```
+function bisection(f, a, b, tolerance, max_iterations):
+  if sign(f(a)) == sign(f(b)):
+    error "No sign change in interval"
+
+  for i from 1 to max_iterations:
+    m = (a + b) / 2
+    fm = f(m)
+    if abs(fm) < tolerance:
+      return m
+    if sign(fm) == sign(f(a)):
+      a = m
+    else:
+      b = m
+  return m // Konvergenz nicht erreicht
+```
 
 ---
 
