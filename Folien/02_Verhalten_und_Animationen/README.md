@@ -738,11 +738,11 @@ Obwohl beide zur Gliederung von Modellen dienen, haben sie unterschiedliche Zwec
 In diesem Abschnitt betrachten wir die folgenden Arten von Abtastzeiten für Simulink-Blöcke:
 
 1. **Konstante Abtastzeiten**
-2. **Diskrete Abtastzeiten**
-3. **Asynchrone Abtastzeiten**
-4. **Vererbte Abtastzeiten**
-5. **Mehrratige Abtastzeiten**
-6. **Kontinuierliche Abtastzeiten**
+2. **Variable Abtastzeiten**
+3. **Diskrete Abtastzeiten**
+4. **Mehrratige Abtastzeiten**
+5. **Kontinuierliche Abtastzeiten**
+6. **Vererbte Abtastzeiten**
 
 ---
 
@@ -751,24 +751,27 @@ In diesem Abschnitt betrachten wir die folgenden Arten von Abtastzeiten für Sim
 Die **Abtastzeit** (`Sample Time`) eines Blocks legt fest, zu welchen Zeitpunkten der Block während der Simulation ausgeführt wird, d.h. wann seine Ausgänge und (falls vorhanden) sein interner Zustand aktualisiert werden.
 
 - **Effizienz:** Eine korrekte Konfiguration der Abtastzeiten ist entscheidend für die Genauigkeit und Geschwindigkeit der Simulation.
-- **Definition:** Die Abtastzeit wird typischerweise als Vektor `[Periode, Offset]` definiert.
-- TODO Unterschiedliche Arten von Abtastzeiten
+- **Definition:** Die Abtastzeit wird typischerweise als zweidimensionaler Vektor `[Periode, Offset]` definiert.
+- **Typen**: Konstant, variabel, diskret, mehrratig, kontinuierlich, kontinuierlich mit festem kleinen Zeitschritt, und vererbt
 
 ---
 
 <div class="columns">
-<div class="two">
+<div class="three">
 
 #### **Konstante** Abtastzeiten `[inf, 0]`
 
-Blöcke mit konstanter Abtastzeit (z.B. `Constant`) werden nur **einmal zu Beginn** der Simulation (`t=0`) ausgewertet. Ihr Ausgangswert bleibt während der gesamten Simulationsdauer unverändert.
+Blöcke mit konstanter Abtastzeit werden nur **einmal zu Beginn** der Simulation (`t=0`) ausgewertet.
 
-Dies ist nützlich für Parameter oder Sollwerte, die sich nicht ändern.
+- Ihr Ausgangswert bleibt während der gesamten Simulationsdauer unverändert.
+- Dies ist nützlich für Parameter oder Sollwerte, die sich nicht ändern.
+
+**Beispiel:** Ein `Constant`-Block, der den Wert der Erdbeschleunigung (`9.81`) für eine Simulation bereitstellt.
 
 </div>
-<div>
+<div class="two">
 
-TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine konstante Abtastzeit illustriert.
+![width:1000px](./Diagramme/Abtastzeit_Konstant.svg)
 
 </div>
 </div>
@@ -776,21 +779,43 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine konstante Abtastzeit illus
 ---
 
 <div class="columns">
+<div class="three">
+
+#### **Variable** Abtastzeiten `[-2, Tvo]`
+
+Blöcke mit variabler Abtastzeit bestimmen zur Laufzeit selbst, wann ihr nächster Ausführungs-zeitpunkt liegt.
+
+-  Nützlich für Blöcke, die auf unregelmäßige Ereignisse reagieren müssen.
+
+**Beispiel:** Der `Hit Crossing`-Block überwacht ein Signal und weist den Solver an, genau dann einen Zeitschritt auszuführen, wenn das Signal einen Schwellenwert kreuzt (z.B. zur präzisen Modellierung von mechanischen Anschlägen).
+
+</div>
 <div class="two">
+
+![width:1000px](./Diagramme/Abtastzeit_Variabel.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
 
 #### **Diskrete** Abtastzeiten `[Ts, To]`
 
-Der Block wird in regelmäßigen Intervallen ausgeführt.
+Der Block wird in regelmäßigen Intervallen ausgeführt (z.B. digitale Signalverarbeitung).
 
-- **`Ts` (Sample Time):** Die Periode, also der zeitliche Abstand zwischen zwei Ausführungen.
+- **`Ts` (Sample Time):** Der zeitliche Abstand zwischen zwei Ausführungen.
 - **`To` (Offset):** Eine anfängliche Zeitverzögerung.
+- Die Ausführungszeitpunkte sind also `To, To + Ts, To + 2*Ts, ...`.
 
-Die Ausführungszeitpunkte sind also `To, To + Ts, To + 2*Ts, ...`. Dies ist die Grundlage für die digitale Signalverarbeitung.
+**Beispiel:** Ein `Discrete-Time Integrator`-Block mit `[0.1, 0]` wird alle 0,1 Sekunden ausgeführt.
 
 </div>
-<div>
+<div class="two">
 
-TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine diskrete Abtastzeit illustriert.
+![width:1000px](./Diagramme/Abtastzeit_Diskret.svg)
 
 </div>
 </div>
@@ -798,27 +823,47 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine diskrete Abtastzeit illust
 ---
 
 <div class="columns">
-<div class="two">
+<div class="three">
 
-#### **Asynchrone** Abtastzeiten `[-1, -n]`
+#### **Mehrratige** Abtastzeiten
 
-Die Ausführung des Blocks wird nicht durch die Simulationszeit, sondern durch ein **externes Ereignis** ausgelöst.
+Ein Modell ist mehrratig, wenn es Blöcke mit **unterschiedlichen Abtastzeiten** enthält.
 
-- `[-1, -n]` bedeutet, dass die Abtastzeit von einer externen Quelle (z.B. einem Funktionsaufruf oder einer Hardware-Interrupt-Service-Routine im generierten Code) bestimmt wird.
-- Nützlich für die Modellierung von ereignisgesteuerten Systemen.
+-  Erfordert Synchronisation zwischen den verschiedenen "Zeitdomänen", um Daten-verlust oder Inkonsistenzen zu vermeiden.
+
+**Beispiel:** Ein *schneller* digitaler Regler (`Ts = 0.01s`) interagiert mit einem *langsameren* physikalischen Streckenmodell (`Ts = 0.1s`). Zwischen den beiden Teilen ist ein `Rate Transition`-Block notwendig.
 
 </div>
-<div>
+<div class="two">
 
-TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine asynchrone Abtastzeit illustriert.
+![width:1000px](./Diagramme/Abtastzeit_Mehrratig.svg)
 
 </div>
 </div>
 
 ---
 
-<div class="columns">
-<div class="two">
+#### **Kontinuierliche** Abtastzeiten `[0, 0]`
+
+Blöcke mit dieser Abtastzeit werden in jedem Simulationszeitschritt ausgeführt.
+
+- **Anwendung:** Wird für Blöcke verwendet, die kontinuierliche Zustände haben (z.B. `Integrator`) und deren Verhalten durch Differentialgleichungen beschrieben wird.
+- **Festlegung:** Erfordert einen Solver für kontinuierliche Systeme (z.B. `ode45`), der die Schrittweite dynamisch anpasst, um die Genauigkeit zu gewährleisten.
+- **Aufteilung:** Solver arbeiten mit großem und kleinem Zeitschritt, um die Genauigkeit zu verbessern.
+
+**Beispiel:** Ein `Integrator`-Block, der die *Geschwindigkeit* eines Fahrzeugs integriert, um dessen *Position* zu berechnen. Da die Bewegung ein kontinuierlicher physikalischer Prozess ist, muss der Block kontinuierlich arbeiten, um eine Positionskurve zu erhalten.
+
+---
+
+#### Kontinuierliche Abtastzeiten **mit festem kleinen Zeitschritt** `[0, 1]`
+
+Diese spezielle Einstellung signalisiert, dass der Block zwar kontinuierlich ist, aber der Solver einen festen, sehr kleinen Zeitschritt verwenden soll, um das Verhalten anzunähern.
+
+- Wird seltener verwendet und ist für spezielle Anwendungsfälle gedacht, bei denen eine Annäherung an ein kontinuierliches Verhalten mit fester Schrittweite erforderlich ist.
+
+**Beispiel:** In einem Modell, das für die *Echtzeit-Hardware-in-the-Loop (HIL)-Simulation* vorgesehen ist, muss der Solver mit einer festen Schrittweite laufen, die der Abtastrate der Hardware entspricht. Ein kontinuierlicher Block in diesem Modell könnte `[0, 1]` verwenden, um anzuzeigen, dass er sich an diese feste Schrittweite anpasst.
+
+---
 
 #### **Vererbte** Abtastzeiten `[-1, 0]`
 
@@ -827,95 +872,7 @@ Dies ist die Standardeinstellung für viele Blöcke. Der Block **erbt** seine Ab
 - **Vorteil:** Sorgt für Konsistenz im Signalfluss und reduziert den Konfigurationsaufwand.
 - **Best Practice:** Wird verwendet, um sicherzustellen, dass zusammengehörige Operationen mit der gleichen Rate ausgeführt werden.
 
-</div>
-<div>
-
-![height:175px](./Simulink_Vererbte_Abtastzeit.png)
-
-TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine vererbte Abtastzeit anhand eines Pulse-Generators und eines Gains illustriert.
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div class="two">
-
-#### **Mehrratige** Abtastzeiten
-
-Ein Modell ist mehrratig, wenn es Blöcke mit **unterschiedlichen Abtastzeiten** enthält.
-
-- **Beispiel:** Ein schneller Regler (`Ts = 0.01s`) interagiert mit einem langsameren Streckenmodell (`Ts = 0.1s`).
-- **Herausforderung:** Erfordert sorgfältige Synchronisation und Datenübergabe zwischen den verschiedenen "Zeitdomänen", um Datenverlust oder Inkonsistenzen zu vermeiden (z.B. mit `Rate Transition`-Blöcken).
-
-</div>
-<div>
-
-TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine mehrratige Abtastzeit illustriert.
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div class="two">
-
-#### **Kontinuierliche** Abtastzeiten `[0, 0]`
-
-Blöcke mit dieser Abtastzeit werden in jedem Simulationszeitschritt ausgeführt.
-
-- **Anwendung:** Wird für Blöcke verwendet, die kontinuierliche Zustände haben (z.B. `Integrator`) und deren Verhalten durch Differentialgleichungen beschrieben wird.
-- **Solver:** Erfordert einen Solver für kontinuierliche Systeme (z.B. `ode45`), der die Schrittweite dynamisch anpasst, um die Genauigkeit zu gewährleisten.
-
-</div>
-<div>
-
-TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine kontinuierliche Abtastzeit illustriert.
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div class="two">
-
-#### Kontinuierliche Abtastzeiten **mit festem kleinen Zeitschritt** `[0, 1]`
-
-Diese spezielle Einstellung signalisiert, dass der Block zwar kontinuierlich ist, aber der Solver einen festen, sehr kleinen Zeitschritt verwenden soll, um das Verhalten anzunähern.
-
-- Wird seltener verwendet und ist für spezielle Anwendungsfälle gedacht, bei denen eine Annäherung an ein kontinuierliches Verhalten mit fester Schrittweite erforderlich ist.
-- TODO konkretes Beispiel
-
-</div>
-<div>
-
-TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine Abtastzeit mit festem kleinen Zeitschritt illustriert.
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div class="two">
-
-#### **Variable** kontinuierliche Abtastzeiten `[-2, Tvo]`
-
-Diese Abtastzeit ist implizit für Modelle mit kontinuierlichen Blöcken, die mit einem Solver mit variabler Schrittweite simuliert werden.
-
-- **`Tvo` (Variable-step Offset):** Der Solver bestimmt die Schrittweite dynamisch, um die geforderte Genauigkeit bei minimalem Rechenaufwand zu erreichen.
-- Die Schrittweite wird bei schnellen Änderungen verkleinert und bei langsamem Verhalten vergrößert.
-
-</div>
-<div>
-
-TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine variable Abtastzeit illustriert.
-
-</div>
-</div>
+**Beispiel:** Ein `Gain`-Block, der mit dem Ausgang eines `Sine Wave`-Blocks verbunden ist, der mit einer Abtastzeit von 0.01s konfiguriert ist. Der `Gain`-Block erbt automatisch die Abtastzeit von 0.01s und wird somit mit der gleichen Frequenz wie die Sinuswelle aktualisiert.
 
 ---
 
@@ -988,7 +945,7 @@ Simulink bietet eine Vielzahl von Solvern, die für unterschiedliche Modelltypen
 </div>
 <div>
 
-TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von kontiunierlichen und diskreten Solvern illustriert
+TODO
 
 </div>
 </div>
@@ -1006,7 +963,7 @@ TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von kontiunierlichen u
 </div>
 <div>
 
-TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von expliziten und impliziten Solvern illustriert
+TODO
 
 </div>
 </div>
@@ -1024,7 +981,7 @@ TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von expliziten und imp
 </div>
 <div>
 
-TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von Ein-Schritt- und Mehr-Schritt-Solvern illustriert
+TODO
 
 </div>
 </div>
@@ -1042,7 +999,7 @@ TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von Ein-Schritt- und M
 </div>
 <div>
 
-TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von Solvern mit fester und variabler Ordnung illustriert
+TODO
 
 </div>
 </div>
