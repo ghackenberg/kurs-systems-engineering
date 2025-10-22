@@ -68,9 +68,34 @@ Zustandsautomaten
 
 In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
-1. Grundlagen von Signalen (Zeitverlauf, Stetigkeit, Differenzierbarkeit)
-2. Wichtige Simulink-Blöcke (zustandslos, mit Zuständen, Bibliothek)
-3. TODO Solver
+1. **Signale** (TODO)
+2. **Blöcke** (TODO)
+3. **Abtastzeiten** (TODO)
+4. **Solver** (TODO)
+
+---
+
+![bg contain right](./Simulink_Component_Create.png)
+
+### Simulink-Modell für System Composer Komponente erstellen
+
+TODO Kontextmenü einer atomaren System Composer Komponente. Speicherung des Simulink-Modells in eigener Datei
+
+---
+
+![bg contain right](./Simulink_Component_Link.png)
+
+### Bestehendes Simulink-Modell mit Komponente verknüpfen
+
+TODO Wiederverwendung bestehender Simulink-Modelle. Konkretes Anwendungsbeispiel.
+
+---
+
+![bg contain right](./Simulink_Component_Finished.png)
+
+### Darstellung des Simulink-Modells in der Komponente
+
+TODO Eine Vorschau des Simulink-Modells wird innerhalb der Komponente dargestellt. Doppelklick auf Komponente öffnet Simulink-Modell für Bearbeitung.
 
 ---
 
@@ -229,6 +254,10 @@ Blockarten und -funktionsweisen und die Simulink-Bibliothek:
 4. Blöcke mit diskreten Zuständen
 5. Blöcke mit hybriden Zuständen
 6. Die Simulink-Bibliothek
+
+---
+
+TODO: Folie - Was ist ein Block?
 
 ---
 
@@ -442,11 +471,12 @@ $y(t) = f_o(t,x_c,x_{d_k},u)$
 
 #### Die Simulink-Bibliothek
 
-- **Sources:** Erzeugen Signale (z.B. `Constant`, `Step`, `Sine Wave`).
-- **Sinks:** Visualisieren Signale (z.B. `Scope`, `Display`).
-- **Math Operations:** Einfache Berechnungen  (z.B. `Add`, `Gain`).
-- **Continuous:** Kontinuierliche Zeit-funktionen (z.B. `Integrator`).
-- **Discrete:** Diskrete Zeitfunktionen (z.B. `DiscreteIntegrator`)
+Die Simulink-Bibliothek biete eine Vielzahl von vordefinierten Blöcken:
+
+- **Sources + Sinks:** Signale erzeugen und visualisieren
+- **Math Operations:** Einfache mathematische Operationen
+- **Continuous + Discrete:** Glatte und sprunghafte Funktionen
+- **Ports & Subsystems:** Kapselung und Wiederverwendung
 
 ---
 
@@ -600,9 +630,128 @@ Diese Blöcke modellieren diskrete Systeme oder diskrete Anteile in hybriden Sys
 
 ---
 
+##### Wichtige Blöcke: **Ports & Subsystems**
+
+<div class="columns top">
+<div>
+
+![height:175px](./Simulink_Block_InOutPort.png)
+
+*TODO Kurzbeschreibung*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_InOutBus.png)
+
+*TODO Kurzbeschreibung*
+
+</div>
+<div>
+
+![height:175px](./Simulink_Block_Subsystem.png)
+
+*TODO Kurzbeschreibung*
+
+</div>
+</div>
+
+---
+
+![bg contain right](./Simulink_Component_Created.png)
+
+TODO Folie - Eindeutige Zuordnung zwischen Ports im Architekturmodell und Ports im Verhaltensmodell. Datentypen müssen auch übereinstimmen.
+
+---
+
+TODO: Folie - Unterscheid zwischen System Composer Komponente und Simulink Subsystem. Wann nutzt man das eine, wann das andere?
+
+---
+
+![bg contain right](./Simulink_Abtastzeiten.jpg)
+
+### 2.1.3. Abtastzeiten
+
+In diesem Abschnitt betrachten wir die folgenden Arten von Abtastzeiten für Simulink-Blöcke:
+
+1. **Konstante Abtastzeiten**
+2. **Diskrete Abtastzeiten**
+3. **Asynchrone Abtastzeiten**
+4. **Vererbte Abtastzeiten**
+5. **Mehrratige Abtastzeiten**
+6. **Kontinuierliche Abtastzeiten**
+
+---
+
+### Was sind Abtastzeiten?
+
+TODO: Abtastzeit-Vektor. Pro Block definiert. Bestimmt, wann ein Block berechnet wird. Reduziert rechenaufwand. Beschleunigt Simulationsrechnung.
+
+---
+
+#### **Konstante** Abtastzeiten $[\inf,0]$
+
+TODO: Beschreibung, Formalisierung und Beispiel
+
+---
+
+#### **Diskrete** Abtastzeiten $[T_S,T_O]$
+
+TODO: Beschreibung, Formalisierung und Beispiel
+
+---
+
+#### **Asynchrone** Abtastzeiten $[-1,-n]$
+
+TODO: Beschreibung, Formalisierung und Beispiel
+
+---
+
+#### **Vererbte** Abtastzeiten $[-1,0]$
+
+TODO: Beschreibung, Formalisierung und Beispiel
+
+---
+
+#### **Mehrratige** Abtastzeiten
+
+TODO: Beschreibung, Formalisierung und Beispiel
+
+---
+
+#### **Kontinuierliche** Abtastzeiten $[0,0]$
+
+TODO: Beschreibung, Formalisierung und Beispiel
+
+---
+
+#### Kontinuierliche Abtastzeiten **mit festem kleinen Zeitschritt** $[0,1]$
+
+TODO: Beschreibung, Formalisierung und Beispiel
+
+---
+
+#### **Variable** kontinuierliche Abtastzeiten $[-2,T_{VO}]$
+
+TODO: Beschreibung, Formalisierung und Beispiel
+
+---
+
+![bg contain right](./Simulink_Timing_Properties.png)
+
+TODO: Folie - Abtastzeit-Eigenschaft konfigurieren
+
+---
+
+![bg contain right](./Simulink_Timing_Legend.png)
+
+TODO: Folie - Zeitverlauf-Legende anzeigen
+
+---
+
 ![bg contain right](./Simulink_Solver.jpg)
 
-### 2.1.3. Solver
+### 2.1.4. Solver
 
 TODO
 
@@ -615,13 +764,8 @@ TODO
 
 Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
 
-1.  **Initialisierungsphase:**
-    -   Simulink wertet Blockparameter aus, berechnet Anfangszustände und bestimmt die Abtastzeiten.
-    -   Der Solver wird initialisiert.
-
-2.  **Simulationsschleife (Execution Phase):**
-    -   Der Solver berechnet die Zustände und Ausgänge des Modells für jeden Zeitschritt.
-    -   Diese Phase wiederholt sich, bis die Simulationszeit endet oder ein Abbruchkriterium erfüllt ist.
+1.  **Initialisierungsphase:** Simulink wertet Blockparameter aus, berechnet Anfangszustände und bestimmt die Abtastzeiten.
+2.  **Simulationsschleife (Ausführungsphase):** Der Solver berechnet die Zustände und Ausgänge des Modells für jeden Zeitschritt. Diese Phase wiederholt sich, bis die Simulationszeit endet oder ein Abbruchkriterium erfüllt ist.
 
 </div>
 <div>
@@ -633,83 +777,34 @@ Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
 
 ---
 
-### Abtastzeiten
-
-Die Abtastzeit (Sample Time) definiert, wann ein Block seine Ausgänge berechnet und seine Zustände aktualisiert. Sie ist entscheidend für das Verhalten von diskreten Systemen und die Interaktion zwischen kontinuierlichen und diskreten Teilen eines Modells.
-
----
-
-#### **Diskrete** Abtastzeiten
-
--   **Feste Abtastzeit:** Der Block wird in regelmäßigen, festen Zeitintervallen ausgeführt (z.B. alle 0.1 Sekunden).
--   **Vererbte Abtastzeit (-1):** Der Block erbt seine Abtastzeit von dem Block, der ihn antreibt.
--   **Triggered:** Der Block wird nur ausgeführt, wenn er ein Triggersignal erhält.
-
----
-
-#### **Mehrratige** diskrete Abtastzeiten
-
--   In Systemen mit mehreren diskreten Abtastzeiten, die Vielfache voneinander sind (z.B. 0.1s und 0.2s).
--   Simulink plant die Ausführung der Blöcke so, dass alle Abtastzeiten korrekt berücksichtigt werden.
-
----
-
-#### **Kontinuierliche** Abtastzeiten
-
--   Für Blöcke, die kontinuierliche Zustände oder Ausgänge haben (z.B. Integratoren).
--   Diese Blöcke werden vom Solver zu jedem Zeitpunkt ausgewertet, um die Differentialgleichungen zu lösen.
-
----
-
-#### Kontinuierliche Abtastzeiten **mit festgelegten Unterschritten**
-
--   Der Solver verwendet eine feste Anzahl von Unterschritten pro Hauptzeitschritt, um die Genauigkeit zu erhöhen.
--   Dies ist eine Form der festen Schrittweite für kontinuierliche Solver.
-
----
-
-#### **Variable** kontinuierliche Abtastzeiten
-
--   Der Solver passt die Schrittweite dynamisch an, um die vorgegebene Fehlertoleranz einzuhalten.
--   Effizient für Systeme mit schnellen und langsamen Dynamiken.
-
----
-
-#### **Asynchrone** Abtastzeiten
-
--   Blöcke werden durch externe Ereignisse oder Interrupts ausgeführt, nicht durch eine feste Taktfrequenz.
--   Relevant für ereignisgesteuerte Systeme und Echtzeitanwendungen.
-
----
-
 ### Solverarten
 
 Simulink bietet eine Vielzahl von Solvern, die für unterschiedliche Modelltypen und Genauigkeitsanforderungen optimiert sind. Die Wahl des richtigen Solvers ist entscheidend für die Effizienz und Genauigkeit der Simulation.
 
 ---
 
-#### Kontinuierliche und diskrete Solver
+#### **Kontinuierliche** und **diskrete** Solver
 
 -   **Kontinuierliche Solver:** Für Modelle mit kontinuierlichen Zuständen (Differentialgleichungen). Sie integrieren die Zustände über die Zeit.
 -   **Diskrete Solver:** Für Modelle, die nur diskrete Zustände haben. Sie aktualisieren die Zustände nur zu den diskreten Abtastzeiten.
 
 ---
 
-#### Explizite und implizite kontinuierliche Solver
+#### **Explizite** und **implizite** kontinuierliche Solver
 
 -   **Explizite Solver:** Berechnen den nächsten Zustand direkt aus dem aktuellen Zustand und der Ableitung. Einfacher, aber weniger stabil für "steife" Systeme.
 -   **Implizite Solver:** Lösen ein Gleichungssystem, um den nächsten Zustand zu finden. Komplexer, aber stabiler für steife Systeme.
 
 ---
 
-#### Kontinuierliche Ein-Schritt und Mehr-Schritt-Solver
+#### Kontinuierliche **Ein-Schritt** und **Mehr-Schritt**-Solver
 
 -   **Ein-Schritt-Solver:** Verwenden nur Informationen vom aktuellen Zeitschritt, um den nächsten zu berechnen (z.B. `ode45`).
 -   **Mehr-Schritt-Solver:** Verwenden Informationen von mehreren vorherigen Zeitschritten, um den nächsten zu berechnen (z.B. `ode113`).
 
 ---
 
-#### Kontinuierliche Solver fester und variabler Ordnung
+#### Kontinuierliche Solver **fester** und **variabler Ordnung**
 
 -   **Solver fester Ordnung:** Verwenden immer die gleiche Ordnung für die Integration (z.B. `ode4` ist ein Solver 4. Ordnung).
 -   **Solver variabler Ordnung:** Passen die Ordnung der Integration dynamisch an, um die Effizienz und Genauigkeit zu optimieren (z.B. `ode45`).
@@ -718,7 +813,7 @@ Simulink bietet eine Vielzahl von Solvern, die für unterschiedliche Modelltypen
 
 ![bg contain right:40%](../01_Anforderungen_und_Architekturen/Case_Study.jpg)
 
-### 2.1.4. Fallbeispiel: Akku-Schrauber
+### 2.1.5. Fallbeispiel: Akku-Schrauber
 
 Wir modellieren das vereinfachte Verhalten des Motors. Annahme: Die Drehzahl des Motors ist direkt proportional zur angelegten Spannung, abzüglich eines Lastmoments.
 
@@ -737,7 +832,7 @@ TODO kurzer Text
 
 ![bg right](../Übungsaufgabe.jpg)
 
-### 2.1.5. Übungsaufgabe
+### 2.1.6. Übungsaufgabe
 
 Modellieren Sie mit Simulink das Verhalten des Extruders eines 3D-Druckers.
 
