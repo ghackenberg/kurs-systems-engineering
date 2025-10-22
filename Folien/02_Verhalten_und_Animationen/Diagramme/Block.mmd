@@ -1,0 +1,9 @@
+graph TB
+    subgraph Block
+        direction TB
+        B["<b>Funktion</b><br/><code>f(...)</code>"]
+        U["<b>Eingang</b><br/><code>u(t)</code>"] --> B
+        B --> Y["<b>Ausgang</b><br/><code>y(t)</code>"]
+        P["<b>Parameter</b><br/><code>p</code>"] -.-> B
+        X["<b>Zustand</b><br/><code>x(t)</code>"] -.-> B
+    end

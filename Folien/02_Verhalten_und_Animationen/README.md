@@ -75,27 +75,41 @@ In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
-![bg contain right](./Simulink_Component_Create.png)
+![bg contain right:35%](./Simulink_Component_Create.png)
 
-### Simulink-Modell für System Composer Komponente erstellen
+### Simulink-Verhalten erstellen
 
-TODO Kontextmenü einer atomaren System Composer Komponente. Speicherung des Simulink-Modells in eigener Datei
+Für jede atomare Komponente im System Composer kann ein  Verhalten in Simulink modelliert werden.
 
----
-
-![bg contain right](./Simulink_Component_Link.png)
-
-### Bestehendes Simulink-Modell mit Komponente verknüpfen
-
-TODO Wiederverwendung bestehender Simulink-Modelle. Konkretes Anwendungsbeispiel.
+1.  **Rechtsklick** auf die Komponente.
+2.  Wählen Sie im Kontextmenü `Create Behavior > Simulink Behavior`.
+3.  System Composer erstellt ein neues, verknüpf-tes Simulink-Modell (`.slx`-Datei) und öffnet es.
+4.  Die Ports der Komponente werden automatisch als In- und Out-Ports im Simulink-Modell angelegt.
 
 ---
 
-![bg contain right](./Simulink_Component_Finished.png)
+![bg contain right:35%](./Simulink_Component_Link.png)
 
-### Darstellung des Simulink-Modells in der Komponente
+### Bestehendes Verhalten verknüpfen
 
-TODO Eine Vorschau des Simulink-Modells wird innerhalb der Komponente dargestellt. Doppelklick auf Komponente öffnet Simulink-Modell für Bearbeitung.
+Bestehende Simulink-Modelle können wiederver-wendet werden, indem sie mit einer Komponente verknüpft werden.
+
+1.  **Rechtsklick** auf die Komponente.
+2.  Wählen Sie im Kontextmenü `Link to > Model`.
+3.  Navigieren Sie zur gewünschten `.slx`-Datei und wählen Sie sie aus.
+
+Dies ist ideal für die Wiederverwendung von Bibliothekskomponenten oder  existierenden Verhaltensmodellen.
+
+---
+
+![bg contain right:35%](./Simulink_Component_Finished.png)
+
+### Vorschau des Verhaltens
+
+Sobald einer Komponente ein Simulink-Verhalten zugewiesen ist, zeigt System Composer eine Miniatur-Vorschau des Simulink-Modells direkt im Komponentenblock an.
+
+-   **Visuelle Referenz:** Gibt einen schnellen Überblick über die interne Logik.
+-   **Navigation:** Ein **Doppelklick** auf die Komponente öffnet das verknüpfte Simulink-Modell zur Bearbeitung des Verhaltens.
 
 ---
 
@@ -257,7 +271,24 @@ Blockarten und -funktionsweisen und die Simulink-Bibliothek:
 
 ---
 
-TODO: Folie - Was ist ein Block?
+<div class="columns">
+<div>
+
+### Was ist ein Block?
+
+Ein **Block** ist das grundlegende Element eines Simulink-Modells.
+
+Er repräsentiert eine mathematische Funktion oder ein logisches Konstrukt, das **Eingangssignale** verarbeitet, um **Ausgangssignale** zu erzeugen.
+
+Neben den Signalen umfassen Blöcke noch **Zustände** (eine Art *Gedächtnis*) und **Parameter** zur Konfiguration des Block-verhaltens.
+
+</div>
+<div>
+
+![](./Diagramme/Block.svg)
+
+</div>
+</div>
 
 ---
 
@@ -632,39 +663,71 @@ Diese Blöcke modellieren diskrete Systeme oder diskrete Anteile in hybriden Sys
 
 ##### Wichtige Blöcke: **Ports & Subsystems**
 
+Diese Blöcke sind essenziell für die hierarchische Gliederung und Wiederverwendung von Modellen.
+
 <div class="columns top">
 <div>
 
 ![height:175px](./Simulink_Block_InputPort.png)
 
-*TODO Kurzbeschreibung Port*
+*Definiert einen Eingang für ein Subsystem oder Modell.*
 
 </div>
 <div>
 
 ![height:175px](./Simulink_Block_OutputPort.png)
 
-*TODO Kurzbeschreibung*
+*Definiert einen Ausgang für ein Subsystem oder Modell.*
 
 </div>
 <div>
 
 ![height:175px](./Simulink_Block_Subsystem.png)
 
-*TODO Kurzbeschreibung*
+*Gruppiert Blöcke, um ein hierarchisches Subsystem zu erstellen.*
 
 </div>
 </div>
 
 ---
 
-![bg contain right](./Simulink_Component_Created.png)
+![bg contain right:40%](./Simulink_Component_Created.png)
 
-TODO Folie - Eindeutige Zuordnung zwischen Ports im Architekturmodell und Ports im Verhaltensmodell. Datentypen müssen übereinstimmen.
+### Port-Zuordnung
+
+Die Ports einer System Composer Komponente werden direkt auf die `Inport`- und `Outport`-Blöcke im Simulink-Modell abgebildet.
+
+-   **Eindeutige Namen:** Der Name eines Ports im Architekturmodell muss mit dem Namen des entsprechenden Port-Blocks im Simulink-Modell übereinstimmen.
+-   **Konsistente Schnittstellen:** Die auf den Ports definierten Schnittstellen (Datentyp, Dimension, etc.) müssen mit den Simulink-Signaleigenschaften kompatibel sein.
 
 ---
 
-TODO: Folie - Unterscheid zwischen System Composer Komponente und Simulink Subsystem. Wann nutzt man das eine, wann das andere?
+### Komponente vs. Subsystem
+
+Obwohl beide zur Gliederung von Modellen dienen, haben sie unterschiedliche Zwecke.
+
+<div class="columns top">
+<div>
+
+#### System Composer **Komponente**
+
+-   **Was?** Ein Baustein der Systemarchitektur.
+-   **Wo?** Wird in `.slx`-Dateien für Architekturmodelle verwendet.
+-   **Zweck:** Definiert die Struktur und die Schnittstellen eines Systems (`Wer?`).
+-   **Ports:** Formale Ports, die auf Schnittstellen basieren.
+
+</div>
+<div>
+
+#### Simulink **Subsystem**
+
+-   **Was?** Eine Gruppierung von Blöcken.
+-   **Wo?** Wird in `.slx`-Dateien für Verhaltensmodelle verwendet.
+-   **Zweck:** Kapselt eine detaillierte Funktion oder Logik innerhalb eines Verhaltensmodells (`Wie?`).
+-   **Ports:** Einfache In- und Outports ohne formale Definition.
+
+</div>
+</div>
 
 ---
 
