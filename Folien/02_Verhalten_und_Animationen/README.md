@@ -635,14 +635,14 @@ Diese Blöcke modellieren diskrete Systeme oder diskrete Anteile in hybriden Sys
 <div class="columns top">
 <div>
 
-![height:175px](./Simulink_Block_InOutPort.png)
+![height:175px](./Simulink_Block_InputPort.png)
 
-*TODO Kurzbeschreibung*
+*TODO Kurzbeschreibung Port*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_InOutBus.png)
+![height:175px](./Simulink_Block_OutputPort.png)
 
 *TODO Kurzbeschreibung*
 
@@ -660,7 +660,7 @@ Diese Blöcke modellieren diskrete Systeme oder diskrete Anteile in hybriden Sys
 
 ![bg contain right](./Simulink_Component_Created.png)
 
-TODO Folie - Eindeutige Zuordnung zwischen Ports im Architekturmodell und Ports im Verhaltensmodell. Datentypen müssen auch übereinstimmen.
+TODO Folie - Eindeutige Zuordnung zwischen Ports im Architekturmodell und Ports im Verhaltensmodell. Datentypen müssen übereinstimmen.
 
 ---
 
@@ -689,63 +689,153 @@ TODO: Abtastzeit-Vektor. Pro Block definiert. Bestimmt, wann ein Block berechnet
 
 ---
 
+<div class="columns">
+<div>
+
 #### **Konstante** Abtastzeiten $[\inf,0]$
 
 TODO: Beschreibung, Formalisierung und Beispiel
 
+</div>
+<div>
+
+TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine konstante Abtastzeit illustriert.
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### **Diskrete** Abtastzeiten $[T_S,T_O]$
 
 TODO: Beschreibung, Formalisierung und Beispiel
 
+</div>
+<div>
+
+TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine diskrete Abtastzeit illustriert.
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### **Asynchrone** Abtastzeiten $[-1,-n]$
 
 TODO: Beschreibung, Formalisierung und Beispiel
 
+</div>
+<div>
+
+TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine asynchrone Abtastzeit illustriert.
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### **Vererbte** Abtastzeiten $[-1,0]$
 
 TODO: Beschreibung, Formalisierung und Beispiel
 
+</div>
+<div>
+
+![height:175px](./Simulink_Vererbte_Abtastzeit.png)
+
+TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine vererbte Abtastzeit anhand eines Pulse-Generators und eines Gains illustriert.
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### **Mehrratige** Abtastzeiten
 
 TODO: Beschreibung, Formalisierung und Beispiel
 
+</div>
+<div>
+
+TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine mehrratige Abtastzeit illustriert.
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### **Kontinuierliche** Abtastzeiten $[0,0]$
 
 TODO: Beschreibung, Formalisierung und Beispiel
 
+</div>
+<div>
+
+TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine kontinuierliche Abtastzeit illustriert.
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### Kontinuierliche Abtastzeiten **mit festem kleinen Zeitschritt** $[0,1]$
 
 TODO: Beschreibung, Formalisierung und Beispiel
 
+</div>
+<div>
+
+TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine Abtastzeit mit festem kleinen Zeitschritt illustriert.
+
+</div>
+</div>
+
 ---
+
+<div class="columns">
+<div>
 
 #### **Variable** kontinuierliche Abtastzeiten $[-2,T_{VO}]$
 
 TODO: Beschreibung, Formalisierung und Beispiel
 
+</div>
+<div>
+
+TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine variable Abtastzeit illustriert.
+
+</div>
+</div>
+
 ---
 
 ![bg contain right](./Simulink_Timing_Properties.png)
 
-TODO: Folie - Abtastzeit-Eigenschaft konfigurieren
+TODO: Folie - Abtastzeit-Eigenschaft konfigurieren (Doppelklick auf Block; Abtastzeit ist eine der Block Eigenschaften)
 
 ---
 
 ![bg contain right](./Simulink_Timing_Legend.png)
 
-TODO: Folie - Zeitverlauf-Legende anzeigen
+TODO: Folie - Zeitverlauf-Legende anzeigen (Farbige Darstellung unterschiedlicher Abtastzeiten)
 
 ---
 
@@ -758,19 +848,19 @@ TODO
 ---
 
 <div class="columns">
-<div class="two">
+<div class="three">
 
 #### Simulationsphasen
 
 Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
 
 1.  **Initialisierungsphase:** Simulink wertet Blockparameter aus, berechnet Anfangszustände und bestimmt die Abtastzeiten.
-2.  **Simulationsschleife (Ausführungsphase):** Der Solver berechnet die Zustände und Ausgänge des Modells für jeden Zeitschritt. Diese Phase wiederholt sich, bis die Simulationszeit endet oder ein Abbruchkriterium erfüllt ist.
+2.  **Simulationsschleife (Ausführungsphase):** Der Solver berechnet die Ableitungen, Zustände und Ausgänge des Modells für jeden Zeitschritt. Diese Phase wiederholt sich, bis die Simulationszeit endet oder ein Abbruchkriterium erfüllt ist.
 
 </div>
 <div>
 
-![](https://de.mathworks.com/help/simulink/ug/simulationphasesloop.png)
+![](./Diagramme/Simulationsphasen.svg)
 
 </div>
 </div>
@@ -783,31 +873,75 @@ Simulink bietet eine Vielzahl von Solvern, die für unterschiedliche Modelltypen
 
 ---
 
+<div class="columns">
+<div>
+
 #### **Kontinuierliche** und **diskrete** Solver
 
--   **Kontinuierliche Solver:** Für Modelle mit kontinuierlichen Zuständen (Differentialgleichungen). Sie integrieren die Zustände über die Zeit.
--   **Diskrete Solver:** Für Modelle, die nur diskrete Zustände haben. Sie aktualisieren die Zustände nur zu den diskreten Abtastzeiten.
+- **Kontinuierliche Solver:** Für Modelle mit kontinuierlichen Zuständen (Differentialgleichungen). Sie integrieren die Zustände über die Zeit.
+- **Diskrete Solver:** Für Modelle, die nur diskrete Zustände haben. Sie aktualisieren die Zustände nur zu den diskreten Abtastzeiten.
+
+</div>
+<div>
+
+TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von kontiunierlichen und diskreten Solvern illustriert
+
+</div>
+</div>
 
 ---
+
+<div class="columns">
+<div>
 
 #### **Explizite** und **implizite** kontinuierliche Solver
 
--   **Explizite Solver:** Berechnen den nächsten Zustand direkt aus dem aktuellen Zustand und der Ableitung. Einfacher, aber weniger stabil für "steife" Systeme.
--   **Implizite Solver:** Lösen ein Gleichungssystem, um den nächsten Zustand zu finden. Komplexer, aber stabiler für steife Systeme.
+- **Explizite Solver:** Berechnen den nächsten Zustand direkt aus dem aktuellen Zustand und der Ableitung. Einfacher, aber weniger stabil für "steife" Systeme.
+- **Implizite Solver:** Lösen ein Gleichungssystem, um den nächsten Zustand zu finden. Komplexer, aber stabiler für steife Systeme.
+
+</div>
+<div>
+
+TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von expliziten und impliziten Solvern illustriert
+
+</div>
+</div>
 
 ---
+
+<div class="columns">
+<div>
 
 #### Kontinuierliche **Ein-Schritt** und **Mehr-Schritt**-Solver
 
--   **Ein-Schritt-Solver:** Verwenden nur Informationen vom aktuellen Zeitschritt, um den nächsten zu berechnen (z.B. `ode45`).
--   **Mehr-Schritt-Solver:** Verwenden Informationen von mehreren vorherigen Zeitschritten, um den nächsten zu berechnen (z.B. `ode113`).
+- **Ein-Schritt-Solver:** Verwenden nur Informationen vom aktuellen Zeitschritt, um den nächsten zu berechnen (z.B. `ode45`).
+- **Mehr-Schritt-Solver:** Verwenden Informationen von mehreren vorherigen Zeitschritten, um den nächsten zu berechnen (z.B. `ode113`).
+
+</div>
+<div>
+
+TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von Ein-Schritt- und Mehr-Schritt-Solvern illustriert
+
+</div>
+</div>
 
 ---
 
+<div class="columns">
+<div>
+
 #### Kontinuierliche Solver **fester** und **variabler Ordnung**
 
--   **Solver fester Ordnung:** Verwenden immer die gleiche Ordnung für die Integration (z.B. `ode4` ist ein Solver 4. Ordnung).
--   **Solver variabler Ordnung:** Passen die Ordnung der Integration dynamisch an, um die Effizienz und Genauigkeit zu optimieren (z.B. `ode45`).
+- **Solver fester Ordnung:** Verwenden immer die gleiche Ordnung für die Integration (z.B. `ode4` ist ein Solver 4. Ordnung).
+- **Solver variabler Ordnung:** Passen die Ordnung der Integration dynamisch an, um die Effizienz und Genauigkeit zu optimieren (z.B. `ode45`).
+
+</div>
+<div>
+
+TODO SVG-basierte Vektorgrafik, welche die Funktionsweise von Solvern mit fester und variabler Ordnung illustriert
+
+</div>
+</div>
 
 ---
 

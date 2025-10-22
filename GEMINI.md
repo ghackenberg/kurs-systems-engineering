@@ -118,7 +118,7 @@ Inhalt der zweiten Spalte
 </div>
 ```
 
-Der Inhalt einer Spalte kann ein Text mit Überschrift, Absätzen und wahlweise Listen und Formeln sein, eine Tabelle, ein Code-Beispiel, ein Mermaid-Diagramm, oder eine Referenz auf eine Bilddatei mit Beschreibung der Bildinhalte.
+Der Inhalt einer Spalte kann ein Text mit Überschrift, Absätzen und wahlweise Listen und Formeln sein, eine Tabelle, ein Code-Beispiel, eine SVG-basierte Vektorgrafik, oder eine Referenz auf eine Bilddatei mit Beschreibung der Bildinhalte.
 
 ````md
 <div class="columns">
@@ -146,9 +146,9 @@ code-snippet
 </div>
 <div class="one|two|three|four|five|six">
 
-```mermaid
-diagram-as-code
-```
+<svg width="..." height="...">
+Inhalte der SVG-basierten Vektorgrafik
+</svg>
 
 </div>
 <div class="one|two|three|four|five|six">

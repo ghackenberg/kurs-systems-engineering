@@ -1,0 +1,8 @@
+flowchart TD
+    Start((Start)) --> A[Modell-Initialisierung];
+    A --> B{Schleife über Zeitschritte};
+    B -- nächster Zeitschritt --> C[1. Ausgänge berechnen];
+    C --> D[2. Ableitungen berechnen];
+    D --> E[3. Zustände aktualisieren];
+    E --> B;
+    B -- Simulationsende --> End((Ende));
