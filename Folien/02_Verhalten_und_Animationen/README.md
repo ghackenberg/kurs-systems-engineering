@@ -884,7 +884,7 @@ Dies ist die Standardeinstellung für viele Blöcke. Der Block **erbt** seine Ab
 Die Abtastzeit eines Blocks kann in dessen **Blockparametern** eingestellt werden.
 
 - **Doppelklick** auf einen Block öffnet den Parameterdialog.
-- Unter dem Reiter `Main` (oder `Block Properties`) findet sich oft das Feld **Sample time**.
+- Unter dem Reiter `Main` (oder `Block Properties`) findet sich oft das Feld `Sample time`.
 - Hier kann der gewünschte Wert (z.B. `0.1` für eine diskrete Abtastzeit von 100ms oder `-1` für vererbt) eingetragen werden.
 
 ---
@@ -895,7 +895,7 @@ Die Abtastzeit eines Blocks kann in dessen **Blockparametern** eingestellt werde
 
 Simulink kann die verschiedenen Abtastzeiten im Modell farblich hervorheben, um die Analyse zu erleichtern.
 
-- Gehen Sie im Menü auf **Debug > Information Overlays > Sample Time > Colors**.
+- Gehen Sie im Menü auf `Debug > Information Overlays > Sample Time > Colors`.
 - Jeder Abtastzeit wird eine eindeutige Farbe zugewiesen.
 - Die **Sample Time Legend** (erreichbar über dasselbe Menü) zeigt die Zuordnung von Farben zu Abtastzeiten an.
 
@@ -933,133 +933,85 @@ Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
 
 ---
 
-### Solverarten
-
-Simulink bietet eine Vielzahl von Solvern, die für unterschiedliche Modelltypen und Genauigkeitsanforderungen optimiert sind:
-
-- **Kontinuierliche** und **diskrete** Solver
-- **Explizite** und **implizite** kontinuierliche Solver
-- Kontinuierliche **Ein-** und **Mehr-Schritt**-Solver
-- Kontinuierliche Solver **fester** und **variabler Ordnung**
-
-Die Wahl des richtigen Solvers für das jeweilige Modell ist entscheidend für die Effizienz und Genauigkeit der Simulationsrechnung.
-
-
----
-
 <div class="columns">
-<div class="two">
+<div>
 
-#### **Kontinuierliche** und **diskrete** Solver
+### Solver-Auswahl
 
-**Kontinuierliche Solver:** Für Modelle mit konti-nuierlichen Zuständen (Differentialgleichungen). Sie integrieren die Zustände über die Zeit.
-
-*Können Signale mit diskreten Abtastzeiten genau berechnen und berücksigtigen.*
-
-**Diskrete Solver:** Für Modelle, die nur diskrete Zustände haben. Sie aktualisieren die Zustände nur zu den diskreten Abtastzeiten.
-
-*Nutzen relativ ungenaue Schätzungen von Signalen mit kontinuierlichen Abtastzeiten.*
+TODO Fester Schritt ja/nein, Kontinuierliche Zustände ja/nein
 
 </div>
 <div>
 
-TODO
+![](https://de.mathworks.com/help/simulink/ug/library_of_solvers.png)
 
 </div>
 </div>
-
----
-
-TODO fixed-step discrete Pseudocode
 
 ---
 
 <div class="columns">
-<div class="two">
+<div>
 
-#### **Explizite** und **implizite** kontinuierliche Solver
+### **Automatische** Solver-Auswahl
 
-**Explizite Solver:** Berechnen den nächsten Zustand direkt aus dem aktuellen Zustand und der Ableitung. Einfacher, aber weniger stabil für steife Systeme.
-
-*Der Folgezustand ergibt sich direkt aus dem aktuellen Zustand und der aktuellen Ableitung.*
-
-**Implizite Solver:** Lösen ein Gleichungssystem, um den nächsten Zustand zu finden. Komplexer, aber stabiler für steife Systeme.
-
-*Der Folgezustand ergibt sich indirekt aus dem aktuellen Zustand un der folgenden Ableitung.*
+TODO Automatische Solver-Auswahl bei `solver` und `max step size` gleich `auto`
 
 </div>
 <div>
 
-TODO
+![](https://de.mathworks.com/help/simulink/ug/autosolver_heuristics.png)
 
 </div>
 </div>
 
 ---
 
-TODO: Folie - Explizite Solver (inklusive Formalisierung und Illustration)
+TODO Folie - Ordinary Differential Equations (ODE)
 
 ---
 
-TODO: Folie - Implizite Solver (inklusive Formalisierung und Illustration)
+TODO Folie - Steifigkeit von Ordinary Differential Equations
 
 ---
 
-<div class="columns">
-<div class="two">
-
-#### Kontinuierliche **Ein-** und **Mehr-Schritt**-Solver
-
-**Ein-Schritt-Solver:** Verwenden nur Informationen vom aktuellen Zeitschritt, um den nächsten zu berechnen (z.B. `ode45`).
-
-*Die Zustandshistorie hat somit keinen direkten Einfluss auf das Berechnungsergebnis.*
-
-**Mehr-Schritt-Solver:** Verwenden Informationen von mehreren vorherigen Zeitschritten, um den nächsten zu berechnen (z.B. `ode113`).
-
-*Die Zustandshistorie wird bei der Berechnung des Folgezustands berücksichtigt.*
-
-</div>
-<div>
-
-TODO
-
-</div>
-</div>
+TODO Folie - Differential Algebraic Equations (DAE)
 
 ---
 
-TODO Folie - ode45 Pseudocode
+TODO Folie - Fixed-Step Discrete Solver Funktionsprinzip
 
 ---
 
-TODO Folie - ode113 Pseudocode
+TODO Folie - Variable-Step Discrete Solver Funktionsprinzip
 
 ---
 
-<div class="columns">
-<div class="three">
-
-#### Kontinuierliche Solver **fester** und **variabler Ordnung**
-
-**Solver fester Ordnung:** Verwenden immer die gleiche Ordnung für die Integration (z.B. `ode4` ist ein Solver 4. Ordnung).
-
-*TODO*
-
-**Solver variabler Ordnung:** Passen die Ordnung der Integration dynamisch an, um die Effizienz und Genauigkeit zu optimieren (z.B. `ode45`).
-
-*TODO*
-
-</div>
-<div>
-
-TODO
-
-</div>
-</div>
+TODO Folie - Fixed-Step Continuous Solver Funktionsprinzip
 
 ---
 
-TODO Folie - ode4 Pseudocode
+TODO Folie - `ode3` Funktionsprinzip
+
+---
+
+TODO Folie - `ode14x` Funktionsprinzip
+
+---
+
+TODO Folie - Variable-Step Continuous Solver Funktionsprinzip
+
+---
+
+TODO Folie - `ode15s` Funktionsprinzip
+
+---
+
+TODO Folie - `ode45` Funktionsprinzip
+
+---
+
+TODO Folie - `ode23t` Funktionsprinzip
 
 ---
 
