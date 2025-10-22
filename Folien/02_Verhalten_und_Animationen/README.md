@@ -748,16 +748,22 @@ In diesem Abschnitt betrachten wir die folgenden Arten von Abtastzeiten für Sim
 
 ### Was sind Abtastzeiten?
 
-TODO: Abtastzeit-Vektor. Pro Block definiert. Bestimmt, wann ein Block berechnet wird. Reduziert rechenaufwand. Beschleunigt Simulationsrechnung.
+Die **Abtastzeit** (`Sample Time`) eines Blocks legt fest, zu welchen Zeitpunkten der Block während der Simulation ausgeführt wird, d.h. wann seine Ausgänge und (falls vorhanden) sein interner Zustand aktualisiert werden.
+
+- **Effizienz:** Eine korrekte Konfiguration der Abtastzeiten ist entscheidend für die Genauigkeit und Geschwindigkeit der Simulation.
+- **Definition:** Die Abtastzeit wird typischerweise als Vektor `[Periode, Offset]` definiert.
+- TODO Unterschiedliche Arten von Abtastzeiten
 
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
-#### **Konstante** Abtastzeiten $[\inf,0]$
+#### **Konstante** Abtastzeiten `[inf, 0]`
 
-TODO: Beschreibung, Formalisierung und Beispiel
+Blöcke mit konstanter Abtastzeit (z.B. `Constant`) werden nur **einmal zu Beginn** der Simulation (`t=0`) ausgewertet. Ihr Ausgangswert bleibt während der gesamten Simulationsdauer unverändert.
+
+Dies ist nützlich für Parameter oder Sollwerte, die sich nicht ändern.
 
 </div>
 <div>
@@ -770,11 +776,16 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine konstante Abtastzeit illus
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
-#### **Diskrete** Abtastzeiten $[T_S,T_O]$
+#### **Diskrete** Abtastzeiten `[Ts, To]`
 
-TODO: Beschreibung, Formalisierung und Beispiel
+Der Block wird in regelmäßigen Intervallen ausgeführt.
+
+- **`Ts` (Sample Time):** Die Periode, also der zeitliche Abstand zwischen zwei Ausführungen.
+- **`To` (Offset):** Eine anfängliche Zeitverzögerung.
+
+Die Ausführungszeitpunkte sind also `To, To + Ts, To + 2*Ts, ...`. Dies ist die Grundlage für die digitale Signalverarbeitung.
 
 </div>
 <div>
@@ -787,11 +798,14 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine diskrete Abtastzeit illust
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
-#### **Asynchrone** Abtastzeiten $[-1,-n]$
+#### **Asynchrone** Abtastzeiten `[-1, -n]`
 
-TODO: Beschreibung, Formalisierung und Beispiel
+Die Ausführung des Blocks wird nicht durch die Simulationszeit, sondern durch ein **externes Ereignis** ausgelöst.
+
+- `[-1, -n]` bedeutet, dass die Abtastzeit von einer externen Quelle (z.B. einem Funktionsaufruf oder einer Hardware-Interrupt-Service-Routine im generierten Code) bestimmt wird.
+- Nützlich für die Modellierung von ereignisgesteuerten Systemen.
 
 </div>
 <div>
@@ -804,11 +818,14 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine asynchrone Abtastzeit illu
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
-#### **Vererbte** Abtastzeiten $[-1,0]$
+#### **Vererbte** Abtastzeiten `[-1, 0]`
 
-TODO: Beschreibung, Formalisierung und Beispiel
+Dies ist die Standardeinstellung für viele Blöcke. Der Block **erbt** seine Abtastzeit von dem Block, der mit seinem Eingang verbunden ist.
+
+- **Vorteil:** Sorgt für Konsistenz im Signalfluss und reduziert den Konfigurationsaufwand.
+- **Best Practice:** Wird verwendet, um sicherzustellen, dass zusammengehörige Operationen mit der gleichen Rate ausgeführt werden.
 
 </div>
 <div>
@@ -823,11 +840,14 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine vererbte Abtastzeit anhand
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
 #### **Mehrratige** Abtastzeiten
 
-TODO: Beschreibung, Formalisierung und Beispiel
+Ein Modell ist mehrratig, wenn es Blöcke mit **unterschiedlichen Abtastzeiten** enthält.
+
+- **Beispiel:** Ein schneller Regler (`Ts = 0.01s`) interagiert mit einem langsameren Streckenmodell (`Ts = 0.1s`).
+- **Herausforderung:** Erfordert sorgfältige Synchronisation und Datenübergabe zwischen den verschiedenen "Zeitdomänen", um Datenverlust oder Inkonsistenzen zu vermeiden (z.B. mit `Rate Transition`-Blöcken).
 
 </div>
 <div>
@@ -840,11 +860,14 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine mehrratige Abtastzeit illu
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
-#### **Kontinuierliche** Abtastzeiten $[0,0]$
+#### **Kontinuierliche** Abtastzeiten `[0, 0]`
 
-TODO: Beschreibung, Formalisierung und Beispiel
+Blöcke mit dieser Abtastzeit werden in jedem Simulationszeitschritt ausgeführt.
+
+- **Anwendung:** Wird für Blöcke verwendet, die kontinuierliche Zustände haben (z.B. `Integrator`) und deren Verhalten durch Differentialgleichungen beschrieben wird.
+- **Solver:** Erfordert einen Solver für kontinuierliche Systeme (z.B. `ode45`), der die Schrittweite dynamisch anpasst, um die Genauigkeit zu gewährleisten.
 
 </div>
 <div>
@@ -857,11 +880,14 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine kontinuierliche Abtastzeit
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
-#### Kontinuierliche Abtastzeiten **mit festem kleinen Zeitschritt** $[0,1]$
+#### Kontinuierliche Abtastzeiten **mit festem kleinen Zeitschritt** `[0, 1]`
 
-TODO: Beschreibung, Formalisierung und Beispiel
+Diese spezielle Einstellung signalisiert, dass der Block zwar kontinuierlich ist, aber der Solver einen festen, sehr kleinen Zeitschritt verwenden soll, um das Verhalten anzunähern.
+
+- Wird seltener verwendet und ist für spezielle Anwendungsfälle gedacht, bei denen eine Annäherung an ein kontinuierliches Verhalten mit fester Schrittweite erforderlich ist.
+- TODO konkretes Beispiel
 
 </div>
 <div>
@@ -874,11 +900,14 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine Abtastzeit mit festem klei
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
-#### **Variable** kontinuierliche Abtastzeiten $[-2,T_{VO}]$
+#### **Variable** kontinuierliche Abtastzeiten `[-2, Tvo]`
 
-TODO: Beschreibung, Formalisierung und Beispiel
+Diese Abtastzeit ist implizit für Modelle mit kontinuierlichen Blöcken, die mit einem Solver mit variabler Schrittweite simuliert werden.
+
+- **`Tvo` (Variable-step Offset):** Der Solver bestimmt die Schrittweite dynamisch, um die geforderte Genauigkeit bei minimalem Rechenaufwand zu erreichen.
+- Die Schrittweite wird bei schnellen Änderungen verkleinert und bei langsamem Verhalten vergrößert.
 
 </div>
 <div>
@@ -890,15 +919,27 @@ TODO SVG-basiertes Zeitverlaufsdiagramm, welches eine variable Abtastzeit illust
 
 ---
 
-![bg contain right](./Simulink_Timing_Properties.png)
+![bg contain right:40%](./Simulink_Timing_Properties.png)
 
-TODO: Folie - Abtastzeit-Eigenschaft konfigurieren (Doppelklick auf Block; Abtastzeit ist eine der Block Eigenschaften)
+### Abtastzeit **konfigurieren**
+
+Die Abtastzeit eines Blocks kann in dessen **Blockparametern** eingestellt werden.
+
+- **Doppelklick** auf einen Block öffnet den Parameterdialog.
+- Unter dem Reiter `Main` (oder `Block Properties`) findet sich oft das Feld **Sample time**.
+- Hier kann der gewünschte Wert (z.B. `0.1` für eine diskrete Abtastzeit von 100ms oder `-1` für vererbt) eingetragen werden.
 
 ---
 
-![bg contain right](./Simulink_Timing_Legend.png)
+![bg contain right:40%](./Simulink_Timing_Legend.png)
 
-TODO: Folie - Zeitverlauf-Legende anzeigen (Farbige Darstellung unterschiedlicher Abtastzeiten)
+### Abtastzeiten **visualisieren**
+
+Simulink kann die verschiedenen Abtastzeiten im Modell farblich hervorheben, um die Analyse zu erleichtern.
+
+- Gehen Sie im Menü auf **Debug > Information Overlays > Sample Time > Colors**.
+- Jeder Abtastzeit wird eine eindeutige Farbe zugewiesen.
+- Die **Sample Time Legend** (erreichbar über dasselbe Menü) zeigt die Zuordnung von Farben zu Abtastzeiten an.
 
 ---
 
