@@ -1085,7 +1085,7 @@ $F(t, x, \dot{x}) = 0$
 
 ---
 
-### Beispiel: Integration zweier Variablen mit Randbedingung
+#### Beispiel: Integration zweier Variablen mit Randbedingung
 
 Betrachten wir ein einfaches System, das sowohl eine Differentialgleichung als auch eine algebraische Gleichung enthält:
 
@@ -1102,18 +1102,77 @@ Dieses System kann nicht direkt in die Form $\dot{z} = f(t, z)$ gebracht werden,
 ![bg contain right:40%](./Simulink_DAE.png)
 
 
-### Umsetzung des einfachen DAE in Simulink
+#### Umsetzung des einfachen DAE in Simulink
 
 1. **Differentialgleichung:** Ein `Integrator`-Block wird für $x$ verwendet. Sein Eingang ist $-x + y$. Dies erfordert einen `Difference`-Block mit Eingängen $y$ und $x$.
 2. **Algebraische Gleichung:** Man kann einen `Algebraic Constraint`-Block verwenden, der die Gleichung $x - y^2 = 0$ löst, um $y$ zu finden. Der Eingang des Blocks ist $x-y^2$ und der Ausgang ist $y$.
 
 ---
 
-TODO Folie - Fixed-Step Discrete Solver Funktionsprinzip
+#### Fixed-Step Discrete Solver
+
+**Fixed-Step Discrete Solver** führen die Simulation in festen, vordefinierten Zeitschritten durch. Die Ausführungspunkte sind gleichmäßig über die Simulationszeit verteilt.
+
+**Anwendungsbereiche:**
+-   **Echtzeitsysteme:** Da die Ausführungszeitpunkte fest sind, eignen sie sich hervorragend für die Codegenerierung und den Einsatz in Echtzeitumgebungen (z.B. Hardware-in-the-Loop-Simulationen).
+-   **Diskrete Systeme:** Für Modelle, die ausschließlich diskrete Blöcke enthalten.
+
+**Vorteile:**
+-   Vorhersehbares Verhalten und Ausführungszeit.
+-   Einfache Implementierung in eingebetteten Systemen.
 
 ---
 
-TODO Folie - Variable-Step Discrete Solver Funktionsprinzip
+#### Fixed-Step Discrete Solver **Funktionsweise**
+
+Zu jedem festen Zeitschritt (`step_size`) werden die Ausgänge der diskreten Blöcke berechnet und deren interne Zustände aktualisiert. Die Berechnung basiert auf den aktuellen Eingängen und den Zuständen des vorherigen Zeitschritts.
+
+**Pseudocode:**
+```
+// Initialisiere die Zeit
+t = t_start
+while t < t_end:
+  // Berechne Ausgänge basierend auf aktuellen Eingängen und Zuständen
+  outputs = calculate_outputs(t, states, inputs)
+  // Aktualisiere Zustände für den nächsten Zeitschritt
+  states = update_states(t, states, inputs, step_size)
+  // Aktualliesere die Zeit
+  t = t + step_size
+```
+
+
+---
+
+#### Variable-Step Discrete Solver
+
+**Variable-Step Discrete Solver** passen ihre Schrittweite an die Ereignisse im Modell an. Sie springen von einem Ereignis zum nächsten, anstatt feste Zeitschritte zu verwenden.
+
+**Anwendungsbereiche:**
+-   **Ereignisgesteuerte Systeme:** Effizient für Modelle mit unregelmäßigen diskreten Ereignissen oder wenn die genaue Zeitsteuerung von Ereignissen wichtig ist.
+-   **Hybride Systeme:** Kann in Kombination mit kontinuierlichen Solvern verwendet werden, um diskrete Anteile in hybriden Systemen zu lösen.
+
+**Vorteile:**
+-   Effizienter für Modelle mit wenigen, aber unregelmäßigen diskreten Ereignissen.
+-   Genauere Erfassung von Ereigniszeitpunkten.
+
+---
+
+#### Variable-Step Discrete Solver **Funktionsweise**
+
+Der Solver identifiziert den Zeitpunkt des nächsten diskreten Ereignisses (z.B. die nächste Abtastzeit eines Blocks, ein Trigger-Ereignis) und springt direkt zu diesem Zeitpunkt. Die Zustände werden nur an diesen Ereignispunkten aktualisiert.
+
+**Pseudocode:**
+```
+t = t_start
+while t < t_end:
+  // Finde den Zeitpunkt des nächsten diskreten Ereignisses
+  next_event_time = find_next_event(t, states, inputs)
+  step_size = next_event_time - t
+  // Berechne Ausgänge und aktualisiere Zustände am Ereigniszeitpunkt
+  outputs = calculate_outputs(t, states, inputs)
+  states = update_states(t, states, inputs, step_size)
+  t = next_event_time
+```
 
 ---
 
@@ -1121,27 +1180,7 @@ TODO Folie - Fixed-Step Continuous Solver Funktionsprinzip
 
 ---
 
-TODO Folie - `ode3` Funktionsprinzip
-
----
-
-TODO Folie - `ode14x` Funktionsprinzip
-
----
-
 TODO Folie - Variable-Step Continuous Solver Funktionsprinzip
-
----
-
-TODO Folie - `ode15s` Funktionsprinzip
-
----
-
-TODO Folie - `ode45` Funktionsprinzip
-
----
-
-TODO Folie - `ode23t` Funktionsprinzip
 
 ---
 
