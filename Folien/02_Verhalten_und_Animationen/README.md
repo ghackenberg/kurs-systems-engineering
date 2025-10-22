@@ -14,7 +14,7 @@ math: mathjax
 Dieses Kapitel umfasst die folgenden vier Abschnitte:
 
 1. **Simulink Signalmodelle**
-2. **[Simscape Physikmodelle]**
+2. **Simscape Physikmodelle**
 3. **Stateflow Logikmodelle**
 4. **Simulink 3D Animation**
 
@@ -1237,6 +1237,59 @@ while t < t_end:
   states = integrate(states, derivatives, step_size)
   t = t + step_size
 ```
+
+---
+
+#### **Algebraische Schleifen** in Solvern
+
+**Beschreibung:**
+Eine **algebraische Schleife** entsteht, wenn der Ausgang eines Blocks direkt oder indirekt als einer seiner Eingänge verwendet wird, ohne dass ein Zustand oder eine Zeitverzögerung dazwischenliegt. Dies führt zu einer zirkulären Abhängigkeit, die nicht durch einfache Vorwärtsberechnung gelöst werden kann.
+
+**Problemstellung:**
+Simulink kann die Ausgänge der Blöcke in einer algebraischen Schleife nicht direkt berechnen, da die Werte voneinander abhängen. Dies erfordert eine spezielle Behandlung durch den Solver.
+
+---
+
+#### Lösen von algebraischen Schleifen in Simulink
+
+**Verfahren:**
+1.  **Erkennung:** Simulink erkennt algebraische Schleifen während der Kompilierung des Modells.
+2.  **Iterative Lösung:** Für kontinuierliche algebraische Schleifen verwendet Simulink bei jedem Zeitschritt einen iterativen numerischen Ansatz (z.B. Newton-Raphson-Verfahren), um die Werte zu finden, die die algebraische Gleichung erfüllen.
+
+**Auswirkungen:**
+-   Die iterative Lösung von algebraischen Schleifen kann die Simulations-geschwindigkeit erheblich reduzieren.
+-   Die Genauigkeit der Lösung hängt von der Konvergenz des Verfahrens ab.
+
+---
+
+#### **Zero Crossings** in Solvern
+
+**Beschreibung:**
+Ein **Zero Crossing** (Nulldurchgang) ist ein Ereignis, bei dem ein kontinuierliches Signal einen Schwellenwert (oft Null) überschreitet. Solche Ereignisse können diskrete Änderungen im Systemverhalten auslösen, z.B. das Umschalten eines Schalters, das Erreichen einer Begrenzung oder das Auslösen eines Triggers.
+
+**Problemstellung:**
+Kontinuierliche Solver könnten solche Ereignisse überspringen, wenn ihre Schrittweite zu groß ist, was zu ungenauen Ergebnissen oder verpassten Zustandsänderungen führen würde.
+
+---
+
+#### Verfahren zur Bestimmung von Nulldurchgängen in Simulink
+
+1. **Erkennung:** Simulink-Solver (insbesondere variable-step Continuous Solver) verfügen über integrierte Mechanismen zur Erkennung von Zero Crossings.
+2. **Ereignis-Lokalisierung:** Wenn ein potenzieller Nulldurchgang erkannt wird, reduziert der Solver seine Schrittweite, um den genauen Zeitpunkt des Ereignisses präzise zu lokalisieren.
+3. **Zustandsanpassung:** Am exakten Zeitpunkt des Nulldurchgangs wird die Integration angehalten, die diskreten Zustände des Modells werden aktualisiert (falls das Ereignis eine diskrete Änderung auslöst), und die Integration wird von diesem neuen Punkt aus fortgesetzt.
+
+---
+
+#### Bedeutung und Beispiele
+
+**Bedeutung:**
+Die präzise Handhabung von Zero Crossings ist entscheidend für die Genauigkeit und Stabilität von Simulationen, insbesondere in hybriden Systemen, die sowohl kontinuierliche als auch diskrete Dynamiken aufweisen.
+
+**Beispiele für Blöcke, die Zero Crossings erzeugen:**
+-   `Switch`-Block: Schaltet, wenn das Steuersignal einen Schwellenwert überschreitet.
+-   `Relay`-Block: Schaltet bei bestimmten Ein- und Ausschaltpunkten.
+-   `Saturation`-Block: Erreicht eine obere oder untere Begrenzung.
+-   `Hit Crossing`-Block: Erkennt, wenn ein Signal einen bestimmten Wert erreicht.
 
 ---
 
