@@ -989,7 +989,7 @@ Simulink-Solver sind darauf ausgelegt, solche Gleichungssysteme numerisch zu lö
 
 ---
 
-#### Beispiel: Vertikaler Wurf
+#### Beispiel: Vertikaler Wurf (Mathematik)
 
 Wir betrachten den vertikalen Wurf eines Balls in einem Gravitationsfeld ohne Berücksichtigung des Luftwiderstands. Die Bewegung des Balls kann durch eine gewöhnliche Differentialgleichung beschrieben werden.
 
@@ -1006,7 +1006,7 @@ $\dot{v} = -g$
 
 ![bg contain right](./Simulink_ODE.png)
 
-#### Beispiel: Vertikaler Wurf (Cont'd)
+#### Beispiel: Vertikaler Wurf (Simulink)
 
 Im Simulink-Modell würde man:
 1.  Drei `Constant`-Blöcke verwenden, um $-g$, $v_0$ und $y_0$ zu definieren.
@@ -1026,12 +1026,49 @@ Das bedeutet, das System hat Komponenten, die sich **sehr schnell** ändern, und
 **Lösung:** Implizite (steife) Solver wie `ode15s` sind für solche Probleme konzipiert. Sie sind pro Schritt rechenintensiver, können aber deutlich größere Zeitschritte stabil bewältigen, was die Gesamtsimulationszeit drastisch reduziert.
 
 ---
+### Beispiel : RC-Schaltung (Allgemein)
 
-TODO Abstraktes Beispiel für steifes ODE
+Ein klassisches Beispiel für ein steifes System ist eine elektrische Schaltung, die Komponenten mit sehr unterschiedlichen Zeitkonstanten enthält. Betrachten wir zwei RC-Glieder in Reihe:
+
+- **Schnelles RC-Glied:** Hat eine sehr kleine Zeitkonstante ($\tau_1 = R_1 C_1$). Es reagiert sehr schnell auf Änderungen der Eingangsspannung.
+- **Langsames RC-Glied:** Hat eine große Zeitkonstante ($\tau_2 = R_2 C_2$). Es reagiert langsam auf Änderungen.
+
+Wenn $\tau_1 \ll \tau_2$ ist, ist das System steif. Ein expliziter Solver müsste die gesamte Simulation über sehr kleine Zeitschritte verwenden, um die schnelle Dynamik des ersten RC-Glieds korrekt zu erfassen, selbst wenn diese Dynamik längst abgeklungen ist.
 
 ---
 
-TODO Umsetung des steifen ODE in Simulink
+<div class="columns">
+<div class="two">
+
+#### Beispiel: RC-Schaltung (Mathematik)
+
+**Differentialgleichungen:**
+
+$\dot{V}_1 = \frac{1}{R_1 C_1}(V_{in} - V_1)$
+$\dot{V}_2 = \frac{1}{R_2 C_2}(V_1 - V_2)$
+
+**Verhalten:**
+Bei einer Sprungfunktion als $V_{in}$ steigt $V_1$ sehr schnell an und erreicht fast sofort den Endwert. $V_2$ folgt $V_1$ jedoch viel langsamer.
+
+Ein steifer Solver kann die schnelle Anfangsphase mit kleinen Schritten und die langsame Folgephase mit großen Schritten effizient simulieren.
+
+</div>
+<div>
+
+![width:1000px](./Diagramme/RC-Schaltung.svg)
+
+</div>
+</div>
+
+---
+
+![bg contain right:40%](./Simulink_Steif.png)
+
+#### Beispiel: RC-Schaltung (Simulink)
+
+1.  **Sources:** Ein `Step`-Block liefert die Eingangsspannung $V_{in}$, `Constant`-Blöcke definieren die  Wiederstände $(R_1, R_2)$ und Kapazitäten $(C_1, C_2)$.
+3.  **Math Operations:** `Subtract`-, `Product`- und `Divide`-Blöcke werden verwendet, um die Terme $\frac{1}{R_1 C_1}(V_{in} - V_1)$ und $\frac{1}{R_2 C_2}(V_1 - V_2)$ zu bilden.
+2.  **Continuous:** Für jede Spannung ($V_1, V_2$) wird ein `Integrator`-Block verwendet.
 
 ---
 
