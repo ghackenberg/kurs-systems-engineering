@@ -936,9 +936,12 @@ Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
 <div class="columns">
 <div>
 
-### Solver-Auswahl
+#### Solver-Auswahl
 
-TODO Fester Schritt ja/nein, Kontinuierliche Zustände ja/nein
+Die Grafik auf der rechten Seite zeigt den Entscheidungsbaum für die Auswahl:
+
+- Zunächst ist zu klären, ob mit einem **festen Schritt** (*diskret* oder *Echtzeit-anforderung*) oder mit **variablen Schritten** gerechnet werden soll.
+- Danach hängt die Entscheidung noch davon ab, ob das Modell **kontinuierliche Zustände** beinhaltet oder nicht.
 
 </div>
 <div>
@@ -953,9 +956,12 @@ TODO Fester Schritt ja/nein, Kontinuierliche Zustände ja/nein
 <div class="columns">
 <div>
 
-### **Automatische** Solver-Auswahl
+#### **Automatische** Solver-Auswahl
 
-TODO Automatische Solver-Auswahl bei `solver` und `max step size` gleich `auto`
+Simulink bietet auch die Möglichkeit, den Solver automatisch auszuwählen:
+
+- Die Auswahl hängt zudem noch davon ab, ob das Modell eine **gewöhnliche Differentialgleichung** oder eine **differential-algebraische Gleichung** ist.
+- Zudem hängt die Auswahl bei ge-wöhnlichen Differentialgleichungen von deren **Steifigkeit** ab.
 
 </div>
 <div>
@@ -967,15 +973,86 @@ TODO Automatische Solver-Auswahl bei `solver` und `max step size` gleich `auto`
 
 ---
 
-TODO Folie - Ordinary Differential Equations (ODE)
+#### Gewöhnliche Differentialgleichungen (ODEs)
+
+Viele physikalische Systeme werden durch **gewöhnliche Differentialgleichungen (ODEs)** beschrieben. Eine ODE ist eine mathematische Gleichung, die die zeitliche Änderung eines Systemzustands beschreibt.
+
+Die allgemeine Form einer ODE erster Ordnung lautet:
+
+$\dot{x} = f(t, x)$
+
+- $x$ ist der **Zustandsvektor** des Systems (z.B. Position und Geschwindigkeit).
+- $\dot{x}$ ist die erste Ableitung von $x$ nach der Zeit $t$.
+- $f$ ist eine Funktion, die die Dynamik des Systems beschreibt.
+
+Simulink-Solver sind darauf ausgelegt, solche Gleichungssysteme numerisch zu lösen, um den Verlauf von $x(t)$ zu finden.
 
 ---
 
-TODO Folie - Steifigkeit von Ordinary Differential Equations
+#### Beispiel: Vertikaler Wurf
+
+Wir betrachten den vertikalen Wurf eines Balls in einem Gravitationsfeld ohne Berücksichtigung des Luftwiderstands. Die Bewegung des Balls kann durch eine gewöhnliche Differentialgleichung beschrieben werden.
+
+Die Beschleunigung in y-Richtung ist:
+
+$\ddot{y} = -g$ (wobei $g$ die Erdbeschleunigung ist)
+
+Um dies in ein System von ODEs erster Ordnung umzuwandeln, definieren wir die Zustandsgrößen als Position ($y$) und Geschwindigkeit ($v$):
+
+$\dot{y} = v$
+$\dot{v} = -g$
 
 ---
 
-TODO Folie - Differential Algebraic Equations (DAE)
+![bg contain right](./Simulink_ODE.png)
+
+#### Beispiel: Vertikaler Wurf (Cont'd)
+
+Im Simulink-Modell würde man:
+1.  Drei `Constant`-Blöcke verwenden, um $-g$, $v_0$ und $y_0$ zu definieren.
+2.  Zwei `Integrator`-Blöcke verwenden, um $-g$ zu $v$ und $v$ zu $y$ zu integrieren.
+3.  Zwei `Scope`-Blöcke verwenden, um $v$ und $y$ zu visualisieren.
+
+---
+
+#### Steifigkeit von ODEs ("Stiff" Systems)
+
+Ein Differentialgleichungssystem wird als **steif** bezeichnet, wenn es Zeitkonstanten enthält, die sich über mehrere Größenordnungen erstrecken.
+
+Das bedeutet, das System hat Komponenten, die sich **sehr schnell** ändern, und andere, die sich **sehr langsam** ändern.
+
+**Problem:** Explizite (nicht-steife) Solver wie `ode45` müssen extrem kleine Zeitschritte verwenden, um die schnellen Änderungen stabil zu erfassen. Dies macht die Simulation ineffizient, besonders wenn die schnelle Dynamik bereits abgeklungen ist.
+
+**Lösung:** Implizite (steife) Solver wie `ode15s` sind für solche Probleme konzipiert. Sie sind pro Schritt rechenintensiver, können aber deutlich größere Zeitschritte stabil bewältigen, was die Gesamtsimulationszeit drastisch reduziert.
+
+---
+
+TODO Abstraktes Beispiel für steifes ODE
+
+---
+
+TODO Umsetung des steifen ODE in Simulink
+
+---
+
+#### Differential-Algebraische Gleichungen (DAEs)
+
+**Differential-Algebraische Gleichungen (DAEs)** sind Systeme von Gleichungen, die sowohl Differentialgleichungen als auch algebraische Gleichungen enthalten. Im Gegensatz zu gewöhnlichen Differentialgleichungen (ODEs) können DAEs nicht immer in eine explizite Form $\dot{x} = f(t, x)$ umgewandelt werden.
+
+Die allgemeine Form einer DAE ist:
+$F(t, x, \dot{x}) = 0$
+
+- $x$ ist der Vektor der abhängigen Variablen.
+- $\dot{x}$ ist der Vektor der Ableitungen.
+- $F$ ist eine Funktion, die sowohl Differential- als auch algebraische Beziehungen ausdrückt.
+
+---
+
+TODO Beispiel für einfaches DAE
+
+---
+
+TODO Umsetzung des einfachen DAE in Simulink
 
 ---
 
