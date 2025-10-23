@@ -1038,11 +1038,10 @@ Blöcke mit konstanter Abtastzeit werden nur **einmal zu Beginn** der Simulation
 
 #### **Variable** Abtastzeiten `[-2, Tvo]`
 
-Blöcke mit variabler Abtastzeit bestimmen zur Laufzeit selbst, wann ihr nächster Ausführungs-zeitpunkt liegt (`NextTimeHit`).
+Blöcke mit **variabler Abtastzeiten** werden zu beliebigen diskreten Zeiten abgetastet. Simulink unterstützt zwei Mechanismen, um variable Abtastzeiten zu realisieren:
 
--  Nützlich für Blöcke, die auf unregelmäßige Ereignisse reagieren müssen.
-
-**Beispiel:** Der `Hit Crossing`-Block überwacht ein Signal und weist den Solver an, genau dann einen Zeitschritt auszuführen, wenn das Signal einen Schwellenwert kreuzt (`ZeroCrossings`), z.B. präzise mechanische Anschläge.
+- **Manuelle Bestimmung** der Abtastzeiten mittels `NextTimeHit`-Eigenschaft (z.B. `Pulse Generator` Block).
+- **Atomatische Bestimmung** der Abtastzeiten mittels `ZeroCrossing`-Vektor (z.B. `Crossing Hit` Block).
 
 </div>
 <div class="two">
@@ -1054,7 +1053,23 @@ Blöcke mit variabler Abtastzeit bestimmen zur Laufzeit selbst, wann ihr nächst
 
 ---
 
-TODO: Folie - Nulldurchgänge (Zero Crossings)
+<div class="columns">
+<div class="three">
+
+#### **Nulldurchgänge** (Zero Crossings)
+
+Die **automatische Bestimmung** mittels Nulldurchgängen wird verwendet, um den exakten Zeitpunkt von Ereignissen zu bestimmen (z.B. Kollision zweier Körper).
+
+- Die exakte Bestimmung des Zeitpunktes ist oft wichtig für die Genauigkeit der Simulationsrechnung
+- Blöcke können kontinuierliche Signale für die automatische Bestimmung von Nulldurchgängen übergeben
+
+</div>
+<div class="two">
+
+![width:1000px](./Diagramme/Abtastzeit_Variabel_ZeroCrossing.svg)
+
+</div>
+</div>
 
 ---
 
