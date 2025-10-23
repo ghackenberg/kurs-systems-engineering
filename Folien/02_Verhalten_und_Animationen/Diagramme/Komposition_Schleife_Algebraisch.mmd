@@ -1,0 +1,15 @@
+flowchart LR
+
+    subgraph "Block A"
+        direction LR
+        U1(("u<sub>1</sub>(t)")) --> F1["f<sub>1</sub>(u<sub>1</sub>(t))"] --> Y1(("y<sub>1</sub>(t)"))
+    end
+
+    subgraph "Block B"
+        direction LR
+        U2(("u<sub>2</sub>(t)")) --> F2["f<sub>2</sub>(u<sub>2</sub>(t))"] --> Y2(("y<sub>2</sub>(t)"))
+    end
+
+    Y1 -."y<sub>1</sub>(t) = u<sub>2</sub>(t)".-> U2
+    Y2 -."y<sub>2</sub>(t) = u<sub>1</sub>(t)".-> U1
+

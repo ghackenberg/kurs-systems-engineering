@@ -68,10 +68,11 @@ Zustandsautomaten
 
 In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
-1. **Signale** (TODO)
-2. **Blöcke** (TODO)
-3. **Abtastzeiten** (TODO)
-4. **Solver** (TODO)
+1. **Signale** (Zeitverläufe)
+2. **Blöcke** (Funktionsvorschriften)
+3. **Kompositionen** (Verknüpfungen)
+4. **Abtastzeiten** (Diskretisierungen)
+5. **Solver** (Berechnungen)
 
 ---
 
@@ -731,11 +732,237 @@ Obwohl beide zur Gliederung von Modellen dienen, haben sie unterschiedliche Zwec
 
 ---
 
+![bg contain right](./Simulink_Linien.jpg)
+
+### 2.1.3. Kompositionen
+
+Themen in diesem Unterabschnitt:
+
+1. **Gewöhnliche Differential-gleichungen** (Zeitliche Veränderung des Zustands)
+2. **Steife gewöhnliche Differen-tialgelichungen** (schnelle und langsame Änderungen)
+3. **Differential-algebraische Gleichungen** (algeraische Randbedingungen)
+
+---
+
+#### Was sind Kompositionen?
+
+Der Begriff **Komposition** beschreibt die Zusammensetzung und Verschaltung von einzelnen Simulink-Blöcken zu einem größeren Ganzen:
+
+- Ausgangssignale von Blöcken werden weitergeleitet an Eingangssignale von anderen Blöcken
+- Ein Ausgangssignal kann dabei nur an ein, oder aber mehrere Eingangssignale weitergeleitet werden
+- Ein Ausgangssignal eines Blocks kann auch direkt als Eingangssignal desselben Blocks verwendet werden
+- Die Weiterleitung von Signalen erfolgt in Simulink mithilfe von sogenannten *Linien* (d.h. scharze Linien)
+
+---
+
+![bg contain right:40%](./Simulink_Linie.png)
+
+#### Linie in Simulink erstellen (Ausgangssignal auf Eingangssignal weiterleiten)
+
+In Simulink können Weiterleitungen zwischen Ausgangs- und Eingangssignalen einfach per Drag & Drop erstellt werden.
+
+- Die Signale selbst erste als Ports auf den zugehörigen Blöcken dargestellt
+- Die Drag & Drop Operation kann beim Ausgangssignal starten
+- Alternativ kann die Operation auch beim Eingangssignal starten
+
+---
+
+![bg contain right:40%](./Simulink_Linie_Fork.png)
+
+#### Ein Ausgangssignal auf **mehere** Eingangs-signale weiterleiten
+
+Ein Ausgangssignal kann auch an mehrere Eingangssignale von unterschiedlichen Blöcken weitergeleitet werden.
+
+- Ein Eingangssignal kann jedeoch nur mit einem Ausgangssignal verknüpft werden, sonst wäre es nicht Eindeutig
+- Die Drag & Drop Operaton startet dieses mal beim Eingangsignal und endet auf einer bestehenden Linie
+
+---
+
+#### Mathematische Beschreibung einer Komposition
+
+Gegeben seien zwei Blöcke $f_1,f_2$ mit den Eingängen $u_1,u_2$ und Ausgänge $y_1,y_2$:
+
+$y_1(t) = f_1(t, u_1)$ und $y_2(t) = f_2(t, u_2)$
+
+Durch die Komposition erwingen wir die Gleichheit von $y_1$ und $u_2$:
+
+$u_1 = y_2 \Rightarrow f_2(t, u_2) = f_2(t, y_1)$
+
+Grafische Darstellung der Komposition:
+
+![](./Diagramme/Komposition.svg)
+
+---
+
+#### Komposition mit **Schleifen**
+
+Eine Schleife entsteht, wenn wir zusätzlich Gleichheit von $y_2$ und $u_1$ erzwingen:
+
+$u_2 = y_1 \Rightarrow f_1(t, u_1) = f_1(t, y_2)$
+
+Grafische Darstellung der erweiterten Komposition:
+
+![](./Diagramme/Komposition_Schleife.svg)
+
+Ist kein Problem, solange $f_1$ oder $f_2$ Zusstände haben oder zeitverzögert reagieren.
+
+---
+
+#### Komposition mit **algebraischen** Schleifen
+
+Ein Sonderfall entsteht, wenn die Blöcke $f_1,f_2$ Signale direkt durchleiten:
+
+$y_1(t) = f_1(u_1(t))$ und $y_2(t) = f_2(u_2(t)) \Rightarrow f_1(f_2(u_2(t))) = f_2(u_2(t))$
+
+Grafische Drastellung dieses Sonderfalls mit direkter Signaldurchleitung:
+
+![](./Diagramme/Komposition_Schleife_Algebraisch.svg)
+
+Dieser Fall muss bei der Simulationsrechnung gesondert berücksichtigt werden.
+
+---
+
+#### Gewöhnliche Differentialgleichungen (ODEs)
+
+Viele physikalische Systeme werden durch **gewöhnliche Differentialgleichungen (ODEs)** beschrieben. Eine ODE ist eine mathematische Gleichung, die die zeitliche Änderung eines Systemzustands beschreibt.
+
+Die allgemeine Form einer ODE erster Ordnung lautet:
+
+$\dot{x} = f(t, x)$
+
+- $x$ ist der **Zustandsvektor** des Systems (z.B. Position und Geschwindigkeit).
+- $\dot{x}$ ist die erste Ableitung von $x$ nach der Zeit $t$.
+- $f$ ist eine Funktion, die die Dynamik des Systems beschreibt.
+
+Simulink-Solver sind darauf ausgelegt, solche Gleichungssysteme numerisch zu lösen, um den Verlauf von $x(t)$ zu finden.
+
+---
+
+#### Beispiel: Vertikaler Wurf eines Balls
+
+Wir betrachten den vertikalen Wurf eines Balls in einem Gravitationsfeld ohne Berücksichtigung des Luftwiderstands. Die Bewegung des Balls kann durch eine gewöhnliche Differentialgleichung beschrieben werden.
+
+Die Beschleunigung in y-Richtung ist:
+
+$\ddot{y} = -g$ (wobei $g$ die Erdbeschleunigung ist)
+
+Um dies in ein System von ODEs erster Ordnung umzuwandeln, definieren wir die Zustandsgrößen als Position ($y$) und Geschwindigkeit ($v$):
+
+$\dot{y} = v$
+$\dot{v} = -g$
+
+---
+
+![bg contain right](./Simulink_ODE.png)
+
+#### Umsetzung als Simulink-Modell
+
+Im Simulink-Modell würde man:
+1.  Drei `Constant`-Blöcke verwenden, um $-g$, $v_0$ und $y_0$ zu definieren.
+2.  Zwei `Integrator`-Blöcke verwenden, um $-g$ zu $v$ und $v$ zu $y$ zu integrieren.
+3.  Zwei `Scope`-Blöcke verwenden, um $v$ und $y$ zu visualisieren.
+
+---
+
+#### Steifigkeit von ODEs ("Stiff" Systems)
+
+Ein Differentialgleichungssystem wird als **steif** bezeichnet, wenn es Zeitkonstanten enthält, die sich über mehrere Größenordnungen erstrecken.
+
+Das bedeutet, das System hat Komponenten, die sich **sehr schnell** ändern, und andere, die sich **sehr langsam** ändern.
+
+**Problem:** Explizite (nicht-steife) Solver wie `ode45` müssen extrem kleine Zeitschritte verwenden, um die schnellen Änderungen stabil zu erfassen. Dies macht die Simulation ineffizient, besonders wenn die schnelle Dynamik bereits abgeklungen ist.
+
+**Lösung:** Implizite (steife) Solver wie `ode15s` sind für solche Probleme konzipiert. Sie sind pro Schritt rechenintensiver, können aber deutlich größere Zeitschritte stabil bewältigen, was die Gesamtsimulationszeit drastisch reduziert.
+
+---
+### Beispiel : RC-Schaltung mit unterschiedlich schnellen Gliedern
+
+Ein klassisches Beispiel für ein steifes System ist eine elektrische Schaltung, die Komponenten mit sehr unterschiedlichen Zeitkonstanten enthält. Betrachten wir zwei RC-Glieder in Reihe:
+
+- **Schnelles RC-Glied:** Hat eine sehr kleine Zeitkonstante ($\tau_1 = R_1 C_1$). Es reagiert sehr schnell auf Änderungen der Eingangsspannung.
+- **Langsames RC-Glied:** Hat eine große Zeitkonstante ($\tau_2 = R_2 C_2$). Es reagiert langsam auf Änderungen.
+
+Wenn $\tau_1 \ll \tau_2$ ist, ist das System steif. Ein expliziter Solver müsste die gesamte Simulation über sehr kleine Zeitschritte verwenden, um die schnelle Dynamik des ersten RC-Glieds korrekt zu erfassen, selbst wenn diese Dynamik längst abgeklungen ist.
+
+---
+
+<div class="columns">
+<div class="two">
+
+#### Mathematisches Modell der RC-Schaltung
+
+**Differentialgleichungen:**
+
+$\dot{V}_1 = \frac{1}{R_1 C_1}(V_{in} - V_1)$
+$\dot{V}_2 = \frac{1}{R_2 C_2}(V_1 - V_2)$
+
+**Verhalten:**
+Bei einer Sprungfunktion als $V_{in}$ steigt $V_1$ sehr schnell an und erreicht fast sofort den Endwert. $V_2$ folgt $V_1$ jedoch viel langsamer.
+
+Ein steifer Solver kann die schnelle Anfangsphase mit kleinen Schritten und die langsame Folgephase mit großen Schritten effizient simulieren.
+
+</div>
+<div>
+
+![width:1000px](./Diagramme/RC-Schaltung.svg)
+
+</div>
+</div>
+
+---
+
+![bg contain right:40%](./Simulink_Steif.png)
+
+#### Umsetzung des Modells in Simulink
+
+1.  **Sources:** Ein `Step`-Block liefert die Eingangsspannung $V_{in}$, `Constant`-Blöcke definieren die  Wiederstände $(R_1, R_2)$ und Kapazitäten $(C_1, C_2)$.
+3.  **Math Operations:** `Subtract`-, `Product`- und `Divide`-Blöcke werden verwendet, um die Terme $\frac{1}{R_1 C_1}(V_{in} - V_1)$ und $\frac{1}{R_2 C_2}(V_1 - V_2)$ zu bilden.
+2.  **Continuous:** Für jede Spannung ($V_1, V_2$) wird ein `Integrator`-Block verwendet.
+
+---
+
+#### Differential-Algebraische Gleichungen (DAEs)
+
+**Differential-Algebraische Gleichungen (DAEs)** sind Systeme von Gleichungen, die sowohl Differentialgleichungen als auch algebraische Gleichungen enthalten. Im Gegensatz zu gewöhnlichen Differentialgleichungen (ODEs) können DAEs nicht immer in eine explizite Form $\dot{x} = f(t, x)$ umgewandelt werden.
+
+Die allgemeine Form einer DAE ist:
+$F(t, x, \dot{x}) = 0$
+
+- $x$ ist der Vektor der abhängigen Variablen.
+- $\dot{x}$ ist der Vektor der Ableitungen.
+- $F$ ist eine Funktion, die sowohl Differential- als auch algebraische Beziehungen ausdrückt.
+
+---
+
+#### Beispiel: Integration zweier Variablen mit Randbedingung
+
+Betrachten wir ein einfaches System, das sowohl eine Differentialgleichung als auch eine algebraische Gleichung enthält:
+
+**Gleichungssystem:**
+$\dot{x} = -x + y$
+$0 = x - y^2$
+
+Hier ist $x$ eine Differentialvariable, deren Ableitung $\dot{x}$ in der ersten Gleichung vorkommt. $y$ ist eine algebraische Variable, die durch die zweite Gleichung an $x$ gekoppelt ist.
+
+Dieses System kann nicht direkt in die Form $\dot{z} = f(t, z)$ gebracht werden, ohne die algebraische Gleichung explizit nach $y$ aufzulösen (was hier $y = \pm\sqrt{x}$ wäre).
+
+---
+
+![bg contain right:40%](./Simulink_DAE.png)
+
+
+#### Umsetzung des einfachen DAE in Simulink
+
+1. **Differentialgleichung:** Ein `Integrator`-Block wird für $x$ verwendet. Sein Eingang ist $-x + y$. Dies erfordert einen `Difference`-Block mit Eingängen $y$ und $x$.
+2. **Algebraische Gleichung:** Man kann einen `Algebraic Constraint`-Block verwenden, der die Gleichung $x - y^2 = 0$ löst, um $y$ zu finden. Der Eingang des Blocks ist $x-y^2$ und der Ausgang ist $y$.
+
+---
+
 ![bg contain right](./Simulink_Abtastzeiten.jpg)
 
-### 2.1.3. Abtastzeiten
+### 2.1.4. Abtastzeiten
 
-In diesem Abschnitt betrachten wir die folgenden Arten von Abtastzeiten für Simulink-Blöcke:
+In diesem Unterabschnitt betrachten wir die folgenden Arten von Abtast-zeiten für Simulink-Blöcke:
 
 1. **Konstante Abtastzeiten**
 2. **Variable Abtastzeiten**
@@ -903,13 +1130,24 @@ Simulink kann die verschiedenen Abtastzeiten im Modell farblich hervorheben, um 
 
 ![bg contain right](./Simulink_Solver.jpg)
 
-### 2.1.4. Solver
+### 2.1.5. Solver
 
 In diesem Abschnitt betrachten wir die folgenden Themen:
 
 - **Simulationsphasen** (die große Klammer um die jeweilige Simulationsrechnung)
 - **Solver-Arten** (die Logik zur Bestimmung der Zeitschritte und Berechnung von Werten)
 - **Nulldurchgangserkennung** (eine wichtige Methode für eine hohe Genauigkeit)
+
+---
+
+#### Was sind Solver?
+
+Solver sind für die Berechnung der Zustände und Signalverläufe während eines Simulationsdurchlaufs zuständig.
+
+- Dabei muss entschieden werden, zu welchen Zeitpunkten die Ableitungen, Zustände und Signale des Modells berechnet werden
+- Die Zeitpunkte hängen grundsätzlich von den konfigurierten Abtastzeiten der Blöcke und den Solver-Einstellungen ab.
+- Eine wichtige Aufgabe der Solver ist die Bestimmung der Abtastzeiten von kontinuierlichen Singalverläufen.
+- Für diskrete Signalverläufe ist die Bestimmung der Abtastzeiten einfacher, da sie exakt vorgegebn sind.
 
 ---
 
@@ -970,142 +1208,6 @@ Simulink bietet auch die Möglichkeit, den Solver automatisch auszuwählen:
 
 </div>
 </div>
-
----
-
-#### Gewöhnliche Differentialgleichungen (ODEs)
-
-Viele physikalische Systeme werden durch **gewöhnliche Differentialgleichungen (ODEs)** beschrieben. Eine ODE ist eine mathematische Gleichung, die die zeitliche Änderung eines Systemzustands beschreibt.
-
-Die allgemeine Form einer ODE erster Ordnung lautet:
-
-$\dot{x} = f(t, x)$
-
-- $x$ ist der **Zustandsvektor** des Systems (z.B. Position und Geschwindigkeit).
-- $\dot{x}$ ist die erste Ableitung von $x$ nach der Zeit $t$.
-- $f$ ist eine Funktion, die die Dynamik des Systems beschreibt.
-
-Simulink-Solver sind darauf ausgelegt, solche Gleichungssysteme numerisch zu lösen, um den Verlauf von $x(t)$ zu finden.
-
----
-
-#### Beispiel: Vertikaler Wurf eines Balls
-
-Wir betrachten den vertikalen Wurf eines Balls in einem Gravitationsfeld ohne Berücksichtigung des Luftwiderstands. Die Bewegung des Balls kann durch eine gewöhnliche Differentialgleichung beschrieben werden.
-
-Die Beschleunigung in y-Richtung ist:
-
-$\ddot{y} = -g$ (wobei $g$ die Erdbeschleunigung ist)
-
-Um dies in ein System von ODEs erster Ordnung umzuwandeln, definieren wir die Zustandsgrößen als Position ($y$) und Geschwindigkeit ($v$):
-
-$\dot{y} = v$
-$\dot{v} = -g$
-
----
-
-![bg contain right](./Simulink_ODE.png)
-
-#### Umsetzung als Simulink-Modell
-
-Im Simulink-Modell würde man:
-1.  Drei `Constant`-Blöcke verwenden, um $-g$, $v_0$ und $y_0$ zu definieren.
-2.  Zwei `Integrator`-Blöcke verwenden, um $-g$ zu $v$ und $v$ zu $y$ zu integrieren.
-3.  Zwei `Scope`-Blöcke verwenden, um $v$ und $y$ zu visualisieren.
-
----
-
-#### Steifigkeit von ODEs ("Stiff" Systems)
-
-Ein Differentialgleichungssystem wird als **steif** bezeichnet, wenn es Zeitkonstanten enthält, die sich über mehrere Größenordnungen erstrecken.
-
-Das bedeutet, das System hat Komponenten, die sich **sehr schnell** ändern, und andere, die sich **sehr langsam** ändern.
-
-**Problem:** Explizite (nicht-steife) Solver wie `ode45` müssen extrem kleine Zeitschritte verwenden, um die schnellen Änderungen stabil zu erfassen. Dies macht die Simulation ineffizient, besonders wenn die schnelle Dynamik bereits abgeklungen ist.
-
-**Lösung:** Implizite (steife) Solver wie `ode15s` sind für solche Probleme konzipiert. Sie sind pro Schritt rechenintensiver, können aber deutlich größere Zeitschritte stabil bewältigen, was die Gesamtsimulationszeit drastisch reduziert.
-
----
-### Beispiel : RC-Schaltung mit unterschiedlich schnellen Gliedern
-
-Ein klassisches Beispiel für ein steifes System ist eine elektrische Schaltung, die Komponenten mit sehr unterschiedlichen Zeitkonstanten enthält. Betrachten wir zwei RC-Glieder in Reihe:
-
-- **Schnelles RC-Glied:** Hat eine sehr kleine Zeitkonstante ($\tau_1 = R_1 C_1$). Es reagiert sehr schnell auf Änderungen der Eingangsspannung.
-- **Langsames RC-Glied:** Hat eine große Zeitkonstante ($\tau_2 = R_2 C_2$). Es reagiert langsam auf Änderungen.
-
-Wenn $\tau_1 \ll \tau_2$ ist, ist das System steif. Ein expliziter Solver müsste die gesamte Simulation über sehr kleine Zeitschritte verwenden, um die schnelle Dynamik des ersten RC-Glieds korrekt zu erfassen, selbst wenn diese Dynamik längst abgeklungen ist.
-
----
-
-<div class="columns">
-<div class="two">
-
-#### Mathematisches Modell der RC-Schaltung
-
-**Differentialgleichungen:**
-
-$\dot{V}_1 = \frac{1}{R_1 C_1}(V_{in} - V_1)$
-$\dot{V}_2 = \frac{1}{R_2 C_2}(V_1 - V_2)$
-
-**Verhalten:**
-Bei einer Sprungfunktion als $V_{in}$ steigt $V_1$ sehr schnell an und erreicht fast sofort den Endwert. $V_2$ folgt $V_1$ jedoch viel langsamer.
-
-Ein steifer Solver kann die schnelle Anfangsphase mit kleinen Schritten und die langsame Folgephase mit großen Schritten effizient simulieren.
-
-</div>
-<div>
-
-![width:1000px](./Diagramme/RC-Schaltung.svg)
-
-</div>
-</div>
-
----
-
-![bg contain right:40%](./Simulink_Steif.png)
-
-#### Umsetzung des Modells in Simulink
-
-1.  **Sources:** Ein `Step`-Block liefert die Eingangsspannung $V_{in}$, `Constant`-Blöcke definieren die  Wiederstände $(R_1, R_2)$ und Kapazitäten $(C_1, C_2)$.
-3.  **Math Operations:** `Subtract`-, `Product`- und `Divide`-Blöcke werden verwendet, um die Terme $\frac{1}{R_1 C_1}(V_{in} - V_1)$ und $\frac{1}{R_2 C_2}(V_1 - V_2)$ zu bilden.
-2.  **Continuous:** Für jede Spannung ($V_1, V_2$) wird ein `Integrator`-Block verwendet.
-
----
-
-#### Differential-Algebraische Gleichungen (DAEs)
-
-**Differential-Algebraische Gleichungen (DAEs)** sind Systeme von Gleichungen, die sowohl Differentialgleichungen als auch algebraische Gleichungen enthalten. Im Gegensatz zu gewöhnlichen Differentialgleichungen (ODEs) können DAEs nicht immer in eine explizite Form $\dot{x} = f(t, x)$ umgewandelt werden.
-
-Die allgemeine Form einer DAE ist:
-$F(t, x, \dot{x}) = 0$
-
-- $x$ ist der Vektor der abhängigen Variablen.
-- $\dot{x}$ ist der Vektor der Ableitungen.
-- $F$ ist eine Funktion, die sowohl Differential- als auch algebraische Beziehungen ausdrückt.
-
----
-
-#### Beispiel: Integration zweier Variablen mit Randbedingung
-
-Betrachten wir ein einfaches System, das sowohl eine Differentialgleichung als auch eine algebraische Gleichung enthält:
-
-**Gleichungssystem:**
-$\dot{x} = -x + y$
-$0 = x - y^2$
-
-Hier ist $x$ eine Differentialvariable, deren Ableitung $\dot{x}$ in der ersten Gleichung vorkommt. $y$ ist eine algebraische Variable, die durch die zweite Gleichung an $x$ gekoppelt ist.
-
-Dieses System kann nicht direkt in die Form $\dot{z} = f(t, z)$ gebracht werden, ohne die algebraische Gleichung explizit nach $y$ aufzulösen (was hier $y = \pm\sqrt{x}$ wäre).
-
----
-
-![bg contain right:40%](./Simulink_DAE.png)
-
-
-#### Umsetzung des einfachen DAE in Simulink
-
-1. **Differentialgleichung:** Ein `Integrator`-Block wird für $x$ verwendet. Sein Eingang ist $-x + y$. Dies erfordert einen `Difference`-Block mit Eingängen $y$ und $x$.
-2. **Algebraische Gleichung:** Man kann einen `Algebraic Constraint`-Block verwenden, der die Gleichung $x - y^2 = 0$ löst, um $y$ zu finden. Der Eingang des Blocks ist $x-y^2$ und der Ausgang ist $y$.
 
 ---
 
@@ -1250,7 +1352,7 @@ Simulink kann die Ausgänge der Blöcke in einer algebraischen Schleife nicht di
 
 ---
 
-#### Lösen von algebraischen Schleifen in Simulink
+#### Lösen von **algebraischen Schleifen** in Simulink
 
 **Verfahren:**
 1.  **Erkennung:** Simulink erkennt algebraische Schleifen während der Kompilierung des Modells.
@@ -1391,7 +1493,7 @@ Die präzise Handhabung von Zero Crossings ist entscheidend für die Genauigkeit
 
 ---
 
-### 2.1.5. Fallbeispiel: Akku-Schrauber
+### 2.1.6. Fallbeispiel: Akku-Schrauber
 
 Im Rahmen dieses Kapitels wenden wir die gelernten Konzepte der Simulink Signalmodelle auf das durchgängige Fallbeispiel eines Akku-Schraubers an. Ziel ist es, das vereinfachte Verhalten des Motors zu modellieren.
 
@@ -1428,7 +1530,7 @@ Dieses Modell wird uns helfen, die Dynamik des Antriebsstrangs zu verstehen und 
 
 ![bg right](../Übungsaufgabe.jpg)
 
-### 2.1.6. Übungsaufgabe
+### 2.1.7. Übungsaufgabe
 
 Modellieren Sie das Verhalten der atomaren physikalischen Kompo-nenten des 3D-Druckers (z.B. Antriebe) mithilfe von Simulink Signalmodellen.
 
