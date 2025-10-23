@@ -822,6 +822,33 @@ Dieser Fall muss bei der Simulationsrechnung gesondert berücksichtigt werden.
 
 ---
 
+#### Mathematische Eigenschaften einer Komposition
+
+Eine Komposition ohne algebraische Schleife ergibt eine gewöhnliche Differential-gleichung, andernfalls erhält man eine differential-algebraische Gleichung:
+
+<div class="columns">
+<div>
+
+##### **Gewöhnliche** Differentialgleichung
+
+*Reine Zeitintegration (z.B. vertikaler Wurf eines Balls)*
+
+![width:200px](./ODE.jpg)
+
+</div>
+<div>
+
+##### Differential-**algebraische** Gleichung
+
+*Zeitintegration mit Randbedingungen (z.B. Pendelbewegung)*
+
+![width:200px](./DAE.jpg)
+
+</div>
+</div>
+
+---
+
 #### Gewöhnliche Differentialgleichungen (ODEs)
 
 Viele physikalische Systeme werden durch **gewöhnliche Differentialgleichungen (ODEs)** beschrieben. Eine ODE ist eine mathematische Gleichung, die die zeitliche Änderung eines Systemzustands beschreibt.
@@ -1024,6 +1051,10 @@ Blöcke mit variabler Abtastzeit bestimmen zur Laufzeit selbst, wann ihr nächst
 
 </div>
 </div>
+
+---
+
+TODO: Folie - Nulldurchgänge (Zero Crossings)
 
 ---
 
