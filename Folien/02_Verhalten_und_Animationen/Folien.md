@@ -2060,6 +2060,8 @@ Ziel ist es, das physikalische Verhalten des Motors sowie des Antriebsstrangs de
 </div>
 <div>
 
+TODO Screenshot des Simscape-Modells für die Akku-Modellierung
+
 </div>
 </div>
 
@@ -2076,6 +2078,8 @@ Ziel ist es, das physikalische Verhalten des Motors sowie des Antriebsstrangs de
 
 </div>
 <div>
+
+TODO Screenshot des Simscape-Modells für die elektrische Motor-Modellierung
 
 </div>
 </div>
@@ -2095,6 +2099,8 @@ Ziel ist es, das physikalische Verhalten des Motors sowie des Antriebsstrangs de
 </div>
 <div class="two">
 
+TODO Screenshot des Simscape-Modells für die mechanische Motor-Modellierung
+
 </div>
 </div>
 
@@ -2112,6 +2118,8 @@ Ziel ist es, das physikalische Verhalten des Motors sowie des Antriebsstrangs de
 </div>
 <div>
 
+TODO Screenshot des Simscape-Modells für die Getriebe-Modellierung
+
 </div>
 </div>
 
@@ -2128,6 +2136,8 @@ Ziel ist es, das physikalische Verhalten des Motors sowie des Antriebsstrangs de
 
 </div>
 <div>
+
+TODO Screenshot des Simscape-Modells für die Last-Modellierung
 
 </div>
 </div>
