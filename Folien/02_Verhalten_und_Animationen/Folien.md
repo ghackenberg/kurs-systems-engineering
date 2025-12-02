@@ -1733,11 +1733,13 @@ Modellierung von Wärmeerzeugung und -übertragung.
 
 Der `Resistor`-Block modelliert einen linearen elektrischen Widerstand.
 
-**Gleichung:** Das Verhalten wird durch das Ohmsche Gesetz beschrieben, das die Spannung $v$ über dem Widerstand mit dem Strom $i$ in Beziehung setzt, der durch ihn fließt. $R$ ist der Widerstandswert.
+**Gleichung:** Das Verhalten wird durch das Ohmsche Gesetz beschrieben, das die Spannung $v$ über dem Widerstand mit dem Strom $i$ in Beziehung setzt, der durch ihn fließt.
 
-$v = i \cdot R$
+$$v = i \cdot R$$
 
-TODO Beschreibung von Across- und Through-Variablen
+**Across-Variable:** Die **Spannung** $v$ wird *über* die Anschlüsse des Widerstands gemessen.
+
+**Through-Variable:** Der **Strom** $i$ fließt *durch* den Widerstand.
 
 </div>
 <div>
@@ -1758,9 +1760,11 @@ Der `Mass`-Block modelliert eine ideale translatorische Masse.
 
 **Gleichung:** Das Verhalten wird durch das zweite Newtonsche Gesetz beschrieben. Die Summe aller auf die Masse wirkenden Kräfte $F$ ist gleich dem Produkt aus der Masse $m$ und der Beschleunigung $a$.
 
-$F = m \cdot a = m \cdot \frac{dv}{dt}$
+$$F = m \cdot a = m \cdot \frac{dv}{dt}$$
 
-TODO Beschreibung von Across- und Through-Variablen
+**Across-Variable:** Die **Geschwindigkeit** $v$ wird *über* die Masse gemessen (d.h. relativ zu einem Referenzrahmen).
+
+**Through-Variable:** Die **Kraft** $F$ wirkt *auf* die Masse.
 
 </div>
 <div>
@@ -1899,7 +1903,88 @@ Die dynamischen Elemente (z.B. Masse) liefern Differentialgleichungen, während 
 
 ---
 
-TODO Folien zu einem konkreten Beispiel mit mathematischen Formeln für die Blöcke und das gesamte Gleichungssystem
+<div class="columns">
+<div class="two">
+
+#### Beispiel: Masse-Feder-Dämpfer
+
+Ein klassisches mechanisches System, um die DAE-Formulierung in Simscape zu verstehen. Es besteht aus:
+- **Masse ($m$):** Speichert kinetische Energie.
+- **Feder ($k$):** Speichert potentielle Energie.
+- **Dämpfer ($d$):** Dissipiert Energie.
+
+Das System wird durch eine externe Kraft $F_{ext}$ angeregt und bewegt sich mit der Geschwindigkeit $v$. Die Bauteile sind zwischen der Masse und einem festen Referenzpunkt (Wand) eingespannt.
+
+</div>
+<div>
+
+![Ein schematisches Diagramm eines Masse-Feder-Dämpfer-Systems. Eine Masse (m) ist horizontal zwischen einer Feder (k) auf der einen und einem Dämpfer (d) auf der anderen Seite eingespannt. Beide sind an einer festen Wand befestigt. Eine externe Kraft (F_ext) wirkt auf die Masse.](./Diagramme/Draw/Masse_Feder_Daempfer.svg)
+
+</div>
+</div>
+
+---
+
+#### Gleichungen der Simscape-Komponenten
+
+<div class="columns top">
+<div>
+
+##### Masse
+*2. Newtonsches Gesetz*
+
+Die Summe der Kräfte $F_m$ an der Masse verursacht eine Beschleunigung $\dot{v}$.
+
+$F_m = m \cdot \dot{v}$
+
+**(Differential-Term)**
+
+</div>
+<div>
+
+##### Feder
+*Hookesches Gesetz*
+
+Die Federkraft $F_f$ ist proportional zur Auslenkung $x$, dem Integral der Geschwindigkeit.
+
+$F_f = k \cdot x = k \int v \,dt$
+
+**(Differential-Term)**
+
+</div>
+<div>
+
+##### Dämpfer
+*Reibungsgesetz*
+
+Die Dämpferkraft $F_d$ ist proportional zur Geschwindigkeit $v$.
+
+$F_d = d \cdot v$
+
+**(Algebraischer-Term)**
+
+</div>
+</div>
+
+---
+
+#### Das zusammengesetzte DAE-System
+
+**1. Algebraische Zwangsbedingungen (Knotengesetze):**
+Die Verbindungen definieren algebraische Gleichungen. Hier gilt das Kräftegleichgewicht an der Masse: Die externe Kraft muss die Summe der internen Kräfte (Trägheit, Feder, Dämpfer) aufheben.
+
+$F_{ext}(t) - F_m(t) - F_f(t) - F_d(t) = 0$
+
+**2. Das DAE-System:**
+Setzt man die Komponentengleichungen ein, entsteht eine einzige Gleichung, die differentielle und algebraische Terme enthält. Simscape löst dieses System für alle unbekannten Variablen simultan.
+
+$F_{ext} - (m \cdot \dot{v}) - (k \cdot \int v dt) - (d \cdot v) = 0$
+
+---
+
+TODO Überschrift
+
+![Ein Simscape-Modell eines Masse-Feder-Dämpfer-Systems mit den Blöcken für Masse, Feder, Dämpfer, Kraftquelle und Referenz.](./Screenshots/Simscape_MSD_Modell.png)
 
 ---
 
@@ -2158,7 +2243,21 @@ Dies ist nützlich für Unterbrechungen (z.B. ein "Pause"-Modus), nach denen das
 
 ---
 
-TODO Folie zu Beispiel für Historien-Zustand
+#### Beispiel: Pausenfunktion
+
+Der Historien-Zustand ist ideal, um eine Pausen- und Fortsetzen-Funktion zu implementieren.
+
+- Der Super-Zustand `Player` enthält die Logik für die Wiedergabe (`Playing`) und das Spulen (`Seeking`).
+- Wenn das `pause`-Ereignis eintritt, wird in den `Paused`-Zustand gewechselt.
+- Beim `resume`-Ereignis kehrt der Automat nicht zum Standardzustand (`Playing`) zurück, sondern zum `(H)`-Symbol.
+- Dieses "merkt" sich, ob der Player vor der Pause im `Playing`- oder `Seeking`-Modus war und stellt diesen wieder her.
+
+---
+
+TODO Überschrift
+
+![Ein Zustandsautomat für einen Mediaplayer. Der Super-Zustand "Player" hat die Sub-Zustände "Playing" und "Seeking". Ein "pause"-Übergang führt aus "Player" heraus. Ein "resume"-Übergang führt zurück zum History-Zustand (H) innerhalb von "Player".](./Diagramme/Mermaid/Zustandsautomat_History_Beispiel.svg)
+
 
 ---
 
@@ -2271,11 +2370,37 @@ Stateflow kann außerdem `Simulink Functions` oder `MATLAB Functions` direkt auf
 
 ---
 
-TODO Folie zu konkretem Beispiel für Input Events
+#### Beispiel: Tasten-Ereignis
+
+`Input Events` sind ideal, um auf diskrete Ereignisse aus Simulink zu reagieren, ohne den Zustand bei jedem Zeitschritt abfragen zu müssen.
+
+- Im Symbol-Manager wird ein `Input Event` namens `E_PRESS` definiert.
+- In Simulink wandelt ein `Trigger`-Block oder ein `Hit Crossing`-Block ein Signal (z.B. einen Tastendruck) in dieses Ereignis um.
+- Der Übergang im Stateflow Chart (z.B. von `Off` nach `On`) wird mit dem Ereignis als Auslöser versehen.
+- Die Logik wird nur dann ausgeführt, wenn das Ereignis `E_PRESS` von Simulink gesendet wird, was die Simulationseffizienz erhöht.
 
 ---
 
-TODO Folie zu konkretem Beispiel für Output Events
+TODO Überschrift
+
+![Ein Simulink-Modell, das ein Signal an einen Stateflow-Chart sendet. Das Signal wird in ein Input Event umgewandelt, das einen Zustandsübergang von "Off" nach "On" auslöst.](./Screenshots/Stateflow_Input_Event_Beispiel.png)
+
+---
+
+#### Beispiel: Motor aktivieren
+
+`Output Events` sind nützlich, um Aktionen in Simulink basierend auf Stateflow-Logik auszulösen.
+
+- Im Symbol-Manager wird ein `Output Event` namens `E_MOTOR_ON` definiert.
+- Im Stateflow Chart wird dieses Ereignis als Übergangsaktion (`/E_MOTOR_ON`) oder Zustandsaktion (z.B. `entry: E_MOTOR_ON`) verwendet, um den Motor zu starten, wenn der Zustand `Operating` erreicht wird.
+- In Simulink wird ein `Function-Call Subsystem` durch das `E_MOTOR_ON` Event ausgelöst, das die tatsächliche Motor-Aktivierung simuliert.
+- Dies gewährleistet eine klare Schnittstelle zwischen der Steuerungslogik und den Aktuatoren im System.
+
+---
+
+TODO Überschrift
+
+![Ein Stateflow-Chart, das bei einem Übergang ein Output Event generiert. Dieses Event aktiviert ein Function-Call Subsystem in Simulink, das den Motor steuert.](./Screenshots/Stateflow_Output_Event_Beispiel.png)
 
 ---
 
@@ -2495,5 +2620,3 @@ TODO Folien mit VRML-Codebeispielen für Viewport-Knoten
 Im 3D-Viewer können Benutzer interaktiv zwischen allen in der Welt definierten `Viewpoint`-Knoten wechseln. Die `description` des Knotens wird dabei als Name im Auswahlmenü angezeigt. Dies ermöglicht geführte Sichten auf wichtige Aspekte der Simulation.
 
 ![Ein Screenshot des Simulink 3D Animation Viewers. Man sieht eine 3D-Szene und ein Menü oder eine Symbolleiste, in der man zwischen verschiedenen, per 'description' benannten, 'Viewpoints' (z.B. "Fahrerperspektive", "Draufsicht") wechseln kann.](./Screenshots/S3D_Viewpoint_Selection.png)
-
----
