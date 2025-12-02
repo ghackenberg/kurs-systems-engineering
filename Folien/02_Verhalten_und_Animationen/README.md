@@ -62,7 +62,7 @@ Zustandsautomaten
 
 ---
 
-![bg right](./Simulink.jpg)
+![bg right](./Illustrationen/Simulink.jpg)
 
 ## 2.1 Simulink **Signalmodelle**
 
@@ -76,7 +76,7 @@ In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
-![bg contain right:35%](./Simulink_Component_Create.png)
+![bg contain right:35%](./Screenshots/Simulink_Component_Create.png)
 
 ### Simulink-Verhalten erstellen
 
@@ -89,7 +89,7 @@ Für jede atomare Komponente im System Composer kann ein  Verhalten in Simulink 
 
 ---
 
-![bg contain right:35%](./Simulink_Component_Link.png)
+![bg contain right:35%](./Screenshots/Simulink_Component_Link.png)
 
 ### Bestehendes Verhalten verknüpfen
 
@@ -103,7 +103,7 @@ Dies ist ideal für die Wiederverwendung von Bibliothekskomponenten oder  existi
 
 ---
 
-![bg contain right:35%](./Simulink_Component_Finished.png)
+![bg contain right:35%](./Screenshots/Simulink_Component_Finished.png)
 
 ### Vorschau des Verhaltens
 
@@ -136,7 +136,7 @@ Simulink-Modelle werden über die Zeit simuliert, um das Verhalten eines Systems
 
 ---
 
-![bg contain right](./Simulink_Signale.jpg)
+![bg contain right](./Illustrationen/Simulink_Signale.jpg)
 
 ### 2.1.1. Signale
 
@@ -1606,7 +1606,7 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 ![bg right](./Illustrationen/Simulink3D.jpg)
 
-## 2.4 Simulink 3D Animation
+## 2.4 Simulink **3D Animation**
 
 In diesem vierten Abschnitt lernen wir die folgenden Dinge:
 
