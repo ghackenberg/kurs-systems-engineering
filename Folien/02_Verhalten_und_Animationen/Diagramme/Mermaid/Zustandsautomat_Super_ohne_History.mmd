@@ -1,0 +1,9 @@
+stateDiagram-v2
+    state "Super" as S {
+        state "Sub1" as S1
+        state "Sub2" as S2
+        [*] --> S1
+        S1 --> S2
+        S2 --> S1
+    }
+    [*] --> S

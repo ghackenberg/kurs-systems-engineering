@@ -1,0 +1,19 @@
+stateDiagram-v2
+    state "Maschine AN" as On {
+        state "Strom" as Power {
+            [*] --> Netzbetrieb
+            Netzbetrieb --> Akkubetrieb : Stromausfall
+            Akkubetrieb --> Netzbetrieb : Strom wieder da
+        }
+        state "Status" as Op {
+            [*] --> Leerlauf
+            Leerlauf --> Arbeiten
+            Arbeiten --> Leerlauf
+        }
+    }
+    [*] --> On
+
+    classDef region stroke-dasharray:10 10
+
+    class Power region
+    class Op region

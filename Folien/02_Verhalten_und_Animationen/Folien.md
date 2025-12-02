@@ -199,7 +199,7 @@ Eine erste wichtige mathematische Eigenschaften der Signalfunktionen ist deren *
 
 #### **Differenzierbarkeit** von Signalen
 
-Eine zweite wichtige mathematische Eigenschaft ist deren **Differenzierbarkeit:**
+Eine zweite wichtige mathematische Eigenschaft ist deren **Differenzierbarkeit**:
 
 - **Differenzierbare Signale:** Sind "glatt" und stetig, d.h. sie besitzen an jedem Punkt eine eindeutige Ableitung. Dies ist ideal für die Modellierung von Systemen durch Differentialgleichungen.
 
@@ -418,7 +418,7 @@ $y(t) = f_o(t, x_c, u)$
 
 **Zustandssequenz** repräsentiert den Zustands des Blocks ausschließlich zu bestimmten *Zeitpunkten*
 
-$x_d = x_{d_0}, x_{d_1}, x_{d_2}, ...$ mit Zeitpunkten $t_0,t_1,t_2,...$
+$x_d = x_{d_0}, x_{d_1}, x_{d_2}, ...$ mit Zeitpunkten $t_0,t_1,t_2,...
 
 **Aktualisierungsfunktion** beschreibt die Berechnung der jeweiligen *Folgezustände* aus den *Vorgängerzuständen*
 
@@ -1524,6 +1524,7 @@ function bisection(f, a, b, tolerance, max_iterations):
   return m // Konvergenz nicht erreicht
 ```
 
+
 ---
 
 #### Bedeutung und Beispiele
@@ -1610,7 +1611,65 @@ Dieser Unterabschnitt behandelt die Grundlagen akausaler physikalischer Netzwerk
 
 ---
 
-TODO Inhaltsfolien
+<div class="columns">
+<div class="three">
+
+#### Was ist akausale Modellierung?
+
+Bei der **kausalen** Modellierung (wie in Simulink) berechnet jeder Block seine Ausgänge direkt aus seinen Eingängen. Die Berechnungsrichtung ist klar vorgegeben (`y = f(u)`).
+
+Bei der **akausalen** Modellierung (wie in Simscape) definieren Blöcke physikalische Gesetze als Gleichungen, ohne eine feste Ein- oder Ausgangsrichtung vorzugeben. Das gesamte verbundene Netzwerk bildet ein Gleichungssystem, das der Solver simultan löst (`F(x, y, z) = 0`).
+
+Dies entspricht eher der Denkweise von Physikern und Ingenieuren, die ein System als Ganzes betrachten.
+
+</div>
+<div>
+
+![Ein Diagramm, das den Unterschied zwischen kausaler und akausaler Modellierung zeigt. Links (Kausal) zeigt Blöcke mit Pfeilen in eine Richtung: u -> f1 -> y1, y1 -> f2 -> y2. Rechts (Akausal) zeigt die gleichen Blöcke, aber nur mit Verbindungslinien ohne Pfeile, was eine bidirektionale Beziehung andeutet.](./Diagramme/Mermaid/Kausal_Akausal.svg)
+
+</div>
+</div>
+
+---
+
+#### Through- und Across-Variablen
+
+Jede physikalische Verbindung in Simscape wird durch zwei Arten von Variablen beschrieben:
+
+-   **Across-Variablen:** Eine Größe, die über zwei Punkte gemessen wird (z.B. Spannung, Geschwindigkeitsdifferenz, Druckdifferenz).
+-   **Through-Variablen:** Eine Größe, die durch ein Element fließt (z.B. Strom, Kraft, Massenstrom).
+
+Das Produkt dieser beiden Variablen ist in der Regel die Leistung, die durch die Verbindung fließt. An jedem Verbindungspunkt gilt das Kirchhoffsche Gesetz: Die Summe aller Through-Variablen ist Null.
+
+---
+
+TODO Überschrift und kurzer Text
+
+| Domäne | Across-Variable | Through-Variable |
+| :--- | :--- | :--- |
+| Elektrisch | Spannung (`V`) | Strom (`A`) |
+| Mechanisch (Translation) | Geschwindigkeit (`m/s`) | Kraft (`N`) |
+| Mechanisch (Rotation) | Winkelgeschwindigkeit (`rad/s`) | Drehmoment (`Nm`) |
+| Thermisch | Temperatur (`K`) | Wärmestrom (`W`) |
+| Hydraulisch | Druck (`Pa`) | Volumenstrom (`m³/s`) |
+
+---
+
+#### Referenzknoten (Reference Node)
+
+Jedes physikalische Netzwerk in Simscape benötigt mindestens einen **Referenzknoten**. Dieser Block definiert den absoluten Nullpunkt für die Across-Variablen der jeweiligen Domäne.
+
+-   **Elektrisch:** `Electrical Reference` (Masse, 0V)
+-   **Mechanisch:** `Mechanical Translation/Rotational Reference` (fester Rahmen, unbewegliche Umgebung)
+-   **Thermisch:** `Thermal Reference` (absolute Temperatur von 0K, obwohl oft eine Quelle mit konstanter Temperatur verwendet wird)
+
+Ohne Referenz ist das Gleichungssystem unbestimmt, da alle Across-Variablen nur relativ zueinander wären.
+
+---
+
+TODO Überschrift
+
+![Ein Screenshot, der verschiedene Referenzblöcke in Simscape zeigt: Electrical Reference, Mechanical Translational Reference und Thermal Reference.](./Screenshots/Simscape_Reference_Blocks.png)
 
 ---
 
@@ -1627,7 +1686,39 @@ Hier lernen wir die verschiedenen physikalischen Domänen und ihre zugehörigen 
 
 ---
 
-TODO Inhaltsfolien
+TODO Überschrift
+
+Simscape bietet eine breite Palette an Bibliotheken für verschiedene physikalische Domänen, die es ermöglichen, multidisziplinäre Systeme zu modellieren.
+
+<div class="columns top">
+<div>
+
+##### Elektrisch
+
+Modellierung von analogen und leistungselektronischen Schaltungen.
+
+**Blöcke:** Widerstand, Kondensator, Diode, ...
+
+</div>
+<div>
+
+##### Mechanisch (1D)
+
+Modellierung von translatorischen und rotatorischen mechanischen Systemen.
+
+**Blöcke:** Masse, Feder, Dämpfer, Getriebe, ...
+
+</div>
+<div>
+
+##### Thermisch
+
+Modellierung von Wärmeerzeugung und -übertragung.
+
+**Blöcke:** Wärmeleitender Widerstand, thermische Masse, ...
+
+</div>
+</div>
 
 ---
 
@@ -1643,7 +1734,75 @@ Dieser Abschnitt erklärt den fundamentalen Unterschied zwischen Simscape- und S
 
 ---
 
-TODO Inhaltsfolien
+#### Der fundamentale Unterschied
+
+Der Hauptunterschied liegt in der Art der Verbindung und der Information, die sie transportiert.
+
+<div class="columns top">
+<div>
+
+***Simulink* Signal-Ports:**
+-   Pfeilförmige Ports (`>`, `<`)
+-   Übertragen unidirektionale Signale (Information)
+-   Linien haben eine klare Richtung (Quelle zu Senke)
+-   Kausale Logik
+
+</div>
+<div>
+
+***Simscape* Erhaltungs-Ports:**
+-   Quadratische Ports (verschiedene Farben je Domäne)
+-   Stellen eine physikalische Verbindung dar
+-   Bidirektionaler Austausch von Energie/Materie
+-   Linien haben keine Richtung
+-   Akausale Gleichungen
+
+</div>
+</div>
+
+---
+
+![Eine Illustration, die einen Simulink-Block (z.B. Gain) mit spitzen Ein- und Ausgangsports und einen Simscape-Block (z.B. Resistor) mit quadratischen, farbigen Erhaltungsports zeigt. Dazwischen sind die Konverterblöcke platziert, die die beiden Welten verbinden.](./Illustrationen/simscape_port_vergleich.jpg)
+
+---
+
+#### Die Brücke zwischen den Welten
+
+Um Simulink-Signale zur Steuerung von Simscape-Netzwerken zu verwenden oder physikalische Größen aus Simscape in Simulink zu messen, sind spezielle Konverterblöcke notwendig.
+
+<div class="columns top">
+<div>
+
+##### `Simulink-PS Converter`
+
+Wandelt ein Simulink-Signal in eine physikalische Größe um. Man konfiguriert den Block, um festzulegen, ob das Eingangssignal z.B. eine Kraft, eine Spannung oder eine Geschwindigkeit repräsentiert.
+
+</div>
+<div>
+
+##### `PS-Simulink Converter`
+
+Wandelt eine physikalische Größe (eine Across- oder Through-Variable) aus dem Simscape-Netzwerk in ein Simulink-Signal um, das dann weiterverarbeitet oder angezeigt werden kann.
+
+</div>
+</div>
+
+---
+
+TODO Überschrift
+
+<div class="columns">
+<div>
+
+![Ein Screenshot des Simulink-PS Converter Blocks und seines Parameterdialogs, in dem die Einheiten konfiguriert werden.](./Screenshots/Simscape_Simulink_PS_Converter.png)
+
+</div>
+<div>
+
+![Ein Screenshot des PS-Simulink Converter Blocks und seines Parameterdialogs.](./Screenshots/Simscape_PS_Simulink_Converter.png)
+
+</div>
+</div>
 
 ---
 
@@ -1660,7 +1819,67 @@ Simscape-Modelle erfordern spezielle Solver-Einstellungen. Wir behandeln:
 
 ---
 
-TODO Inhaltsfolien
+#### DAEs in Simscape
+
+Da Simscape-Modelle auf akausalen Gleichungen basieren, die physikalische Verbindungen und Erhaltungsgesetze beschreiben, führen sie fast immer zu **Differential-Algebraischen Gleichungen (DAEs)**.
+
+-   Die **Differentialgleichungen** beschreiben die Dynamik von Elementen, die Energie speichern können (z.B. Massen, Kondensatoren).
+-   Die **algebraischen Gleichungen** beschreiben die Randbedingungen und Verbindungen, die zu jedem Zeitpunkt gelten müssen (z.B. Kirchhoffsche Gesetze, Kräftegleichgewicht).
+
+Aus diesem Grund sind spezielle DAE-Solver für die Simulation von Simscape-Modellen erforderlich.
+
+---
+
+TODO Überschrift und kurzer Text
+
+![Ein abstraktes Diagramm, das zeigt, wie verbundene Simscape-Blöcke (Masse, Feder, Dämpfer) in ein System von Differential- und Algebraischen Gleichungen übersetzt werden.](./Diagramme/Draw/Simscape_zu_DAE.svg)
+
+---
+
+#### Der `Solver Configuration` Block
+
+Jedes physikalisch getrennte Netzwerk in einem Simulink-Modell **muss genau einen** `Solver Configuration` Block enthalten.
+
+Dieser Block ist entscheidend und hat zwei Hauptaufgaben:
+1.  Er deklariert das Modell als physikalisches Netzwerk für den Simulink-Solver.
+2.  Er bietet die Möglichkeit, die Solver-Einstellungen spezifisch für dieses Netzwerk zu konfigurieren.
+
+Er wird direkt mit einem Referenzblock (z.B. `Electrical Reference`) im Netzwerk verbunden.
+
+---
+
+TODO Überschrift und kurzer Text
+
+![Ein Screenshot des 'Solver Configuration' Blocks, wie er in einem einfachen Simscape-Schaltkreis platziert und verbunden ist.](./Screenshots/Simscape_Solver_Configuration.png)
+
+---
+
+#### Auswahl des richtigen Solvers
+
+Für DAEs, die in Simscape entstehen, sind variable Zeitschritt-Solver, die für steife Systeme optimiert sind, oft die beste Wahl.
+
+-   **`ode23t` (Trapezoidal Rule):** Ein guter Allrounder für moderat steife Systeme. Er ist oft schneller als `ode15s`, aber weniger robust bei sehr steifen Problemen.
+-   **`ode15s` (Variable-order, NDF):** Der robusteste Solver für steife Systeme und DAEs. Er ist die empfohlene Wahl, wenn andere Solver versagen oder sehr langsam werden.
+
+Die Solver-Auswahl erfolgt in den allgemeinen Modelleinstellungen von Simulink (`Model Settings > Solver`).
+
+---
+
+TODO Überschrift und kurzer Text
+
+![Ein Screenshot der Solver-Einstellungen in Simulink, der die Auswahl zwischen ode23t und ode15s im Dropdown-Menü zeigt.](./Screenshots/Simulink_Solver_Selection_DAE.png)
+
+---
+
+#### Lokale Solver
+
+Wenn ein Modell mehrere, voneinander unabhängige physikalische Netzwerke enthält, kann die Verwendung lokaler Solver die Leistung verbessern.
+
+1.  **Aktivierung:** Im `Solver Configuration` Block kann die Option `Use local solver` aktiviert werden.
+2.  **Vorteil:** Jedes Netzwerk wird mit seinem eigenen, separaten Solver simuliert. Dies kann die Berechnung parallelisieren und beschleunigen, insbesondere auf Mehrkern-Prozessoren.
+3.  **Nachteil:** Die Genauigkeit kann geringfügig abnehmen, da die Solver nicht mehr global synchronisiert sind.
+
+Dies ist eine fortgeschrittene Option, die bei komplexen, modularen Modellen nützlich sein kann.
 
 ---
 
@@ -1691,7 +1910,24 @@ Die Grundbausteine eines jeden Stateflow-Charts:
 
 ---
 
-TODO Inhaltsfolien
+<div class="columns">
+<div class="four">
+
+#### Zustände und Übergänge
+
+- **Zustand (State):** Ein abgerundetes Rechteck, das einen Betriebszustand darstellt (z.B. "An", "Aus", "Standby"). Das System ist immer in genau einem aktiven Zustand (in nicht-parallelen Automaten).
+
+- **Übergang (Transition):** Ein Pfeil von einem Zustand zum anderen. Er repräsentiert die Möglichkeit, den Zustand zu wechseln.
+
+- **Standardübergang:** Ein Pfeil, der von einem kleinen gefüllten Kreis ausgeht. Er legt fest, welcher Zustand beim ersten Aktivieren des Automaten eingenommen wird.
+
+</div>
+<div>
+
+![Ein einfacher Zustandsautomat mit zwei Zuständen, "An" und "Aus", und den Übergängen "einschalten" und "ausschalten".](./Diagramme/Mermaid/Zustandsautomat_An_Aus.svg)
+
+</div>
+</div>
 
 ---
 
@@ -1708,7 +1944,44 @@ Hier definieren wir, was passiert und wann es passiert:
 
 ---
 
-TODO Inhaltsfolien
+#### Anatomie eines Übergangs
+
+Die Logik eines Übergangs wird direkt an den Pfeil geschrieben. Die Syntax `Ereignis[Bedingung]{Bedingungsaktion}/Übergangsaktion` steuert den Wechsel.
+
+| Syntax | Name | Ausführung |
+| :--- | :--- | :--- |
+| `[temp > 95]` | **Bedingung** (Guard) | Muss `true` sein, damit der Übergang<br/>überhaupt in Betracht gezogen wird. |
+| `{check()}` | **Bedingungs-aktion** | Wird ausgeführt, sobald die Bedingung<br/>als `true` ausgewertet wird. |
+| `/stop()` | **Übergangs-aktion** | Wird ausgeführt, *nachdem* der Quellzustand<br/>verlassen wurde und *bevor* der Zielzustand<br/>betreten wird. |
+
+---
+
+<div class="columns">
+<div>
+
+Überschrift und kurzer Text
+
+</div>
+<div>
+
+![](./Diagramme/Mermaid/Zustandsautomat_Betrieb_Ueberhitzt.svg)
+
+</div>
+</div>
+
+---
+
+#### Zustands-Aktionen (`entry`, `during`, `exit`)
+
+Zustände können Aktionen ausführen, wenn sie betreten, verlassen werden oder während sie aktiv sind. Dies wird im Zustands-Feld notiert.
+
+- `entry` (oder `en`): Wird **einmalig** beim Betreten des Zustands ausgeführt. Ideal für Initialisierungen.
+- `during` (oder `du`): Wird bei **jedem Zeitschritt** ausgeführt, den der Zustand aktiv ist. Ideal für kontinuierliche Aktivitäten.
+- `exit` (oder `ex`): Wird **einmalig** beim Verlassen des Zustands ausgeführt. Ideal für Aufräumarbeiten.
+
+---
+
+TODO Folie mit Beispiel für Zustandsaktionen
 
 ---
 
@@ -1725,7 +1998,50 @@ Strukturierung komplexer Logik durch Schachtelung:
 
 ---
 
-TODO Inhaltsfolien
+<div class="columns">
+<div class="five">
+
+#### Super- und Sub-Zustände
+
+Ein **Super-Zustand** (oder Eltern-Zustand) fasst eine Gruppe von **Sub-Zuständen** (oder Kind-Zuständen) zusammen.
+
+- **Kapselung:** Die Logik innerhalb des Super-Zustands ist in sich geschlossen.
+- **Lesbarkeit:** Komplexe Automaten werden übersichtlicher.
+- **Gemeinsame Übergänge:** Ein Übergang, der vom Super-Zustand ausgeht, gilt für alle seine Sub-Zustände. Dies vermeidet redundante Übergangspfeile von jedem einzelnen Sub-Zustand.
+
+</div>
+<div>
+
+![Der Zustand "Betrieb" ist ein Super-Zustand mit den Sub-Zuständen "Leerlauf" und "Heizen".](./Diagramme/Mermaid/Zustandsautomat_Betrieb.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="four">
+
+#### Historien-Zustand (History Junction)
+
+Ein Historien-Zustand (`H`) innerhalb eines Super-Zustands merkt sich den zuletzt aktiven Sub-Zustand.
+
+Wenn ein Übergang zum Historien-Zustand führt, wird nicht der Standard-Sub-Zustand aktiviert, sondern derjenige, der beim letzten Verlassen des Super-Zustands aktiv war.
+
+Dies ist nützlich für Unterbrechungen (z.B. ein "Pause"-Modus), nach denen das System genau dort weitermachen soll, wo es aufgehört hat.
+
+</div>
+<div>
+
+![Beispiel ohne History: Bei Rückkehr in "Super" wird immer "Sub1" aktiviert.](./Diagramme/Mermaid/Zustandsautomat_Super_ohne_History.svg)
+
+</div>
+<div>
+
+![Mit History: Bei "resume" wird der zuletzt aktive Sub-Zustand (S1 oder S2) wiederhergestellt.](./Diagramme/Mermaid/Zustandsautomat_Super_mit_History.svg)
+
+</div>
+</div>
 
 ---
 
@@ -1736,13 +2052,45 @@ TODO Inhaltsfolien
 Modellierung von nebenläufigen, unabhängigen Prozessen:
 
 1. **AND-Zustände:** Zustände, deren Sub-Zustände (Regionen) gleichzeitig aktiv sind.
-2. **Orthogonale Regionen:** Die parallelen Bereiche innerhalb eines AND-Zustands.
+2. **Orthogonale Regionen:** Die parallelen Bereiche innerhalb eines AND-Zands.
 3. **Anwendungsbeispiele:** Gleichzeitige Verwaltung von Stromversorgung und Betriebsmodus.
 4. **Synchronisation** zwischen parallelen Zuständen.
 
 ---
 
-TODO Inhaltsfolien
+<div class="columns">
+<div class="two">
+
+#### Orthogonale (AND) Zustände
+
+Manchmal müssen verschiedene Aspekte eines Systems gleichzeitig, aber unabhängig voneinander modelliert werden. Hierfür verwendet man **orthogonale Zustände**, auch **AND-Zustände** genannt.
+
+Ein Super-Zustand wird durch eine gestrichelte Linie in mehrere parallele **Regionen** aufgeteilt. Jede Region enthält einen eigenen, unabhängigen Zustandsautomaten.
+
+Wenn der Super-Zustand aktiv ist, ist in **jeder** seiner Regionen genau ein Sub-Zustand aktiv.
+
+</div>
+<div>
+
+TODO Allgemeine Illustration
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+TODO Überschrift und Text
+
+</div>
+<div>
+
+![Zwei parallele Automaten: Einer für die Energieversorgung ("Strom") und einer für den Betriebsstatus ("Status").](./Diagramme/Mermaid/Zustandsautomat_Maschine_AN.svg)
+
+</div>
+</div>
 
 ---
 
@@ -1759,7 +2107,55 @@ Die Schnittstelle zwischen der Stateflow-Logik und der Außenwelt (Simulink):
 
 ---
 
-TODO Inhaltsfolien
+<div class="columns">
+<div class="two">
+
+#### Datenobjekte und der Symbol-Manager
+
+Stateflow tauscht Informationen mit Simulink über **Datenobjekte** aus. Diese werden im **Symbol-Manager** (früher "Model Explorer") definiert und typisiert.
+
+Jedes Datenobjekt hat einen **Scope** (Gültigkeitsbereich), der festlegt, woher es kommt und wohin es geht.
+
+</div>
+<div class="two">
+
+![Ein Screenshot des Stateflow Symbol-Managers (oder des Model Explorer-Fensters), der eine Liste von Datenobjekten mit den Spalten Name, Scope und Port zeigt.](./Screenshots/Stateflow_Symbol_Manager.png)
+
+</div>
+</div>
+
+---
+
+#### Daten-Scopes
+
+Der Scope definiert die Sichtbarkeit und Rolle eines Datenobjekts.
+
+TODO Beschreibungen in der Tabelle kürzen
+
+| Scope | Richtung | Beschreibung |
+| :--- | :--- | :--- |
+| `Input` | Simulink &rarr; Stateflow | Ein Datensignal, das von Simulink gelesen wird. Stateflow kann diesen Wert nicht ändern. |
+| `Output` | Stateflow &rarr; Simulink | Ein Datensignal, das von Stateflow geschrieben und an Simulink ausgegeben wird. |
+| `Local` | Intern | Eine Variable, die nur innerhalb des Stateflow-Charts sichtbar und gültig ist. |
+| `Parameter` | Konfiguration | Ein Wert, der von außerhalb (z.B. MATLAB Workspace) gesetzt wird, um das Verhalten des Charts zu konfigurieren. Ist zur Laufzeit konstant. |
+| `Data Store Memory`| Global | Eine globale Variable, die über das gesamte Simulink-Modell hinweg geteilt werden kann. |
+
+---
+
+#### Ereignisse und Funktionsaufrufe
+
+Neben dem kontinuierlichen Austausch von Daten kann Stateflow auch auf **Ereignisse** reagieren oder selbst welche auslösen.
+
+- **Input Events:** Können von Simulink gesendet werden, um Übergänge direkt zu triggern (z.B. ein "rising edge" an einem Port).
+- **Output Events:** Können von Stateflow Aktionen gesendet werden, um ereignisbasierte Subsysteme in Simulink zu aktivieren (`Function-Call Subsystems`).
+
+Stateflow kann außerdem `Simulink Functions` oder `MATLAB Functions` direkt aufrufen, um komplexe Berechnungen auszulagern, anstatt die Logik im Chart selbst abzubilden.
+
+---
+
+TODO Überschrift und kurzer Text
+
+![Ein Diagramm, das die Interaktion zeigt: Ein Simulink-Signal triggert ein Input Event in Stateflow. Eine Stateflow-Aktion sendet ein Output Event, das ein Function-Call Subsystem in Simulink aktiviert.](./Diagramme/Draw/Stateflow_Events_Functions.svg)
 
 ---
 
@@ -1770,7 +2166,7 @@ TODO Inhaltsfolien
 In diesem vierten Abschnitt lernen wir die folgenden Dinge:
 
 1. **Virtuelle Welten** (Die 3D-Szene im VRML/X3D-Format)
-2. **Der VR Sink Block** (Die Brücke zwischen Simulink und der 3D-Welt)
+2. **Der VR Sink Block** (Die Brücke zwischen Simulink und 3D-Welt)
 3. **Transformationen** (Objekte bewegen und rotieren)
 4. **Kameras und Ansichten** (Die Perspektive wechseln)
 
@@ -1789,7 +2185,39 @@ Die Grundlage für jede 3D-Visualisierung:
 
 ---
 
-TODO Inhaltsfolien
+#### VRML und X3D
+
+Simulink 3D Animation verwendet **VRML** (Virtual Reality Modeling Language) und dessen Nachfolger **X3D** als Dateiformate zur Beschreibung der 3D-Szene.
+
+Diese textbasierten Formate definieren eine Szene als Baum von **Knoten (Nodes)**.
+- **`Shape`**-Knoten definieren die sichtbare Geometrie (z.B. `Box`, `Sphere`, `Cylinder`).
+- **`Appearance`**-Knoten beschreiben das Material und die Farbe.
+- **`Transform`**-Knoten positionieren, rotieren und skalieren die Objekte, die sie enthalten.
+
+Felder eines Knotens, die von Simulink aus gesteuert werden sollen, müssen mit `DEF` benannt werden.
+
+---
+
+TODO Üverschrift und kurzer Text
+
+```vrml
+#VRML V2.0 utf8
+Transform {
+  children [
+    DEF Roboterarm Transform {
+      translation 0 1 0
+      children [
+        Shape {
+          geometry Box { size 0.2 1 0.2 }
+          appearance Appearance {
+            material Material { diffuseColor 1 0 0 }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
 
 ---
 
@@ -1806,7 +2234,20 @@ Die essenzielle Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:
 
 ---
 
-TODO Inhaltsfolien
+#### Einrichtung des VR Sink Blocks
+
+Der `VR Sink` Block ist die Brücke von Simulink zur 3D-Welt.
+
+1.  **Welt laden:** Im Block-Dialog wird der Pfad zur `.wrl` oder `.x3d` Datei angegeben.
+2.  **Knoten auswählen:** Nach dem Laden der Welt zeigt der Block eine Baumstruktur aller `DEF`-benannten Knoten an.
+3.  **Feld auswählen:** Man wählt den Knoten (z.B. `Roboterarm`) und das zu steuernde Feld (z.B. `rotation` oder `translation`).
+4.  **Signal verbinden:** Der Block erstellt einen Eingangs-Port, der mit dem entsprechenden Simulink-Signal verbunden wird. Die Dimension des Signals muss zum Feld passen (z.B. 3-Element-Vektor für `translation`).
+
+---
+
+TODO Überschrift und kurzer Text
+
+![Ein Screenshot des VR Sink Blockdialogs. Links ist die Baumstruktur der VRML-Welt zu sehen, rechts die Parameter für das ausgewählte Feld.](./Screenshots/S3D_VRSink_Dialog.png)
 
 ---
 
@@ -1824,7 +2265,43 @@ Wie Objekte in der virtuellen Welt positioniert und orientiert werden:
 
 ---
 
-TODO Inhaltsfolien
+#### Der `Transform`-Knoten
+
+Der `Transform`-Knoten ist der wichtigste Knoten zur Animation von Objekten. Er wendet eine Reihe von Transformationen auf alle seine `children` (Kinder) an. Die wichtigsten Felder sind:
+
+-   `translation [x y z]`: Verschiebt das Objekt um den angegebenen Vektor vom Ursprung seines übergeordneten Knotens.
+-   `rotation [x y z angle]`: Rotiert das Objekt um die Achse `[x y z]` um den `angle` (in Radiant).
+-   `scale [x y z]`: Skaliert das Objekt entlang der Achsen.
+-   `children [...]`: Enthält die Knoten (z.B. andere `Transform`-Knoten oder `Shape`-Knoten), auf die die Transformation angewendet wird.
+
+---
+
+TODO Überschrift und kurzer Text
+
+![Eine Illustration, die die Effekte von Translation, Rotation und Skalierung auf ein Koordinatensystem und ein darin platziertes Objekt zeigt.](./Illustrationen/s3d_transform_effects.jpg)
+
+---
+
+<div class="columns">
+<div class="five">
+
+#### Hierarchische Transformationen
+
+Um komplexe Bewegungen wie bei einem Roboterarm zu realisieren, werden `Transform`-Knoten ineinander geschachtelt.
+
+-   Die **Basis** des Roboters ist ein `Transform`-Knoten relativ zum Welt-Ursprung.
+-   Der **Oberarm** ist ein Kind der Basis. Seine Transformation ist relativ zur Basis.
+-   Der **Unterarm** ist ein Kind des Oberarms. Seine Transformation ist relativ zum Oberarm.
+
+Wenn sich also die Basis dreht, bewegen sich Ober- und Unterarm automatisch mit. Dies schafft eine kinematische Kette.
+
+</div>
+<div>
+
+![Struktur einer kinematischen Kette.](./Diagramme/Mermaid/Kinematische_Kette.svg)
+
+</div>
+</div>
 
 ---
 
@@ -1841,4 +2318,18 @@ Definition des Blickwinkels des Betrachters:
 
 ---
 
-TODO Inhaltsfolien
+#### Der `Viewpoint`-Knoten
+
+Ein `Viewpoint`-Knoten definiert eine Kamera in der Szene. Man kann mehrere `Viewpoint`-Knoten erstellen, um zwischen verschiedenen Perspektiven zu wechseln.
+
+Wichtige Felder:
+-   `position [x y z]`: Der Standpunkt der Kamera im 3D-Raum.
+-   `orientation [x y z angle]`: Die Ausrichtung der Kamera (Achse-Winkel-Repräsentation). Definiert, in welche Richtung die Kamera blickt.
+-   `fieldOfView angle`: Der Öffnungswinkel der Kamera (in Radiant). Kleine Werte entsprechen einem Teleobjektiv, große Werte einem Weitwinkelobjektiv.
+-   `description "Name"`: Der Name, der im Auswahlmenü des 3D-Viewers angezeigt wird.
+
+---
+
+TODO Überschrift und kurzer Text
+
+![Ein Screenshot des Simulink 3D Animation Viewers. Man sieht eine 3D-Szene und ein Menü oder eine Symbolleiste, in der man zwischen verschiedenen, per 'description' benannten, 'Viewpoints' (z.B. "Fahrerperspektive", "Draufsicht") wechseln kann.](./Screenshots/S3D_Viewpoint_Selection.png)

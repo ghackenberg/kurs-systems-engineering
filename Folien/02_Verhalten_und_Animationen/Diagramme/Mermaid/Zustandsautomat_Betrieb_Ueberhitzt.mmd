@@ -1,0 +1,6 @@
+stateDiagram-v2
+    state "Betrieb" as S1
+    state "Überhitzt" as S2
+    [*] --> S1
+    S1 --> S2 : [temp > 95]{log_warning()}/emergency_stop()
+    S2 --> S1 : [temp < 80]

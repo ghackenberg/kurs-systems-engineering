@@ -1,0 +1,10 @@
+stateDiagram-v2
+    [*] --> Aus
+    Aus --> Betrieb : einschalten
+
+    state Betrieb {
+        [*] --> Leerlauf
+        Leerlauf --> Heizen : start
+        Heizen --> Leerlauf : stop
+    }
+    Betrieb --> Aus : ausschalten
