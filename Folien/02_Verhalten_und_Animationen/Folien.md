@@ -2674,7 +2674,7 @@ Shape {
 
 ---
 
-TODO Folie zu komplexen Formen in VRML
+TODO Folie zu komplexen Geometrien in VRML
 
 ---
 
