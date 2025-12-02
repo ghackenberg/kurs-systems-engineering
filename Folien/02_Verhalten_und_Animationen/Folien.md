@@ -2039,6 +2039,10 @@ Dies ist eine fortgeschrittene Option, die bei komplexen, modularen Modellen nü
 
 ---
 
+TODO Abschnitt zu Fallbeispiel "Akkuschrauber"
+
+---
+
 ![bg right](./Illustrationen/Stateflow.jpg)
 
 ## 2.3 Stateflow **Logikmodelle**
@@ -2412,6 +2416,10 @@ Stateflow kann über Ereignisse und direkte Funktionsaufrufe eng mit Simulink in
 
 ---
 
+TODO Abschnitt zu Fallbeispiel "Akkuschrauber"
+
+---
+
 ![bg right](./Illustrationen/Simulink3D.jpg)
 
 ## 2.4 Simulink **3D Animation**
@@ -2731,3 +2739,7 @@ Viewpoint {
 Im 3D-Viewer können Benutzer interaktiv zwischen allen in der Welt definierten `Viewpoint`-Knoten wechseln. Die `description` des Knotens wird dabei als Name im Auswahlmenü angezeigt. Dies ermöglicht geführte Sichten auf wichtige Aspekte der Simulation.
 
 ![Ein Screenshot des Simulink 3D Animation Viewers. Man sieht eine 3D-Szene und ein Menü oder eine Symbolleiste, in der man zwischen verschiedenen, per 'description' benannten, 'Viewpoints' (z.B. "Fahrerperspektive", "Draufsicht") wechseln kann.](./Screenshots/S3D_Viewpoint_Selection.png)
+
+---
+
+TODO Abschnitt zu Fallbeispiel "Akkuschrauber"
