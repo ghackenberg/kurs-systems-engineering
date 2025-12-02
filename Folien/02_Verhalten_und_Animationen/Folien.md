@@ -2426,7 +2426,7 @@ TODO Abschnitt zu Fallbeispiel "Akkuschrauber"
 
 1. **Virtuelle Welten** (Die 3D-Szene im VRML/X3D-Format)
 2. **Der VR Sink Block** (Die Brücke zwischen Simulink und 3D-Welt)
-3. **Formen** (Geometrien wie Würfel, Kugel und Zylinder)
+3. **Geometrien** (Grundformen wie Würfel, Kugel und Zylinder)
 4. **Transformationen** (Objekte bewegen und rotieren)
 5. **Kameras und Ansichten** (Die Perspektive wechseln)
 
@@ -2535,15 +2535,146 @@ Im Dialog des `VR Sink` Blocks wird die Verknüpfung zwischen Simulink und der 3
 
 ---
 
-![bg right](./Illustrationen/s3d_shape.jpg)
+![bg right](./Illustrationen/s3d_geometry.jpg)
 
-### 2.4.3 Formen
+### 2.4.3 Geometrien
 
-TODO Übersicht der Inhalte
+VRML (Virtual Reality Modeling Language) und X3D bieten eine Reihe vordefinierter Geometriegrund-formen, die den Aufbau von 3D-Szenen vereinfachen. Diese primitiven Formen sind effizient und flexibel einsetzbar.
+
+1.  **Box** (Würfel, Quader)
+2.  **Cone** (Kegel)
+3.  **Cylinder** (Zylinder)
+4.  **Sphere** (Kugel)
 
 ---
 
-TODO Folien zu Formen in VRML
+#### Box
+
+Der `Box`-Knoten erzeugt einen Quader (standardmäßig einen Würfel). Die Größe des Quaders kann über das `size`-Feld definiert werden.
+
+<div class="columns">
+<div class="four">
+
+```vrml
+#VRML V2.0 utf8
+Shape {
+  geometry Box {
+    size 2 1 0.5  # Breite, Höhe, Tiefe
+  }
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.8 0.2 0.2  # Rot
+    }
+  }
+}
+```
+
+</div>
+<div class="two">
+
+![](./Screenshots/VRML_Formen_Box.png)
+
+</div>
+</div>
+
+---
+
+#### Cone
+
+Der `Cone`-Knoten erzeugt einen Kegel. Seine Form wird durch `bottomRadius` und `height` bestimmt.
+
+<div class="columns">
+<div class="four">
+
+```vrml
+#VRML V2.0 utf8
+Shape {
+  geometry Cone {
+    bottomRadius 1.0  # Radius an der Basis
+    height 2.0        # Höhe des Kegels
+  }
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.2 0.8 0.2  # Grün
+    }
+  }
+}
+```
+
+</div>
+<div class="two">
+
+![](./Screenshots/VRML_Formen_Cone.png)
+
+</div>
+</div>
+
+---
+
+#### Cylinder
+
+Der `Cylinder`-Knoten erzeugt einen Zylinder. Seine Abmessungen werden durch `radius` und `height` festgelegt.
+
+<div class="columns">
+<div class="four">
+
+```vrml
+#VRML V2.0 utf8
+Shape {
+  geometry Cylinder {
+    radius 0.7  # Radius des Zylinders
+    height 2.5  # Höhe des Zylinders
+  }
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.2 0.2 0.8  # Blau
+    }
+  }
+}
+```
+
+</div>
+<div class="two">
+
+![](./Screenshots/VRML_Formen_Cylinder.png)
+
+</div>
+</div>
+
+---
+
+#### Sphere
+
+Der `Sphere`-Knoten erzeugt eine Kugel. Ihre Größe wird durch das `radius`-Feld bestimmt.
+
+<div class="columns">
+<div class="four">
+
+```vrml
+#VRML V2.0 utf8
+Shape {
+  geometry Sphere {
+    radius 1.5  # Radius der Kugel
+  }
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.8 0.8 0.2  # Gelb
+    }
+  }
+}
+```
+
+</div>
+<div class="two">
+
+![](./Screenshots/VRML_Formen_Sphere.png)
+
+</div>
+</div>
+
+---
+
+TODO Folie zu komplexen Formen in VRML
 
 ---
 
