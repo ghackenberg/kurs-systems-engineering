@@ -1610,6 +1610,10 @@ Dieser Unterabschnitt behandelt die Grundlagen akausaler physikalischer Netzwerk
 
 ---
 
+TODO Inhaltsfolien
+
+---
+
 ![bg right](./Illustrationen/simscape_domaenen.jpg)
 
 ### 2.2.2 Domänen und Bibliotheken
@@ -1620,6 +1624,10 @@ Hier lernen wir die verschiedenen physikalischen Domänen und ihre zugehörigen 
 2. Mechanische Domänen (1D Translation/Rotation)
 3. Thermische Domäne
 4. Weitere Domänen (z.B. Hydraulik, Gas)
+
+---
+
+TODO Inhaltsfolien
 
 ---
 
@@ -1635,6 +1643,10 @@ Dieser Abschnitt erklärt den fundamentalen Unterschied zwischen Simscape- und S
 
 ---
 
+TODO Inhaltsfolien
+
+---
+
 ![bg contain right](./Illustrationen/simscape_solver.jpg)
 
 ### 2.2.4 Solver für physikalische Netze
@@ -1645,6 +1657,10 @@ Simscape-Modelle erfordern spezielle Solver-Einstellungen. Wir behandeln:
 2. Der "Solver Configuration" Block
 3. Auswahl des richtigen Solvers (z.B. `ode23t`, `ode15s`)
 4. Lokale Solver für einzelne Netzwerke
+
+---
+
+TODO Inhaltsfolien
 
 ---
 
@@ -1675,6 +1691,10 @@ Die Grundbausteine eines jeden Stateflow-Charts:
 
 ---
 
+TODO Inhaltsfolien
+
+---
+
 ![bg contain right](./Illustrationen/stateflow_aktionen.jpg)
 
 ### 2.3.2 Aktionen und Bedingungen
@@ -1685,6 +1705,10 @@ Hier definieren wir, was passiert und wann es passiert:
 2. **Bedingungsaktionen (Condition Actions):** Werden ausgeführt, wenn die Bedingung wahr ist. `{action}`
 3. **Übergangsaktionen (Transition Actions):** Werden ausgeführt, wenn der Übergang stattfindet. `/action`
 4. **Zustandsaktionen (State Actions):** `entry`, `during`, `exit` Aktionen.
+
+---
+
+TODO Inhaltsfolien
 
 ---
 
@@ -1701,6 +1725,10 @@ Strukturierung komplexer Logik durch Schachtelung:
 
 ---
 
+TODO Inhaltsfolien
+
+---
+
 ![bg right](./Illustrationen/stateflow_parallel.jpg)
 
 ### 2.3.4 Parallele Zustandsautomaten
@@ -1711,6 +1739,10 @@ Modellierung von nebenläufigen, unabhängigen Prozessen:
 2. **Orthogonale Regionen:** Die parallelen Bereiche innerhalb eines AND-Zustands.
 3. **Anwendungsbeispiele:** Gleichzeitige Verwaltung von Stromversorgung und Betriebsmodus.
 4. **Synchronisation** zwischen parallelen Zuständen.
+
+---
+
+TODO Inhaltsfolien
 
 ---
 
@@ -1727,130 +1759,86 @@ Die Schnittstelle zwischen der Stateflow-Logik und der Außenwelt (Simulink):
 
 ---
 
+TODO Inhaltsfolien
 
+---
 
 ![bg right](./Illustrationen/Simulink3D.jpg)
 
-
-
 ## 2.4 Simulink **3D Animation**
-
-
 
 In diesem vierten Abschnitt lernen wir die folgenden Dinge:
 
-
-
 1. **Virtuelle Welten** (Die 3D-Szene im VRML/X3D-Format)
-
 2. **Der VR Sink Block** (Die Brücke zwischen Simulink und der 3D-Welt)
-
 3. **Transformationen** (Objekte bewegen und rotieren)
-
 4. **Kameras und Ansichten** (Die Perspektive wechseln)
 
-
-
 ---
-
-
 
 ![bg right](./Illustrationen/s3d_welt.jpg)
 
-
-
 ### 2.4.1 Virtuelle Welten
-
-
 
 Die Grundlage für jede 3D-Visualisierung:
 
-
-
 1. **VRML und X3D:** Standardformate zur Beschreibung von 3D-Szenen.
-
 2. **Aufbau einer Welt:** Knoten (`Nodes`), Felder (`Fields`) und Routen (`Routes`).
-
 3. **Erstellen und Bearbeiten:** Verwendung von 3D-Editoren (z.B. V-Realm Builder, Blender).
-
 4. **Einbinden in Simulink 3D Animation**.
-
-
 
 ---
 
+TODO Inhaltsfolien
 
+---
 
 ![bg right](./Illustrationen/s3d_vrsink.jpg)
 
-
-
 ### 2.4.2 Der VR Sink Block
-
-
 
 Die essenzielle Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:
 
-
-
 1. **Block-Parameter:** Zuordnung der virtuellen Welt.
-
 2. **Signale verbinden:** Wie man ein Simulink-Signal mit einer Eigenschaft (Feld) eines 3D-Objekts (Knoten) verknüpft.
-
 3. **Baumstruktur der Welt:** Navigation zu den richtigen Knoten und Feldern.
-
 4. **Abtastzeit** und deren Auswirkung auf die Flüssigkeit der Animation.
-
-
 
 ---
 
+TODO Inhaltsfolien
 
+---
 
 ![bg right](./Illustrationen/s3d_transformation.jpg)
 
-
-
 ### 2.4.3 Transformationen
-
-
 
 Wie Objekte in der virtuellen Welt positioniert und orientiert werden:
 
-
-
 1. **Der `Transform`-Knoten:** Kapselt Geometrie und deren Position/Rotation.
-
 2. **Translation:** Verschiebung entlang der X-, Y- und Z-Achse.
-
 3. **Rotation:** Drehung um eine beliebige Achse (Axis-Angle-Repräsentation).
-
 4. **Skalierung:** Ändern der Größe von Objekten.
-
 5. **Hierarchische Transformationen:** Verknüpfung von Bewegungen (z.B. Roboterarm).
-
-
 
 ---
 
+TODO Inhaltsfolien
 
+---
 
 ![bg right](./Illustrationen/s3d_kamera.jpg)
 
-
-
 ### 2.4.4 Kameras und Ansichten
-
-
 
 Definition des Blickwinkels des Betrachters:
 
-
-
 1. **Der `Viewpoint`-Knoten:** Definition einer Kamera in der 3D-Szene.
-
 2. **Position und Orientierung:** Wo befindet sich die Kamera und wohin schaut sie?
-
 3. **Blickfeld (Field of View):** Weitwinkel- oder Teleobjektiv-Effekt.
-
 4. **Navigation:** Umschalten zwischen verschiedenen vordefinierten Ansichten während der Simulation.
+
+---
+
+TODO Inhaltsfolien
