@@ -1,0 +1,16 @@
+stateDiagram-v2
+    [*] --> Standby
+    
+    Standby --> Heating : temp < setpoint
+    Heating --> Standby : temp >= setpoint
+
+    state "<b>Standby</b><br/><code>entry / motor_off()</code>" as Standby
+    state "<b>Heating</b><br/><code>entry / motor_on()</code><br/><code>during / update_display()</code>" as Heating
+    state "<b>Fault</b><br/><code>entry / log_error()</code>" as Fault
+
+    Heating --> Fault : error_detected
+    Standby --> Fault : error_detected
+
+    classDef x white-space:nowrap;
+
+    class Heating x

@@ -1,0 +1,19 @@
+stateDiagram-v2
+    state "Super-Zustand" as Super {
+        state "Region 1" as R1 {
+            [*] --> A
+            A --> B
+            B --> A
+        }
+        state "Region 2" as R2 {
+            [*] --> C
+            C --> D
+            D --> C
+        }
+    }
+    [*] --> Super
+
+    classDef region stroke-dasharray:10 10
+
+    class R1 region
+    class R2 region

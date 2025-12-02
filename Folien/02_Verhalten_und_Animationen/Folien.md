@@ -1643,7 +1643,9 @@ Das Produkt dieser beiden Variablen ist in der Regel die Leistung, die durch die
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Variablen-Paare in jeder Domäne
+
+Jede physikalische Domäne in Simscape wird durch ein charakteristisches Paar von Through- und Across-Variablen definiert. Die folgende Tabelle zeigt die gängigsten Beispiele.
 
 | Domäne | Across-Variable | Through-Variable |
 | :--- | :--- | :--- |
@@ -1667,7 +1669,9 @@ Ohne Referenz ist das Gleichungssystem unbestimmt, da alle Across-Variablen nur 
 
 ---
 
-TODO Überschrift
+#### Beispiele für Referenzknoten
+
+Jede Domäne hat ihren eigenen Referenzblock, um den Nullpunkt zu definieren.
 
 ![Ein Screenshot, der verschiedene Referenzblöcke in Simscape zeigt: Electrical Reference, Mechanical Translational Reference und Thermal Reference.](./Screenshots/Simscape_Reference_Blocks.png)
 
@@ -1686,7 +1690,7 @@ Hier lernen wir die verschiedenen physikalischen Domänen und ihre zugehörigen 
 
 ---
 
-TODO Überschrift
+#### Multiphysikalische Bibliotheken
 
 Simscape bietet eine breite Palette an Bibliotheken für verschiedene physikalische Domänen, die es ermöglichen, multidisziplinäre Systeme zu modellieren.
 
@@ -1722,7 +1726,45 @@ Modellierung von Wärmeerzeugung und -übertragung.
 
 ---
 
-TODO Folien zu ausgewählten Blöcken und deren Implementierungen (interne Gleichungen)
+<div class="columns">
+<div class="six">
+
+#### Elektrische Domäne: **Widerstand**
+
+Der `Resistor`-Block modelliert einen linearen elektrischen Widerstand.
+
+**Gleichung:** Das Verhalten wird durch das Ohmsche Gesetz beschrieben, das die Spannung $v$ über dem Widerstand mit dem Strom $i$ in Beziehung setzt, der durch ihn fließt. $R$ ist der Widerstandswert.
+
+$v = i \cdot R$
+
+</div>
+<div>
+
+![w:1000](https://de.mathworks.com/help/simscape/ref/resistor_ic.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="six">
+
+#### Mechanische Domäne: **Masse**
+
+Der `Mass`-Block modelliert eine ideale translatorische Masse.
+
+**Gleichung:** Das Verhalten wird durch das zweite Newtonsche Gesetz beschrieben. Die Summe aller auf die Masse wirkenden Kräfte $F$ ist gleich dem Produkt aus der Masse $m$ und der Beschleunigung $a$.
+
+$F = m \cdot a = m \cdot \frac{dv}{dt}$
+
+</div>
+<div>
+
+![w:1000](https://de.mathworks.com/help/simscape/ref/mass_ic.png)
+
+</div>
+</div>
 
 ---
 
@@ -1793,7 +1835,7 @@ Wandelt eine physikalische Größe (eine Across- oder Through-Variable) aus dem 
 
 ---
 
-TODO Überschrift
+#### Simulink-Simscape Konverterblöcke
 
 <div class="columns">
 <div>
@@ -1834,7 +1876,9 @@ Aus diesem Grund sind spezielle DAE-Solver für die Simulation von Simscape-Mode
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Vom Modell zum Gleichungssystem
+
+Simscape übersetzt das physikalische Netzwerk intern in ein System aus Gleichungen. Die dynamischen Elemente (z.B. Masse) liefern Differentialgleichungen, während die Verbindungen und statischen Elemente (z.B. Feder) algebraische Nebenbedingungen aufstellen.
 
 ![Ein abstraktes Diagramm, das zeigt, wie verbundene Simscape-Blöcke (Masse, Feder, Dämpfer) in ein System von Differential- und Algebraischen Gleichungen übersetzt werden.](./Diagramme/Draw/Simscape_zu_DAE.svg)
 
@@ -1852,7 +1896,9 @@ Er wird direkt mit einem Referenzblock (z.B. `Electrical Reference`) im Netzwerk
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Konfiguration des Solvers
+
+Der `Solver Configuration` Block muss mit dem physikalischen Netzwerk verbunden sein. Er stellt die Verbindung zur Solver-Engine von Simulink her und ermöglicht netzwerkspezifische Einstellungen.
 
 ![Ein Screenshot des 'Solver Configuration' Blocks, wie er in einem einfachen Simscape-Schaltkreis platziert und verbunden ist.](./Screenshots/Simscape_Solver_Configuration.png)
 
@@ -1869,7 +1915,9 @@ Die Solver-Auswahl erfolgt in den allgemeinen Modelleinstellungen von Simulink (
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Globale Solver-Auswahl für DAEs
+
+Die Auswahl des Solvers erfolgt in den globalen Modelleinstellungen. Für Simscape-Modelle (DAEs) sind steife Solver wie `ode23t` oder `ode15s` in der Regel die beste Wahl.
 
 ![Ein Screenshot der Solver-Einstellungen in Simulink, der die Auswahl zwischen ode23t und ode15s im Dropdown-Menü zeigt.](./Screenshots/Simulink_Solver_Selection_DAE.png)
 
@@ -1959,12 +2007,18 @@ Die Logik eines Übergangs wird direkt an den Pfeil geschrieben. Die Syntax `Ere
 ---
 
 <div class="columns">
-<div>
+<div class="five">
 
-Überschrift und kurzer Text
+#### Beispiel: Überhitzungsschutz
+
+Dieser Zustandsautomat modelliert einen einfachen Überhitzungsschutz.
+
+- Der **Standardübergang** führt in den Zustand `Betrieb`.
+- Wenn die `Temperatur` über 95°C steigt (`[Temperatur > 95]`), wird der Übergang zum Zustand `Ueberhitzt` ausgelöst.
+- Im Zustand `Ueberhitzt` wird die `Heizung` abgeschaltet (`entry: Heizung = 0`).
 
 </div>
-<div>
+<div class="four">
 
 ![](./Diagramme/Mermaid/Zustandsautomat_Betrieb_Ueberhitzt.svg)
 
@@ -1973,7 +2027,26 @@ Die Logik eines Übergangs wird direkt an den Pfeil geschrieben. Die Syntax `Ere
 
 ---
 
-TODO Folie zu Unterscheid zwischen Bedingungsaktion und Übergangsaktion
+#### Bedingungs- vs. Übergangsaktion
+
+<div class="columns top">
+<div>
+
+##### Bedingungsaktion `{action}`
+
+- **Wann?** Wird ausgeführt, sobald die Bedingung (`guard`) des Übergangs `true` ist, **unabhängig davon, ob der Übergang tatsächlich stattfindet.**
+- **Anwendung:** Nützlich, um ein Ereignis zu protokollieren, sobald eine Schwelle erreicht ist, auch wenn der Zustandswechsel (noch) nicht vollzogen wird (z.B. weil andere Bedingungen nicht erfüllt sind).
+
+</div>
+<div>
+
+##### Übergangsaktion `/action`
+
+- **Wann?** Wird ausgeführt, wenn der **gesamte Übergang stattfindet**, d.h., nachdem der Quellzustand verlassen wurde und bevor der Zielzustand betreten wird.
+- **Anwendung:** Der Standardfall, um eine Aktion auszuführen, die direkt mit dem Zustandswechsel verbun-den ist (z.B. `motor_abschalten()`).
+
+</div>
+</div>
 
 ---
 
@@ -1987,7 +2060,22 @@ Zustände können Aktionen ausführen, wenn sie betreten, verlassen werden oder 
 
 ---
 
-TODO Folie mit Beispiel für Zustandsaktionen
+<div class="columns">
+<div class="three">
+
+#### Beispiel einer **Heizungssteuerung**
+
+-   **`entry` Aktionen:** Werden beim Betreten eines Zustands ausgeführt, z.B. `motor_on()` beim Wechsel in den `Heating`-Zustand.
+-   **`during` Aktion:** Läuft, solange der Zustand aktiv ist, z.B. `update_display()` zur kontinuierlichen Aktualisierung einer Anzeige.
+-   **`exit` Aktion (nicht gezeigt):** Würde beim Verlassen eines Zustands ausgeführt, z.B. um eine Log-Datei zu schreiben.
+
+</div>
+<div class="two">
+
+![Ein Zustandsautomat, der die Verwendung von entry- und during-Aktionen in den Zuständen "Heating" und "Standby" zeigt.](./Diagramme/Mermaid/Zustandsautomat_Aktionen.svg)
+
+</div>
+</div>
 
 ---
 
@@ -2051,6 +2139,10 @@ Dies ist nützlich für Unterbrechungen (z.B. ein "Pause"-Modus), nach denen das
 
 ---
 
+TODO Folie zu Beispiel für Historien-Zustand
+
+---
+
 ![bg right](./Illustrationen/stateflow_parallel.jpg)
 
 ### 2.3.4 Parallele Zustandsautomaten
@@ -2065,7 +2157,7 @@ Modellierung von nebenläufigen, unabhängigen Prozessen:
 ---
 
 <div class="columns">
-<div class="two">
+<div class="five">
 
 #### Orthogonale (AND) Zustände
 
@@ -2076,9 +2168,9 @@ Ein Super-Zustand wird durch eine gestrichelte Linie in mehrere parallele **Regi
 Wenn der Super-Zustand aktiv ist, ist in **jeder** seiner Regionen genau ein Sub-Zustand aktiv.
 
 </div>
-<div>
+<div class="two">
 
-TODO Allgemeine Illustration
+![Ein Super-Zustand mit zwei parallelen (orthogonalen) Regionen, die durch eine gestrichelte Linie getrennt sind.](./Diagramme/Mermaid/Zustandsautomat_Parallel.svg)
 
 </div>
 </div>
@@ -2088,7 +2180,14 @@ TODO Allgemeine Illustration
 <div class="columns">
 <div>
 
-TODO Überschrift und Text
+#### Beispiel: Maschinen-Betriebsart
+
+Ein gutes Beispiel ist eine Maschine, deren Energieversorgung und Betriebsstatus parallel verwaltet werden.
+
+- **Region `Strom`:** Verwaltet, ob die Maschine am Netz (`Netzbetrieb`) oder per Akku (`Akkubetrieb`) läuft.
+- **Region `Status`:** Verwaltet, ob die Maschine im `Leerlauf` ist oder `Aktiv` arbeitet.
+
+Beide Zustände sind parallel aktiv!
 
 </div>
 <div>
@@ -2107,8 +2206,8 @@ TODO Überschrift und Text
 Die Schnittstelle zwischen der Stateflow-Logik und der Außenwelt (Simulink):
 
 1. **Datenobjekte:** `Input`, `Output`, `Local`, `Parameter` Daten.
-2. **Ereignisse (Events):** `Input Events` zum Triggern von Übergängen, `Output Events` zur Aktivierung von Simulink-Subsystemen.
-3. **Funktionsaufrufe:** Aufruf von Simulink Functions oder MATLAB Functions aus Stateflow.
+2. **Ereignisse:** Einführung von `Input` und `Output Events`.
+3. **Funktionsaufrufe:** Aufruf von Simulink Functions.
 4. **Symbol-Manager** zur Verwaltung der Schnittstelle.
 
 ---
@@ -2153,7 +2252,9 @@ Stateflow kann außerdem `Simulink Functions` oder `MATLAB Functions` direkt auf
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Ereignis- und Funktions-Interaktion
+
+Stateflow kann über Ereignisse und direkte Funktionsaufrufe eng mit Simulink interagieren, was eine ereignisgesteuerte Architektur ermöglicht.
 
 ![Ein Diagramm, das die Interaktion zeigt: Ein Simulink-Signal triggert ein Input Event in Stateflow. Eine Stateflow-Aktion sendet ein Output Event, das ein Function-Call Subsystem in Simulink aktiviert.](./Diagramme/Draw/Stateflow_Events_Functions.svg)
 
@@ -2198,7 +2299,7 @@ Felder eines Knotens, die von Simulink aus gesteuert werden sollen, müssen mit 
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Beispiel einer VRML-Datei
 
 <div class="columns">
 <div class="four">
@@ -2232,11 +2333,26 @@ Transform {
 
 ---
 
-TODO Folien zu VRML-Syntax
+TODO Folie zu Shape-Knoten
 
 ---
 
-TODO Folie zu X3D
+TODO Folie zu Appearance-Knoten
+
+---
+
+TODO Folie zu Transform-Knoten
+
+---
+
+#### Von VRML zu X3D
+
+**X3D** ist der Nachfolger von VRML und ein modernerer, ISO-genormter Standard für 3D-Web- und Broadcast-Grafiken.
+
+- **XML-basiert:** X3D-Dateien verwenden eine XML-Syntax, was sie leichter parsebar und kompatibel mit vielen Web-Technologien macht.
+- **Erweiterte Funktionen:** Bietet zusätzliche Knoten, Shader-Unterstützung (GLSL, etc.), Geo-Referenzierung und mehr.
+- **Abwärtskompatibilität:** Simulink 3D Animation unterstützt beide Formate. X3D ist oft die bevorzugte Wahl für neue Projekte aufgrund seiner Flexibilität.
+- **Classic-Encoding:** X3D unterstützt auch ein "Classic" Encoding, das der VRML-Syntax sehr ähnlich ist.
 
 ---
 
@@ -2264,7 +2380,9 @@ Der `VR Sink` Block ist die Brücke von Simulink zur 3D-Welt.
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Die VR Sink Benutzeroberfläche
+
+Im Dialog des `VR Sink` Blocks wird die Verknüpfung zwischen Simulink und der 3D-Welt hergestellt. Man navigiert durch die Baumstruktur der `DEF`-benannten Knoten und wählt das Feld (z.B. `rotation`), das man mit einem Simulink-Signal steuern möchte.
 
 ![Ein Screenshot des VR Sink Blockdialogs. Links ist die Baumstruktur der VRML-Welt zu sehen, rechts die Parameter für das ausgewählte Feld.](./Screenshots/S3D_VRSink_Dialog.png)
 
@@ -2293,7 +2411,9 @@ Der `Transform`-Knoten ist der wichtigste Knoten zur Animation von Objekten. Er 
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Visuelle Effekte der Transformation
+
+Jedes Feld im `Transform`-Knoten hat eine direkte visuelle Auswirkung auf das Objekt und sein lokales Koordinatensystem. Die Reihenfolge der Transformationen ist wichtig: Skalierung, dann Rotation, dann Translation.
 
 ![Eine Illustration, die die Effekte von Translation, Rotation und Skalierung auf ein Koordinatensystem und ein darin platziertes Objekt zeigt.](./Illustrationen/s3d_transform_effects.jpg)
 
@@ -2347,6 +2467,10 @@ Wichtige Felder:
 
 ---
 
-TODO Überschrift und kurzer Text
+#### Wechseln der Kameraperspektive
+
+Im 3D-Viewer können Benutzer interaktiv zwischen allen in der Welt definierten `Viewpoint`-Knoten wechseln. Die `description` des Knotens wird dabei als Name im Auswahlmenü angezeigt. Dies ermöglicht geführte Sichten auf wichtige Aspekte der Simulation.
 
 ![Ein Screenshot des Simulink 3D Animation Viewers. Man sieht eine 3D-Szene und ein Menü oder eine Symbolleiste, in der man zwischen verschiedenen, per 'description' benannten, 'Viewpoints' (z.B. "Fahrerperspektive", "Draufsicht") wechseln kann.](./Screenshots/S3D_Viewpoint_Selection.png)
+
+---
