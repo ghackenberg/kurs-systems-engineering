@@ -2551,7 +2551,67 @@ Der `Transform`-Knoten ist der wichtigste Knoten zur Animation von Objekten. Er 
 
 ---
 
-TODO Folien mit VRML-Codebeispielen für Transform-Knoten
+#### Beispiel: **Translation**
+
+Dieses VRML-Beispiel zeigt einen Würfel, der entlang der X-, Y- und Z-Achse verschoben wird.
+
+```vrml
+#VRML V2.0 utf8
+Transform {
+  translation 1 0.5 -2  # Verschiebung um 1 Einheit auf X, 0.5 auf Y, -2 auf Z
+  children [
+    Shape {
+      geometry Box { size 1 1 1 }
+      appearance Appearance {
+        material Material { diffuseColor 0 0.5 1 } # Blau
+      }
+    }
+  ]
+}
+```
+
+---
+
+#### Beispiel: **Rotation**
+
+Dieses VRML-Beispiel zeigt einen Würfel, der um die Y-Achse um 45 Grad (0.785 Radiant) rotiert wird.
+
+```vrml
+#VRML V2.0 utf8
+Transform {
+  rotation 0 1 0 0.785  # Rotation um Y-Achse, 45 Grad (0.785 rad)
+  children [
+    Shape {
+      geometry Box { size 1 1 1 }
+      appearance Appearance {
+        material Material { diffuseColor 1 0.5 0 } # Orange
+      }
+    }
+  ]
+}
+```
+
+---
+
+#### Beispiel: **Skalierung**
+
+Dieses VRML-Beispiel zeigt einen Würfel, der in X-Richtung verdoppelt und in Y-Richtung halbiert wird.
+
+```vrml
+#VRML V2.0 utf8
+Transform {
+  scale 2 0.5 1  # Skalierung: X verdoppelt, Y halbiert, Z unverändert
+  children [
+    Shape {
+      geometry Box { size 1 1 1 }
+      appearance Appearance {
+        material Material { diffuseColor 0.8 0.8 0 } # Gelb
+      }
+    }
+  ]
+}
+```
+
 
 ---
 
@@ -2611,7 +2671,58 @@ Wichtige Felder:
 
 ---
 
-TODO Folien mit VRML-Codebeispielen für Viewport-Knoten
+#### Beispiel: **Standard**-Viewpoint
+
+Dieses Beispiel definiert einen einfachen Viewpoint, der als Standardansicht dient.
+
+```vrml
+#VRML V2.0 utf8
+WorldInfo { title "Einfache Szene mit Viewpoints" }
+Viewpoint {
+  position 0 1.6 8
+  orientation 0 0 1 0
+  fieldOfView 0.785
+  description "Standardansicht"
+}
+# Hier würden weitere Szenenobjekte folgen
+```
+
+---
+
+#### Beispiel: **Overhead**-Viewpoint
+
+Dieses Beispiel zeigt eine Kamera, die von oben auf die Szene blickt.
+
+```vrml
+#VRML V2.0 utf8
+WorldInfo { title "Einfache Szene mit Viewpoints" }
+Viewpoint {
+  position 0 10 0
+  orientation 1 0 0 -1.57 # 90 Grad um die X-Achse gedreht
+  fieldOfView 0.785
+  description "Draufsicht"
+}
+# Hier würden weitere Szenenobjekte folgen
+```
+
+---
+
+#### Beispiel: **Nahaufnahme**
+
+Dieses Beispiel zeigt einen Viewpoint, der nah an einem Objekt positioniert ist, ideal für Detailansichten.
+
+```vrml
+#VRML V2.0 utf8
+WorldInfo { title "Einfache Szene mit Viewpoints" }
+Viewpoint {
+  position 2 1 2
+  orientation 0 1 0 0.785 # Leicht um die Y-Achse gedreht
+  fieldOfView 0.5
+  description "Nahaufnahme"
+}
+# Hier würden weitere Szenenobjekte folgen
+```
+
 
 ---
 
