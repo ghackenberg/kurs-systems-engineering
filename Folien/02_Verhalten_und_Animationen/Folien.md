@@ -1737,6 +1737,8 @@ Der `Resistor`-Block modelliert einen linearen elektrischen Widerstand.
 
 $v = i \cdot R$
 
+TODO Beschreibung von Across- und Through-Variablen
+
 </div>
 <div>
 
@@ -1757,6 +1759,8 @@ Der `Mass`-Block modelliert eine ideale translatorische Masse.
 **Gleichung:** Das Verhalten wird durch das zweite Newtonsche Gesetz beschrieben. Die Summe aller auf die Masse wirkenden Kräfte $F$ ist gleich dem Produkt aus der Masse $m$ und der Beschleunigung $a$.
 
 $F = m \cdot a = m \cdot \frac{dv}{dt}$
+
+TODO Beschreibung von Across- und Through-Variablen
 
 </div>
 <div>
@@ -1876,11 +1880,26 @@ Aus diesem Grund sind spezielle DAE-Solver für die Simulation von Simscape-Mode
 
 ---
 
+<div class="columns">
+<div>
+
 #### Vom Modell zum Gleichungssystem
 
-Simscape übersetzt das physikalische Netzwerk intern in ein System aus Gleichungen. Die dynamischen Elemente (z.B. Masse) liefern Differentialgleichungen, während die Verbindungen und statischen Elemente (z.B. Feder) algebraische Nebenbedingungen aufstellen.
+Simscape übersetzt das physikalische Netzwerk intern in ein System aus Gleichungen.
+
+Die dynamischen Elemente (z.B. Masse) liefern Differentialgleichungen, während die Verbindungen und statischen Elemente (z.B. Feder) algebraische Nebenbedingungen aufstellen.
+
+</div>
+<div>
 
 ![Ein abstraktes Diagramm, das zeigt, wie verbundene Simscape-Blöcke (Masse, Feder, Dämpfer) in ein System von Differential- und Algebraischen Gleichungen übersetzt werden.](./Diagramme/Draw/Simscape_zu_DAE.svg)
+
+</div>
+</div>
+
+---
+
+TODO Folien zu einem konkreten Beispiel mit mathematischen Formeln für die Blöcke und das gesamte Gleichungssystem
 
 ---
 
@@ -2252,6 +2271,14 @@ Stateflow kann außerdem `Simulink Functions` oder `MATLAB Functions` direkt auf
 
 ---
 
+TODO Folie zu konkretem Beispiel für Input Events
+
+---
+
+TODO Folie zu konkretem Beispiel für Output Events
+
+---
+
 #### Ereignis- und Funktions-Interaktion
 
 Stateflow kann über Ereignisse und direkte Funktionsaufrufe eng mit Simulink interagieren, was eine ereignisgesteuerte Architektur ermöglicht.
@@ -2333,18 +2360,6 @@ Transform {
 
 ---
 
-TODO Folie zu Shape-Knoten
-
----
-
-TODO Folie zu Appearance-Knoten
-
----
-
-TODO Folie zu Transform-Knoten
-
----
-
 #### Von VRML zu X3D
 
 **X3D** ist der Nachfolger von VRML und ein modernerer, ISO-genormter Standard für 3D-Web- und Broadcast-Grafiken.
@@ -2411,6 +2426,10 @@ Der `Transform`-Knoten ist der wichtigste Knoten zur Animation von Objekten. Er 
 
 ---
 
+TODO Folien mit VRML-Codebeispielen für Transform-Knoten
+
+---
+
 #### Visuelle Effekte der Transformation
 
 Jedes Feld im `Transform`-Knoten hat eine direkte visuelle Auswirkung auf das Objekt und sein lokales Koordinatensystem. Die Reihenfolge der Transformationen ist wichtig: Skalierung, dann Rotation, dann Translation.
@@ -2464,6 +2483,10 @@ Wichtige Felder:
 -   `orientation [x y z angle]`: Die Ausrichtung der Kamera (Achse-Winkel-Repräsentation). Definiert, in welche Richtung die Kamera blickt.
 -   `fieldOfView angle`: Der Öffnungswinkel der Kamera (in Radiant). Kleine Werte entsprechen einem Teleobjektiv, große Werte einem Weitwinkelobjektiv.
 -   `description "Name"`: Der Name, der im Auswahlmenü des 3D-Viewers angezeigt wird.
+
+---
+
+TODO Folien mit VRML-Codebeispielen für Viewport-Knoten
 
 ---
 
