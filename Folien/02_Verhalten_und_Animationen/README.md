@@ -166,7 +166,7 @@ Mathematisch wird ein Signal als Funktion $s(t)$ ausgedrückt, wobei $t$ die Zei
 </div>
 <div>
 
-![width:1000px](./Diagramme/Signal.svg)
+![width:1000px](./Diagramme/Draw/Signal.svg)
 
 </div>
 </div>
@@ -187,7 +187,7 @@ Eine erste wichtige mathematische Eigenschaften der Signalfunktionen ist deren *
 </div>
 <div>
 
-![width:1000px](./Diagramme/Signal_Stetigkeit.svg)
+![width:1000px](./Diagramme/Draw/Signal_Stetigkeit.svg)
 
 </div>
 </div>
@@ -208,7 +208,7 @@ Eine zweite wichtige mathematische Eigenschaft ist deren **Differenzierbarkeit:*
 </div>
 <div>
 
-![width:1000px](./Diagramme/Signal_Differenzierbarkeit.svg)
+![width:1000px](./Diagramme/Draw/Signal_Differenzierbarkeit.svg)
 
 </div>
 </div>
@@ -229,7 +229,7 @@ Eine zweite wichtige mathematische Eigenschaft ist deren **Differenzierbarkeit:*
 </div>
 <div>
 
-![width:1000px](./Diagramme/Signal_Abschnittsweise_Differenzierbarkeit.svg)
+![width:1000px](./Diagramme/Draw/Signal_Abschnittsweise_Differenzierbarkeit.svg)
 
 </div>
 </div>
@@ -250,14 +250,14 @@ Simulink-Blöcke verarbeiten Signale. Dabei wird zwischen Ein- und Ausgangssigna
 </div>
 <div>
 
-![width:1000px](./Diagramme/Signal_IO.svg)
+![width:1000px](./Diagramme/Draw/Signal_IO.svg)
 
 </div>
 </div>
 
 ---
 
-![bg contain right](./Simulink_Blöcke.jpg)
+![bg contain right](./Illustrationen/Simulink_Blöcke.jpg)
 
 ### 2.1.2. Blöcke
 
@@ -286,7 +286,7 @@ Neben den Signalen umfassen Blöcke noch **Zustände** (eine Art *Gedächtnis*) 
 </div>
 <div>
 
-![](./Diagramme/Block.svg)
+![](./Diagramme/Mermaid/Block.svg)
 
 </div>
 </div>
@@ -309,7 +309,7 @@ Das Beispiel auf der rechten Seite zeigt eine konkrete Formulierung für die Fun
 </div>
 <div>
 
-![](./Diagramme/Block_Gain.svg)
+![](./Diagramme/Mermaid/Block_Gain.svg)
 
 </div>
 </div>
@@ -319,12 +319,12 @@ Das Beispiel auf der rechten Seite zeigt eine konkrete Formulierung für die Fun
 <div class="columns">
 <div class="four">
 
-![width:1000px](./Diagramme/Signal_Gain.svg)
+![width:1000px](./Diagramme/Draw/Signal_Gain.svg)
 
 </div>
 <div>
 
-![](./Diagramme/Block_Gain.svg)
+![](./Diagramme/Mermaid/Block_Gain.svg)
 
 </div>
 </div>
@@ -347,7 +347,7 @@ Das Beispiel auf der rechten Seite zeigt wieder eine konkrete Formulierung der F
 </div>
 <div>
 
-![](./Diagramme/Block_Delay.svg)
+![](./Diagramme/Mermaid/Block_Delay.svg)
 
 </div>
 </div>
@@ -357,12 +357,12 @@ Das Beispiel auf der rechten Seite zeigt wieder eine konkrete Formulierung der F
 <div class="columns">
 <div class="four">
 
-![width:1000px](./Diagramme/Signal_Delay.svg)
+![width:1000px](./Diagramme/Draw/Signal_Delay.svg)
 
 </div>
 <div>
 
-![](./Diagramme/Block_Delay.svg)
+![](./Diagramme/Mermaid/Block_Delay.svg)
 
 </div>
 </div>
@@ -389,7 +389,7 @@ $y(t) = f_o(t, x_c, u)$
 </div>
 <div>
 
-![](./Diagramme/Block_Integrator.svg)
+![](./Diagramme/Mermaid/Block_Integrator.svg)
 
 </div>
 </div>
@@ -399,12 +399,12 @@ $y(t) = f_o(t, x_c, u)$
 <div class="columns">
 <div class="four">
 
-![width:1000px](./Diagramme/Signal_Integrator.svg)
+![width:1000px](./Diagramme/Draw/Signal_Integrator.svg)
 
 </div>
 <div>
 
-![](./Diagramme/Block_Integrator.svg)
+![](./Diagramme/Mermaid/Block_Integrator.svg)
 
 </div>
 </div>
@@ -431,7 +431,7 @@ $y(t) = f_o(t, x_{d_k}, u)$
 </div>
 <div>
 
-![](./Diagramme/Block_Discrete_Time_Integrator.svg)
+![](./Diagramme/Mermaid/Block_Discrete_Time_Integrator.svg)
 
 </div>
 </div>
@@ -441,12 +441,12 @@ $y(t) = f_o(t, x_{d_k}, u)$
 <div class="columns">
 <div class="four">
 
-![width:1000px](./Diagramme/Signal_Discrete_Time_Integrator.svg)
+![width:1000px](./Diagramme/Draw/Signal_Discrete_Time_Integrator.svg)
 
 </div>
 <div>
 
-![](./Diagramme/Block_Discrete_Time_Integrator.svg)
+![](./Diagramme/Mermaid/Block_Discrete_Time_Integrator.svg)
 
 </div>
 </div>
@@ -477,7 +477,7 @@ $y(t) = f_o(t,x_c,x_{d_k},u)$
 </div>
 <div>
 
-![](./Diagramme/Block_Hybrid.svg)
+![](./Diagramme/Mermaid/Block_Hybrid.svg)
 
 </div>
 </div>
@@ -487,19 +487,19 @@ $y(t) = f_o(t,x_c,x_{d_k},u)$
 <div class="columns">
 <div class="three">
 
-![width:1000px](./Diagramme/Signal_Hybrid.svg)
+![width:1000px](./Diagramme/Draw/Signal_Hybrid.svg)
 
 </div>
 <div>
 
-![](./Diagramme/Block_Hybrid.svg)
+![](./Diagramme/Mermaid/Block_Hybrid.svg)
 
 </div>
 </div>
 
 ---
 
-![bg contain right](./Simulink_Bibliothek.png)
+![bg contain right](./Screenshots/Simulink_Bibliothek.png)
 
 #### Die Simulink-Bibliothek
 
@@ -519,21 +519,21 @@ Quellen sind der Ausgangspunkt für Signale in einem Simulink-Modell.
 <div class="columns top">
 <div>
 
-![height:175px](./Simulink_Block_Constant.png)
+![height:175px](./Screenshots/Simulink_Block_Constant.png)
 
 *Erzeugt einen konstanten Wert.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Step.png)
+![height:175px](./Screenshots/Simulink_Block_Step.png)
 
 *Erzeugt eine Sprungfunk-tion zu einer bestimmten Zeit.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Sine_Wave.png)
+![height:175px](./Screenshots/Simulink_Block_Sine_Wave.png)
 
 *Erzeugt ein sinusförmiges Signal mit einstellbarer Amplitude, Frequenz und Phase.*
 
@@ -549,21 +549,21 @@ Senken dienen zur Analyse und Anzeige von Signalen während und nach der Simulat
 <div class="columns top">
 <div>
 
-![height:175px](./Simulink_Block_Display.png)
+![height:175px](./Screenshots/Simulink_Block_Display.png)
 
 *Zeigt den numerischen Wert eines Signals am Ende der Simulation an.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Scope.png)
+![height:175px](./Screenshots/Simulink_Block_Scope.png)
 
 *Zeigt Signale in einem Oszilloskop-ähnlichen Diagramm an.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_To_File.png)
+![height:175px](./Screenshots/Simulink_Block_To_File.png)
 
 *Schreibt Signaldaten in eine MAT-Datei zur späteren Analyse.*
 
@@ -579,21 +579,21 @@ Diese Blöcke führen grundlegende mathematische Operationen mit Signalen durch.
 <div class="columns top">
 <div>
 
-![height:175px](./Simulink_Block_Gain.png)
+![height:175px](./Screenshots/Simulink_Block_Gain.png)
 
 *Multipliziert ein Signal mit einem konstanten Faktor (Verstärkung).*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Add.png)
+![height:175px](./Screenshots/Simulink_Block_Add.png)
 
 *Addiert oder subtrahiert zwei oder mehr Signale elementweise.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Polynomial.png)
+![height:175px](./Screenshots/Simulink_Block_Polynomial.png)
 
 *Berechnet einen Polynomwert für das Eingangssignal.*
 
@@ -609,21 +609,21 @@ Diese Blöcke sind das Herzstück für die Modellierung von physikalischen Syste
 <div class="columns">
 <div>
 
-![height:175px](./Simulink_Block_Transport_Delay.png)
+![height:175px](./Screenshots/Simulink_Block_Transport_Delay.png)
 
 *Verzögert das Eingangssignal um eine bestimmte Zeit.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Integrator.png)
+![height:175px](./Screenshots/Simulink_Block_Integrator.png)
 
 *Führt eine kontinuierliche Integration des Eingangssignals durch.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Integrator_Second_Order.png)
+![height:175px](./Screenshots/Simulink_Block_Integrator_Second_Order.png)
 
 *Führt eine doppelte kontinuierliche Integration des Eingangssignals durch.*
 
@@ -639,21 +639,21 @@ Diese Blöcke modellieren diskrete Systeme oder diskrete Anteile in hybriden Sys
 <div class="columns top">
 <div>
 
-![height:175px](./Simulink_Block_Memory.png)
+![height:175px](./Screenshots/Simulink_Block_Memory.png)
 
 *Speichert den Wert des Eingangssignals vom vorherigen Zeitschritt.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Discrete_Time_Integrator.png)
+![height:175px](./Screenshots/Simulink_Block_Discrete_Time_Integrator.png)
 
 *Führt eine diskrete Integration des Eingangssignals durch.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Discrete_Derivative.png)
+![height:175px](./Screenshots/Simulink_Block_Discrete_Derivative.png)
 
 *Berechnet die diskrete Ableitung des Eingangssignals.*
 
@@ -669,21 +669,21 @@ Diese Blöcke sind essenziell für die hierarchische Gliederung und Wiederverwen
 <div class="columns top">
 <div>
 
-![height:175px](./Simulink_Block_InputPort.png)
+![height:175px](./Screenshots/Simulink_Block_InputPort.png)
 
 *Definiert einen Eingang für ein Subsystem oder Modell.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_OutputPort.png)
+![height:175px](./Screenshots/Simulink_Block_OutputPort.png)
 
 *Definiert einen Ausgang für ein Subsystem oder Modell.*
 
 </div>
 <div>
 
-![height:175px](./Simulink_Block_Subsystem.png)
+![height:175px](./Screenshots/Simulink_Block_Subsystem.png)
 
 *Gruppiert Blöcke, um ein hierarchisches Subsystem zu erstellen.*
 
@@ -692,7 +692,7 @@ Diese Blöcke sind essenziell für die hierarchische Gliederung und Wiederverwen
 
 ---
 
-![bg contain right:40%](./Simulink_Component_Created.png)
+![bg contain right:40%](./Screenshots/Simulink_Component_Created.png)
 
 ### Port-Zuordnung
 
@@ -732,7 +732,7 @@ Obwohl beide zur Gliederung von Modellen dienen, haben sie unterschiedliche Zwec
 
 ---
 
-![bg contain right](./Simulink_Linien.jpg)
+![bg contain right](./Illustrationen/Simulink_Linien.jpg)
 
 ### 2.1.3. Kompositionen
 
@@ -755,7 +755,7 @@ Der Begriff **Komposition** beschreibt die Zusammensetzung und Verschaltung von 
 
 ---
 
-![bg contain right:40%](./Simulink_Linie.png)
+![bg contain right:40%](./Screenshots/Simulink_Linie.png)
 
 #### Linie in Simulink erstellen (Ausgangssignal auf Eingangssignal weiterleiten)
 
@@ -767,7 +767,7 @@ In Simulink können Weiterleitungen zwischen Ausgangs- und Eingangssignalen einf
 
 ---
 
-![bg contain right:40%](./Simulink_Linie_Fork.png)
+![bg contain right:40%](./Screenshots/Simulink_Linie_Fork.png)
 
 #### Ein Ausgangssignal auf **mehere** Eingangs-signale weiterleiten
 
@@ -790,7 +790,7 @@ $u_1 = y_2 \Rightarrow f_2(t, u_2) = f_2(t, y_1)$
 
 Grafische Darstellung der Komposition:
 
-![](./Diagramme/Komposition.svg)
+![](./Diagramme/Mermaid/Komposition.svg)
 
 ---
 
@@ -802,7 +802,7 @@ $u_2 = y_1 \Rightarrow f_1(t, u_1) = f_1(t, y_2)$
 
 Grafische Darstellung der erweiterten Komposition:
 
-![](./Diagramme/Komposition_Schleife.svg)
+![](./Diagramme/Mermaid/Komposition_Schleife.svg)
 
 Ist kein Problem, solange $f_1$ oder $f_2$ Zusstände haben oder zeitverzögert reagieren.
 
@@ -833,7 +833,7 @@ Eine Komposition ohne algebraische Schleife ergibt eine gewöhnliche Differentia
 
 *Reine Zeitintegration (z.B. vertikaler Wurf eines Balls)*
 
-![width:200px](./ODE.jpg)
+![width:200px](./Illustrationen/ODE.jpg)
 
 </div>
 <div>
@@ -842,7 +842,7 @@ Eine Komposition ohne algebraische Schleife ergibt eine gewöhnliche Differentia
 
 *Zeitintegration mit Randbedingungen (z.B. Pendelbewegung)*
 
-![width:200px](./DAE.jpg)
+![width:200px](./Illustrationen/DAE.jpg)
 
 </div>
 </div>
@@ -880,7 +880,7 @@ $\dot{v} = -g$
 
 ---
 
-![bg contain right](./Simulink_ODE.png)
+![bg contain right](./Screenshots/Simulink_ODE.png)
 
 #### Umsetzung als Simulink-Modell
 
@@ -931,14 +931,14 @@ Ein steifer Solver kann die schnelle Anfangsphase mit kleinen Schritten und die 
 </div>
 <div>
 
-![width:1000px](./Diagramme/RC-Schaltung.svg)
+![width:1000px](./Diagramme/Draw/RC-Schaltung.svg)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Simulink_Steif.png)
+![bg contain right:40%](./Screenshots/Simulink_Steif.png)
 
 #### Umsetzung des Modells in Simulink
 
@@ -975,7 +975,7 @@ Dieses System kann nicht direkt in die Form $\dot{z} = f(t, z)$ gebracht werden,
 
 ---
 
-![bg contain right:40%](./Simulink_DAE.png)
+![bg contain right:40%](./Screenshots/Simulink_DAE.png)
 
 
 #### Umsetzung des einfachen DAE in Simulink
@@ -985,7 +985,7 @@ Dieses System kann nicht direkt in die Form $\dot{z} = f(t, z)$ gebracht werden,
 
 ---
 
-![bg contain right](./Simulink_Abtastzeiten.jpg)
+![bg contain right](./Illustrationen/Simulink_Abtastzeiten.jpg)
 
 ### 2.1.4. Abtastzeiten
 
@@ -1026,7 +1026,7 @@ Blöcke mit konstanter Abtastzeit werden nur **einmal zu Beginn** der Simulation
 </div>
 <div class="two">
 
-![width:1000px](./Diagramme/Abtastzeit_Konstant.svg)
+![width:1000px](./Diagramme/Draw/Abtastzeit_Konstant.svg)
 
 </div>
 </div>
@@ -1046,7 +1046,7 @@ Blöcke mit **variabler Abtastzeiten** werden zu beliebigen diskreten Zeiten abg
 </div>
 <div class="two">
 
-![width:1000px](./Diagramme/Abtastzeit_Variabel.svg)
+![width:1000px](./Diagramme/Draw/Abtastzeit_Variabel.svg)
 
 </div>
 </div>
@@ -1066,7 +1066,7 @@ Die **automatische Bestimmung** mittels Nulldurchgängen wird verwendet, um den 
 </div>
 <div class="two">
 
-![width:1000px](./Diagramme/Abtastzeit_Variabel_ZeroCrossing.svg)
+![width:1000px](./Diagramme/Draw/Abtastzeit_Variabel_ZeroCrossing.svg)
 
 </div>
 </div>
@@ -1089,7 +1089,7 @@ Der Block wird in regelmäßigen Intervallen ausgeführt (z.B. digitale Signalve
 </div>
 <div class="two">
 
-![width:1000px](./Diagramme/Abtastzeit_Diskret.svg)
+![width:1000px](./Diagramme/Draw/Abtastzeit_Diskret.svg)
 
 </div>
 </div>
@@ -1110,7 +1110,7 @@ Ein Modell ist mehrratig, wenn es Blöcke mit **unterschiedlichen Abtastzeiten**
 </div>
 <div class="two">
 
-![width:1000px](./Diagramme/Abtastzeit_Mehrratig.svg)
+![width:1000px](./Diagramme/Draw/Abtastzeit_Mehrratig.svg)
 
 </div>
 </div>
@@ -1150,7 +1150,7 @@ Dies ist die Standardeinstellung für viele Blöcke. Der Block **erbt** seine Ab
 
 ---
 
-![bg contain right:40%](./Simulink_Timing_Properties.png)
+![bg contain right:40%](./Screenshots/Simulink_Timing_Properties.png)
 
 ### Abtastzeit **konfigurieren**
 
@@ -1162,7 +1162,7 @@ Die Abtastzeit eines Blocks kann in dessen **Blockparametern** eingestellt werde
 
 ---
 
-![bg contain right:40%](./Simulink_Timing_Legend.png)
+![bg contain right:40%](./Screenshots/Simulink_Timing_Legend.png)
 
 ### Abtastzeiten **visualisieren**
 
@@ -1174,7 +1174,7 @@ Simulink kann die verschiedenen Abtastzeiten im Modell farblich hervorheben, um 
 
 ---
 
-![bg contain right](./Simulink_Solver.jpg)
+![bg contain right](./Illustrationen/Simulink_Solver.jpg)
 
 ### 2.1.5. Solver
 
@@ -1210,7 +1210,7 @@ Eine Simulink-Simulation durchläuft typischerweise zwei Hauptphasen:
 </div>
 <div>
 
-![](./Diagramme/Simulationsphasen.svg)
+![](./Diagramme/Mermaid/Simulationsphasen.svg)
 
 </div>
 </div>
@@ -1584,7 +1584,7 @@ Modellieren Sie das Verhalten der atomaren physikalischen Kompo-nenten des 3D-Dr
 
 ---
 
-![bg right](./Simscape.jpg)
+![bg right](./Illustrationen/Simscape.jpg)
 
 ## 2.2 Simscape **Physikmodelle**
 
@@ -1594,7 +1594,7 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
-![bg right](./Stateflow.jpg)
+![bg right](./Illustrationen/Stateflow.jpg)
 
 ## 2.3 Stateflow **Logikmodelle**
 
@@ -1604,7 +1604,7 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
-![bg right](./Simulink3D.jpg)
+![bg right](./Illustrationen/Simulink3D.jpg)
 
 ## 2.4 Simulink 3D Animation
 
