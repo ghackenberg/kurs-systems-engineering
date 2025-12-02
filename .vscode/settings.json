@@ -4,6 +4,9 @@
             {
                 "match": ".mmd",
                 "cmd": "mmdc -i \"${file}\" -o \"${fileDirname}/${fileBasenameNoExt}.svg\""
+            },{
+                "match": ".tikz.tex",
+                "cmd": "pdflatex -shell-escape -output-directory=\"${fileDirname}\" \"${file}\" && pdftocairo -svg \"${fileDirname}/${fileBasenameNoExt}.pdf\" \"${fileDirname}/${fileBasenameNoExt}.svg\""
             }
         ]
     },
