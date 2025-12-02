@@ -2424,12 +2424,11 @@ TODO Abschnitt zu Fallbeispiel "Akkuschrauber"
 
 ## 2.4 Simulink **3D Animation**
 
-In diesem vierten Abschnitt lernen wir die folgenden Dinge:
-
 1. **Virtuelle Welten** (Die 3D-Szene im VRML/X3D-Format)
 2. **Der VR Sink Block** (Die Brücke zwischen Simulink und 3D-Welt)
-3. **Transformationen** (Objekte bewegen und rotieren)
-4. **Kameras und Ansichten** (Die Perspektive wechseln)
+3. **Formen** (Geometrien wie Würfel, Kugel und Zylinder)
+4. **Transformationen** (Objekte bewegen und rotieren)
+5. **Kameras und Ansichten** (Die Perspektive wechseln)
 
 ---
 
@@ -2536,9 +2535,21 @@ Im Dialog des `VR Sink` Blocks wird die Verknüpfung zwischen Simulink und der 3
 
 ---
 
+![bg right](./Illustrationen/s3d_shape.jpg)
+
+### 2.4.3 Formen
+
+TODO Übersicht der Inhalte
+
+---
+
+TODO Folien zu Formen in VRML
+
+---
+
 ![bg right](./Illustrationen/s3d_transformation.jpg)
 
-### 2.4.3 Transformationen
+### 2.4.4 Transformationen
 
 1. **Der `Transform`-Knoten:** Kapselt Geometrie und deren Position.
 2. **Translation:** Verschiebung entlang der X-, Y- und Z-Achse.
@@ -2656,7 +2667,7 @@ Wenn sich also die Basis dreht, bewegen sich Ober- und Unterarm automatisch mit.
 
 ![bg right](./Illustrationen/s3d_kamera.jpg)
 
-### 2.4.4 Kameras und Ansichten
+### 2.4.5 Kameras und Ansichten
 
 Definition des Blickwinkels des Betrachters:
 
