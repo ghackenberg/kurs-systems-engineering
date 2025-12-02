@@ -118,7 +118,7 @@ Inhalt der zweiten Spalte
 </div>
 ```
 
-Der Inhalt einer Spalte kann ein Text mit Überschrift, Absätzen und wahlweise Listen und Formeln sein, eine Tabelle, ein Code-Beispiel, eine SVG-basierte Vektorgrafik, oder eine Referenz auf eine Bilddatei mit Beschreibung der Bildinhalte.
+Der Inhalt einer Spalte kann ein Text mit Überschrift, Absätzen und wahlweise Listen und Formeln sein, eine Tabelle, ein Code-Beispiel, oder eine Referenz auf eine Bilddatei mit detaillierter Beschreibung der Bildinhalte.
 
 ````md
 <div class="columns">
@@ -146,15 +146,36 @@ code-snippet
 </div>
 <div class="one|two|three|four|five|six">
 
-<svg width="..." height="...">
-Inhalte der SVG-basierten Vektorgrafik
-</svg>
-
-</div>
-<div class="one|two|three|four|five|six">
-
 ![Detaillierte Beschreibung des Inhalts des Folienbildes](relativer Pfad des Folienbildes)
 
 </div>
 </div>
 ````
+
+Die Bilder selbst können als Fotografie und Screenshot oder mit Nano Banana, Tikz, und Mermaid.js erstellt werden. Die Quelldateien werden in Visual Studio Code mittels *RunOnSave* automatisch in SVG-Dateien kompiliert.
+
+## Ordnerstruktur
+
+Dieses Repository ist nach folgendem Schema aufgebaut:
+
+- Der Ordner `./Folien` enthält die Foliensätze
+- Der Ordner `./Folien/[XX_Kapitel_Bezeichnung]` enthält den Foliensatz für Kapitel `XX`
+- Die Datei `./Folien/[XX_Kapitel_Bezeichnung]/Titelbild.jpg` ist das Titelbild zum Kapitel (mit Nano Banana generiert)
+- Die Datei `./Folien/[XX_Kapitel_Bezeichnung]/Folien.md` enthält den MARP-Markdown für den Foliensatz des Kapitels
+- Die Datei `./Folien/[XX_Kapitel_Bezeichnung]/Notizen.md` enthält Notizen zum Foliensatz (z.B. größere TODOs)
+- Der Ordner `./Folien/[XX_Kapitel_Bezeichnung]/Diagramme` enthält die LibreOffice Draw, Tikz- und Mermaid-Diagramme
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Diagramme/Draw/[Diagrammname].odg` enthält LibreOffice-Draw Quelldatei mit einer oder mehreren Folien
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Diagramme/Draw/[Diagrammname]_[Folienname].svg` enthält die kompilierte SVG-Datei für eine Folie aus einer LibreOffice Draw Datei
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Diagramme/Tikz/[Diagrammname].tikz.tex` enthält den Quelltext einer Tikz-Grafik
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Diagramme/Tikz/[Diagrammname].tikz.svg` enthält die kompilierte SVG-Datei für eine Tikz-Grafik
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Diagramme/Mermaid/[Diagrammname].mmd` enthält den Quelltext einer Mermaid.js-Grafik
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Diagramme/Mermaid/[Diagrammname].svg` enthält die kompilierte SVG-Datei für eine Mermaid.js-Grafik
+- Der Ordner `./Folien/[XX_Kapitel_Bezeichnung]/Illustrationen` enthält mit Nano Banana generierte Illustrationen
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Illustrationen/[Illustrationsname].jpg` ist eine spezielle Illustration
+- Der Ordner `./Folien/[XX_Kapitel_Bezeichnung]/Screenshots` enthält Screenshots von selbst entwickelten Simulationsprogrammen
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Screenshots/[Screenshotname].png` ist ein spezieller Screenshot
+- Der Ordner `./Folien/[XX_Kapitel_Bezeichnung]/Tafelbilder` enthält Fotografien von Tafelbildern, die während dem Unterricht entstanden sind
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Tafelbilder/[Tafelbildname].jpg` ist ein spezielles Tafelbild
+- Der Ordner `./Folien/[XX_Kapitel_Bezeichnung]/Fotografien` enthält alle sonstigen Fotografien von Personen, Gegenständen, und Situationen
+- Der Datei `./Folien/[XX_Kapitel_Bezeichnung]/Fotografien/[Fotografiename].jpg` ist eine spezielles Fotografie
+- Der Ordner `./Quellen` enthält die zugehörigen Quelldateien der MATLAB Modelle
