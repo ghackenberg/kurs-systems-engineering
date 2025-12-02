@@ -19,7 +19,7 @@ Dieses Kapitel umfasst die folgenden drei Abschnitte:
 
 ---
 
-![bg right](./Anforderungen.jpg)
+![bg right](./Illustrationen/Anforderungen.jpg)
 
 ## 1. Anforderungen sammeln
 
@@ -32,7 +32,7 @@ In diesem ersten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
-![bg contain right:40%](./Architekturmodelle.jpg)
+![bg contain right:40%](./Illustrationen/Architekturmodelle.jpg)
 
 ### 1.1. Architekturmodelle
 
@@ -58,7 +58,7 @@ Der System Composer stellt als Vorlage ein Architekturmodell, ein Software-Archi
 </div>
 <div>
 
-![](./Architektur_Modell_Neu.png)
+![](./Screenshots/Architektur_Modell_Neu.png)
 
 </div>
 </div>
@@ -79,14 +79,14 @@ In der Modellierungsansicht können die Komponenten der Architektur definiert un
 </div>
 <div>
 
-![](./Architektur_Modell_Leer.png)
+![](./Screenshots/Architektur_Modell_Leer.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Anforderungsliste.jpg)
+![bg contain right:40%](./Illustrationen/Anforderungsliste.jpg)
 
 ### 1.2. Anforderungsliste (*Requirement Sets*)
 
@@ -112,7 +112,7 @@ Denn im ersten Schritt wollen wir die Anforderungen an das System beschreiben.
 </div>
 <div>
 
-![](./Architektur_Modell_Apps.png)
+![](./Screenshots/Architektur_Modell_Apps.png)
 
 </div>
 </div>
@@ -133,14 +133,14 @@ In einem Requirement Set können wir mehrere Anforderungen sammeln und gemeinsam
 </div>
 <div>
 
-![](./Architektur_Modell_RequirementsSet_Neu.png)
+![](./Screenshots/Architektur_Modell_RequirementsSet_Neu.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Anforderung.jpg)
+![bg contain right:40%](./Illustrationen/Anforderung.jpg)
 
 ### 1.3. Anforderungen (*Requirements*)
 
@@ -166,7 +166,7 @@ Die Requirements repräsentieren die Anforderungen an das System und können hie
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Neu.png)
+![](./Screenshots/Architektur_Modell_Requirement_Neu.png)
 
 </div>
 </div>
@@ -187,7 +187,7 @@ Die Eigenschaften umfassen einen Typ, eine Zusammenfassung, und eine detailliert
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Beispiel.png)
+![](./Screenshots/Architektur_Modell_Requirement_Beispiel.png)
 
 </div>
 </div>
@@ -208,14 +208,14 @@ Wir unterscheiden diese Typen:
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Edit.png)
+![](./Screenshots/Architektur_Modell_Requirement_Edit.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:20%](./Requirement_Typen_Container.jpg)
+![bg contain right:20%](./Illustrationen/Requirement_Typen_Container.jpg)
 
 ##### Requirement-Typ **Container**
 
@@ -227,7 +227,7 @@ Wir unterscheiden diese Typen:
 
 ---
 
-![bg contain right:20%](./Requirement_Typen_Functional.jpg)
+![bg contain right:20%](./Illustrationen/Requirement_Typen_Functional.jpg)
 
 ##### Requirement-Typ **Functional**
 
@@ -239,7 +239,7 @@ Wir unterscheiden diese Typen:
 
 ---
 
-![bg contain right:20%](./Requirement_Typen_Informational.jpg)
+![bg contain right:20%](./Illustrationen/Requirement_Typen_Informational.jpg)
 
 ##### Requirement-Typ **Informational**
 
@@ -265,7 +265,7 @@ Der Requirements Editor kann über den Reiter **Requirements** im oberen Menü-b
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Editor.png)
+![](./Screenshots/Architektur_Modell_Requirement_Editor.png)
 
 </div>
 </div>
@@ -286,7 +286,7 @@ Die Details der einzelnen Anforderungen wiederum auch im Property Inspector darg
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Editor_Tabelle.png)
+![](./Screenshots/Architektur_Modell_Requirement_Editor_Tabelle.png)
 
 </div>
 </div>
@@ -307,14 +307,14 @@ Diese Darstellung beim Durchlesen der Anforderungsspezifikation aufgrund des hö
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Editor_Dokument.png)
+![](./Screenshots/Architektur_Modell_Requirement_Editor_Dokument.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Verknüpfung.jpg)
+![bg contain right:40%](./Illustrationen/Verknüpfung.jpg)
 
 ### 1.4. Verknüpfungen (*Links*)
 
@@ -340,7 +340,7 @@ Vor die Nachverfolgung bietet die Requirements Toolbox die Möglichkeit, sogenan
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Editor_Link_Select.png)
+![](./Screenshots/Architektur_Modell_Requirement_Editor_Link_Select.png)
 
 </div>
 </div>
@@ -361,7 +361,7 @@ Schließlich kann die Erstellung des Links bestätigt werden und so ein neue Ver
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Editor_Link_Create.png)
+![](./Screenshots/Architektur_Modell_Requirement_Editor_Link_Create.png)
 
 </div>
 </div>
@@ -382,7 +382,7 @@ Die Ansicht zeigt für die gewählte Anforderung alle damit verknüpften Modelle
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Editor_Link_View.png)
+![](./Screenshots/Architektur_Modell_Requirement_Editor_Link_View.png)
 
 </div>
 </div>
@@ -403,7 +403,7 @@ Die Ansicht zeigt auch Vernüpfungen zu anderen Modellen (d.h. anderen Modell-da
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Editor_Link_Show.png)
+![](./Screenshots/Architektur_Modell_Requirement_Editor_Link_Show.png)
 
 </div>
 </div>
@@ -424,14 +424,14 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 </div>
 <div>
 
-![](./Architektur_Modell_Requirement_Editor_Link_Edit.png)
+![](./Screenshots/Architektur_Modell_Requirement_Editor_Link_Edit.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Link_Typen_Confirmed.jpg)
+![bg contain right:40%](./Illustrationen/Link_Typen_Confirmed.jpg)
 
 ##### Link-Typ **Confirmed by** (*Bestätigt durch*)
 
@@ -443,7 +443,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ---
 
-![bg contain right:30%](./Link_Typen_Derives.jpg)
+![bg contain right:30%](./Illustrationen/Link_Typen_Derives.jpg)
 
 ##### Link-Typ **Derives** (*Leitet ab*)
 
@@ -455,7 +455,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ---
 
-![bg contain right:35%](./Link_Typen_Implements.jpg)
+![bg contain right:35%](./Illustrationen/Link_Typen_Implements.jpg)
 
 ##### Link-Typ **Implements** (*Implementiert*)
 
@@ -467,7 +467,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ---
 
-![bg contain right:25%](./Link_Typen_Refines.jpg)
+![bg contain right:25%](./Illustrationen/Link_Typen_Refines.jpg)
 
 ##### Link-Typ **Refines** (*Verfeinert*)
 
@@ -479,7 +479,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ---
 
-![bg contain right:25%](./Link_Typen_Related.jpg)
+![bg contain right:25%](./Illustrationen/Link_Typen_Related.jpg)
 
 ##### Link-Typ **Related to** (*Bezogen auf*)
 
@@ -491,7 +491,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ---
 
-![bg contain right:35%](./Link_Typen_Verifies.jpg)
+![bg contain right:35%](./Illustrationen/Link_Typen_Verifies.jpg)
 
 ##### Link-Typ **Verifies** (*Überprüft*)
 
@@ -503,7 +503,7 @@ Schließlich unterscheidet die MATLAB Requirements Toolbox standardmäßig sechs
 
 ---
 
-![bg contain right:40%](./Case_Study_Requirements.jpg)
+![bg contain right:40%](./Illustrationen/Case_Study_Requirements.jpg)
 
 ### 1.5. Fallbeispiel
 
@@ -601,7 +601,7 @@ Sammle Anforderungen an den 3D-Drucker und dokumentiere die Anforderungen mithil
 
 ---
 
-![bg right](./Architekturen.jpg)
+![bg right](./Illustrationen/Architekturen.jpg)
 
 ## 2. Architekturen festlegen
 
@@ -614,7 +614,7 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
-![bg contain right:40%](./Komponenten.jpg)
+![bg contain right:40%](./Illustrationen/Komponenten.jpg)
 
 ### 2.1. Komponenten
 
@@ -640,7 +640,7 @@ Diese Komponenten repräsentieren die Haupt-Teilsysteme, aus denen das Gesamtsys
 </div>
 <div>
 
-![](./Architektur_Modell_Komponente_Haupt.png)
+![](./Screenshots/Architektur_Modell_Komponente_Haupt.png)
 
 </div>
 </div>
@@ -661,7 +661,7 @@ Durch das Hinzufügen von Unter-Komponenten kann die Komplexität des Systems be
 </div>
 <div>
 
-![](./Architektur_Modell_Komponente_Unter.png)
+![](./Screenshots/Architektur_Modell_Komponente_Unter.png)
 
 </div>
 </div>
@@ -694,14 +694,14 @@ Referenz-Komponenten ermöglichen die Wiederverwendung von Teilarchitekturen in 
 </div>
 <div>
 
-![](./Architektur_Modell_Komponente_Referenz.png)
+![](./Screenshots/Architektur_Modell_Komponente_Referenz.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right](./Architektur_Modell_Komponente_Referenz_Auswahl.png)
+![bg contain right](./Screenshots/Architektur_Modell_Komponente_Referenz_Auswahl.png)
 
 #### Separate Dateien für Speicherung von Referenz-Komponenten
 
@@ -727,14 +727,14 @@ Dies ermöglicht eine nachträgliche Modularisierung und Wiederverwendung von be
 </div>
 <div>
 
-![](./Architektur_Modell_Komponente_Referenz_Refactor.png)
+![](./Screenshots/Architektur_Modell_Komponente_Referenz_Refactor.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Ports_und_Konnektoren.jpg)
+![bg contain right:40%](./Illustrationen/Ports_und_Konnektoren.jpg)
 
 ### 2.2. Anschlüsse und Konnektoren (*Ports* und *Connectors*)
 
@@ -748,7 +748,7 @@ Dies hilft, die Systemstruktur klar zu definieren und Abhängigkeiten zu versteh
 
 ---
 
-![bg contain right:40%](./Port_Typen.png)
+![bg contain right:40%](./Screenshots/Port_Typen.png)
 
 #### Port-Typen
 
@@ -760,7 +760,7 @@ Sytem Composer unterscheidet die folgende drei Port-Typen:
 
 ---
 
-![bg contain right:30%](./Port_Typen_Input.jpg)
+![bg contain right:30%](./Illustrationen/Port_Typen_Input.jpg)
 
 ##### Port-Typ **Input**
 
@@ -772,7 +772,7 @@ Er definiert einen Eingangspunkt für Daten oder Steuersignale.
 
 ---
 
-![bg contain right:30%](./Port_Typen_Output.jpg)
+![bg contain right:30%](./Illustrationen/Port_Typen_Output.jpg)
 
 ##### Port-Typ **Output**
 
@@ -784,7 +784,7 @@ Er definiert einen Ausgangspunkt für Daten oder Statusmeldungen.
 
 ---
 
-![bg contain right:30%](./Port_Typen_Physical.jpg)
+![bg contain right:30%](./Illustrationen/Port_Typen_Physical.jpg)
 
 ##### Port-Typ **Physical**
 
@@ -810,7 +810,7 @@ Ports können allgemein an den Grenzen von Komponenten platziert werden, um dere
 </div>
 <div>
 
-![](./Architektur_Modell_Port_System.png)
+![](./Screenshots/Architektur_Modell_Port_System.png)
 
 </div>
 </div>
@@ -831,7 +831,7 @@ Diese Weiterleitung stellt sicher, dass externe Signale die richtigen Teilsystem
 </div>
 <div>
 
-![](./Architektur_Modell_Port_Haupt.png)
+![](./Screenshots/Architektur_Modell_Port_Haupt.png)
 
 </div>
 </div>
@@ -852,7 +852,7 @@ Diese Verknüpfungen stellen die internen Kommunikationswege des Systems dar.
 </div>
 <div>
 
-![](./Architektur_Modell_Port_System_Intern.png)
+![](./Screenshots/Architektur_Modell_Port_System_Intern.png)
 
 </div>
 </div>
@@ -873,7 +873,7 @@ Diese hierarchische Port-Weiterleitung ermöglicht eine detaillierte und modular
 </div>
 <div>
 
-![](./Architektur_Modell_Port_Haupt_Unter.png)
+![](./Screenshots/Architektur_Modell_Port_Haupt_Unter.png)
 
 </div>
 </div>
@@ -894,14 +894,14 @@ Auf dieser Ebene wird die Funktionsweise eines Teilsystems durch das Zusammen-sp
 </div>
 <div>
 
-![](./Architektur_Modell_Port_Unter_Unter.png)
+![](./Screenshots/Architektur_Modell_Port_Unter_Unter.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Schnittstellen.jpg)
+![bg contain right:40%](./Illustrationen/Schnittstellen.jpg)
 
 ### 2.3. Schnittstellen (*Interfaces*)
 
@@ -927,7 +927,7 @@ Man kann den Datentyp, die Einheiten, Dimensionen und andere Eigenschaften der a
 </div>
 <div>
 
-![](./Interface_Editor.png)
+![](./Screenshots/Interface_Editor.png)
 
 </div>
 </div>
@@ -948,14 +948,14 @@ Es werden die folgenden Typen von Schnittstellen unterschieden:
 </div>
 <div>
 
-![](./Interface_Typen.png)
+![](./Screenshots/Interface_Typen.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Interface_Value.jpg)
+![bg contain right:40%](./Illustrationen/Interface_Value.jpg)
 
 ##### Schnittstellen-Typ **Value Type**
 
@@ -980,14 +980,14 @@ Bei der Konfiguration eines Value Type kann man den genauen Datentyp festlegen:
 </div>
 <div>
 
-![](./Interface_Value_Screenshot.png)
+![](./Screenshots/Interface_Value_Screenshot.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Interface_Composite.jpg)
+![bg contain right:40%](./Illustrationen/Interface_Composite.jpg)
 
 ##### Schnittstellen-Typ **Composite Data Interface**
 
@@ -1013,14 +1013,14 @@ Man kann auch andere Interfaces (Value Types oder andere Composite Interfaces) a
 </div>
 <div>
 
-![](./Interface_Composite_Screenshot.png)
+![](./Screenshots/Interface_Composite_Screenshot.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Interface_Physical.jpg)
+![bg contain right:40%](./Illustrationen/Interface_Physical.jpg)
 
 ##### Schnittstellen-Typ **Physical Interface**
 
@@ -1048,7 +1048,7 @@ Diese Elemente werden nicht mit klassischen Datentypen, sondern mit physikalisch
 </div>
 <div>
 
-![](./Interface_Physical_Screenshot.png)
+![](./Screenshots/Interface_Physical_Screenshot.png)
 
 </div>
 </div>
@@ -1069,14 +1069,14 @@ Die Zuweisung stellt sicher, dass der Port nur kompatible Daten sendet oder empf
 </div>
 <div>
 
-![](./Interface_Apply.png)
+![](./Screenshots/Interface_Apply.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Interface_Compatibility.jpg)
+![bg contain right:40%](./Illustrationen/Interface_Compatibility.jpg)
 
 #### Kompatibilität von Schnittstellen
 
@@ -1088,7 +1088,7 @@ System Composer prüft diese Kompatibilität automatisch.
 
 ---
 
-![bg contain right](./Interface_Incompatibility.png)
+![bg contain right](./Screenshots/Interface_Incompatibility.png)
 
 #### Warnung bei Inkompatibilitäten
 
@@ -1100,7 +1100,7 @@ Zusätzlich erscheint eine Fehlermeldung im Diagnostic Viewer, die das Problem g
 
 ---
 
-![bg contain right](./Interface_Adapter.png)
+![bg contain right](./Screenshots/Interface_Adapter.png)
 
 #### Behebung der Inkompatibilitäten durch Adapter-Komponenten
 
@@ -1112,7 +1112,7 @@ Man fügt eine Komponente zwischen die beiden Ports ein und implementiert darin 
 
 ---
 
-![bg contain right:40%](./Verknüpfung_Komponente.jpg)
+![bg contain right:40%](./Illustrationen/Verknüpfung_Komponente.jpg)
 
 ### 2.4. Verknüpfungen (*Links*)
 
@@ -1138,7 +1138,7 @@ System Composer erstellt dann automatisch einen Link vom Typ `Implements`.
 </div>
 <div>
 
-![](./Link_Requirement_Component.png)
+![](./Screenshots/Link_Requirement_Component.png)
 
 </div>
 </div>
@@ -1159,7 +1159,7 @@ Dies ermöglicht eine schnelle Navigation zwischen den Artefakten.
 </div>
 <div>
 
-![](./Link_Requirement_Component_Inspector.png)
+![](./Screenshots/Link_Requirement_Component_Inspector.png)
 
 </div>
 </div>
@@ -1180,7 +1180,7 @@ Dies hilft, die Vollständigkeit der Verknüpfungen zu überprüfen.
 </div>
 <div>
 
-![](./Link_Requirement_Component_All.png)
+![](./Screenshots/Link_Requirement_Component_All.png)
 
 </div>
 </div>
@@ -1226,7 +1226,7 @@ Es handelt sich um eine temporäre Ansicht, die nicht als separate Datei gespeic
 </div>
 <div>
 
-![](./Matrix_Create.png)
+![](./Screenshots/Matrix_Create.png)
 
 </div>
 </div>
@@ -1247,7 +1247,7 @@ Die Matrix kann dadurch anfangs sehr groß und unübersichtlich sein.
 </div>
 <div>
 
-![](./Matrix_Initial.png)
+![](./Screenshots/Matrix_Initial.png)
 
 </div>
 </div>
@@ -1268,14 +1268,14 @@ Ebenso können die Spalten gefiltert werden, um beispielsweise nur Komponenten o
 </div>
 <div>
 
-![](./Matrix_Filter.png)
+![](./Screenshots/Matrix_Filter.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Case_Study.jpg)
+![bg contain right:40%](./Illustrationen/Case_Study.jpg)
 
 ### 2.5. Fallbeispiel
 
@@ -1301,7 +1301,7 @@ Anschließend verfeinern wir die Struktur durch die Definition von Unter-Kompone
 </div>
 <div>
 
-![](./Architektur_Modell_Komponente_Beispiel.png)
+![](./Screenshots/Architektur_Modell_Komponente_Beispiel.png)
 
 </div>
 </div>
@@ -1321,7 +1321,7 @@ Bei der Energieversorgung können wir zum Beispiel einen Akku und ein Ladegerät
 </div>
 <div>
 
-![](./Architektur_Modell_Komponente_Beispiel_Energie.png)
+![](./Screenshots/Architektur_Modell_Komponente_Beispiel_Energie.png)
 
 </div>
 </div>
@@ -1341,7 +1341,7 @@ Beim Antriebssystem können wir zum Beispiel einen Motor und ein Getriebe identi
 </div>
 <div>
 
-![](./Architektur_Modell_Komponente_Beispiel_Energie.png)
+![](./Screenshots/Architektur_Modell_Komponente_Beispiel_Energie.png)
 
 ---
 
@@ -1353,7 +1353,7 @@ Erstelle eine Architektur für den 3D-Drucker und dokumentiere die Architektur m
 
 ---
 
-![bg right](./Stereotypen.jpg)
+![bg right](./Illustrationen/Stereotypen.jpg)
 
 ## 3. Profile anwenden
 
@@ -1364,7 +1364,7 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 ---
 
-![bg contain right:40%](./Profile.jpg)
+![bg contain right:40%](./Illustrationen/Profile.jpg)
 
 ### 3.1. Profile
 
@@ -1390,7 +1390,7 @@ Er bietet eine grafische Oberfläche, um neue Stereotypen zu definieren, ihnen E
 </div>
 <div>
 
-![](./Profile_Editor.png)
+![](./Screenshots/Profile_Editor.png)
 
 </div>
 </div>
@@ -1411,7 +1411,7 @@ Dadurch kann es versioniert und in verschiedenen Projekten wiederverwendet werde
 </div>
 <div>
 
-![](./Profile_Create.png)
+![](./Screenshots/Profile_Create.png)
 
 </div>
 </div>
@@ -1432,7 +1432,7 @@ Beispiele für Stereotypen könnten `MechanischeKomponente`, `SoftwareModul` ode
 </div>
 <div>
 
-![](./Profile_Stereotype_Create.png)
+![](./Screenshots/Profile_Stereotype_Create.png)
 
 </div>
 </div>
@@ -1453,7 +1453,7 @@ So wird sichergestellt, dass Stereotypen nur dort verwendet werden, wo sie seman
 </div>
 <div>
 
-![](./Profile_Stereotype_Applies.png)
+![](./Screenshots/Profile_Stereotype_Applies.png)
 
 </div>
 </div>
@@ -1474,7 +1474,7 @@ Beispiel: `ElektrischerSensor` könnte von `Sensor` erben und zusätzliche elekt
 </div>
 <div>
 
-![](./Profile_Stereotype_Base.png)
+![](./Screenshots/Profile_Stereotype_Base.png)
 
 </div>
 </div>
@@ -1495,7 +1495,7 @@ Eigenschaften, die in einem Basis-Stereotyp definiert sind, werden an alle abgel
 </div>
 <div>
 
-![](./Profile_Stereotype_Properties.png)
+![](./Screenshots/Profile_Stereotype_Properties.png)
 
 </div>
 </div>
@@ -1516,7 +1516,7 @@ Nach der Anwendung stehen die Stereotypen im Property Inspector zur Auswahl bere
 </div>
 <div>
 
-![](./Profile_Applies.png)
+![](./Screenshots/Profile_Applies.png)
 
 </div>
 </div>
@@ -1537,7 +1537,7 @@ Einem Element können auch mehrere Stereotypen zugewiesen werden.
 </div>
 <div>
 
-![](./Stereotyp_Komponente_Anwenden.png)
+![](./Screenshots/Stereotyp_Komponente_Anwenden.png)
 
 </div>
 </div>
@@ -1558,14 +1558,14 @@ Zum Beispiel kann man für eine Komponente mit dem Stereotyp `Hardware` den Wert
 </div>
 <div>
 
-![](./Stereotyp_Komponente_Anwenden.png)
+![](./Screenshots/Stereotyp_Komponente_Anwenden.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Sichten.jpg)
+![bg contain right:40%](./Illustrationen/Sichten.jpg)
 
 ### 3.2. Sichten (*Views*)
 
@@ -1591,7 +1591,7 @@ Eine neue Sicht wird durch Klick auf "New View" angelegt. Jede Sicht besteht aus
 </div>
 <div>
 
-![](./Views_Editor.png)
+![](./Screenshots/Views_Editor.png)
 
 </div>
 </div>
@@ -1612,7 +1612,7 @@ Initial ist die Sicht leer; sie wird durch das Hinzufügen von Filtern und Abfra
 </div>
 <div>
 
-![](./Views_Create.png)
+![](./Screenshots/Views_Create.png)
 
 </div>
 </div>
@@ -1633,7 +1633,7 @@ Dies ist die primäre Methode, um zu steuern, welche Teile der Architektur in de
 </div>
 <div>
 
-![](./Views_Filter_Component_Create.png)
+![](./Screenshots/Views_Filter_Component_Create.png)
 
 </div>
 </div>
@@ -1654,7 +1654,7 @@ Oder man filtert nach einem Namensmuster, z.B. "Zeige alle Komponenten, deren Na
 </div>
 <div>
 
-![](./Views_Filter_Component_Create.png)
+![](./Screenshots/Views_Filter_Component_Create.png)
 
 </div>
 </div>
@@ -1675,7 +1675,7 @@ Dies ist nützlich, um nur bestimmte Arten von Verbindungen anzuzeigen, z.B. nur
 </div>
 <div>
 
-![](./Views_Filter_Port_Create.png)
+![](./Screenshots/Views_Filter_Port_Create.png)
 
 </div>
 </div>
@@ -1696,7 +1696,7 @@ Beispiel: "Blende alle Ports aus, deren Name 'debug' enthält".
 </div>
 <div>
 
-![](./Views_Filter_Port_Stereotype.png)
+![](./Screenshots/Views_Filter_Port_Stereotype.png)
 
 </div>
 </div>
@@ -1717,14 +1717,14 @@ Das Ergebnis ist eine vereinfachte, fokussierte Darstellung der Architektur.
 </div>
 <div>
 
-![](./Views_Filter_Apply.png)
+![](./Screenshots/Views_Filter_Apply.png)
 
 </div>
 </div>
 
 ---
 
-![bg contain right:40%](./Profile_Case.jpg)
+![bg contain right:40%](./Illustrationen/Profile_Case.jpg)
 
 ### 3.3. Fallbeispiel
 
