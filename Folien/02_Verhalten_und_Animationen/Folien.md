@@ -1982,7 +1982,7 @@ $F_{ext} - (m \cdot \dot{v}) - (k \cdot \int v dt) - (d \cdot v) = 0$
 
 ---
 
-TODO Überschrift
+#### Simscape-Modell eines Masse-Feder-Dämpfer-Systems
 
 ![Ein Simscape-Modell eines Masse-Feder-Dämpfer-Systems mit den Blöcken für Masse, Feder, Dämpfer, Kraftquelle und Referenz.](./Screenshots/Simscape_MSD_Modell.png)
 
@@ -2039,7 +2039,7 @@ Dies ist eine fortgeschrittene Option, die bei komplexen, modularen Modellen nü
 
 ---
 
-TODO Abschnitt zu Fallbeispiel "Akkuschrauber"
+TODO Abschnitt zu Anwendung von SimScape auf Fallbeispiel "Akkuschrauber"
 
 ---
 
@@ -2258,7 +2258,7 @@ Der Historien-Zustand ist ideal, um eine Pausen- und Fortsetzen-Funktion zu impl
 
 ---
 
-TODO Überschrift
+#### Beispiel: Pausenfunktion (Stateflow-Chart)
 
 ![Ein Zustandsautomat für einen Mediaplayer. Der Super-Zustand "Player" hat die Sub-Zustände "Playing" und "Seeking". Ein "pause"-Übergang führt aus "Player" heraus. Ein "resume"-Übergang führt zurück zum History-Zustand (H) innerhalb von "Player".](./Diagramme/Mermaid/Zustandsautomat_History_Beispiel.svg)
 
@@ -2385,7 +2385,7 @@ Stateflow kann außerdem `Simulink Functions` oder `MATLAB Functions` direkt auf
 
 ---
 
-TODO Überschrift
+#### Beispiel: Tasten-Ereignis (Simulink-Modell)
 
 ![Ein Simulink-Modell, das ein Signal an einen Stateflow-Chart sendet. Das Signal wird in ein Input Event umgewandelt, das einen Zustandsübergang von "Off" nach "On" auslöst.](./Screenshots/Stateflow_Input_Event_Beispiel.png)
 
@@ -2402,7 +2402,7 @@ TODO Überschrift
 
 ---
 
-TODO Überschrift
+#### Beispiel: Motor aktivieren (Stateflow-Chart)
 
 ![Ein Stateflow-Chart, das bei einem Übergang ein Output Event generiert. Dieses Event aktiviert ein Function-Call Subsystem in Simulink, das den Motor steuert.](./Screenshots/Stateflow_Output_Event_Beispiel.png)
 
@@ -2416,7 +2416,7 @@ Stateflow kann über Ereignisse und direkte Funktionsaufrufe eng mit Simulink in
 
 ---
 
-TODO Abschnitt zu Fallbeispiel "Akkuschrauber"
+TODO Abschnitt zu Anwendung von StateFlow auf Fallbeispiel "Akkuschrauber"
 
 ---
 
@@ -2934,4 +2934,4 @@ Im 3D-Viewer können Benutzer interaktiv zwischen allen in der Welt definierten 
 
 ---
 
-TODO Abschnitt zu Fallbeispiel "Akkuschrauber"
+TODO Abschnitt zu Anwendung von Simulink 3D Animation auf Fallbeispiel "Akkuschrauber"
