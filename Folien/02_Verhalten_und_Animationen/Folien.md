@@ -1590,11 +1590,61 @@ Modellieren Sie das Verhalten der atomaren physikalischen Kompo-nenten des 3D-Dr
 
 In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
-1. TODO Kurze Übersicht über die Inhalte des Abschnitts
+1. **Physikalische Netzwerke** (akausale Modellierung)
+2. **Domänen und Bibliotheken** (mechanisch, elektrisch, etc.)
+3. **Erhaltungs- vs. Signal-Ports** (physikalische vs. Signal-Verbindungen)
+4. **Solver für physikalische Netze** (DAE-Solver)
 
 ---
 
-TODO Kurze Einführung in SimScape. Keine detaillierte Beschreibung, wie für Simulink oder Stateflow.
+![bg right](./Illustrationen/simscape_netzwerk.jpg)
+
+### 2.2.1 Physikalische Netzwerke
+
+Dieser Unterabschnitt behandelt die Grundlagen akausaler physikalischer Netzwerke in Simscape:
+
+1. Was ist akausale Modellierung?
+2. Aufbau eines physikalischen Netzwerks
+3. Through- und Across-Variablen
+4. Referenzknoten (Reference node)
+
+---
+
+![bg right](./Illustrationen/simscape_domaenen.jpg)
+
+### 2.2.2 Domänen und Bibliotheken
+
+Hier lernen wir die verschiedenen physikalischen Domänen und ihre zugehörigen Blockbibliotheken kennen:
+
+1. Elektrische Domänen
+2. Mechanische Domänen (1D Translation/Rotation)
+3. Thermische Domäne
+4. Weitere Domänen (z.B. Hydraulik, Gas)
+
+---
+
+![bg right](./Illustrationen/simscape_ports.jpg)
+
+### 2.2.3 Erhaltungs- vs. Signal-Ports
+
+Dieser Abschnitt erklärt den fundamentalen Unterschied zwischen Simscape- und Simulink-Verbindungen:
+
+1. **Simulink Signal-Ports:** Kausale, unidirektionale Signalübertragung
+2. **Simscape Erhaltungs-Ports (Conserving Ports):** Akausale, bidirektionale Energie-/Materieflüsse
+3. Konvertierung zwischen den beiden Welten (Simulink-PS Converter & PS-Simulink Converter)
+
+---
+
+![bg contain right](./Illustrationen/simscape_solver.jpg)
+
+### 2.2.4 Solver für physikalische Netze
+
+Simscape-Modelle erfordern spezielle Solver-Einstellungen. Wir behandeln:
+
+1. Warum Simscape-Modelle DAEs sind
+2. Der "Solver Configuration" Block
+3. Auswahl des richtigen Solvers (z.B. `ode23t`, `ode15s`)
+4. Lokale Solver für einzelne Netzwerke
 
 ---
 
@@ -1604,23 +1654,203 @@ TODO Kurze Einführung in SimScape. Keine detaillierte Beschreibung, wie für Si
 
 In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
-1. TODO Kurze Übersicht über die Inhalte des Abschnitts
-
+1. **Zustände und Übergänge** (Grundelemente)
+2. **Aktionen und Bedingungen** (Logik in Zuständen und Übergängen)
+3. **Hierarchische Zustandsautomaten** (Struktur und Kapselung)
+4. **Parallele Zustandsautomaten** (gleichzeitige Ausführung)
+5. **Ereignisse und Daten** (Schnittstelle zu Simulink)
 
 ---
 
-TODO Detaillierte Einführung in Stateflow. Ähnlicher Tiefgang wie bei der Einführung von Simulink.
+![bg right](./Illustrationen/stateflow_zustaende.jpg)
+
+### 2.3.1 Zustände und Übergänge
+
+Die Grundbausteine eines jeden Stateflow-Charts:
+
+1. **Zustände (States):** Repräsentieren einen Modus des Systems.
+2. **Übergänge (Transitions):** Definieren den Wechsel von einem Zustand in einen anderen.
+3. **Start- und Endzustände:** Der Standard-Übergangspfad.
+4. **Graphische Darstellung** und Syntax.
 
 ---
+
+![bg contain right](./Illustrationen/stateflow_aktionen.jpg)
+
+### 2.3.2 Aktionen und Bedingungen
+
+Hier definieren wir, was passiert und wann es passiert:
+
+1. **Bedingungen (Conditions / Guards):** Logische Ausdrücke, die einen Übergang erlauben. `[condition]`
+2. **Bedingungsaktionen (Condition Actions):** Werden ausgeführt, wenn die Bedingung wahr ist. `{action}`
+3. **Übergangsaktionen (Transition Actions):** Werden ausgeführt, wenn der Übergang stattfindet. `/action`
+4. **Zustandsaktionen (State Actions):** `entry`, `during`, `exit` Aktionen.
+
+---
+
+![bg right](./Illustrationen/stateflow_hierarchie.jpg)
+
+### 2.3.3 Hierarchische Zustandsautomaten
+
+Strukturierung komplexer Logik durch Schachtelung:
+
+1. **Super-Zustände (Superstates):** Zustände, die weitere Zustandsautomaten enthalten.
+2. **Sub-Zustände (Substates):** Die inneren Zustände.
+3. **Vorteile:** Bessere Lesbarkeit, Wiederverwendbarkeit und Kapselung von Logik.
+4. **Historien-Zustände (History Junctions):** "Erinnern" sich an den zuletzt aktiven Sub-Zustand.
+
+---
+
+![bg right](./Illustrationen/stateflow_parallel.jpg)
+
+### 2.3.4 Parallele Zustandsautomaten
+
+Modellierung von nebenläufigen, unabhängigen Prozessen:
+
+1. **AND-Zustände:** Zustände, deren Sub-Zustände (Regionen) gleichzeitig aktiv sind.
+2. **Orthogonale Regionen:** Die parallelen Bereiche innerhalb eines AND-Zustands.
+3. **Anwendungsbeispiele:** Gleichzeitige Verwaltung von Stromversorgung und Betriebsmodus.
+4. **Synchronisation** zwischen parallelen Zuständen.
+
+---
+
+![bg right](./Illustrationen/stateflow_ereignisse.jpg)
+
+### 2.3.5 Ereignisse und Daten
+
+Die Schnittstelle zwischen der Stateflow-Logik und der Außenwelt (Simulink):
+
+1. **Datenobjekte:** `Input`, `Output`, `Local`, `Parameter` Daten.
+2. **Ereignisse (Events):** `Input Events` zum Triggern von Übergängen, `Output Events` zur Aktivierung von Simulink-Subsystemen.
+3. **Funktionsaufrufe:** Aufruf von Simulink Functions oder MATLAB Functions aus Stateflow.
+4. **Symbol-Manager** zur Verwaltung der Schnittstelle.
+
+---
+
+
 
 ![bg right](./Illustrationen/Simulink3D.jpg)
 
+
+
 ## 2.4 Simulink **3D Animation**
+
+
 
 In diesem vierten Abschnitt lernen wir die folgenden Dinge:
 
-1. TODO Kurze Übersicht über die Inhalte des Abschnitts
+
+
+1. **Virtuelle Welten** (Die 3D-Szene im VRML/X3D-Format)
+
+2. **Der VR Sink Block** (Die Brücke zwischen Simulink und der 3D-Welt)
+
+3. **Transformationen** (Objekte bewegen und rotieren)
+
+4. **Kameras und Ansichten** (Die Perspektive wechseln)
+
+
 
 ---
 
-TODO Detaillierte Einführung in Simulink 3D Animation. Ähnlicher Tiefgang wie bei der Einführung von Simulink selbst.
+
+
+![bg right](./Illustrationen/s3d_welt.jpg)
+
+
+
+### 2.4.1 Virtuelle Welten
+
+
+
+Die Grundlage für jede 3D-Visualisierung:
+
+
+
+1. **VRML und X3D:** Standardformate zur Beschreibung von 3D-Szenen.
+
+2. **Aufbau einer Welt:** Knoten (`Nodes`), Felder (`Fields`) und Routen (`Routes`).
+
+3. **Erstellen und Bearbeiten:** Verwendung von 3D-Editoren (z.B. V-Realm Builder, Blender).
+
+4. **Einbinden in Simulink 3D Animation**.
+
+
+
+---
+
+
+
+![bg right](./Illustrationen/s3d_vrsink.jpg)
+
+
+
+### 2.4.2 Der VR Sink Block
+
+
+
+Die essenzielle Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:
+
+
+
+1. **Block-Parameter:** Zuordnung der virtuellen Welt.
+
+2. **Signale verbinden:** Wie man ein Simulink-Signal mit einer Eigenschaft (Feld) eines 3D-Objekts (Knoten) verknüpft.
+
+3. **Baumstruktur der Welt:** Navigation zu den richtigen Knoten und Feldern.
+
+4. **Abtastzeit** und deren Auswirkung auf die Flüssigkeit der Animation.
+
+
+
+---
+
+
+
+![bg right](./Illustrationen/s3d_transformation.jpg)
+
+
+
+### 2.4.3 Transformationen
+
+
+
+Wie Objekte in der virtuellen Welt positioniert und orientiert werden:
+
+
+
+1. **Der `Transform`-Knoten:** Kapselt Geometrie und deren Position/Rotation.
+
+2. **Translation:** Verschiebung entlang der X-, Y- und Z-Achse.
+
+3. **Rotation:** Drehung um eine beliebige Achse (Axis-Angle-Repräsentation).
+
+4. **Skalierung:** Ändern der Größe von Objekten.
+
+5. **Hierarchische Transformationen:** Verknüpfung von Bewegungen (z.B. Roboterarm).
+
+
+
+---
+
+
+
+![bg right](./Illustrationen/s3d_kamera.jpg)
+
+
+
+### 2.4.4 Kameras und Ansichten
+
+
+
+Definition des Blickwinkels des Betrachters:
+
+
+
+1. **Der `Viewpoint`-Knoten:** Definition einer Kamera in der 3D-Szene.
+
+2. **Position und Orientierung:** Wo befindet sich die Kamera und wohin schaut sie?
+
+3. **Blickfeld (Field of View):** Weitwinkel- oder Teleobjektiv-Effekt.
+
+4. **Navigation:** Umschalten zwischen verschiedenen vordefinierten Ansichten während der Simulation.
