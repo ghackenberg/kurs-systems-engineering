@@ -2674,7 +2674,57 @@ Shape {
 
 ---
 
-TODO Folie zu komplexen Geometrien in VRML
+#### Komplexe Geometrien: IndexedFaceSet
+
+Für komplexe, nicht-primitive Formen bietet VRML den `IndexedFaceSet`-Knoten. Dieser Knoten erlaubt es, benutzerdefinierte 3D-Meshes zu definieren, indem er eine Liste von Vertices (Eckpunkten) und Indizes für deren Verbindung zu Flächen verwendet.
+
+-   **`coord`:** Ein `Coordinate`-Knoten, der die Liste der 3D-Punkte (Vertices) enthält.
+-   **`coordIndex`:** Eine Liste von Integern, die angeben, welche Vertices zu einer Fläche gehören. Ein `-1` trennt die einzelnen Flächen.
+-   **`creaseAngle`:** Ein Winkel, der die Glättung von Flächenübergängen steuert.
+
+Dies ist die flexibelste Methode, um detaillierte Modelle zu importieren oder zu erstellen.
+
+---
+
+<div class="columns">
+<div>
+
+```vrml
+#VRML V2.0 utf8
+Shape {
+  geometry IndexedFaceSet {
+    coord Coordinate {
+      point [ # Beispiel: Pyramide
+        0 1 0,   # Spitze (0)
+        -1 0 -1, # Basis links hinten (1)
+        1 0 -1,  # Basis rechts hinten (2)
+        1 0 1,   # Basis rechts vorne (3)
+        -1 0 1   # Basis links vorne (4)
+      ]
+    }
+    coordIndex [
+      0, 1, 2, -1, # Dreieck hinten links
+      0, 2, 3, -1, # Dreieck hinten rechts
+      0, 3, 4, -1, # Dreieck vorne rechts
+      0, 4, 1, -1, # Dreieck vorne links
+      1, 4, 3, 2, -1 # Basis (Viereck)
+    ]
+  }
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.7 0.7 0.7 # Grau
+    }
+  }
+}
+```
+
+</div>
+<div>
+
+![](./Screenshots/VRML_Formen_IndexedFaceSet.png)
+
+</div>
+</div>
 
 ---
 
