@@ -1726,11 +1726,11 @@ Modellierung von Wärmeerzeugung und -übertragung.
 
 ### 2.2.3 Erhaltungs- vs. Signal-Ports
 
-Dieser Abschnitt erklärt den fundamentalen Unterschied zwischen Simscape- und Simulink-Verbindungen:
+Unterschied zwischen Simscape- und Simulink-Verbindungen:
 
 1. **Simulink Signal-Ports:** Kausale, unidirektionale Signalübertragung
-2. **Simscape Erhaltungs-Ports (Conserving Ports):** Akausale, bidirektionale Energie-/Materieflüsse
-3. Konvertierung zwischen den beiden Welten (Simulink-PS Converter & PS-Simulink Converter)
+2. **Simscape Erhaltungs-Ports:** Akausale, bidirektionale Energie-/Materieflüsse
+3. **Konvertierung** zwischen den beiden Welten (Simulink-PS & PS-Simulink Converter)
 
 ---
 
@@ -1887,11 +1887,9 @@ Dies ist eine fortgeschrittene Option, die bei komplexen, modularen Modellen nü
 
 ## 2.3 Stateflow **Logikmodelle**
 
-In diesem dritten Abschnitt lernen wir die folgenden Dinge:
-
 1. **Zustände und Übergänge** (Grundelemente)
-2. **Aktionen und Bedingungen** (Logik in Zuständen und Übergängen)
-3. **Hierarchische Zustandsautomaten** (Struktur und Kapselung)
+2. **Aktionen und Bedingungen** (Logik)
+3. **Hierarchische Zustands-automaten** (Struktur)
 4. **Parallele Zustandsautomaten** (gleichzeitige Ausführung)
 5. **Ereignisse und Daten** (Schnittstelle zu Simulink)
 
@@ -1903,8 +1901,8 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 Die Grundbausteine eines jeden Stateflow-Charts:
 
-1. **Zustände (States):** Repräsentieren einen Modus des Systems.
-2. **Übergänge (Transitions):** Definieren den Wechsel von einem Zustand in einen anderen.
+1. **Zustände:** Repräsentieren einen Modus des Systems.
+2. **Übergänge:** Definieren den Wechsel zwischen Zuständen.
 3. **Start- und Endzustände:** Der Standard-Übergangspfad.
 4. **Graphische Darstellung** und Syntax.
 
@@ -1937,10 +1935,10 @@ Die Grundbausteine eines jeden Stateflow-Charts:
 
 Hier definieren wir, was passiert und wann es passiert:
 
-1. **Bedingungen (Conditions / Guards):** Logische Ausdrücke, die einen Übergang erlauben. `[condition]`
-2. **Bedingungsaktionen (Condition Actions):** Werden ausgeführt, wenn die Bedingung wahr ist. `{action}`
-3. **Übergangsaktionen (Transition Actions):** Werden ausgeführt, wenn der Übergang stattfindet. `/action`
-4. **Zustandsaktionen (State Actions):** `entry`, `during`, `exit` Aktionen.
+1. **Bedingungen:** Ausdrücke, die einen Übergang erlauben.
+2. **Bedingungsaktionen:** Ausge-führt, wenn Bedingung wahr.
+3. **Übergangsaktionen:** Ausgeführt, wenn Übergang stattfindet.
+4. **Zustandsaktionen:** `entry`, `during`, `exit` Aktionen.
 
 ---
 
@@ -1951,8 +1949,8 @@ Die Logik eines Übergangs wird direkt an den Pfeil geschrieben. Die Syntax `Ere
 | Syntax | Name | Ausführung |
 | :--- | :--- | :--- |
 | `[temp > 95]` | **Bedingung** (Guard) | Muss `true` sein, damit der Übergang<br/>überhaupt in Betracht gezogen wird. |
-| `{check()}` | **Bedingungs-aktion** | Wird ausgeführt, sobald die Bedingung<br/>als `true` ausgewertet wird. |
-| `/stop()` | **Übergangs-aktion** | Wird ausgeführt, *nachdem* der Quellzustand<br/>verlassen wurde und *bevor* der Zielzustand<br/>betreten wird. |
+| `{check()}` | **Bedingungsaktion** | Wird ausgeführt, sobald die Bedingung<br/>als `true` ausgewertet wird. |
+| `/stop()` | **Übergangsaktion** | Wird ausgeführt, *nachdem* der Quellzustand<br/>verlassen wurde und *bevor* der Zielzustand<br/>betreten wird. |
 
 ---
 
@@ -1991,10 +1989,10 @@ TODO Folie mit Beispiel für Zustandsaktionen
 
 Strukturierung komplexer Logik durch Schachtelung:
 
-1. **Super-Zustände (Superstates):** Zustände, die weitere Zustandsautomaten enthalten.
-2. **Sub-Zustände (Substates):** Die inneren Zustände.
-3. **Vorteile:** Bessere Lesbarkeit, Wiederverwendbarkeit und Kapselung von Logik.
-4. **Historien-Zustände (History Junctions):** "Erinnern" sich an den zuletzt aktiven Sub-Zustand.
+1. **Super-Zustände:** Zustände mit Unterzuständen.
+2. **Sub-Zustände:** Die inneren Zustände.
+3. **Vorteile:** Lesbarkeit, Wieder-verwendbarkeit und Kapselung.
+4. **Historien-Zustände:** Zuletzt aktiven Sub-Zustand merken.
 
 ---
 
@@ -2051,9 +2049,9 @@ Dies ist nützlich für Unterbrechungen (z.B. ein "Pause"-Modus), nach denen das
 
 Modellierung von nebenläufigen, unabhängigen Prozessen:
 
-1. **AND-Zustände:** Zustände, deren Sub-Zustände (Regionen) gleichzeitig aktiv sind.
-2. **Orthogonale Regionen:** Die parallelen Bereiche innerhalb eines AND-Zands.
-3. **Anwendungsbeispiele:** Gleichzeitige Verwaltung von Stromversorgung und Betriebsmodus.
+1. **AND-Zustände:** Gleichzeitig aktive Sub-Zustände.
+2. **Orthogonale Regionen:** Die parallelen Bereiche.
+3. **Anwendungsbeispiele:** Strom-versorgung und Betriebsmodus.
 4. **Synchronisation** zwischen parallelen Zuständen.
 
 ---
@@ -2126,18 +2124,12 @@ Jedes Datenobjekt hat einen **Scope** (Gültigkeitsbereich), der festlegt, woher
 
 ---
 
-#### Daten-Scopes
-
-Der Scope definiert die Sichtbarkeit und Rolle eines Datenobjekts.
-
-TODO Beschreibungen in der Tabelle kürzen
-
 | Scope | Richtung | Beschreibung |
 | :--- | :--- | :--- |
 | `Input` | Simulink &rarr; Stateflow | Ein Datensignal, das von Simulink gelesen wird. Stateflow kann diesen Wert nicht ändern. |
 | `Output` | Stateflow &rarr; Simulink | Ein Datensignal, das von Stateflow geschrieben und an Simulink ausgegeben wird. |
 | `Local` | Intern | Eine Variable, die nur innerhalb des Stateflow-Charts sichtbar und gültig ist. |
-| `Parameter` | Konfiguration | Ein Wert, der von außerhalb (z.B. MATLAB Workspace) gesetzt wird, um das Verhalten des Charts zu konfigurieren. Ist zur Laufzeit konstant. |
+| `Parameter` | Konfiguration | Ein Wert, der von außerhalb gesetzt wird, um das Verhalten des Charts zu konfigurieren.  |
 | `Data Store Memory`| Global | Eine globale Variable, die über das gesamte Simulink-Modell hinweg geteilt werden kann. |
 
 ---
@@ -2178,10 +2170,10 @@ In diesem vierten Abschnitt lernen wir die folgenden Dinge:
 
 Die Grundlage für jede 3D-Visualisierung:
 
-1. **VRML und X3D:** Standardformate zur Beschreibung von 3D-Szenen.
-2. **Aufbau einer Welt:** Knoten (`Nodes`), Felder (`Fields`) und Routen (`Routes`).
-3. **Erstellen und Bearbeiten:** Verwendung von 3D-Editoren (z.B. V-Realm Builder, Blender).
-4. **Einbinden in Simulink 3D Animation**.
+1. **VRML und X3D:** Standardforma-te zur Szenen-Beschreibung.
+2. **Aufbau einer Welt:** Knoten, Felder und Routen.
+3. **Erstellen und Bearbeiten:** Ver-wendung von 3D-Editoren.
+4. **Einbinden in Simulink 3D Animation**
 
 ---
 
@@ -2225,12 +2217,12 @@ Transform {
 
 ### 2.4.2 Der VR Sink Block
 
-Die essenzielle Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:
+Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:
 
 1. **Block-Parameter:** Zuordnung der virtuellen Welt.
-2. **Signale verbinden:** Wie man ein Simulink-Signal mit einer Eigenschaft (Feld) eines 3D-Objekts (Knoten) verknüpft.
-3. **Baumstruktur der Welt:** Navigation zu den richtigen Knoten und Feldern.
-4. **Abtastzeit** und deren Auswirkung auf die Flüssigkeit der Animation.
+2. **Signale verbinden:** Verknüpfung Simulink-Signal / 3D-Objekts.
+3. **Baumstruktur der Welt:** Naviga-tion zu den Knoten und Feldern.
+4. **Abtastzeit** und Auswirkung auf die Flüssigkeit der Animation.
 
 ---
 
@@ -2255,13 +2247,11 @@ TODO Überschrift und kurzer Text
 
 ### 2.4.3 Transformationen
 
-Wie Objekte in der virtuellen Welt positioniert und orientiert werden:
-
-1. **Der `Transform`-Knoten:** Kapselt Geometrie und deren Position/Rotation.
+1. **Der `Transform`-Knoten:** Kapselt Geometrie und deren Position.
 2. **Translation:** Verschiebung entlang der X-, Y- und Z-Achse.
-3. **Rotation:** Drehung um eine beliebige Achse (Axis-Angle-Repräsentation).
+3. **Rotation:** Drehung um eine beliebige Achse.
 4. **Skalierung:** Ändern der Größe von Objekten.
-5. **Hierarchische Transformationen:** Verknüpfung von Bewegungen (z.B. Roboterarm).
+5. **Hierarchische Transformationen:** Verknüpfung von Bewegungen.
 
 ---
 
@@ -2311,10 +2301,10 @@ Wenn sich also die Basis dreht, bewegen sich Ober- und Unterarm automatisch mit.
 
 Definition des Blickwinkels des Betrachters:
 
-1. **Der `Viewpoint`-Knoten:** Definition einer Kamera in der 3D-Szene.
-2. **Position und Orientierung:** Wo befindet sich die Kamera und wohin schaut sie?
-3. **Blickfeld (Field of View):** Weitwinkel- oder Teleobjektiv-Effekt.
-4. **Navigation:** Umschalten zwischen verschiedenen vordefinierten Ansichten während der Simulation.
+1. **Der `Viewpoint`-Knoten:** Defini-tion der Kamera der 3D-Szene.
+2. **Position und Orientierung:** Wo befindet sich die Kamera?
+3. **Blickfeld (Field of View):** Weit-winkel- oder Teleobjektiv-Effekt.
+4. **Navigation:** Umschalten zwi-schen vordefinierten Ansichten.
 
 ---
 
