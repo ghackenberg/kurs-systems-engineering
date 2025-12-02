@@ -1722,6 +1722,10 @@ Modellierung von Wärmeerzeugung und -übertragung.
 
 ---
 
+TODO Folien zu ausgewählten Blöcken und deren Implementierungen (interne Gleichungen)
+
+---
+
 ![bg right](./Illustrationen/simscape_ports.jpg)
 
 ### 2.2.3 Erhaltungs- vs. Signal-Ports
@@ -1966,6 +1970,10 @@ Die Logik eines Übergangs wird direkt an den Pfeil geschrieben. Die Syntax `Ere
 
 </div>
 </div>
+
+---
+
+TODO Folie zu Unterscheid zwischen Bedingungsaktion und Übergangsaktion
 
 ---
 
