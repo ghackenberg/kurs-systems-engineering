@@ -1590,7 +1590,11 @@ Modellieren Sie das Verhalten der atomaren physikalischen Kompo-nenten des 3D-Dr
 
 In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
-1. TODO
+1. TODO Kurze Übersicht über die Inhalte des Abschnitts
+
+---
+
+TODO Kurze Einführung in SimScape. Keine detaillierte Beschreibung, wie für Simulink oder Stateflow.
 
 ---
 
@@ -1600,7 +1604,12 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
-1. TODO
+1. TODO Kurze Übersicht über die Inhalte des Abschnitts
+
+
+---
+
+TODO Detaillierte Einführung in Stateflow. Ähnlicher Tiefgang wie bei der Einführung von Simulink.
 
 ---
 
@@ -1610,4 +1619,8 @@ In diesem dritten Abschnitt lernen wir die folgenden Dinge:
 
 In diesem vierten Abschnitt lernen wir die folgenden Dinge:
 
-1. TODO
+1. TODO Kurze Übersicht über die Inhalte des Abschnitts
+
+---
+
+TODO Detaillierte Einführung in Simulink 3D Animation. Ähnlicher Tiefgang wie bei der Einführung von Simulink selbst.
