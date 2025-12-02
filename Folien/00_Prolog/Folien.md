@@ -22,7 +22,7 @@ Dieser erste Foliensatz umfasst die folgenden Abschnitte:
 
 ---
 
-![bg right](./Voraussetzungen.jpg)
+![bg right](./Illustrationen/Voraussetzungen.jpg)
 
 ## Voraussetzungen
 
@@ -35,7 +35,7 @@ Folgendes Vorwissen ist für diesen Kurs notwendig:
 
 ---
 
-![bg contain right:30%](./Lernziele.jpg)
+![bg contain right:30%](./Illustrationen/Lernziele.jpg)
 
 ## Lernziele
 
@@ -48,7 +48,7 @@ Teilnehmer*innen können nach Absolvieren des Kurses:
 
 ---
 
-![bg contain right:30%](./Kursinhalte.jpg)
+![bg contain right:30%](./Illustrationen/Kursinhalte.jpg)
 
 ## Kursinhalte
 
@@ -60,7 +60,7 @@ Dieser Kurs umfasst die folgenden drei Kapitel:
 
 ---
 
-![bg right](./Notenrichtlinie.jpg)
+![bg right](./Illustrationen/Notenrichtlinie.jpg)
 
 ## Notenrichtlinie
 
@@ -73,7 +73,7 @@ Die Noten für diesen Kurs werden wie folgt gebildet:
 
 ---
 
-![bg right](./Lektorenprofil.jpg)
+![bg right](./Fotografien/Lektorenprofil.jpg)
 
 ## Lektorenprofil
 
@@ -124,7 +124,7 @@ Diese kurze MATLAB-Einführung umfasst die folgenden Punkte:
 </div>
 <div>
 
-![](./MATLAB_Webseite.png)
+![](./Screenshots/MATLAB_Webseite.png)
 
 </div>
 </div>
@@ -143,7 +143,7 @@ Die Online-Variante bietet grundsätzlich **alle Funktionalitäten** der Offline
 </div>
 <div>
 
-![](./MATLAB_Online.png)
+![](./Screenshots/MATLAB_Online.png)
 
 </div>
 </div>
@@ -162,7 +162,7 @@ Die **Benutzerschnittstelle** von MATLAB ist in der Online-Variante **identisch*
 </div>
 <div>
 
-![](./MATLAB_Online_Gestartet.png)
+![](./Screenshots/MATLAB_Online_Gestartet.png)
 
 </div>
 </div>
@@ -181,7 +181,7 @@ Wir empfehlen diesen Betriebsmodus für die Software, da er unserer Erfahrung na
 </div>
 <div>
 
-![](./MATLAB_Download.png)
+![](./Screenshots/MATLAB_Download.png)
 
 </div>
 </div>
@@ -207,7 +207,7 @@ disp("Hello world")
 </div>
 <div>
 
-![](./MATLAB_Skript.png)
+![](./Screenshots/MATLAB_Skript.png)
 
 </div>
 </div>
@@ -228,7 +228,7 @@ Live-Skripte bieten somit die Möglichkeit, **Rich-Text** für die **Dokumentati
 </div>
 <div>
 
-![](./MATLAB_Live_Skript.png)
+![](./Screenshots/MATLAB_Live_Skript.png)
 
 </div>
 </div>
@@ -249,7 +249,7 @@ Die Kommentare enthalten sowohl den **Rich-Text** im **Markdown-Format** als auc
 </div>
 <div>
 
-![](./MATLAB_Live_Skript_Raw.png)
+![](./Screenshots/MATLAB_Live_Skript_Raw.png)
 
 </div>
 </div>
@@ -270,7 +270,7 @@ Mit MATLAB Add-Ons kann der **Funktionsumfang** der MATLAB Entwick-lungsumgebung
 </div>
 <div>
 
-![](./MATLAB.png)
+![](./Screenshots/MATLAB.png)
 
 </div>
 </div>
@@ -291,7 +291,7 @@ Es stehen Add-Ons für **verschiedenste Anwendungsgebiete** von **Modellierung**
 </div>
 <div>
 
-![](./MATLAB_Add-On_Explorer.png)
+![](./Screenshots/MATLAB_Add-On_Explorer.png)
 
 </div>
 </div>
@@ -312,7 +312,7 @@ Für jeden Treffer wird der **Name** des Add-Ons und eine **kurze Beschreibung**
 </div>
 <div>
 
-![](./MATLAB_Add-On_Explorer_Suche.png)
+![](./Screenshots/MATLAB_Add-On_Explorer_Suche.png)
 
 </div>
 </div>
@@ -333,7 +333,7 @@ Der **erste Reiter** bietet eine **Übersicht** über das Add-On in Form einer *
 </div>
 <div>
 
-![](./MATLAB_Add-On_Explorer_Simulink_Übersicht.png)
+![](./Screenshots/MATLAB_Add-On_Explorer_Simulink_Übersicht.png)
 
 </div>
 </div>
@@ -354,7 +354,7 @@ Sofern ein Add-On neue Funktionen definiert, bietet der **zweite Reiter** eine �
 </div>
 <div>
 
-![](./MATLAB_Add-On_Explorer_Simulink_Funktionen.png)
+![](./Screenshots/MATLAB_Add-On_Explorer_Simulink_Funktionen.png)
 
 </div>
 </div>
@@ -375,7 +375,7 @@ Blöcke selbst sind **kein Konzept der Skriptsprache** von MATLAB, sondern **ein
 </div>
 <div>
 
-![](./MATLAB_Add-On_Explorer_Simulink_Blöcke.png)
+![](./Screenshots/MATLAB_Add-On_Explorer_Simulink_Blöcke.png)
 
 </div>
 </div>
@@ -396,7 +396,7 @@ Anwendungen (sogenannte *Apps*) sind **Erweiterungen der Benutzerschnittstelle**
 </div>
 <div>
 
-![](./MATLAB_Add-On_Explorer_Simulink_Anwendungen.png)
+![](./Screenshots/MATLAB_Add-On_Explorer_Simulink_Anwendungen.png)
 
 </div>
 </div>
@@ -417,7 +417,7 @@ Die Beispiele umfassen eine **Erklärung** sowie den eigentlichen **Quelltext** 
 </div>
 <div>
 
-![](./MATLAB_Add-On_Explorer_Simulink_Beispiele.png)
+![](./Screenshots/MATLAB_Add-On_Explorer_Simulink_Beispiele.png)
 
 </div>
 </div>
@@ -438,7 +438,7 @@ Das **Simulink 3D Animation** Add-On basiert beispielsweise auf dem MATLAB Kern 
 </div>
 <div>
 
-![](./MATLAB_Add-On_Requirements.png)
+![](./Screenshots/MATLAB_Add-On_Requirements.png)
 
 </div>
 </div>
@@ -459,14 +459,14 @@ Des Weiteren kann für **jedes Add-On** die **Dokumentation** aufgerufen werden,
 </div>
 <div>
 
-![](./MATLAB_Add-On_Manager.png)
+![](./Screenshots/MATLAB_Add-On_Manager.png)
 
 </div>
 </div>
 
 ---
 
-![bg right](./Checkliste.jpg)
+![bg right](./Illustrationen/Checkliste.jpg)
 
 ### MATLAB Add-On Liste
 
@@ -497,7 +497,7 @@ Simulink selbst bietet eine komplett **eigenständige Benutzerschnittstell**e an
 </div>
 <div>
 
-![](./MATLAB_Simulink.png)
+![](./Screenshots/MATLAB_Simulink.png)
 
 </div>
 </div>
@@ -518,7 +518,7 @@ Für die Erstellung neuer Modelle stehen **unterschiedliche Vorlagen** zur Auswa
 </div>
 <div>
 
-![](./MATLAB_Simulink_Start.png)
+![](./Screenshots/MATLAB_Simulink_Start.png)
 
 </div>
 </div>
@@ -539,7 +539,7 @@ Die Beispielmodelle sind wiederum **nach Add-On gruppiert** (z.B. *Simulink 3D A
 </div>
 <div>
 
-![](./MATLAB_Simulink_Beispiele.png)
+![](./Screenshots/MATLAB_Simulink_Beispiele.png)
 
 </div>
 </div>
@@ -560,7 +560,7 @@ Die Lernmodule sind direkt **in MATLAB integriert** und führen den Nutzer syste
 </div>
 <div>
 
-![](./MATLAB_Simulink_Lernen.png)
+![](./Screenshots/MATLAB_Simulink_Lernen.png)
 
 </div>
 </div>
