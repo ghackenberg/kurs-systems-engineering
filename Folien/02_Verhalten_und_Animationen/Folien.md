@@ -1540,15 +1540,13 @@ Die präzise Handhabung von Zero Crossings ist entscheidend für die Genauigkeit
 
 ---
 
+![bg right](./Illustrationen/Akkuschrauber.jpg)
+
 ### 2.1.6. Fallbeispiel: Akku-Schrauber
 
-Im Rahmen dieses Kapitels wenden wir die gelernten Konzepte der Simulink Signalmodelle auf das durchgängige Fallbeispiel eines Akku-Schraubers an. Ziel ist es, das vereinfachte Verhalten des Motors zu modellieren.
+Im Rahmen dieses Kapitels wenden wir die gelernten Konzepte der Simulink Signalmodelle auf das durchgängige Fallbeispiel eines Akku-Schraubers an.
 
-**Annahmen für das Signalmodell:**
--   Die Drehzahl des Motors ist direkt proportional zur angelegten Spannung.
--   Ein Lastmoment reduziert die effektive Drehzahl.
-
-Dieses Modell wird uns helfen, die Dynamik des Antriebsstrangs zu verstehen und die Auswirkungen verschiedener Eingangsspannungen und Lasten zu analysieren.
+Ziel ist es, das vereinfachte Verhalten des Motors zu modellieren.
 
 ---
 
@@ -2039,7 +2037,110 @@ Dies ist eine fortgeschrittene Option, die bei komplexen, modularen Modellen nü
 
 ---
 
-TODO Abschnitt zu Anwendung von SimScape auf Fallbeispiel "Akkuschrauber"
+![bg right](./Illustrationen/Akkuschrauber.jpg)
+
+### 2.2.5. Fallbeispiel: Akku-Schrauber
+
+In diesem Abschnitt wenden wir die gelernten Konzepte der Simscape Physikmodelle auf das durchgängige Fallbeispiel eines Akku-Schraubers an.
+
+Ziel ist es, das physikalische Verhalten des Motors sowie des Antriebsstrangs detaillierter zu modellieren.
+
+---
+
+### Simscape-Modell der **elektrischen Energieversorgung** (1 / 2)
+
+<div class="columns">
+<div class="two">
+
+**Akku-Modellierung:**
+-   Ein `Battery`-Block aus der `Simscape / Electrical / Sources`-Bibliothek kann verwendet werden, um die reale Entladecharakteristik und den Innenwiderstand des Akkus abzubilden.
+-   Ein `Controlled Voltage Source` und ein `Resistor` könnten eine einfachere Akkumodellierung darstellen.
+-   Ein `Electrical Reference`-Block ist notwendig, um den Nullpunkt der elektrischen Spannung zu definieren.
+
+</div>
+<div>
+
+</div>
+</div>
+
+---
+
+### Simscape-Modell der **elektrischen Energieversorgung** (2 / 2)
+
+<div class="columns">
+<div>
+
+**Motor-Modellierung (elektrischer Teil):**
+-   Der elektrische Teil des Motors kann durch einen `Resistor` (Wicklungswiderstand) und einen `Inductor` (Wicklungsinduktivität) in Reihe modelliert werden.
+-   Ein `DC Motor`-Block aus der `Simscape / Electrical / Electromechanical`-Bibliothek integriert den elektrischen und mechanischen Teil.
+
+</div>
+<div>
+
+</div>
+</div>
+
+---
+
+### Simscape-Modell des **Antriebssystems** (1 / 3)
+
+<div class="columns">
+<div class="three">
+
+**Motor-Modellierung (mechanischer Teil):**
+-   Der `DC Motor`-Block bietet auch mechanische Anschlüsse.
+-   Ein `Inertia`-Block kann die Massenträgheit der Motorwelle und des Rotors abbilden.
+-   Ein `Ideal Rotational Motion Sensor` kann verwendet werden, um die Winkelgeschwindigkeit des Motors zu messen und als Simulink-Signal auszugeben (`PS-Simulink Converter`).
+
+</div>
+<div class="two">
+
+</div>
+</div>
+
+---
+
+### Simscape-Modell des **Antriebssystems** (2 / 3)
+
+<div class="columns">
+<div>
+
+**Getriebe-Modellierung:**
+-   Ein `Simple Gear`-Block aus der `Simscape / Driveline / Gears and Clutches`-Bibliothek kann das Untersetzungsverhältnis und die Effizienz des Getriebes modellieren.
+-   Ein weiterer `Inertia`-Block kann die Massenträgheit des Bohrfutters und der angelegten Last repräsentieren.
+
+</div>
+<div>
+
+</div>
+</div>
+
+---
+
+### Simscape-Modell des **Antriebssystems** (3 / 3)
+
+<div class="columns">
+<div>
+
+**Last-Modellierung:**
+-   Die Last am Bohrfutter kann durch einen `Ideal Rotational Motion Source` (für eine konstante Drehzahl) oder einen `Controlled Torque Source` (für ein definiertes Lastmoment) simuliert werden.
+-   Ein `Rotational Mechanical Reference`-Block ist notwendig, um den mechanischen Nullpunkt (fester Bezug) zu definieren.
+
+</div>
+<div>
+
+</div>
+</div>
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### 2.2.6. Übungsaufgabe
+
+Modellieren Sie das Verhalten der atomaren physikalischen Kompo-nenten des 3D-Druckers (z.B. die Extruder-Heizung, die Bewegungsachsen) mithilfe von Simscape Physikmodellen.
+
+*Berücksichtigen Sie dabei die jeweiligen physikalischen Domänen (elektrisch, thermisch, mechanisch) und die Notwendigkeit von Referenzblöcken.*
 
 ---
 
