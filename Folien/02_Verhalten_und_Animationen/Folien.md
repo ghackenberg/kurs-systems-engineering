@@ -1725,7 +1725,22 @@ Modellierung von Wärmeerzeugung und -übertragung.
 ---
 
 <div class="columns">
-<div class="six">
+<div class="three">
+
+TODO Folie zu `Electrical Reference` mit mathematischen Gleichungen
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Electrical_Reference.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
 
 #### Elektrische Domäne: **Widerstand**
 
@@ -1742,7 +1757,7 @@ $$v = i \cdot R$$
 </div>
 <div>
 
-![w:1000](https://de.mathworks.com/help/simscape/ref/resistor_ic.png)
+![w:1000](./Screenshots/Simscape_Block_Resistor.png)
 
 </div>
 </div>
@@ -1750,7 +1765,22 @@ $$v = i \cdot R$$
 ---
 
 <div class="columns">
-<div class="six">
+<div class="three">
+
+TODO Folie zu `Mechanical Translational Reference` mit mathematischen Gleichungen
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Mechanical_Translational_Reference.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
 
 #### Mechanische Domäne: **Masse**
 
@@ -1767,7 +1797,37 @@ $$F = m \cdot a = m \cdot \frac{dv}{dt}$$
 </div>
 <div>
 
-![w:1000](https://de.mathworks.com/help/simscape/ref/mass_ic.png)
+![w:1000](./Screenshots/Simscape_Block_Mass.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+TODO Folie zu `Thermal Reference` mit mathematischen Gleichungen
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Thermal_Reference.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+TODO Folie zu `Thermal Resistor` mit mathematischen Gleichungen
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Thermal_Resistor.png)
 
 </div>
 </div>
@@ -1814,7 +1874,24 @@ Der Hauptunterschied liegt in der Art der Verbindung und der Information, die si
 
 ---
 
-![Eine Illustration, die einen Simulink-Block (z.B. Gain) mit spitzen Ein- und Ausgangsports und einen Simscape-Block (z.B. Resistor) mit quadratischen, farbigen Erhaltungsports zeigt. Dazwischen sind die Konverterblöcke platziert, die die beiden Welten verbinden.](./Illustrationen/simscape_port_vergleich.jpg)
+#### Darstellung von Signal- und Erhaltungs-Ports
+
+<div class="columns">
+<div>
+
+**Simulink Signal-Ports:**
+
+![h:400](./Screenshots/Simulink_Block_Gain.png)
+
+</div>
+<div>
+
+**Simscape Erhaltungs-Ports:**
+
+![h:400](./Screenshots/Simscape_Block_Resistor.png)
+
+</div>
+</div>
 
 ---
 
@@ -1841,17 +1918,30 @@ Wandelt eine physikalische Größe (eine Across- oder Through-Variable) aus dem 
 
 ---
 
-#### Simulink-Simscape Konverterblöcke
-
 <div class="columns">
-<div>
+<div class="three">
 
-![Ein Screenshot des Simulink-PS Converter Blocks und seines Parameterdialogs, in dem die Einheiten konfiguriert werden.](./Screenshots/Simscape_Simulink_PS_Converter.png)
+TODO Folie zu `Simulink-PS Converter` Block
 
 </div>
 <div>
 
-![Ein Screenshot des PS-Simulink Converter Blocks und seines Parameterdialogs.](./Screenshots/Simscape_PS_Simulink_Converter.png)
+![](./Screenshots/Simscape_Block_Simulink_PS_Converter.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+TODO Folie zu `PS-Simulink Converter` Block
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_PS_Simulink_Converter.png)
 
 </div>
 </div>
@@ -1894,7 +1984,7 @@ Die dynamischen Elemente (z.B. Masse) liefern Differentialgleichungen, während 
 </div>
 <div>
 
-![Ein abstraktes Diagramm, das zeigt, wie verbundene Simscape-Blöcke (Masse, Feder, Dämpfer) in ein System von Differential- und Algebraischen Gleichungen übersetzt werden.](./Diagramme/Draw/Simscape_zu_DAE.svg)
+![Ein abstraktes Diagramm, das zeigt, wie verbundene Simscape-Blöcke (Masse, Feder, Dämpfer) in ein System von Differential- und Algebraischen Gleichungen übersetzt werden.](./Illustrationen/Simscape_zu_DAE.jpg)
 
 </div>
 </div>
@@ -1916,7 +2006,7 @@ Das System wird durch eine externe Kraft $F_{ext}$ angeregt und bewegt sich mit 
 </div>
 <div>
 
-![Ein schematisches Diagramm eines Masse-Feder-Dämpfer-Systems. Eine Masse (m) ist horizontal zwischen einer Feder (k) auf der einen und einem Dämpfer (d) auf der anderen Seite eingespannt. Beide sind an einer festen Wand befestigt. Eine externe Kraft (F_ext) wirkt auf die Masse.](./Diagramme/Draw/Masse_Feder_Daempfer.svg)
+![Ein schematisches Diagramm eines Masse-Feder-Dämpfer-Systems. Eine Masse (m) ist horizontal zwischen einer Feder (k) auf der einen und einem Dämpfer (d) auf der anderen Seite eingespannt. Beide sind an einer festen Wand befestigt. Eine externe Kraft (F_ext) wirkt auf die Masse.](./Diagramme/Tikz/Masse_Feder_Daempfer.tikz.svg)
 
 </div>
 </div>
@@ -2002,7 +2092,13 @@ Er wird direkt mit einem Referenzblock (z.B. `Electrical Reference`) im Netzwerk
 
 Der `Solver Configuration` Block muss mit dem physikalischen Netzwerk verbunden sein. Er stellt die Verbindung zur Solver-Engine von Simulink her und ermöglicht netzwerkspezifische Einstellungen.
 
-![Ein Screenshot des 'Solver Configuration' Blocks, wie er in einem einfachen Simscape-Schaltkreis platziert und verbunden ist.](./Screenshots/Simscape_Solver_Configuration.png)
+![h:400](./Screenshots/Simscape_Solver_Configuration.png)
+
+---
+
+![bg contain right](./Screenshots/Simscape_Solver_Configuration_Block_Parameters.png)
+
+TODO Folie zu den Parametern des Blocks `Solver Configuration`
 
 ---
 
