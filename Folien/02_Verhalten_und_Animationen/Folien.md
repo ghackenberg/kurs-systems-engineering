@@ -3388,10 +3388,10 @@ Modellieren Sie das Verhalten der Software-Komponenten des 3D-Druckers (z.B. die
 ## 2.4 Simulink **3D Animation**
 
 1. **Virtuelle Welten** (Die 3D-Szene im VRML/X3D-Format)
-2. **Der VR Sink Block** (Die Brücke zwischen Simulink und 3D-Welt)
-3. **Geometrien** (Grundformen wie Würfel, Kugel und Zylinder)
-4. **Transformationen** (Objekte bewegen und rotieren)
-5. **Kameras und Ansichten** (Die Perspektive wechseln)
+2. **Geometrien** (Grundformen wie Würfel, Kugel und Zylinder)
+3. **Transformationen** (Objekte bewegen und rotieren)
+4. **Kameras und Ansichten** (Die Perspektive wechseln)
+5. **Simulation 3D Blöcke** (Die Brücke zu den 3D-Welten)
 
 ---
 
@@ -3466,41 +3466,9 @@ Transform {
 
 ---
 
-![bg right](./Illustrationen/s3d_vrsink.jpg)
-
-### 2.4.2 Der VR Sink Block
-
-Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:
-
-1. **Block-Parameter:** Zuordnung der virtuellen Welt.
-2. **Signale verbinden:** Verknüpfung Simulink-Signal / 3D-Objekts.
-3. **Baumstruktur der Welt:** Naviga-tion zu den Knoten und Feldern.
-4. **Abtastzeit** und Auswirkung auf die Flüssigkeit der Animation.
-
----
-
-#### Einrichtung des VR Sink Blocks
-
-Der `VR Sink` Block ist die Brücke von Simulink zur 3D-Welt.
-
-1.  **Welt laden:** Im Block-Dialog wird der Pfad zur `.wrl` oder `.x3d` Datei angegeben.
-2.  **Knoten auswählen:** Nach dem Laden der Welt zeigt der Block eine Baumstruktur aller `DEF`-benannten Knoten an.
-3.  **Feld auswählen:** Man wählt den Knoten (z.B. `Roboterarm`) und das zu steuernde Feld (z.B. `rotation` oder `translation`).
-4.  **Signal verbinden:** Der Block erstellt einen Eingangs-Port, der mit dem entsprechenden Simulink-Signal verbunden wird. Die Dimension des Signals muss zum Feld passen (z.B. 3-Element-Vektor für `translation`).
-
----
-
-#### Die VR Sink Benutzeroberfläche
-
-Im Dialog des `VR Sink` Blocks wird die Verknüpfung zwischen Simulink und der 3D-Welt hergestellt. Man navigiert durch die Baumstruktur der `DEF`-benannten Knoten und wählt das Feld (z.B. `rotation`), das man mit einem Simulink-Signal steuern möchte.
-
-![Ein Screenshot des VR Sink Blockdialogs. Links ist die Baumstruktur der VRML-Welt zu sehen, rechts die Parameter für das ausgewählte Feld.](./Screenshots/S3D_VRSink_Dialog.png)
-
----
-
 ![bg right](./Illustrationen/s3d_geometry.jpg)
 
-### 2.4.3 Geometrien
+### 2.4.2 Geometrien
 
 VRML (Virtual Reality Modeling Language) und X3D bieten eine Reihe vordefinierter Geometriegrund-formen, die den Aufbau von 3D-Szenen vereinfachen. Diese primitiven Formen sind effizient und flexibel einsetzbar.
 
@@ -3693,7 +3661,7 @@ Shape {
 
 ![bg right](./Illustrationen/s3d_transformation.jpg)
 
-### 2.4.4 Transformationen
+### 2.4.3 Transformationen
 
 1. **Der `Transform`-Knoten:** Kapselt Geometrie und deren Position.
 2. **Translation:** Verschiebung entlang der X-, Y- und Z-Achse.
@@ -3775,15 +3743,6 @@ Transform {
 }
 ```
 
-
----
-
-#### Visuelle Effekte der Transformation
-
-Jedes Feld im `Transform`-Knoten hat eine direkte visuelle Auswirkung auf das Objekt und sein lokales Koordinatensystem. Die Reihenfolge der Transformationen ist wichtig: Skalierung, dann Rotation, dann Translation.
-
-![Eine Illustration, die die Effekte von Translation, Rotation und Skalierung auf ein Koordinatensystem und ein darin platziertes Objekt zeigt.](./Illustrationen/s3d_transform_effects.jpg)
-
 ---
 
 <div class="columns">
@@ -3811,7 +3770,7 @@ Wenn sich also die Basis dreht, bewegen sich Ober- und Unterarm automatisch mit.
 
 ![bg right](./Illustrationen/s3d_kamera.jpg)
 
-### 2.4.5 Kameras und Ansichten
+### 2.4.4 Kameras und Ansichten
 
 Definition des Blickwinkels des Betrachters:
 
@@ -3886,6 +3845,77 @@ Viewpoint {
 # Hier würden weitere Szenenobjekte folgen
 ```
 
+---
+
+![bg right](./Illustrationen/s3d_vrsink.jpg)
+
+### 2.4.5 Simulation 3D Blöcke
+
+Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:
+
+1. **Block-Parameter:** Zuordnung der virtuellen Welt.
+2. **Signale verbinden:** Verknüpfung Simulink-Signal / 3D-Objekts.
+3. **Baumstruktur der Welt:** Naviga-tion zu den Knoten und Feldern.
+4. **Abtastzeit** und Auswirkung auf die Flüssigkeit der Animation.
+
+---
+
+<div class="columns">
+<div>
+
+#### Der **Simulation 3D Scene Configuration** Block
+
+TODO Allgemeine Beschreibung des Scene Configuration Blocks
+
+</div>
+<div>
+
+![](./Screenshots/Simulink_Block_Simulation_3D_Scene_Configuration.png)
+
+</div>
+</div>
+
+---
+
+#### Einrichtung des **Simulation 3D Scene Configuration** Blocks
+
+TODO Beschreibung der Einrichtung des Scene Configuration Blocks
+
+---
+
+<div class="columns">
+<div>
+
+#### Der **Simulation 3D Actor** Block
+
+TODO Allgemeine Beschreibung des Actor Blocks
+
+</div>
+<div>
+
+![](./Screenshots/Simulink_Block_Simulation_3D_Actor.png)
+
+</div>
+</div>
+
+---
+
+#### Einrichtung des **Simulation 3D Actor** Blocks
+
+Der `Simulation 3D Actor` Block ist die Brücke von Simulink zur 3D-Welt.
+
+1.  **Welt laden:** Im Block-Dialog wird der Pfad zur `.wrl` oder `.x3d` Datei angegeben.
+2.  **Knoten auswählen:** Nach dem Laden der Welt zeigt der Block eine Baumstruktur aller `DEF`-benannten Knoten an.
+3.  **Feld auswählen:** Man wählt den Knoten (z.B. `Roboterarm`) und das zu steuernde Feld (z.B. `rotation` oder `translation`).
+4.  **Signal verbinden:** Der Block erstellt einen Eingangs-Port, der mit dem entsprechenden Simulink-Signal verbunden wird. Die Dimension des Signals muss zum Feld passen (z.B. 3-Element-Vektor für `translation`).
+
+---
+
+#### Die **Simulation 3D Actor** Benutzeroberfläche
+
+Im Dialog des `Simulation 3D Actor` Blocks wird die Verknüpfung zwischen Simulink und der 3D-Welt hergestellt. Man navigiert durch die Baumstruktur der `DEF`-benannten Knoten und wählt das Feld (z.B. `rotation`), das man mit einem Simulink-Signal steuern möchte.
+
+![Ein Screenshot des VR Sink Blockdialogs. Links ist die Baumstruktur der VRML-Welt zu sehen, rechts die Parameter für das ausgewählte Feld.](./Screenshots/S3D_VRSink_Dialog.png)
 
 ---
 
@@ -3896,6 +3926,8 @@ Im 3D-Viewer können Benutzer interaktiv zwischen allen in der Welt definierten 
 ![Ein Screenshot des Simulink 3D Animation Viewers. Man sieht eine 3D-Szene und ein Menü oder eine Symbolleiste, in der man zwischen verschiedenen, per 'description' benannten, 'Viewpoints' (z.B. "Fahrerperspektive", "Draufsicht") wechseln kann.](./Screenshots/S3D_Viewpoint_Selection.png)
 
 ---
+
+![bg right](./Illustrationen/Akkuschrauber.jpg)
 
 ### 2.4.6. Fallbeispiel: Akku-Schrauber
 
@@ -3916,14 +3948,14 @@ Ziel ist es, die Bewegungen des Akku-Schraubers, insbesondere die Rotation des B
 
 -   Das Ausgangssignal der Motor-Simulation (Winkelgeschwindigkeit) aus dem Simscape-Modell wird über einen `PS-Simulink Converter` in ein Simulink-Signal umgewandelt.
 -   Dieses Signal wird dann integriert, um die aktuelle Winkelposition zu erhalten.
--   Der `VR Sink` Block wird konfiguriert, um das `rotation`-Feld des `Transform`-Knotens für das Bohrfutter mit diesem Winkelsignal zu steuern.
+-   Der `Simulation 3D Actor` Block wird konfiguriert, um das `rotation`-Feld des `Transform`-Knotens für das Bohrfutter mit diesem Winkelsignal zu steuern.
 
 ---
 
 #### Animation der **LED-Beleuchtung**
 
 -   Das Ausgangssignal der LED-Steuerungslogik (z.B. ein Binärsignal `0` oder `1` für Aus/An) aus dem Stateflow-Chart wird verwendet.
--   Im 3D-Modell des Akku-Schraubers sollte ein `Transform`-Knoten für die LED-Lichtquelle existieren. Dessen `emissiveColor`-Feld (oder ein ähnliches Feld zur Helligkeitssteuerung) kann über den `VR Sink` Block mit dem Stateflow-Ausgangssignal verbunden werden.
+-   Im 3D-Modell des Akku-Schraubers sollte ein `Transform`-Knoten für die LED-Lichtquelle existieren. Dessen `emissiveColor`-Feld (oder ein ähnliches Feld zur Helligkeitssteuerung) kann über den `Simulation 3D Actor` Block mit dem Stateflow-Ausgangssignal verbunden werden.
 -   Alternativ könnte ein `Switch`-Knoten in VRML verwendet werden, um zwischen verschiedenen `Light`-Knoten zu wechseln, die die LED-Zustände repräsentieren.
 
 ---
@@ -3941,4 +3973,4 @@ Ziel ist es, die Bewegungen des Akku-Schraubers, insbesondere die Rotation des B
 
 Visualisieren Sie die Bewegungen des 3D-Druckers, insbesondere die Bewegungen der Achsen und des Extruders, sowie die Statusanzeige (z.B. ein Display, LEDs) mithilfe von Simulink 3D Animation.
 
-*Erstellen Sie dafür ein einfaches 3D-Modell des 3D-Druckers (oder nutzen Sie ein vorhandenes) und verknüpfen Sie die relevanten Simulink-Signale mit den Transformationen und Eigenschaften der 3D-Objekte.*
+*Erstellen Sie dafür ein einfaches 3D-Modell des 3D-Druckers (oder nutzen Sie ein vorhandenes) und verknüpfen Sie die relevanten Simulink-Signale.*
