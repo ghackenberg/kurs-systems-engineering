@@ -1668,15 +1668,15 @@ Die **Simscape Language** ist eine textbasierte Modellierungssprache, die es erm
 ---
 
 <div class="columns">
-<div>
+<div class="two">
 
 #### Definition von **Domänen**
 
 Eine Domänendefinition in Simscape legt die grundlegenden physikalischen Grö-ßen für eine bestimmte Energieform fest.
 
 -   **Across-Variablen:** Werden im ersten `variables`-Block definiert (z.B. Spannung).
--   **Through-Variablen:** Werden im `variables(Balancing = true)`-Block definiert (z.B. Strom).
--   **Parameter:** TODO Beschreibung
+-   **Through-Variablen:** Werden im `variables (Balancing = true)`-Block definiert (z.B. Strom).
+-   **Parameter:** Konstanten, die das Verhalten von Komponenten konfigurieren (z.B. Federkonstante)
 
 </div>
 <div>
@@ -1693,7 +1693,7 @@ domain [name]
   end
 
   parameters
-    ... % TODO Kommentar
+    ... % Parameter
   end
 
 end
@@ -1805,9 +1805,11 @@ end
 
 #### Definition von **Komponenten**
 
--   **Nodes/Inputs/Outputs**: TODO Beschreibung
--   **Parameters/Variables:** TODO Beschreibung
--   **Branches/Equations:** TODO Beschreibung
+Das ist in einer Definition enthalten:
+
+-   **Nodes/Inputs/Outputs**: Anschlüsse für physikalische Netzwerke, Ein-gangssignale und Ausgangssignale.
+-   **Parameters/Variables:** Konstanten und interne Zustände oder Größen der Komponente.
+-   **Branches/Equations:** Durchfluss von Through-Variablen und physikalische Verhalten der Komponente.
 
 </div>
 <div>
@@ -2011,13 +2013,11 @@ end
 ```matlab
 component TranslationalSpring
   nodes
-      % Links
       R = foundation.mechanical.translational.translational;
-      % Rechts
       C = foundation.mechanical.translational.translational;
   end
   parameters
-    r = { 1000, 'N/m' }; % TODO Kommentar
+    r = { 1000, 'N/m' }; % Federkonstante
   end
   variables
     v = { 0, 'm/s' }; % Geschindigkeit
@@ -2028,9 +2028,9 @@ component TranslationalSpring
     f : R.f -> C.f; % Kraftweiterleitung
   end
   equations
-    v == R.v - C.v; % TODO Kommentar
-    v == x.der;     % TODO Kommentar
-    f == r * x;     % TODO Kommentar
+    v == R.v - C.v; % Differenzgeschwindigkeit
+    v == x.der;     % Geschwindigkeit als Ableitung des Weges
+    f == r * x;     % Hookesches Gesetz
   end
 end
 ```
@@ -2059,14 +2059,14 @@ component ThermalResistance
   end
   variables
     T = {0, 'K'}; % Temperatur
-    Q = {0, 'W'}; % TODO Kommentar
+    Q = {0, 'W'}; % Wärmestrom
   end
   branches
-    Q : A.Q -> B.Q; % TODO Kommentar
+    Q : A.Q -> B.Q; % Wärmestromfluss
   end
   equations
     T == A.T - B.T; % Temperaturdifferenz
-    T == R * Q;     % TODO Kommentar
+    T == R * Q;     % Ohmsches Gesetz für thermischen Widerstand
   end
 end
 ```
@@ -2300,12 +2300,88 @@ Verbindet ein Simulink-Signal mit einem physikalischen Simscape-Netzwerk.
 <div class="columns">
 <div>
 
-TODO Beschreibung des Beispiels (Simscape Controlled Voltage Source mit Simulink Constant)
+#### **Simulink-PS** Converter (Beispiel)
+
+Das Beispiel zeigt, wie ein Simulink `Constant`-Block über einen `Simulink-PS Converter` eine physikalische `Controlled Voltage Source` in Simscape steuert.
+
+Der Konverter übersetzt das dimensions-lose Simulink-Signal in eine Spannungs-einheit.
 
 </div>
 <div>
 
 ![](./Screenshots/Simscape_Simulink_PS_Converter_Example.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+```matlab
+component ControlledVoltageSource
+  inputs
+    vT = { 0, 'V' }; % Eingabespannungswert
+  end
+  nodes
+    p = foundation.electrical.electrical; % Positive
+    n = foundation.electrical.electrical; % Negative
+  end
+  variables
+    v = { 0, 'V' }; % Spannung
+    i = { 0, 'A' }; % Stromstärke
+  end
+  branches
+    i : p.i -> n.i;
+  end
+  equations
+    v == p.v - n.v;
+    v == vT;
+  end
+end
+```
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Controlled_Voltage_Source.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+```matlab
+component IdealForceSource
+  inputs
+    S = { 0, 'N' }; % Eingabekraft
+  end
+  nodes
+    C = foundation.mechanical.translational.translational;
+    R = foundation.mechanical.translational.translational;
+  end
+  variables
+    v = { 0, 'm/s' }; % Geschwindigkeit
+    f = { 0, 'N' };   % Kraft
+  end
+  branches
+    f : R.f -> C.f;
+  end
+  equations
+    v == C.v - R.v;
+    f == -S;
+  end
+end
+```
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Ideal_Force_Source.png)
 
 </div>
 </div>
@@ -2337,12 +2413,83 @@ Verbindet ein physikalisches Simscape-Netzwerk mit einem Simulink-Signal.
 <div class="columns">
 <div>
 
-TODO Beschreibung des Beispiels (Simscape Voltage Sensor mir Simulink Scope)
+#### **PS-Simulink** Converter (Beispiel)
+
+Dieses Beispiel demonstriert die Messung einer Spannung in einem Simscape-Netzwerk.
+
+Ein `Voltage Sensor` misst die physikalische Spannung, die dann über einen `PS-Simulink Converter` in ein Simulink-Signal umgewandelt und in einem `Scope` visualisiert wird.
 
 </div>
 <div>
 
 ![](./Screenshots/Simscape_PS_Simulink_Converter_Example.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+```matlab
+component VoltageSensor
+
+  outputs
+    V = { 0.0, 'V' }; % Ausgabespannung
+  end
+
+  nodes
+    p = foundation.electrical.electrical; % Positive
+    n = foundation.electrical.electrical; % Negative
+  end
+
+  equations
+    V == p.v - n.v;
+  end
+  
+end
+```
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Voltage_Sensor.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="two">
+
+```matlab
+component IdealForceSensor
+  nodes
+    R = foundation.mechanical.translational.translational;
+    C = foundation.mechanical.translational.translational;
+  end
+  outputs
+    F = { 0, 'N' }; % Ausgabekraft
+  end
+  variables
+    f = { 0, 'N' }; % Kraft
+  end
+  branches
+    f : R.f -> C.f;
+  end
+  equations
+    C.v == R.v;
+    f == F;
+  end
+end
+```
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Ideal_Force_Sensor.png)
 
 </div>
 </div>
@@ -2499,7 +2646,15 @@ Der `Solver Configuration` Block muss mit dem physikalischen Netzwerk verbunden 
 
 ![bg contain right](./Screenshots/Simscape_Solver_Configuration_Block_Parameters.png)
 
-TODO Folie zu den Parametern des Blocks `Solver Configuration`
+#### Parameter des `Solver Configuration` Blocks
+
+Der `Solver Configuration` Block bietet wichtige Parameter zur Steuerung der Simulation physikalischer Netzwerke:
+
+-   **`Use local solver`:** Wenn aktiviert, wird für dieses spezifische physikalische Netzwerk ein separater Solver verwendet, was bei unabhängigen Netzwerken die Simulation beschleunigen kann.
+-   **`Solver type`:** Auswahl zwischen `Global` (Simulink-Solver) und `Local` (spezieller Simscape-Solver).
+-   **`Sample time`:** Nur bei lokalem Solver relevant, definiert die Abtastzeit des lokalen Solvers.
+-   **`Consistency tolerance`:** Toleranz, mit der die algebraischen Gleichungen des Netzwerks gelöst werden müssen.
+-   **`Number of iterations`:** Maximale Anzahl von Iterationen, die der Solver zur Lösung der algebraischen Schleifen durchführen darf.
 
 ---
 
@@ -3024,7 +3179,45 @@ Stateflow kann über Ereignisse und direkte Funktionsaufrufe eng mit Simulink in
 
 ---
 
-TODO Abschnitt zu Anwendung von StateFlow auf Fallbeispiel "Akkuschrauber"
+### 2.3.6. Fallbeispiel: Akku-Schrauber
+
+Im Rahmen dieses Kapitels wenden wir die gelernten Konzepte der Stateflow Logikmodelle auf das durchgängige Fallbeispiel eines Akku-Schraubers an.
+
+Ziel ist es, die interne Steuerungslogik des Akku-Schraubers zu modellieren, z.B. Betriebsmodi, Fehlerzustände oder die Steuerung der LED-Beleuchtung.
+
+---
+
+#### Stateflow-Modell des **Betriebsmodus**
+
+-   Ein Stateflow-Chart kann verschiedene Betriebsmodi wie `Ausgeschaltet`, `Leerlauf`, `Bohren` oder `Schrauben` darstellen.
+-   Übergänge zwischen diesen Zuständen werden durch Ereignisse (z.B. `Einschaltknopf_gedrückt`, `Bohrermoment_erreicht`) oder Bedingungen (z.B. `Drehzahl_Null`) gesteuert.
+-   `entry`-Aktionen könnten z.B. das Starten des Motors oder das Aktivieren der LED-Beleuchtung umfassen.
+
+---
+
+#### Stateflow-Modell der **LED-Steuerung**
+
+-   Ein separater, paralleler Stateflow-Chart oder ein Sub-Zustand kann die Logik für die LED-Beleuchtung steuern.
+-   Zustände könnten `LED_Aus`, `LED_An` (konstant), `LED_Blinken` (bei Fehlern oder Warnungen) sein.
+-   Das `Output` Signal des Charts würde direkt an einen Simulink-Block (z.B. `Switch`) gesendet, der die LED ein- oder ausschaltet.
+
+---
+
+#### Stateflow-Modell der **Fehlerbehandlung**
+
+-   Fehlerzustände wie `Akku_Leer`, `Ueberlast` oder `Ueberhitzt` können als separate Zustände modelliert werden.
+-   Übergänge in diese Fehlerzustände werden durch entsprechende `Input` Daten (z.B. Akkuspannung, Motortemperatur) oder `Input Events` (z.B. `Ueberlast_Detektiert`) ausgelöst.
+-   `entry`-Aktionen in Fehlerzuständen könnten das Abschalten des Motors, das Blinken einer Warn-LED oder das Protokollieren des Fehlers umfassen.
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### 2.3.7. Übungsaufgabe
+
+Modellieren Sie das Verhalten der Software-Komponenten des 3D-Druckers (z.B. die Betriebslogik der Heizung, die Steuerung der Lüfter) mithilfe von Stateflow Logikmodellen.
+
+*Definieren Sie dabei Zustände, Übergänge, Aktionen und verwenden Sie gegebenenfalls hierarchische oder parallele Zustände zur Strukturierung.*
 
 ---
 
@@ -3542,4 +3735,48 @@ Im 3D-Viewer können Benutzer interaktiv zwischen allen in der Welt definierten 
 
 ---
 
-TODO Abschnitt zu Anwendung von Simulink 3D Animation auf Fallbeispiel "Akkuschrauber"
+### 2.4.6. Fallbeispiel: Akku-Schrauber
+
+In diesem Abschnitt wenden wir die gelernten Konzepte der Simulink 3D Animation auf das durchgängige Fallbeispiel eines Akku-Schraubers an.
+
+Ziel ist es, die Bewegungen des Akku-Schraubers, insbesondere die Rotation des Bohrfutters und die LED-Beleuchtung, in einer virtuellen Umgebung zu visualisieren.
+
+---
+
+#### 3D-Modell des Akku-Schraubers
+
+-   Ein detailliertes 3D-Modell des Akku-Schraubers im VRML- oder X3D-Format wird als Basis verwendet. Dieses Modell sollte separate `Transform`-Knoten für bewegliche Teile wie das Bohrfutter, den Abzug und die LED-Lichtquelle enthalten, die mit `DEF` benannt sind.
+-   Die `.wrl` oder `.x3d` Datei wird in den `VR Sink` Block geladen.
+
+---
+
+#### Animation der **Bohrfutter-Rotation**
+
+-   Das Ausgangssignal der Motor-Simulation (Winkelgeschwindigkeit) aus dem Simscape-Modell wird über einen `PS-Simulink Converter` in ein Simulink-Signal umgewandelt.
+-   Dieses Signal wird dann integriert, um die aktuelle Winkelposition zu erhalten.
+-   Der `VR Sink` Block wird konfiguriert, um das `rotation`-Feld des `Transform`-Knotens für das Bohrfutter mit diesem Winkelsignal zu steuern.
+
+---
+
+#### Animation der **LED-Beleuchtung**
+
+-   Das Ausgangssignal der LED-Steuerungslogik (z.B. ein Binärsignal `0` oder `1` für Aus/An) aus dem Stateflow-Chart wird verwendet.
+-   Im 3D-Modell des Akku-Schraubers sollte ein `Transform`-Knoten für die LED-Lichtquelle existieren. Dessen `emissiveColor`-Feld (oder ein ähnliches Feld zur Helligkeitssteuerung) kann über den `VR Sink` Block mit dem Stateflow-Ausgangssignal verbunden werden.
+-   Alternativ könnte ein `Switch`-Knoten in VRML verwendet werden, um zwischen verschiedenen `Light`-Knoten zu wechseln, die die LED-Zustände repräsentieren.
+
+---
+
+#### Interaktive **Kameraführung**
+
+-   Mehrere `Viewpoint`-Knoten im VRML/X3D-Modell können vordefinierte Kameraperspektiven bieten, z.B. eine Nahaufnahme des Bohrfutters, eine Draufsicht auf den gesamten Schrauber oder eine Benutzeransicht.
+-   Diese Viewpoints können während der Simulation im 3D-Viewer umgeschaltet werden, um verschiedene Aspekte der Animation zu beobachten.
+
+---
+
+![bg right](../Übungsaufgabe.jpg)
+
+### 2.4.7. Übungsaufgabe
+
+Visualisieren Sie die Bewegungen des 3D-Druckers, insbesondere die Bewegungen der Achsen und des Extruders, sowie die Statusanzeige (z.B. ein Display, LEDs) mithilfe von Simulink 3D Animation.
+
+*Erstellen Sie dafür ein einfaches 3D-Modell des 3D-Druckers (oder nutzen Sie ein vorhandenes) und verknüpfen Sie die relevanten Simulink-Signale mit den Transformationen und Eigenschaften der 3D-Objekte.*
