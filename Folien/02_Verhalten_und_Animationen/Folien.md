@@ -1591,7 +1591,7 @@ In diesem zweiten Abschnitt lernen wir die folgenden Dinge:
 
 1. **Physikalische Netzwerke** (akausale Modellierung)
 2. **Domänen und Bibliotheken** (mechanisch, elektrisch, etc.)
-3. **Erhaltungs- vs. Signal-Ports** (physikalische vs. Signal-Verbindungen)
+3. **Erhaltungs- vs. Signal-Ports** (ungerichtet versus gerichtet)
 4. **Solver für physikalische Netze** (DAE-Solver)
 
 ---
@@ -1655,23 +1655,161 @@ Jede physikalische Domäne in Simscape wird durch ein charakteristisches Paar vo
 
 ---
 
-#### Referenzknoten (Reference Node)
+![bg right:30%](./Illustrationen/Simscape_Language.jpg)
 
-Jedes physikalische Netzwerk in Simscape benötigt mindestens einen **Referenzknoten**. Dieser Block definiert den absoluten Nullpunkt für die Across-Variablen der jeweiligen Domäne.
+### Simscape Language
 
--   **Elektrisch:** `Electrical Reference` (Masse, 0V)
--   **Mechanisch:** `Mechanical Translation/Rotational Reference` (fester Rahmen, unbewegliche Umgebung)
--   **Thermisch:** `Thermal Reference` (absolute Temperatur von 0K, obwohl oft eine Quelle mit konstanter Temperatur verwendet wird)
+Die **Simscape Language** ist eine textbasierte Modellierungssprache, die es ermöglicht, eigene physikalische Komponenten und Domänen zu definieren.
 
-Ohne Referenz ist das Gleichungssystem unbestimmt, da alle Across-Variablen nur relativ zueinander wären.
+-   **Benutzerdefinierte Komponenten:** Wenn die Standardbibliothek nicht ausreicht.
+-   **Textbasierte Beschreibung:** Definition von Gleichungen, Parametern und Anschlüssen in einer MATLAB-ähnlichen Syntax (`.ssc` Dateien).
+-   **Kompilierung:** Simscape übersetzt diese Beschreibungen in C-Code für die Simulation.
 
 ---
 
-#### Beispiele für Referenzknoten
+<div class="columns">
+<div>
 
-Jede Domäne hat ihren eigenen Referenzblock, um den Nullpunkt zu definieren.
+#### Definition von  Domänenmodellklasse
 
-![Ein Screenshot, der verschiedene Referenzblöcke in Simscape zeigt: Electrical Reference, Mechanical Translational Reference und Thermal Reference.](./Screenshots/Simscape_Reference_Blocks.png)
+TODO Beschreibung des Konzepts Domänenmodellklassen
+
+</div>
+<div>
+
+```matlab
+domain [name]
+  variables
+    ... % Across-Variablen
+  end
+  variables(Balancing = true)
+    ... % Through-Variablen
+  end 
+end
+```
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+TODO Beschreibung der Domänenmodellklasse Electrical
+
+</div>
+<div>
+
+```matlab
+TODO Code für Domänenmodellklasse Electrical
+```
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+TODO Beschreibung der Domänenmodellklasse Mechanical Translational
+
+</div>
+<div>
+
+```matlab
+TODO Code für Domänenmodellklasse Mechanical Translational
+```
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+TODO Beschreibung der Domänenmodellklasse Thermal
+
+</div>
+<div>
+
+```matlab
+TODO Code für Domänenmodellklasse Thermal
+```
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+TODO Beschreibung der Definition von Komponenten
+
+</div>
+<div>
+
+```matlab
+component [name]
+  nodes
+    ... % TODO Kommentar
+  end
+  parameters
+    ... % TODO Kommentar
+  end
+  variables
+    ... % TODO Kommentar
+  end
+  branches
+    ... % TODO Kommentar
+  end
+  equations
+    ... % TODO Kommentar
+  end
+end
+```
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+TODO Überschrift und Beschreibung des Beispiels Resistor
+
+</div>
+<div>
+
+```matlab
+component Resistor
+  nodes
+    p : electrical   % Positiver Pin
+    n : electrical   % Negativer Pin
+  end
+  parameters
+    R = { 0, 'Ohm' } % Widerstand
+  end
+  variables
+    v = { 0, 'V' }   % Spannung
+    i = { 0, 'A' }   % Stromstärke
+  end
+  branches
+    i : p.i -> n.i;  % Stromfluss
+  end
+  equations
+    v == p.v - n.v;  % Spannungsdifferenz
+    i == v * R;      % Ohmes Gesetz
+  end
+end
+```
+
+</div>
+</div>
 
 ---
 
@@ -1727,32 +1865,28 @@ Modellierung von Wärmeerzeugung und -übertragung.
 <div class="columns">
 <div class="three">
 
-TODO Folie zu `Electrical Reference` mit mathematischen Gleichungen
-
-</div>
-<div>
-
-![](./Screenshots/Simscape_Block_Electrical_Reference.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div class="three">
-
-#### Elektrische Domäne: **Widerstand**
-
-Der `Resistor`-Block modelliert einen linearen elektrischen Widerstand.
-
-**Gleichung:** Das Verhalten wird durch das Ohmsche Gesetz beschrieben, das die Spannung $v$ über dem Widerstand mit dem Strom $i$ in Beziehung setzt, der durch ihn fließt.
-
-$$v = i \cdot R$$
-
-**Across-Variable:** Die **Spannung** $v$ wird *über* die Anschlüsse des Widerstands gemessen.
-
-**Through-Variable:** Der **Strom** $i$ fließt *durch* den Widerstand.
+```matlab
+component Resistor
+  nodes
+    p = foundation.electrical.electrical;
+    n = foundation.electrical.electrical;
+  end
+  parameters
+    R = { 1, 'Ohm' };
+  end
+  variables
+    i = { 0, 'A' };
+    v = { 0, 'V' };
+  end
+  branches
+    i : p.i -> n.i;
+  end
+  equations
+    v == p.v - n.v;
+    v == R * i;
+  end
+end
+```
 
 </div>
 <div>
@@ -1767,32 +1901,27 @@ $$v = i \cdot R$$
 <div class="columns">
 <div class="three">
 
-TODO Folie zu `Mechanical Translational Reference` mit mathematischen Gleichungen
-
-</div>
-<div>
-
-![](./Screenshots/Simscape_Block_Mechanical_Translational_Reference.png)
-
-</div>
-</div>
-
----
-
-<div class="columns">
-<div class="three">
-
-#### Mechanische Domäne: **Masse**
-
-Der `Mass`-Block modelliert eine ideale translatorische Masse.
-
-**Gleichung:** Das Verhalten wird durch das zweite Newtonsche Gesetz beschrieben. Die Summe aller auf die Masse wirkenden Kräfte $F$ ist gleich dem Produkt aus der Masse $m$ und der Beschleunigung $a$.
-
-$$F = m \cdot a = m \cdot \frac{dv}{dt}$$
-
-**Across-Variable:** Die **Geschwindigkeit** $v$ wird *über* die Masse gemessen (d.h. relativ zu einem Referenzrahmen).
-
-**Through-Variable:** Die **Kraft** $F$ wirkt *auf* die Masse.
+```matlab
+component Mass
+  nodes
+    M = foundation.mechanical.translational.translational;
+  end
+  parameters
+    m = { 1, 'kg' };
+  end
+  variables
+    v = { 0, 'm/s' };
+    f = { 0, 'N' };
+  end
+  branches
+    f : M.f -> *;
+  end
+  equations
+    v == M.v;
+    f == m * der(v);
+  end
+end
+```
 
 </div>
 <div>
@@ -1807,12 +1936,51 @@ $$F = m \cdot a = m \cdot \frac{dv}{dt}$$
 <div class="columns">
 <div class="three">
 
-TODO Folie zu `Thermal Reference` mit mathematischen Gleichungen
+```matlab
+TODO Code für Thermal Resistor
+```
 
 </div>
 <div>
 
-![](./Screenshots/Simscape_Block_Thermal_Reference.png)
+![](./Screenshots/Simscape_Block_Thermal_Resistor.png)
+
+</div>
+</div>
+
+---
+
+#### Referenzknoten (Reference Node)
+
+Jedes physikalische Netzwerk in Simscape benötigt mindestens einen **Referenzknoten**. Dieser Block definiert den absoluten Nullpunkt für die Across-Variablen der jeweiligen Domäne.
+
+-   **Elektrisch:** `Electrical Reference` (Masse, 0V)
+-   **Mechanisch:** `Mechanical Translation/Rotational Reference` (fester Rahmen, unbewegliche Umgebung)
+-   **Thermisch:** `Thermal Reference` (absolute Temperatur von 0K, obwohl oft eine Quelle mit konstanter Temperatur verwendet wird)
+
+Ohne Referenz ist das Gleichungssystem unbestimmt, da alle Across-Variablen nur relativ zueinander wären.
+
+---
+
+#### Beispiele für Referenzknoten
+
+Jede Domäne hat ihren eigenen Referenzblock, um den Nullpunkt zu definieren.
+
+![Ein Screenshot, der verschiedene Referenzblöcke in Simscape zeigt: Electrical Reference, Mechanical Translational Reference und Thermal Reference.](./Screenshots/Simscape_Reference_Blocks.png)
+
+---
+
+<div class="columns">
+<div class="three">
+
+```matlab
+TODO Code für Electrical Reference
+```
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Electrical_Reference.png)
 
 </div>
 </div>
@@ -1822,12 +1990,31 @@ TODO Folie zu `Thermal Reference` mit mathematischen Gleichungen
 <div class="columns">
 <div class="three">
 
-TODO Folie zu `Thermal Resistor` mit mathematischen Gleichungen
+```matlab
+TODO Code für Mechanical Translational Reference
+```
 
 </div>
 <div>
 
-![](./Screenshots/Simscape_Block_Thermal_Resistor.png)
+![](./Screenshots/Simscape_Block_Mechanical_Translational_Reference.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+```matlab
+TODO Code für Thermal Reference
+```
+
+</div>
+<div>
+
+![](./Screenshots/Simscape_Block_Thermal_Reference.png)
 
 </div>
 </div>
@@ -1921,7 +2108,14 @@ Wandelt eine physikalische Größe (eine Across- oder Through-Variable) aus dem 
 <div class="columns">
 <div class="three">
 
-TODO Folie zu `Simulink-PS Converter` Block
+#### **Simulink-PS** Converter
+
+Verbindet ein Simulink-Signal mit einem physikalischen Simscape-Netzwerk.
+
+-   **Eingang:** Dimensionsloses Simulink-Signal oder Signal mit Simulink-Einheit.
+-   **Ausgang:** Physikalische Größe mit Einheit (z.B. Spannung, Kraft).
+-   **Anwendung:** Sollwertvorgaben (z.B. Soll-Drehmoment), gesteuerte Quellen.
+-   **Ableitungen:** Kann bei Bedarf die zeitliche Ableitung des Eingangssignals filtern.
 
 </div>
 <div>
@@ -1936,7 +2130,14 @@ TODO Folie zu `Simulink-PS Converter` Block
 <div class="columns">
 <div class="three">
 
-TODO Folie zu `PS-Simulink Converter` Block
+#### **PS-Simulink** Converter
+
+Verbindet ein physikalisches Simscape-Netzwerk mit einem Simulink-Signal.
+
+-   **Eingang:** Physikalische Größe (Across- oder Through-Variable).
+-   **Ausgang:** Simulink-Signal (optional mit Einheit).
+-   **Anwendung:** Messung von Größen zur Anzeige (Scope) oder Regelung.
+-   **Konfiguration:** Auswahl der Ausgabeeinheit (z.B. Umrechnung von $m/s$ in $km/h$).
 
 </div>
 <div>
