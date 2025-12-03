@@ -1854,7 +1854,7 @@ Ein idealer Widerstand wird durch das Ohmsche Gesetz beschrieben.
 
 -   **Nodes:** Zwei elektrische Anschlüsse `p` und `n`.
 -   **Parameter:** Der Widerstandswert `R` in Ohm-Einheiten.
--   **Gleichung:** $U = R \cdot I$ (bzw. $v = R \cdot i$).
+-   **Gleichung:** $v = i \cdot R$.
 
 </div>
 <div>
@@ -1866,18 +1866,56 @@ component Resistor
     n : electrical   % Negativer Anschluss
   end
   parameters
-    R = { 0, 'Ohm' } % Widerstand
+    R = { 1, 'Ohm' } % Widerstand
   end
   variables
-    v = { 0, 'V' }   % Spannung
-    i = { 0, 'A' }   % Stromstärke
+    v = { 0, 'V' };   % Spannung
+    i = { 0, 'A' };   % Strom
   end
   branches
-    i : p.i -> n.i;  % Stromfluss
+    i : p.i -> n.i;  % Stromfluss von p nach n
   end
   equations
     v == p.v - n.v;  % Spannungsdifferenz
-    i == v * R;      % Ohmes Gesetz
+    v == i * R;      % Ohmsches Gesetz
+  end
+end
+```
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Beispiel: **Ideale Spannungsquelle**
+
+Eine ideale Spannungsquelle prägt eine feste Spannung zwischen ihren Anschlüssen ein, unabhängig vom fließenden Strom.
+
+-   **Nodes:** Zwei elektrische Anschlüsse `p` und `n`.
+-   **Parameter:** Der Spannungswert `V` in Volt.
+-   **Gleichung:** $v = V_{source}$
+
+</div>
+<div>
+
+```matlab
+component IdealVoltageSource
+  nodes
+    p : electrical; % Positiver Anschluss
+    n : electrical; % Negativer Anschluss
+  end
+  parameters
+    V = { 1, 'V' }; % Quellenspannung
+  end
+  variables
+    v = { 0, 'V' }; % Spannung am Bauteil
+  end
+  equations
+    v == p.v - n.v; % Spannungsdifferenz
+    v == V;         % Spannung wird eingeprägt
   end
 end
 ```
@@ -1892,22 +1930,28 @@ end
 
 #### Definition **zusammengesetzter Komponenten**
 
-TODO Beschreibung der allgemeinen Syntax für die Komposition von Subkomponenten
+Zusammengesetzte Komponenten erlauben die hierarchische Strukturierung von Modellen. Sie kapseln ein internes Netzwerk von Sub-Komponenten und definieren über `nodes` die externen Anschlüsse. Das interne Verhalten wird in den Abschnitten `components` (Instanziierung) und `connections` (Verschaltung) beschrieben.
 
 </div>
 <div>
 
 ```matlab
-component [name]
-
+component CompositeComponent
+  nodes
+    p : electrical; % Externer Anschluss 1
+    n : electrical; % Externer Anschluss 2
+  end
   components
-    ... % TODO Kommentar
+    % Deklaration der Sub-Komponenten
+    compA = ComponentA();
+    compB = ComponentB();
   end
-
   connections
-    ... % TODO Kommentar
+    % Verschaltung der Komponenten
+    connect(p, compA.p);
+    connect(compA.n, compB.p);
+    connect(compB.n, n);
   end
-
 end
 ```
 
@@ -1919,24 +1963,32 @@ end
 <div class="columns">
 <div>
 
-#### Beispiel: **Elektrisches Netz**
+#### Beispiel: **Reale Spannungsquelle**
 
-TODO Beschreibung eines einfachen Netzmodells bestehend aus einer Spannungsquelle und einem Widerstand.
+Als Beispiel für eine zusammengesetzte Komponente modellieren wir eine **reale Spannungsquelle**. Diese besteht aus einer idealen Spannungsquelle (`IdealVoltageSource`) und einem in Serie geschalteten Innenwiderstand (`Resistor`). Die Komponente hat zwei externe Anschlüsse `p` und `n`.
 
 </div>
 <div>
 
 ```matlab
-component [name]
-
+component RealSource
+  nodes
+    p : electrical; % Positiver Anschluss
+    n : electrical; % Negativer Anschluss
+  end
+  parameters
+    V = { 12, 'V' };   % Nennspannung
+    R = { 1, 'Ohm' }; % Innenwiderstand
+  end
   components
-    TODO Komponenten
+    source   = IdealVoltageSource(V=V);
+    resistor = Resistor(R=R);
   end
-
   connections
-    TODO Verbindungen
+    connect(p, source.p);
+    connect(source.n, resistor.p);
+    connect(resistor.n, n);
   end
-
 end
 ```
 
@@ -1945,7 +1997,14 @@ end
 
 ---
 
-TODO Folie zu mathematischen Gleichungen, die sich aus der Verknüpfung von Komponenten ergeben
+#### Gleichungssystem der Komposition
+
+Wenn Komponenten in Simscape verbunden werden, stellt der Simscape-Solver automatisch das gesamte Gleichungssystem auf.
+
+1.  **Gleichungen der Komponenten:** Jeder Block trägt seine eigenen physikalischen Gleichungen bei (z.B. `v == i*R` für den Widerstand).
+2.  **Verbindungsgleichungen:** An jedem Verbindungsknoten werden zwei Arten von Gleichungen hinzugefügt:
+    -   **Across-Variablen sind gleich:** Alle verbundenen Anschlüsse haben denselben Wert für die Across-Variable (z.B. `source.n.v == resistor.p.v`).
+    -   **Summe der Through-Variablen ist Null:** Die Summe aller Through-Variablen, die in einen Knoten fließen, ist Null (Kirchhoffsches Knotengesetz, z.B. `source.n.i + resistor.p.i == 0`).
 
 ---
 
