@@ -3239,22 +3239,13 @@ Die Schnittstelle zwischen der Stateflow-Logik und der Außenwelt (Simulink):
 
 ---
 
-<div class="columns">
-<div class="two">
+![bg contain right](./Screenshots/Stateflow_Symbol_Data.png)
 
-#### Datenobjekte und der Symbol-Manager
+#### Datenobjekte
 
-Stateflow tauscht Informationen mit Simulink über **Datenobjekte** aus. Diese werden im **Symbol-Manager** (früher "Model Explorer") definiert und typisiert.
+Stateflow tauscht Informationen mit Simulink über **Datenobjekte** aus. Diese werden in der **Symbol Pane** (früher "Model Explorer") definiert und typisiert.
 
 Jedes Datenobjekt hat einen **Scope** (Gültigkeitsbereich), der festlegt, woher es kommt und wohin es geht.
-
-</div>
-<div class="two">
-
-![Ein Screenshot des Stateflow Symbol-Managers (oder des Model Explorer-Fensters), der eine Liste von Datenobjekten mit den Spalten Name, Scope und Port zeigt.](./Screenshots/Stateflow_Symbol_Manager.png)
-
-</div>
-</div>
 
 ---
 
@@ -3268,14 +3259,39 @@ Jedes Datenobjekt hat einen **Scope** (Gültigkeitsbereich), der festlegt, woher
 
 ---
 
+![bg contain right](./Screenshots/Stateflow_Input_Output_Data.png)
+
+#### Input und Ouput Data Ports
+
+TODO Beschreibung der Ports, die für Datenobjekte angelegt werden
+
+---
+
+![bg contain right](./Screenshots/Stateflow_Symbol_Event.png)
+
 #### Ereignisse und Funktionsaufrufe
 
 Neben dem kontinuierlichen Austausch von Daten kann Stateflow auch auf **Ereignisse** reagieren oder selbst welche auslösen.
 
+Stateflow kann außerdem `Simulink Functions` oder `MATLAB Functions` direkt aufrufen, um komplexe Berechnungen auszulagern, anstatt die Logik im Chart selbst abzubilden.
+
+---
+
+#### Arten von Ereignissen
+
+Die folgenden Arten von Ereginissen werden unterschieden:
+
 - **Input Events:** Können von Simulink gesendet werden, um Übergänge direkt zu triggern (z.B. ein "rising edge" an einem Port).
 - **Output Events:** Können von Stateflow Aktionen gesendet werden, um ereignisbasierte Subsysteme in Simulink zu aktivieren (`Function-Call Subsystems`).
+- **Local Events:** TODO Beschreibung
 
-Stateflow kann außerdem `Simulink Functions` oder `MATLAB Functions` direkt aufrufen, um komplexe Berechnungen auszulagern, anstatt die Logik im Chart selbst abzubilden.
+---
+
+![bg contain right](./Screenshots/Stateflow_Input_Output_Event.png)
+
+#### Input und Ouput Event Ports
+
+TODO Beschreibung der Ports, die für Ereignisse angelegt werden
 
 ---
 
