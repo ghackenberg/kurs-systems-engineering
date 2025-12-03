@@ -2842,7 +2842,7 @@ Ziel ist es, das physikalische Verhalten des Motors sowie des Antriebsstrangs de
 </div>
 <div>
 
-TODO Screenshot des Simscape-Modells für die Akku-Modellierung
+![](./Screenshots/Simscape_Fallbeispiel_Akku.png)
 
 </div>
 </div>
@@ -2861,7 +2861,7 @@ TODO Screenshot des Simscape-Modells für die Akku-Modellierung
 </div>
 <div>
 
-TODO Screenshot des Simscape-Modells für die elektrische Motor-Modellierung
+![](./Screenshots/Simscape_Fallbeispiel_Motor_Elektrisch.png)
 
 </div>
 </div>
@@ -2881,7 +2881,7 @@ TODO Screenshot des Simscape-Modells für die elektrische Motor-Modellierung
 </div>
 <div class="two">
 
-TODO Screenshot des Simscape-Modells für die mechanische Motor-Modellierung
+![](./Screenshots/Simscape_Fallbeispiel_Motor_Mechanisch.png)
 
 </div>
 </div>
@@ -2900,7 +2900,7 @@ TODO Screenshot des Simscape-Modells für die mechanische Motor-Modellierung
 </div>
 <div>
 
-TODO Screenshot des Simscape-Modells für die Getriebe-Modellierung
+![](./Screenshots/Simscape_Fallbeispiel_Getriebe.png)
 
 </div>
 </div>
@@ -2913,13 +2913,13 @@ TODO Screenshot des Simscape-Modells für die Getriebe-Modellierung
 <div>
 
 **Last-Modellierung:**
--   Die Last am Bohrfutter kann durch einen `Ideal Rotational Motion Source` (für eine konstante Drehzahl) oder einen `Controlled Torque Source` (für ein definiertes Lastmoment) simuliert werden.
+-   Die Last am Bohrfutter kann durch einen `Ideal Angular Velocity Source` (für eine konstante Drehzahl) oder einen `Controlled Torque Source` (für ein definiertes Lastmoment) simuliert werden.
 -   Ein `Rotational Mechanical Reference`-Block ist notwendig, um den mechanischen Nullpunkt (fester Bezug) zu definieren.
 
 </div>
 <div>
 
-TODO Screenshot des Simscape-Modells für die Last-Modellierung
+![](./Screenshots/Simscape_Fallbeispiel_Last.png)
 
 </div>
 </div>
