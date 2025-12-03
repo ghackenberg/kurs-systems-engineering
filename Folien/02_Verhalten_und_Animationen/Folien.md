@@ -3851,21 +3851,24 @@ Viewpoint {
 
 ### 2.4.5 Simulation 3D Blöcke
 
-Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:
+Die Schnittstelle, um Simulink-Signale in die 3D-Welt zu senden:, basiert auf einer neuen Toolchain, die auf der Unreal Engine aufbaut.
 
-1. **Block-Parameter:** Zuordnung der virtuellen Welt.
-2. **Signale verbinden:** Verknüpfung Simulink-Signal / 3D-Objekts.
-3. **Baumstruktur der Welt:** Naviga-tion zu den Knoten und Feldern.
-4. **Abtastzeit** und Auswirkung auf die Flüssigkeit der Animation.
+1. **Scene Configuration Block:** Definiert die 3D-Umgebung.
+2. **Actor Block:** Repräsentiert und steuert ein Objekt in der Szene.
+3. **Signale verbinden:** Verknüpfung von Simulink-Signalen mit Actor-Eigenschaften.
 
 ---
 
 <div class="columns">
 <div>
 
-#### Der **Simulation 3D Scene Configuration** Block
+#### Der `Simulation 3D Scene Configuration` Block
 
-TODO Allgemeine Beschreibung des Scene Configuration Blocks
+Dieser Block ist das zentrale Element zur Verbindung eines Simulink-Modells mit einer 3D-Szene, die in der Unreal Engine läuft.
+
+Er definiert, welche Szene verwendet wird und konfiguriert globale Umgebungsparameter.
+
+*Jedes Modell benötigt genau einen solchen Block.*
 
 </div>
 <div>
@@ -3877,24 +3880,24 @@ TODO Allgemeine Beschreibung des Scene Configuration Blocks
 
 ---
 
-#### Einrichtung des **Simulation 3D Scene Configuration** Blocks
-
-TODO Beschreibung der Einrichtung des Scene Configuration Blocks
-
----
-
 ![bg contain right](./Screenshots/Simulation_3D_Scene_Configuration.png)
 
-TODO Kurze Beschreibung des Block Parameter Dialogs für den Scene Configuration Block
+#### Einrichtung der 3D-Szene
+
+Im Dialog des `Scene Configuration`-Blocks wird die Umgebung festgelegt:
+- **`Scene`**: Konfiguration der Szene (mit Simulink mitgelieferte Standardszenen oder eigenes Unreal Projekt)
+- **`Weather`**: Ermöglicht die Auswahl von Wetterbeding-ungen wie `Sunny`, `Cloudy`, `Rainy`.
 
 ---
 
 <div class="columns">
 <div>
 
-#### Der **Simulation 3D Actor** Block
+#### Der `Simulation 3D Actor` Block
 
-TODO Allgemeine Beschreibung des Actor Blocks
+Dieser Block repräsentiert ein bestimmtes Objekt (einen "Actor" in der Unreal-Terminologie) innerhalb der 3D-Szene.
+
+Er dient als Brücke, um die Eigenschaften dieses Actors – wie Position und Rotation – über Simulink-Signale zu steuern oder auszulesen.
 
 </div>
 <div>
@@ -3906,52 +3909,88 @@ TODO Allgemeine Beschreibung des Actor Blocks
 
 ---
 
-#### Einrichtung des **Simulation 3D Actor** Blocks
-
-Der `Simulation 3D Actor` Block ist die Brücke von Simulink zur 3D-Welt.
-
-1.  **Welt laden:** Im Block-Dialog wird der Pfad zur `.wrl` oder `.x3d` Datei angegeben.
-2.  **Knoten auswählen:** Nach dem Laden der Welt zeigt der Block eine Baumstruktur aller `DEF`-benannten Knoten an.
-3.  **Feld auswählen:** Man wählt den Knoten (z.B. `Roboterarm`) und das zu steuernde Feld (z.B. `rotation` oder `translation`).
-4.  **Signal verbinden:** Der Block erstellt einen Eingangs-Port, der mit dem entsprechenden Simulink-Signal verbunden wird. Die Dimension des Signals muss zum Feld passen (z.B. 3-Element-Vektor für `translation`).
-
----
-
 ![bg contain right](./Screenshots/Simulation_3D_Actor_Path.png)
 
-TODO Auswahl des VRML-Modells
+#### Quell-Pfad festlegen
+
+Im Parameterdialog des Actor-Blocks muss zunächst der exakte Pfad zur gewünschten VRML-Datei eingetragen werden.
+
+Nachdem man auf den Button `OK` klickt, wird das Modell inklusive seiner Knotenstruktur geladen.
+
+*Danach sind benannte Objekte erst sichtbar.*
 
 ---
 
 ![bg contain right](./Screenshots/Simulation_3D_Actor_Inputs_Empty.png)
 
-TODO Wechsel auf Tab Inputs, Button Browse klicken
+#### Actor-Eigenschaften auswählen
+
+Nachdem der Quell-Pfad festgelegt ist, kann über den `Browse`-Button im `Inputs`- oder `Outputs`-Reiter der Eigenschafts-Auswahldialog geöffnet werden, um die zu steuernden oder auszulesenden Parameter zu bestimmen.
+
+*Die zu steuernden Parameter sind typischerweise Translation und Rotation sowie Farben.*
 
 ---
 
 ![bg contain right](./Screenshots/Simulation_3D_Actor_Inputs_Select.png)
 
-TODO Auswahl das gewünschten Objekts und seiner Eigenschaften (z.B. Rotation des Bohrfutters)
+#### Eigenschaft aus der Baumstruktur wählen
+
+In diesem Dialog wird die gesamte Hierarchie des Actors angezeigt. Hier navigiert man zur gewünschten Eigenschaft.
+
+Für den Akku-Schrauber könnte man beispielsweise die `Rotation` des Bohrfutters (Knoten `Bohrfutter`) auswählen, um dessen Drehung zu steuern.
 
 ---
 
 ![bg contain right](./Screenshots/Simulation_3D_Actor_Inputs_Full.png)
 
-TODO Objekteigenschaft wird nun in Liste der Inputs des Simulation 3D Actors angezeigt
+#### Übernahme der ausgewählten Eigenschaften
+
+Die ausgewählte Eigenschaft (`Rotation`) erscheint nun in der Liste der Eingänge des Actor-Blocks.
+
+Dies bestätigt, dass der Block konfiguriert ist, um diese Eigenschaft über ein externes Simulink-Signal zu steuern.
 
 ---
 
 ![bg contain right](./Screenshots/Simulation_3D_Actor_Inputs_Ports.png)
 
-TODO Die Inputs werden auch als Ports angezeigt, die mit anderen Simulink-Blöcken verknüpft werden können
+#### Automatische Erstellung der Ports
+
+Für jede in der Liste definierte Eigenschaft erstellt der `Simulation 3D Actor`-Block automatisch einen entsprechenden Eingangs- oder Ausgangsport.
+
+Diese Ports können nun mit dem Rest des Simulink-Modells verbunden werden.
 
 ---
 
-TODO Folie zu Datentypen für Translation Inputs
+![bg contain right](./Screenshots/Simulation_3D_Actor_Vector_Concatenate.png)
+
+#### Datentypen für **Translation**-Inputs
+
+Um die Position eines Actors zu steuern, wird ein 3-Element-Vektor `[X, Y, Z]` an den `Translation`-Eingangs-Port angeschlossen.
+
+- Die Werte repräsentieren die Position in **Metern**.
+- Die Position ist relativ zum Koordinatensystem des übergeordneten Actors oder, bei einem Top-Level-Actor, relativ zum Weltursprung der Szene.
 
 ---
 
-TODO Folie zu Datentypen für Rotation Inputs
+![bg contain right](./Screenshots/Simulation_3D_Actor_Vector_Concatenate.png)
+
+#### Datentypen für **Rotation**-Inputs
+
+Um die Orientierung eines Actors zu steuern, wird ein 3-Element-Vektor `[Roll, Pitch, Yaw]` an den `Rotation`-Eingangs-Port angeschlossen.
+
+- Die Werte für Rollen, Nicken und Gieren müssen in **Radiant** angegeben werden.
+- Die Rotationsreihenfolge ist typischerweise Z (Yaw), dann Y (Pitch) und zuletzt X (Roll).
+
+---
+
+![bg contain right](./Screenshots/Simulation_3D_Actor_Vector_Concatenate.png)
+
+#### Datentypen für **Color**-Inputs
+
+Um die Farbe eines Actors zu steuern, wird ein 3-Element-Vektor `[Red, Green, Blue]` an den `Color`-Eingangs-Port angeschlossen.
+
+- Die Werte für Rot, Grün und Blau müssen in **Werten zwischen 0 und 1** angegeben werden.
+- Die Rotationsreihenfolge ist typischerweise Rot (Red), dann Grün (Green) und zuletzt Blau (Blue).
 
 ---
 
@@ -3965,10 +4004,21 @@ Ziel ist es, die Bewegungen des Akku-Schraubers, insbesondere die Rotation des B
 
 ---
 
+<div class="columns">
+<div>
+
 #### 3D-Modell des Akku-Schraubers
 
 -   Ein detailliertes 3D-Modell des Akku-Schraubers im VRML- oder X3D-Format wird als Basis verwendet. Dieses Modell sollte separate `Transform`-Knoten für bewegliche Teile wie das Bohrfutter, den Abzug und die LED-Lichtquelle enthalten, die mit `DEF` benannt sind.
 -   Die `.wrl` oder `.x3d` Datei wird in den `VR Sink` Block geladen.
+
+</div>
+<div>
+
+![](./Screenshots/Akkuschrauber.png)
+
+</div>
+</div>
 
 ---
 

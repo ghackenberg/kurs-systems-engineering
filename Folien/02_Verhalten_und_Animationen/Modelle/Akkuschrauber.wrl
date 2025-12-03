@@ -12,7 +12,7 @@ Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.9 0.7 0.0  # Gelbe Farbe für das Gehäuse
+              diffuseColor 0.2 0.2 0.8  # Gelbe Farbe für das Gehäuse
             }
           }
           geometry Box {
@@ -29,7 +29,7 @@ Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.1 0.1 0.1  # Dunkelgrau für den Griff
+              diffuseColor 0.2 0.8 0.2  # Dunkelgrau für den Griff
             }
           }
           geometry Cylinder {
@@ -42,11 +42,12 @@ Group {
     # Bohrfutter-Gruppe (kann für Animationen gedreht werden)
     DEF Bohrfutter Transform {
       translation 0 0.06 0.12
+      rotation 1 0 0 -1.5708
       children [
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.2  # Metall-Optik für das Bohrfutter
+              diffuseColor 0.8 0.2 0.2  # Metall-Optik für das Bohrfutter
             }
           }
           geometry Cylinder {
@@ -56,7 +57,7 @@ Group {
         },
         # Schrauber-Bit (einfacher Zylinder)
         Transform {
-          translation 0 0 0.065
+          translation 0 -0.065 0
           children [
             Shape {
               appearance Appearance {
