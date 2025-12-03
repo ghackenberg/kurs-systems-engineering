@@ -3883,6 +3883,12 @@ TODO Beschreibung der Einrichtung des Scene Configuration Blocks
 
 ---
 
+![bg contain right](./Screenshots/Simulation_3D_Scene_Configuration.png)
+
+TODO Kurze Beschreibung des Block Parameter Dialogs für den Scene Configuration Block
+
+---
+
 <div class="columns">
 <div>
 
@@ -3911,19 +3917,41 @@ Der `Simulation 3D Actor` Block ist die Brücke von Simulink zur 3D-Welt.
 
 ---
 
-#### Die **Simulation 3D Actor** Benutzeroberfläche
+![bg contain right](./Screenshots/Simulation_3D_Actor_Path.png)
 
-Im Dialog des `Simulation 3D Actor` Blocks wird die Verknüpfung zwischen Simulink und der 3D-Welt hergestellt. Man navigiert durch die Baumstruktur der `DEF`-benannten Knoten und wählt das Feld (z.B. `rotation`), das man mit einem Simulink-Signal steuern möchte.
-
-![Ein Screenshot des VR Sink Blockdialogs. Links ist die Baumstruktur der VRML-Welt zu sehen, rechts die Parameter für das ausgewählte Feld.](./Screenshots/S3D_VRSink_Dialog.png)
+TODO Auswahl des VRML-Modells
 
 ---
 
-#### Wechseln der Kameraperspektive
+![bg contain right](./Screenshots/Simulation_3D_Actor_Inputs_Empty.png)
 
-Im 3D-Viewer können Benutzer interaktiv zwischen allen in der Welt definierten `Viewpoint`-Knoten wechseln. Die `description` des Knotens wird dabei als Name im Auswahlmenü angezeigt. Dies ermöglicht geführte Sichten auf wichtige Aspekte der Simulation.
+TODO Wechsel auf Tab Inputs, Button Browse klicken
 
-![Ein Screenshot des Simulink 3D Animation Viewers. Man sieht eine 3D-Szene und ein Menü oder eine Symbolleiste, in der man zwischen verschiedenen, per 'description' benannten, 'Viewpoints' (z.B. "Fahrerperspektive", "Draufsicht") wechseln kann.](./Screenshots/S3D_Viewpoint_Selection.png)
+---
+
+![bg contain right](./Screenshots/Simulation_3D_Actor_Inputs_Select.png)
+
+TODO Auswahl das gewünschten Objekts und seiner Eigenschaften (z.B. Rotation des Bohrfutters)
+
+---
+
+![bg contain right](./Screenshots/Simulation_3D_Actor_Inputs_Full.png)
+
+TODO Objekteigenschaft wird nun in Liste der Inputs des Simulation 3D Actors angezeigt
+
+---
+
+![bg contain right](./Screenshots/Simulation_3D_Actor_Inputs_Ports.png)
+
+TODO Die Inputs werden auch als Ports angezeigt, die mit anderen Simulink-Blöcken verknüpft werden können
+
+---
+
+TODO Folie zu Datentypen für Translation Inputs
+
+---
+
+TODO Folie zu Datentypen für Rotation Inputs
 
 ---
 
