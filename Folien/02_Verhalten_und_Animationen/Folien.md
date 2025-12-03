@@ -1803,7 +1803,7 @@ end
 <div class="columns">
 <div>
 
-#### Definition von **Komponenten**
+#### Definition **atomarer Komponenten**
 
 Das ist in einer Definition enthalten:
 
@@ -1884,6 +1884,68 @@ end
 
 </div>
 </div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Definition **zusammengesetzter Komponenten**
+
+TODO Beschreibung der allgemeinen Syntax für die Komposition von Subkomponenten
+
+</div>
+<div>
+
+```matlab
+component [name]
+
+  components
+    ... % TODO Kommentar
+  end
+
+  connections
+    ... % TODO Kommentar
+  end
+
+end
+```
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Beispiel: **Elektrisches Netz**
+
+TODO Beschreibung eines einfachen Netzmodells bestehend aus einer Spannungsquelle und einem Widerstand.
+
+</div>
+<div>
+
+```matlab
+component [name]
+
+  components
+    TODO Komponenten
+  end
+
+  connections
+    TODO Verbindungen
+  end
+
+end
+```
+
+</div>
+</div>
+
+---
+
+TODO Folie zu mathematischen Gleichungen, die sich aus der Verknüpfung von Komponenten ergeben
 
 ---
 
