@@ -3263,7 +3263,11 @@ Jedes Datenobjekt hat einen **Scope** (Gültigkeitsbereich), der festlegt, woher
 
 #### Input und Ouput Data Ports
 
-TODO Beschreibung der Ports, die für Datenobjekte angelegt werden
+Datenobjekte mit Scope `Input` oder `Output` erzeugen entsprechende Ports auf der übergeordneten Ebene.
+
+Über diese Ports könnten die Datenobjekte von außen gelesen und geschrieben werden.
+
+So kann die Interaktion des Stateflow-Charts mit anderen Simulink-Blöcken realisiert werden.
 
 ---
 
@@ -3277,13 +3281,15 @@ Stateflow kann außerdem `Simulink Functions` oder `MATLAB Functions` direkt auf
 
 ---
 
+![bg contain right:25%](./Illustrationen/Stateflow_Events.jpg)
+
 #### Arten von Ereignissen
 
 Die folgenden Arten von Ereginissen werden unterschieden:
 
 - **Input Events:** Können von Simulink gesendet werden, um Übergänge direkt zu triggern (z.B. ein "rising edge" an einem Port).
 - **Output Events:** Können von Stateflow Aktionen gesendet werden, um ereignisbasierte Subsysteme in Simulink zu aktivieren (`Function-Call Subsystems`).
-- **Local Events:** TODO Beschreibung
+- **Local Events:** Können für die Synchronization zwischen parallelen Zuständen innerhalb eines Stateflow-Charts verwendet werden.
 
 ---
 
@@ -3291,7 +3297,11 @@ Die folgenden Arten von Ereginissen werden unterschieden:
 
 #### Input und Ouput Event Ports
 
-TODO Beschreibung der Ports, die für Ereignisse angelegt werden
+Ereignisse mit Scope `Input` oder `Output` werden ebenfalls als Ports auf der übergeordneten Ebene angezeigt.
+
+Somit können die Ports wieder verwendet werden, um die Interaktion mit anderen Simulink-Blöcken zu realisieren.
+
+*Beispiele siehe nächste Folien.*
 
 ---
 
@@ -3308,7 +3318,7 @@ TODO Beschreibung der Ports, die für Ereignisse angelegt werden
 
 #### Beispiel: Tasten-Ereignis (Simulink-Modell)
 
-![Ein Simulink-Modell, das ein Signal an einen Stateflow-Chart sendet. Das Signal wird in ein Input Event umgewandelt, das einen Zustandsübergang von "Off" nach "On" auslöst.](./Screenshots/Stateflow_Input_Event_Beispiel.png)
+![](./Screenshots/Stateflow_Event_Trigger.png)
 
 ---
 
@@ -3325,17 +3335,11 @@ TODO Beschreibung der Ports, die für Ereignisse angelegt werden
 
 #### Beispiel: Motor aktivieren (Stateflow-Chart)
 
-![Ein Stateflow-Chart, das bei einem Übergang ein Output Event generiert. Dieses Event aktiviert ein Function-Call Subsystem in Simulink, das den Motor steuert.](./Screenshots/Stateflow_Output_Event_Beispiel.png)
+![](./Screenshots/Stateflow_Event_Function_Call.png)
 
 ---
 
-#### Ereignis- und Funktions-Interaktion
-
-Stateflow kann über Ereignisse und direkte Funktionsaufrufe eng mit Simulink interagieren, was eine ereignisgesteuerte Architektur ermöglicht.
-
-![Ein Diagramm, das die Interaktion zeigt: Ein Simulink-Signal triggert ein Input Event in Stateflow. Eine Stateflow-Aktion sendet ein Output Event, das ein Function-Call Subsystem in Simulink aktiviert.](./Diagramme/Draw/Stateflow_Events_Functions.svg)
-
----
+![bg right](./Illustrationen/Akkuschrauber.jpg)
 
 ### 2.3.6. Fallbeispiel: Akku-Schrauber
 
