@@ -1998,6 +1998,30 @@ end
 ```
 
 </div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+#### Beispiel: Masse-Feder-Dämpfer-System
+
+Ein klassisches Beispiel für ein mechanisches System ist das Masse-Feder-Dämpfer-System. Es besteht aus einer Masse ($m$), die an einer Feder mit Federkonstante ($k$) und einem Dämpfer mit Dämpfungskonstante ($c$) befestigt ist. Eine äußere Kraft ($F(t)$) wirkt auf die Masse, was zu einer Verschiebung ($x(t)$) führt.
+
+Dieses System kann durch die folgende Differentialgleichung beschrieben werden:
+
+$m\ddot{x}(t) + c\dot{x}(t) + kx(t) = F(t)$
+
+In Simscape wird dieses System durch die Verbindung von Blöcken modelliert, die jeweils die Masse, die Feder und den Dämpfer repräsentieren.
+
+</div>
+<div class="two">
+
+![Masse-Feder-Dämpfer-System](./Diagramme/Tikz/Masse_Feder_Daempfer.tikz.svg)
+
+</div>
+</div>
 <div>
 
 ![w:1000](./Screenshots/Simscape_Block_Mass.png)
@@ -2447,7 +2471,7 @@ component VoltageSensor
   equations
     V == p.v - n.v;
   end
-  
+
 end
 ```
 
@@ -2554,7 +2578,7 @@ Das System wird durch eine externe Kraft $F_{ext}$ angeregt und bewegt sich mit 
 </div>
 <div>
 
-![Ein schematisches Diagramm eines Masse-Feder-Dämpfer-Systems. Eine Masse (m) ist horizontal zwischen einer Feder (k) auf der einen und einem Dämpfer (d) auf der anderen Seite eingespannt. Beide sind an einer festen Wand befestigt. Eine externe Kraft (F_ext) wirkt auf die Masse.](./Diagramme/Tikz/Masse_Feder_Daempfer.tikz.svg)
+![w:1000](./Diagramme/Draw/Masse-Feder-Dämpfer.svg)
 
 </div>
 </div>
@@ -2642,13 +2666,22 @@ Der `Solver Configuration` Block muss mit dem physikalischen Netzwerk verbunden 
 
 ![h:400](./Screenshots/Simscape_Solver_Configuration.png)
 
+
 ---
 
 ![bg contain right](./Screenshots/Simscape_Solver_Configuration_Block_Parameters.png)
 
 #### Parameter des `Solver Configuration` Blocks
 
-Der `Solver Configuration` Block bietet wichtige Parameter zur Steuerung der Simulation physikalischer Netzwerke:
+Simscape-Modelle können mit einem lokalen (netzspefischen) Solver gelöst werden, oder mit dem globalen Simulink-Solver.
+
+Außerdem kann für die Lösung der algebraischen Schleifen eingestellt werden, welche Genauigkeit gewünscht ist.
+
+*Mehr dazu auf der nächsten Folie.*
+
+---
+
+#### Parameter des `Solver Configuration` Blocks (Cont'd)
 
 -   **`Use local solver`:** Wenn aktiviert, wird für dieses spezifische physikalische Netzwerk ein separater Solver verwendet, was bei unabhängigen Netzwerken die Simulation beschleunigen kann.
 -   **`Solver type`:** Auswahl zwischen `Global` (Simulink-Solver) und `Local` (spezieller Simscape-Solver).
@@ -2669,11 +2702,11 @@ Die Solver-Auswahl erfolgt in den allgemeinen Modelleinstellungen von Simulink (
 
 ---
 
+![bg contain right](./Screenshots/Model_Configuration_Properties.png)
+
 #### Globale Solver-Auswahl für DAEs
 
 Die Auswahl des Solvers erfolgt in den globalen Modelleinstellungen. Für Simscape-Modelle (DAEs) sind steife Solver wie `ode23t` oder `ode15s` in der Regel die beste Wahl.
-
-![Ein Screenshot der Solver-Einstellungen in Simulink, der die Auswahl zwischen ode23t und ode15s im Dropdown-Menü zeigt.](./Screenshots/Simulink_Solver_Selection_DAE.png)
 
 ---
 
