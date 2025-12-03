@@ -1998,30 +1998,6 @@ end
 ```
 
 </div>
-</div>
-
----
-
-<div class="columns">
-<div class="three">
-
-#### Beispiel: Masse-Feder-Dämpfer-System
-
-Ein klassisches Beispiel für ein mechanisches System ist das Masse-Feder-Dämpfer-System. Es besteht aus einer Masse ($m$), die an einer Feder mit Federkonstante ($k$) und einem Dämpfer mit Dämpfungskonstante ($c$) befestigt ist. Eine äußere Kraft ($F(t)$) wirkt auf die Masse, was zu einer Verschiebung ($x(t)$) führt.
-
-Dieses System kann durch die folgende Differentialgleichung beschrieben werden:
-
-$m\ddot{x}(t) + c\dot{x}(t) + kx(t) = F(t)$
-
-In Simscape wird dieses System durch die Verbindung von Blöcken modelliert, die jeweils die Masse, die Feder und den Dämpfer repräsentieren.
-
-</div>
-<div class="two">
-
-![Masse-Feder-Dämpfer-System](./Diagramme/Tikz/Masse_Feder_Daempfer.tikz.svg)
-
-</div>
-</div>
 <div>
 
 ![w:1000](./Screenshots/Simscape_Block_Mass.png)
