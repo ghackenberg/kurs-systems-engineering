@@ -3151,10 +3151,22 @@ Der Historien-Zustand ist ideal, um eine Pausen- und Fortsetzen-Funktion zu impl
 
 ---
 
+<div class="columns">
+<div>
+
 #### Beispiel: Pausenfunktion (Stateflow-Chart)
 
-![Ein Zustandsautomat für einen Mediaplayer. Der Super-Zustand "Player" hat die Sub-Zustände "Playing" und "Seeking". Ein "pause"-Übergang führt aus "Player" heraus. Ein "resume"-Übergang führt zurück zum History-Zustand (H) innerhalb von "Player".](./Diagramme/Mermaid/Zustandsautomat_History_Beispiel.svg)
+Und so sieht die grafische Darstellung des Zustandsautomaten aus.
 
+Man beachte den Super-Zustsand `Player`, der mittels der Annotation `(H)` als Historien-Zustand markiert ist.
+
+</div>
+<div>
+
+![Ein Zustandsautomat für einen Mediaplayer. Der Super-Zustand "Player" hat die Sub-Zustände "Playing" und "Seeking". Ein "pause"-Übergang führt aus "Player" heraus. Ein "resume"-Übergang führt zurück zum History-Zustand (H) innerhalb von "Player".](./Diagramme/Mermaid/MediaPlayer_Pause.svg)
+
+</div>
+</div>
 
 ---
 

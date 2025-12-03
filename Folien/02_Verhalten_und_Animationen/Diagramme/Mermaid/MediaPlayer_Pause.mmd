@@ -1,0 +1,14 @@
+stateDiagram-v2
+    
+    direction LR
+
+    state "Player (H)" as Player {
+        [*] --> Playing
+        Playing --> Seeking : Seek
+        Seeking --> Playing : Play
+    }
+
+    [*] --> Player
+
+    Player --> Paused : Pause
+    Paused --> Player : Resume
