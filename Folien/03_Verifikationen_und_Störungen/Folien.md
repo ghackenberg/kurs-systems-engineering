@@ -152,21 +152,24 @@ Das V-Modell stellt den Zusammenhang zwischen Entwicklungs- und **Testphasen** d
 
 ---
 
-### Testebenen im V-Modell
+### **Testebenen** im V-Modell
 
-TODO Beschreibung der Testebenen (Komponententest, Integrationstest, Systemtest, Abnahmetest).
+- **Komponententest (Unit Testing):** Überprüfung der korrekten Implementierung der Komponente gemäß Spezifikation. Finden von Fehlern auf der untersten Ebene.
+- **Integrationstest:** Aufdeckung von Fehlern, die bei der Interaktion zwischen Komponenten auftreten (z.B. falsche Datenübergabe, Timing-Probleme).
+- **Systemtest:** Überprüfung, ob das System die in den Systemanforderungen definierten funktionalen und nicht-funktionalen Anforderungen (z.B. Performance, Zuverlässigkeit, Sicherheit) erfüllt.
+- **Abnahmetest (Acceptance Testing):** Bestätigung, dass das System die Erwartungen und vertraglichen Anforderungen erfüllt und für den Einsatz bereit ist.
 
 ---
 
-### Testverfahren im V-Modell (1 / 2)
+### **Testverfahren** im V-Modell (1 / 2)
 
-TODO Kurze Einführung der Grafik
+Das folgende Diagramm veranschaulicht die verschiedenen Verifikationsstufen innerhalb des V-Modells, angefangen von der frühen Modellprüfung bis hin zum Testen mit realer Hardware. Es zeigt den Übergang von rein simulationsbasierten Tests (MIL) zu Hardware-nahen Tests (HIL).
 
 ![](./Diagramme/Mermaid/MIL_SIL_PIL_HIL.svg)
 
 ---
 
-### Testverfahren im V-Modell (2 / 2)
+### **Testverfahren** im V-Modell (2 / 2)
 
 
 - **Model-in-the-Loop (MIL):** Testen des Modells in einer reinen Simulationsumgebung zur frühzeitigen Überprüfung von Algorithmen und Logik.
