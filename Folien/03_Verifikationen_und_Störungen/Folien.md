@@ -204,47 +204,61 @@ Er bietet Werkzeuge zum Erstellen, Verwalten, Ausführen und Analysieren von Tes
 
 ---
 
-<div class="columns">
-<div class="four">
-
 #### Test-Hierarchie: Strukturierung von Tests
 
 Simulink Test organisiert Tests in einer dreistufigen Hierarchie, um Skalierbarkeit und Wiederverwendbarkeit zu gewährleisten.
 
--   **Test-Datei (`.mldatx`):** TODO Kurzbeschreibung
--   **Test-Suite:** TODO Kurzbeschreibung
--   **Test-Case:** TODO Kurzbeschreibung
-
-</div>
-<div>
-
-![](./Diagramme/Mermaid/Simulink_Test_Hierarchie.svg)
-
-</div>
-</div>
+-   **Test-Datei (`.mldatx`):** Der Top-Level-Container. Er speichert alle Testkonfigurationen, Suiten, Cases, Test-Parameter und Ergebnisse in einer einzigen portablen Datei.
+-   **Test-Suite:** Gruppiert zusammengehörige Test-Cases. Suiten können verschachtelt werden, um eine Struktur nach Komponenten oder Testarten (z.B. Funktionstests, Fehlertests) abzubilden.
+-   **Test-Case:** Die kleinste ausführbare Testeinheit. Definiert ein spezifisches Szenario mit einem zu testenden System (SUT), Eingabedaten, Pass/Fail-Kriterien (Assessments) und Konfigurationen.
 
 ---
 
 #### Test-Datei (`.mldatx`)
 
--   Die oberste Ebene, gespeichert als `matlab.unittest.TestFile` Objekt.
--   Container für eine oder mehrere Test-Suiten.
--   Ermöglicht die Verwaltung von Test-Metadaten und testweiten Callbacks.
+- **Test-Suiten und Test-Cases:** Die vollständige Hierarchie aller definierten Tests.
+- **Konfigurationen:** Einstellungen für Simulation, Codegenerierung (für SIL/PIL) und Test-Harnesses.
+- **Test-Inputs:** Verweise auf oder eingebettete Eingangsdaten (z.B. aus Signal Editor Blöcken oder MAT-Dateien).
+- **Assessments:** Definitionen der Pass/Fail-Kriterien, einschließlich Baseline-Daten und Toleranzen.
+- **Callbacks:** MATLAB-Skripte zur Vor- und Nachbereitung der Testausführung.
+- **Ergebnisse:** Nach einer Testausführung werden die Ergebnisse (Pass/Fail, Messdaten, Abdeckungsanalysen) ebenfalls in der `.mldatx`-Datei gespeichert.
+
+---
+
+<!-- Ein Screenshot des Test-Manager-Browsers. Eine .mldatx-Datei ist als Wurzel des Baumes markiert. Darunter sind mehrere Test-Suiten als Ordnersymbole sichtbar. Dies verdeutlicht, dass die Test-Datei der oberste Container ist. -->
+![Screenshot des Test Manager Browsers. Eine .mldatx-Datei ist als Wurzel des Baumes markiert. Darunter sind mehrere Test-Suiten als Ordnersymbole sichtbar. Dies verdeutlicht, dass die Test-Datei der oberste Container ist.](./Screenshots/Simulink_Test_File.png)
 
 ---
 
 #### Test-Suite
 
--   Gruppiert logisch zusammengehörige Test-Cases (z.B. alle Tests für eine bestimmte Komponente oder Anforderung).
--   Kann verschachtelt werden, um komplexe Testhierarchien abzubilden.
--   Hilft bei der selektiven Ausführung von Test-Sets.
+Eine Test-Suite ist ein Container zur Organisation von Test-Cases und anderen Test-Suiten. Sie dient der logischen Strukturierung und Gruppierung von Tests.
+
+##### Anwendungsbeispiele für Suiten:
+- **Komponenten-Tests:** Eine Suite pro Systemkomponente (z.B. `Antriebs-Tests`, `Energieversorgungs-Tests`).
+- **Anforderungs-Tests:** Eine Suite pro übergeordneter Anforderung oder Feature.
+- **Test-Typ-Tests:** Eine Suite pro Testart (z.B. `Funktionale Tests`, `Robustheits-Tests`, `Regressions-Tests`).
+- **Workflow-Tests:** Suiten können auch den Testprozess widerspiegeln (`MIL-Tests`, `SIL-Tests`).
+
+---
+
+<!-- Ein Screenshot des Test-Managers, der eine geöffnete Test-Suite hervorhebt. Man sieht, dass die Suite "Funktionale Tests" mehrere Test-Cases enthält und selbst in einer übergeordneten .mldatx-Datei liegt. Ein Test-Case innerhalb der Suite ist ausgewählt. -->
+![Ein Screenshot des Test-Managers, der eine geöffnete Test-Suite hervorhebt. Man sieht, dass die Suite "Funktionale Tests" mehrere Test-Cases enthält und selbst in einer übergeordneten .mldatx-Datei liegt. Ein Test-Case innerhalb der Suite ist ausgewählt.](./Screenshots/Simulink_Test_Suite.png)
 
 ---
 
 #### Test-Case
 
--   Die unterste Ebene, auf der der eigentliche Test definiert wird.
--   Enthält alle Informationen: was getestet wird, mit welchen Inputs, und wie das Ergebnis bewertet wird.
+- **System Under Test (SUT):** Eine klare Definition dessen, was getestet wird (z.B. ein spezifisches Subsystem). Oft wird dies über ein Test-Harness realisiert.
+- **Inputs:** Die Stimuli, die dem SUT während der Simulation zugeführt werden.
+- **Assessments:** Die Kriterien, die über `Pass` oder `Fail` entscheiden (z.B. Baseline-Vergleich, temporale `verify`-Logik).
+- **Konfigurationen:** Individuelle Einstellungen für den Test-Case, die globale Einstellungen der Suite oder Datei überschreiben können.
+- **Anforderungs-Links:** Verknüpfungen zu den Anforderungen, die durch diesen Test-Case verifiziert werden. Dies ist entscheidend für die Nachverfolgbarkeit (Traceability).
+
+---
+
+<!-- Ein Screenshot, der den Editor-Bereich eines einzelnen Test-Cases im Test-Manager zeigt. Die Abschnitte "System Under Test", "Inputs", "Baseline Criteria" und "Requirements" sind klar sichtbar und ausgefüllt. Dies illustriert die atomare Natur eines Test-Cases mit all seinen Bestandteilen. -->
+![Ein Screenshot, der den Editor-Bereich eines einzelnen Test-Cases im Test-Manager zeigt. Die Abschnitte "System Under Test", "Inputs", "Baseline Criteria" und "Requirements" sind klar sichtbar und ausgefüllt. Dies illustriert die atomare Natur eines Test-Cases mit all seinen Bestandteilen.](./Screenshots/Simulink_Test_Case.png)
 
 ---
 
