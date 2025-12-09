@@ -152,7 +152,7 @@ Das V-Modell stellt den Zusammenhang zwischen Entwicklungs- und **Testphasen** d
 
 ---
 
-### **Testebenen** im V-Modell
+#### **Testebenen** im V-Modell
 
 - **Komponententest (Unit Testing):** Überprüfung der korrekten Implementierung der Komponente gemäß Spezifikation. Finden von Fehlern auf der untersten Ebene.
 - **Integrationstest:** Aufdeckung von Fehlern, die bei der Interaktion zwischen Komponenten auftreten (z.B. falsche Datenübergabe, Timing-Probleme).
@@ -161,7 +161,7 @@ Das V-Modell stellt den Zusammenhang zwischen Entwicklungs- und **Testphasen** d
 
 ---
 
-### **Testverfahren** im V-Modell (1 / 2)
+#### **Testverfahren** im V-Modell (1 / 2)
 
 Das folgende Diagramm veranschaulicht die verschiedenen Verifikationsstufen innerhalb des V-Modells, angefangen von der frühen Modellprüfung bis hin zum Testen mit realer Hardware. Es zeigt den Übergang von rein simulationsbasierten Tests (MIL) zu Hardware-nahen Tests (HIL).
 
@@ -169,7 +169,7 @@ Das folgende Diagramm veranschaulicht die verschiedenen Verifikationsstufen inne
 
 ---
 
-### **Testverfahren** im V-Modell (2 / 2)
+#### **Testverfahren** im V-Modell (2 / 2)
 
 
 - **Model-in-the-Loop (MIL):** Testen des Modells in einer reinen Simulationsumgebung zur frühzeitigen Überprüfung von Algorithmen und Logik.
@@ -196,38 +196,61 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 #### Das Test-Manager User-Interface
 
-Der Test-Manager ist die zentrale IDE für alle verifikationsbezogenen Aktivitäten in Simulink. Er bietet Werkzeuge zum Erstellen, Verwalten, Ausführen und Analysieren von Tests.
+Der Test-Manager ist die zentrale IDE für alle verifikationsbezogenen Aktivitäten in Simulink.
+
+Er bietet Werkzeuge zum Erstellen, Verwalten, Ausführen und Analysieren von Tests.
 
 ![Screenshot des Simulink Test Managers. Links ist der "Test Browser" mit einer Baumstruktur aus Test-Dateien, -Suiten und -Cases markiert. In der Mitte ist der "Test Case Editor" mit Abschnitten wie "System Under Test", "Inputs" und "Assessments" hervorgehoben. Rechts ist das "Results and Artifacts" Panel sichtbar. bg contain right](./Screenshots/Simulink_Test_Manager.png)
 
 ---
 
+<div class="columns">
+<div class="four">
+
 #### Test-Hierarchie: Strukturierung von Tests
 
 Simulink Test organisiert Tests in einer dreistufigen Hierarchie, um Skalierbarkeit und Wiederverwendbarkeit zu gewährleisten.
 
--   **Test-Datei (`.mldatx`):**
-    -   Die oberste Ebene, gespeichert als `matlab.unittest.TestFile` Objekt.
-    -   Container für eine oder mehrere Test-Suiten.
-    -   Ermöglicht die Verwaltung von Test-Metadaten und testweiten Callbacks.
+-   **Test-Datei (`.mldatx`):** TODO Kurzbeschreibung
+-   **Test-Suite:** TODO Kurzbeschreibung
+-   **Test-Case:** TODO Kurzbeschreibung
 
--   **Test-Suite:**
-    -   Gruppiert logisch zusammengehörige Test-Cases (z.B. alle Tests für eine bestimmte Komponente oder Anforderung).
-    -   Kann verschachtelt werden, um komplexe Testhierarchien abzubilden.
-    -   Hilft bei der selektiven Ausführung von Test-Sets.
+</div>
+<div>
 
--   **Test-Case:**
-    -   Die unterste Ebene, auf der der eigentliche Test definiert wird.
-    -   Enthält alle Informationen: was getestet wird, mit welchen Inputs, und wie das Ergebnis bewertet wird.
+![](./Diagramme/Mermaid/Simulink_Test_Hierarchie.svg)
+
+</div>
+</div>
+
+---
+
+#### Test-Datei (`.mldatx`)
+
+-   Die oberste Ebene, gespeichert als `matlab.unittest.TestFile` Objekt.
+-   Container für eine oder mehrere Test-Suiten.
+-   Ermöglicht die Verwaltung von Test-Metadaten und testweiten Callbacks.
+
+---
+
+#### Test-Suite
+
+-   Gruppiert logisch zusammengehörige Test-Cases (z.B. alle Tests für eine bestimmte Komponente oder Anforderung).
+-   Kann verschachtelt werden, um komplexe Testhierarchien abzubilden.
+-   Hilft bei der selektiven Ausführung von Test-Sets.
+
+---
+
+#### Test-Case
+
+-   Die unterste Ebene, auf der der eigentliche Test definiert wird.
+-   Enthält alle Informationen: was getestet wird, mit welchen Inputs, und wie das Ergebnis bewertet wird.
 
 ---
 
 #### Konfiguration: System Under Test (SUT)
 
 In diesem Abschnitt wird die Verbindung zwischen dem Test-Case und der zu testenden Komponente hergestellt.
-
-<div class="columns">
-<div class="two">
 
 **Möglichkeiten zur SUT-Spezifikation:**
 
@@ -236,13 +259,9 @@ In diesem Abschnitt wird die Verbindung zwischen dem Test-Case und der zu testen
 3.  **Test-Harness:** Ein bereits existierendes Test-Harness wird direkt als SUT ausgewählt.
 4.  **Code (SIL/PIL):** Generierter C/C++ Code wird als SUT für SIL/PIL-Tests verwendet.
 
-</div>
-<div class="four">
+---
 
 ![Screenshot des 'System Under Test' Bereichs im Test-Manager. Ein Dropdown-Menü zeigt die Optionen 'Model', 'Subsystem', 'Test Harness'. Ein Dateibrowser-Button zur Auswahl der MDL/SLX-Datei ist sichtbar. Ein Feld zeigt den Pfad zu einem Subsystem innerhalb eines Modells.](placeholder.jpg)
-
-</div>
-</div>
 
 ---
 
