@@ -52,9 +52,6 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-<div class="columns">
-<div class="two">
-
 ### Verifikation & Validierung
 
 **Verifikation** ist der Prozess, der sicherstellt, dass ein System oder eine Komponente seine spezifizierten Anforderungen erfüllt.
@@ -67,13 +64,9 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 - Externe Sicht auf die Nützlichkeit
 - Frage: "Bauen wir das richtige System?"
 
-</div>
-<div class="four">
+---
 
-![Detaillierte Illustration des Unterschieds zwischen Verifikation und Validierung. Links (Verifikation) wird ein Bauplan mit einem Haus verglichen (Häkchen). Rechts (Validierung) wird eine Person gezeigt, die glücklich im fertigen Haus bei Regen sitzt (Häkchen).](placeholder.jpg)
-
-</div>
-</div>
+![Detaillierte Illustration des Unterschieds zwischen Verifikation und Validierung. Links (Verifikation) wird ein Bauplan mit einem Haus verglichen (Häkchen). Rechts (Validierung) wird eine Person gezeigt, die glücklich im fertigen Haus bei Regen sitzt (Häkchen).](./Illustrationen/Verifikation_Validierung.jpg)
 
 ---
 
@@ -81,7 +74,13 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 Bei der testgetriebenen Entwicklung (Test-Driven Development, TDD) wird der Entwicklungszyklus durch das Schreiben von Tests gesteuert. Dieser Ansatz zwingt zur Auseinandersetzung mit den Anforderungen, bevor Code oder Modelle erstellt werden, und führt zu modularen und testbaren Architekturen.
 
-<div class="columns">
+![](./Diagramme/Mermaid/TDD_Red_Green_Refactor.svg)
+
+---
+
+#### Testgetriebene Entwicklung (TDD)
+
+<div class="columns top">
 <div class="three">
 
 ##### 1. Red
@@ -107,25 +106,32 @@ Räume den Code oder das Modell auf (Refactoring), um die interne Struktur zu ve
 
 ---
 
+<div class="columns">
+<div>
+
 #### Verifikationsstufen im V-Modell
 
-Das V-Modell stellt den Zusammenhang zwischen Entwicklungs- und Testphasen dar. Jede Spezifikationsebene auf der linken Seite wird durch eine entsprechende Testebene auf der rechten Seite verifiziert.
+Das V-Modell stellt den Zusammenhang zwischen Entwicklungs- und Testphasen dar.
 
-<div class="columns">
-<div class="four">
+Jede Spezifikationsebene auf der linken Seite wird durch eine entsprechende Testebene auf der rechten Seite verifiziert.
+
+</div>
+<div>
+
+![Diagramm des V-Modells. Links absteigend: Systemanforderungen, Systemarchitektur, Komponenten-Design, Implementierung. Rechts aufsteigend: Komponententest (MIL/SIL/PIL), Integrationstest, Systemtest (HIL), Abnahmetest. Pfeile verbinden die korrespondierenden Ebenen. w:1000](./Diagramme/Draw/V-Modell.svg)
+
+</div>
+</div>
+
+---
+
+### Verifikationsstufen im V-Modell
+
 
 - **Model-in-the-Loop (MIL):** Testen des Modells in einer reinen Simulationsumgebung zur frühzeitigen Überprüfung von Algorithmen und Logik.
 - **Software-in-the-Loop (SIL):** Testen des aus dem Modell automatisch generierten Quellcodes auf dem Entwicklungsrechner. Stellt die Korrektheit der Codegenerierung sicher.
 - **Processor-in-the-Loop (PIL):** Testen des kompilierten Codes auf der Zielhardware (Prozessor). Verifiziert, dass der Code auf der Zielarchitektur korrekt ausgeführt wird.
 - **Hardware-in-the-Loop (HIL):** Testen der finalen Steuerungshardware mit dem darauf laufenden Code gegen eine Echtzeitsimulation der physikalischen Systemumgebung (Strecke).
-
-</div>
-<div class="two">
-
-![Diagramm des V-Modells. Links absteigend: Systemanforderungen, Systemarchitektur, Komponenten-Design, Implementierung. Rechts aufsteigend: Komponententest (MIL/SIL/PIL), Integrationstest, Systemtest (HIL), Abnahmetest. Pfeile verbinden die korrespondierenden Ebenen.](placeholder.jpg)
-
-</div>
-</div>
 
 ---
 
