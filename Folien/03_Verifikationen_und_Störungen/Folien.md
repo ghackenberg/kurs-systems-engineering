@@ -66,40 +66,65 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-![Detaillierte Illustration des Unterschieds zwischen Verifikation und Validierung. Links (Verifikation) wird ein Bauplan mit einem Haus verglichen (Häkchen). Rechts (Validierung) wird eine Person gezeigt, die glücklich im fertigen Haus bei Regen sitzt (Häkchen).](./Illustrationen/Verifikation_Validierung.jpg)
+<div class="columns">
+<div>
+
+**Verifikation**
+
+![w:1000](./Illustrationen/Verifikation.jpg)
+
+</div>
+<div>
+
+**Validierung**
+
+![w:1000](./Illustrationen/Validierung.jpg)
+
+</div>
+</div>
 
 ---
 
 #### Testgetriebene Entwicklung (TDD)
 
-Bei der testgetriebenen Entwicklung (Test-Driven Development, TDD) wird der Entwicklungszyklus durch das Schreiben von Tests gesteuert. Dieser Ansatz zwingt zur Auseinandersetzung mit den Anforderungen, bevor Code oder Modelle erstellt werden, und führt zu modularen und testbaren Architekturen.
+Bei der testgetriebenen Entwicklung (Test-Driven Development, TDD) wird der Entwicklungszyklus durch das Schreiben von Tests gesteuert.
+
+Dieser Ansatz zwingt zur Auseinandersetzung mit den Anforderungen, bevor Code oder Modelle erstellt werden, und führt zu modularen und testbaren Architekturen.
+
+**Red-Green-Refactor-Zyklus:**
 
 ![](./Diagramme/Mermaid/TDD_Red_Green_Refactor.svg)
 
 ---
 
-#### Testgetriebene Entwicklung (TDD)
+#### **Red-Green-Refactor**-Zyklus
 
 <div class="columns top">
 <div class="three">
 
 ##### 1. Red
 
-Schreibe einen automatisierten Test, der eine neue Anforderung oder Funktion validiert. Dieser Test muss zunächst fehlschlagen, da die Funktionalität noch nicht implementiert ist.
+Schreibe einen automatisierten Test, der eine neue Anforderung oder Funktion validiert.
+
+Dieser Test muss zunächst fehlschlagen, da die Funktionalität noch nicht implementiert ist.
 
 </div>
 <div class="three">
 
 ##### 2. Green
 
-Implementiere exakt die Funktionalität, die notwendig ist, damit der zuvor geschriebene Test erfolgreich durchläuft. Ziel ist es nicht, perfekten Code zu schreiben, sondern nur den Test zu bestehen.
+Implementiere exakt die Funktionalität, die notwendig ist, damit der zuvor geschriebene Test erfolgreich durchläuft.
+
+Ziel ist es nicht, perfekten Code zu schreiben, sondern nur den Test zu bestehen.
 
 </div>
 <div class="three">
 
 ##### 3. Refactor
 
-Räume den Code oder das Modell auf (Refactoring), um die interne Struktur zu verbessern, ohne das extern beobachtbare Verhalten zu ändern. Alle Tests müssen weiterhin erfolgreich sein.
+Räume den Code oder das Modell auf (Refactoring), um die interne Struktur zu verbessern, ohne das extern beobachtbare Verhalten zu ändern.
+
+Alle Tests müssen weiterhin erfolgreich sein.
 
 </div>
 </div>
@@ -111,9 +136,11 @@ Räume den Code oder das Modell auf (Refactoring), um die interne Struktur zu ve
 
 #### Verifikationsstufen im V-Modell
 
-Das V-Modell stellt den Zusammenhang zwischen Entwicklungs- und Testphasen dar.
-
-Jede Spezifikationsebene auf der linken Seite wird durch eine entsprechende Testebene auf der rechten Seite verifiziert.
+Das V-Modell stellt den Zusammenhang zwischen Entwicklungs- und **Testphasen** dar. Jede Spezifikationsebene auf der linken Seite wird durch eine entsprechen-de **Testebene** auf der rechten Seite verifiziert:
+- Komponententest (MIL/SIL/PIL)
+- Integrationstest
+- Systemtest (HIL)
+- Abnahmetest
 
 </div>
 <div>
@@ -125,7 +152,21 @@ Jede Spezifikationsebene auf der linken Seite wird durch eine entsprechende Test
 
 ---
 
-### Verifikationsstufen im V-Modell
+### Testebenen im V-Modell
+
+TODO Beschreibung der Testebenen (Komponententest, Integrationstest, Systemtest, Abnahmetest).
+
+---
+
+### Testverfahren im V-Modell (1 / 2)
+
+TODO Kurze Einführung der Grafik
+
+![](./Diagramme/Mermaid/MIL_SIL_PIL_HIL.svg)
+
+---
+
+### Testverfahren im V-Modell (2 / 2)
 
 
 - **Model-in-the-Loop (MIL):** Testen des Modells in einer reinen Simulationsumgebung zur frühzeitigen Überprüfung von Algorithmen und Logik.

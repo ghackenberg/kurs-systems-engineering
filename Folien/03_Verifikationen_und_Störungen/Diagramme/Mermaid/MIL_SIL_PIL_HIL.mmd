@@ -1,0 +1,33 @@
+flowchart
+
+    subgraph "Hardware-in-the-loop (HIL)"
+
+        direction TB
+
+        Hardware[<b>Hardware</b> with<br/>generated code] --> Environment4[Environment<br/>model] --> Hardware
+
+    end
+
+    subgraph "Processor-in-the-loop (PIL)"
+
+        direction TB
+
+        Processor[<b>Processor</b> with<br/>generated code] --> Environment3[Environment<br/>model] --> Processor
+
+    end
+
+    subgraph "Software-in-the-loop (SIL)"
+
+        direction TB
+
+        Code[<b>Emulator</b> with<br/>generated code] --> Environment2[Environment<br/>model] --> Code
+
+    end
+
+    subgraph "Model-in-the-loop (MIL)"
+
+        direction TB
+    
+        Model[Software<br/>model] --> Environment1[Environment<br/>model] --> Model
+
+    end
