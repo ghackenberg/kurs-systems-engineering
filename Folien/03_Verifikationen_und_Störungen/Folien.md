@@ -198,7 +198,7 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 Der Test-Manager ist die zentrale IDE für alle verifikationsbezogenen Aktivitäten in Simulink. Er bietet Werkzeuge zum Erstellen, Verwalten, Ausführen und Analysieren von Tests.
 
-![Screenshot des Simulink Test Managers. Links ist der "Test Browser" mit einer Baumstruktur aus Test-Dateien, -Suiten und -Cases markiert. In der Mitte ist der "Test Case Editor" mit Abschnitten wie "System Under Test", "Inputs" und "Assessments" hervorgehoben. Rechts ist das "Results and Artifacts" Panel sichtbar.](placeholder.jpg)
+![Screenshot des Simulink Test Managers. Links ist der "Test Browser" mit einer Baumstruktur aus Test-Dateien, -Suiten und -Cases markiert. In der Mitte ist der "Test Case Editor" mit Abschnitten wie "System Under Test", "Inputs" und "Assessments" hervorgehoben. Rechts ist das "Results and Artifacts" Panel sichtbar. bg contain right](./Screenshots/Simulink_Test_Manager.png)
 
 ---
 
