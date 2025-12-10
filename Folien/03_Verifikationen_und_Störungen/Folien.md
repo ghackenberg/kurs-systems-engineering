@@ -460,11 +460,33 @@ Dieser Abschnitt definiert die Stimuli, also die Eingangssignale, mit denen das 
 
 ---
 
-TODO Kurze Einführung des Signal Editor Blocks
+#### Der Signal Editor Block
+
+Der `Signal Editor` Block ist ein vielseitiges Werkzeug, um komplexe Eingangssignale interaktiv zu entwerfen. Er ist ideal für die Erstellung von Stimuli für Tests.
+
+-   **Interaktive Bearbeitung:** Signale können grafisch per Drag-and-Drop, über Tabellen oder MATLAB-Ausdrücke definiert werden.
+-   **Vielfältige Signalformen:** Unterstützt verschiedene Signalformen wie Rampen, Sprünge, Sinuswellen, Pulswellen und benutzerdefinierte Kurven.
+-   **Mehrere Szenarien:** Es können mehrere Szenarien in einem einzigen Block gespeichert und zwischen ihnen gewechselt werden, was die Verwaltung von Testfällen vereinfacht.
+-   **Integration:** Die Signale können direkt an die Eingänge des zu testenden Systems (SUT) im Test Harness oder Hauptmodell angeschlossen werden.
 
 ---
 
-TODO Kurze Einführung des Test Sequence Blocks (inklusive Verweis auf den nächsten Abschnitt)
+![Screenshot des Signal Editor Blocks in Simulink. Die Benutzeroberfläche zeigt eine grafische Darstellung von zwei Signalen, die über die Zeit unterschiedliche Verläufe nehmen. Links sind die Signalnamen und Szenarien aufgeführt.](placeholder/Signal_Editor_Block.png)
+
+---
+
+#### Der Test Sequence Block
+
+Der `Test Sequence` Block ermöglicht die Erstellung von sequenziellen oder zustandsbasierten Testabläufen. Er ist ideal für die Modellierung von komplexen Test-Szenarien und Bewertungen.
+
+-   **Zustandsbasierte Logik:** Basierend auf Stateflow, erlaubt er die Definition von Schritten, Übergängen und Aktionen.
+-   **Stimuli-Generierung:** Kann zeitlich koordinierte Eingabesignale generieren.
+-   **In-line Assessments:** Ermöglicht die direkte Bewertung von Modellausgängen innerhalb der Sequenz (siehe dazu auch Abschnitt 3.1.3 "Testsequenzen und -bewertungen").
+-   **Flexibilität:** Bietet eine flexible Möglichkeit, Testlogik zu kapseln und zu visualisieren.
+
+---
+
+![Screenshot eines Test Sequence Blocks in Simulink. Im Editor sind die Schritte und Übergänge einer Testsequenz grafisch dargestellt, ähnlich einem Stateflow-Chart.](placeholder/Test_Sequence_Block.png)
 
 ---
 
@@ -553,7 +575,12 @@ Abgeleitete Größen, die im Test ausgewertet werden sollen.
 
 #### Test-Case - **Sequence Diagram Assessment**
 
-TODO Kurze Einführung der Nutzung von System Composer Sequence Diagrams für das Testen
+System Composer Sequenzdiagramme (Sequence Diagrams) können direkt in Simulink Test für die Bewertung von Test-Cases verwendet werden.
+
+-   **Visuelle Spezifikation:** Statt textueller `verify`-Anweisungen kann der erwartete Nachrichtenfluss zwischen den LifeLines (Komponenten oder Ports) grafisch modelliert werden.
+-   **Formale Bewertung:** Simulink Test führt die Simulation aus und vergleicht den tatsächlichen Nachrichtenfluss mit dem im Sequenzdiagramm spezifizierten.
+-   **Traceability:** Die Sequenzdiagramme können direkt mit Anforderungen verknüpft werden, um die Verifikation von Kommunikationsanforderungen zu erleichtern.
+-   **Zustandsbasierte Kommunikation:** Ideal zur Verifikation von zeitlichen Abfolgen und Interaktionen in verteilten oder ereignisgesteuerten Systemen.
 
 ---
 
@@ -561,19 +588,58 @@ TODO Kurze Einführung der Nutzung von System Composer Sequence Diagrams für da
 
 ---
 
-TODO Kurze Einführung von Sequence Diagrams in System Composer (Lifelines, messages, ...)
+#### Sequenzdiagramme in System Composer
+
+Sequenzdiagramme sind Interaktionsdiagramme, die die Reihenfolge von Nachrichten zwischen Komponenten in einem System darstellen.
+
+-   **LifeLines (Lebenslinien):** Repräsentieren einzelne Komponenten, Ports oder Instanzen, die am Kommunikationsablauf beteiligt sind. Sie verlaufen vertikal.
+-   **Messages (Nachrichten):** Horizontale Pfeile, die den Austausch von Informationen oder Ereignissen zwischen LifeLines darstellen.
+-   **Aktivationsbalken:** Vertikale Balken auf einer LifeLine, die die Zeitdauer anzeigen, in der eine LifeLine aktiv ist.
+-   **Zeitliche Abfolge:** Die Nachrichten werden von oben nach unten in chronologischer Reihenfolge dargestellt.
 
 ---
 
-TODO Kurze Einführung der Signal-Based und message-based Messages in System Composer Sequence Diagrams
+#### Signal-basierte und Message-basierte Nachrichten
+
+<div class="columns top">
+<div>
+
+##### Signal-basierte Nachrichten
+
+-   **Analogie:** Kontinuierliche oder getaktete Signale, wie sie in Simulink-Modellen üblich sind.
+-   **Verwendung:** Für den Austausch von Werten, die sich über die Zeit ändern (z.B. Temperatur, Druck, Sollwerte).
+-   **Verifikation:** Die Bewertung konzentriert sich auf die Werte der Signale zu bestimmten Zeitpunkten oder über Zeitintervalle.
+
+</div>
+<div>
+
+##### Message-basierte Nachrichten
+
+-   **Analogie:** Diskrete Ereignisse oder Datenpakete, wie sie in ereignis-gesteuerten Systemen vorkommen.
+-   **Verwendung:** Für den Versand von Befehlen, Statusinformationen oder Datenstrukturen.
+-   **Verifikation:** Die Bewertung konzentriert sich auf das Senden, Empfangen und den Inhalt der Nachrichten.
+
+</div>
+</div>
 
 ---
 
-TODO Kurze Einführung der Message Label Syntax (trigger[guard]{constraint}) in System Composer Sequence Diagrams
+#### Message Label Syntax: `trigger[guard]{constraint}`
+
+-   **`trigger` (Optional):** Definiert das Ereignis, das die Nachricht auslöst (z.B. ein Signalübergang). Wenn weggelassen, wird angenommen, dass die Nachricht gesendet wird, sobald der vorherige Schritt abgeschlossen ist.
+    -   Beispiel: `send_data()`
+-   **`[guard]` (Optional):** Eine boolesche Bedingung, die erfüllt sein muss, damit die Nachricht gesendet wird.
+    -   Beispiel: `[temperature < 100]`
+-   **`{constraint}` (Optional):** Eine zeitliche oder logische Einschränkung, die für die Nachricht gilt. Dies können Verzögerungen, maximale Sendezeiten oder andere temporale Bedingungen sein.
+    -   Beispiel: `{duration < 10ms}`
 
 ---
 
-TODO Tyischer Anwendungsfall von System Composer Sequence Diagrams (inklusive zugehörigem Mermaid-Sequenzt-Diagram)
+#### Typischer Anwendungsfall: Motorstart-Sequenz
+
+**Anforderung:** "Wenn der Controller den `start_command` im `AUTO`-Modus an den Motor sendet, muss der Motor innerhalb von 10 Millisekunden mit `motor_running` antworten, nachdem er die `current_speed` vom Sensor angefragt hat."
+
+![h:350](./Diagramme/Mermaid/Motor_Start_Sequence.svg)
 
 ---
 
@@ -593,7 +659,17 @@ Ein Baseline-Test vergleicht das Verhalten des SUT mit einem zuvor aufgezeichnet
 
 ---
 
-TODO Aufbau einer Baseline-Datei als Markdown-Tabelle dargestellt (erste Spalte ist der Zeitpunkt, weitere Spalten sind die Signale, Zeilen sind die Werte).
+#### Struktur einer Baseline-Datei
+
+Eine Baseline-Datei (`.mldatx` oder ein Teil davon, wenn sie im Test-Manager erstellt wurde) speichert die aufgezeichneten Signaldaten im Wesentlichen in einem tabellarischen Format. Vereinfacht könnte man es sich wie folgt vorstellen:
+
+| Zeitpunkt (s) | Signal_A (Wert) | Signal_B (Wert) | ... |
+| :------------ | :-------------- | :-------------- | :-- |
+| 0.0           | 0.0             | 10.0            | ... |
+| 0.1           | 0.1             | 10.2            | ... |
+| 0.2           | 0.3             | 10.5            | ... |
+| ...           | ...             | ...             | ... |
+| 10.0          | 5.0             | 12.0            | ... |
 
 ---
 
@@ -622,7 +698,11 @@ Manchmal ist das erwartete Verhalten eines Systems zu komplex, um es mit einfach
 
 #### Test-Case - **Logical and Temporal Assessments**
 
-TODO Kurze Einführung der Nutzung von Logical and Temporal Assessments. Logical Assessments (Bounds Check mit bounds-check-pattern) + Temporal Assessments (Trigger-response mit trigger, delay und response) + Custom Logical Assessments (eigener Ausdruck).
+Simulink Test bietet leistungsstarke Mechanismen zur *formalen Bewertung* von Zeitverläufen und logischen Bedingungen über die Dauer einer Simulation hinweg.
+
+-   **Logical Assessments (z.B. Bounds Check):** Prüfen, ob ein Signal innerhalb definierter Grenzen bleibt oder bestimmte logische Zustände einhält (z.B. `signal > 0`). Dies kann mit vordefinierten Mustern (`bounds-check-pattern`) erfolgen.
+-   **Temporal Assessments (z.B. Trigger-Response):** Überwachen das zeitliche Verhalten des Systems, insbesondere die Reaktion auf Ereignisse (z.B. `trigger` -> `delay` -> `response`).
+-   **Custom Logical Assessments:** Ermöglichen die Definition eigener logischer Ausdrücke, um komplexere Bedingungen zu prüfen.
 
 ---
 
@@ -630,23 +710,23 @@ TODO Kurze Einführung der Nutzung von Logical and Temporal Assessments. Logical
 
 ---
 
-TODO Folie zu den unterschiedlichen bounds-check bounds-check-pattern
+TODO Folie zu bounds-check-pattern (always less than, always greater than, always inside bounds, always outside bounds)
 
 ---
 
-TODO Folie zu den unterschiedlichen trigger-response trigger-pattern
+TODO Folie zu trigger-pattern (whenever is true, becomes true, becomes true and stays true for at least, becomes true and stays true for at most, becomes true and stays true for between)
 
 ---
 
-TODO Folie zu den unterschiedlichen trigger-response delay-pattern
+TODO Folie zu delay-pattern (with no delay, with a delay of at most, with a delay of between)
 
 ---
 
-TODO Folie zu den unterschiedlichen trigger-response response-pattern
+TODO Folie zu response-pattern (must be true, must stay true for at least, must stay true for at most, must stay true for between, must stay true until)
 
 ---
 
-TODO Typischer Anwendungsfall von Bounds-Check Logical Assessments, Trigger-Response Temporal Assessments, und Custom Logical Assessments.
+TODO Folie zu typischen Anwendungsfällen
 
 ---
 
@@ -664,7 +744,25 @@ Wenn die eingebauten Assessment-Möglichkeiten nicht ausreichen, können Sie mit
 
 ---
 
-TODO Folie zur programmierschnittstelle für custom criteria funktionen.
+#### Programmierschnittstelle für Custom Criteria Funktionen
+
+Eine Custom Criteria Funktion ist eine einfache MATLAB-Funktion, die die Simulationsergebnisse erhält und basierend darauf einen Pass/Fail-Status zurückgibt.
+
+```matlab
+function [result, message] = myCustomAssessment(simOutput)
+
+    signal = simOutput.find('mySignal').Values.Data;
+    time = simOutput.find('mySignal').Values.Time;
+
+    if all(signal <= 50)
+        result = true;
+        message = 'Bestanden';
+    else
+        result = false;
+        message = 'Nicht bestanden';
+    end
+end
+```
 
 ---
 
