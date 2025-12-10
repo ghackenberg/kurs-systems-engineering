@@ -460,6 +460,14 @@ Dieser Abschnitt definiert die Stimuli, also die Eingangssignale, mit denen das 
 
 ---
 
+TODO Kurze Einführung des Signal Editor Blocks
+
+---
+
+TODO Kurze Einführung des Test Sequence Blocks (inklusive Verweis auf den nächsten Abschnitt)
+
+---
+
 #### Strategien für Test-Eingangssignale
 
 Die Wahl der richtigen Eingangssignale ist entscheidend für die Aussagekraft eines Tests. Hier sind drei mögliche Strategien:
@@ -553,6 +561,10 @@ TODO Kurze Einführung der Nutzung von System Composer Sequence Diagrams für da
 
 ---
 
+TODO Kurze Einführung von Sequence Diagrams in System Composer (Lifelines, messages, ...)
+
+---
+
 TODO Kurze Einführung der Signal-Based und message-based Messages in System Composer Sequence Diagrams
 
 ---
@@ -562,7 +574,6 @@ TODO Kurze Einführung der Message Label Syntax (trigger[guard]{constraint}) in 
 ---
 
 TODO Tyischer Anwendungsfall von System Composer Sequence Diagrams (inklusive zugehörigem Mermaid-Sequenzt-Diagram)
-
 
 ---
 
@@ -579,6 +590,10 @@ Ein Baseline-Test vergleicht das Verhalten des SUT mit einem zuvor aufgezeichnet
 ---
 
 ![](./Screenshots/Simulink_Test_Case_Baseline_Criteria.png)
+
+---
+
+TODO Aufbau einer Baseline-Datei als Markdown-Tabelle dargestellt (erste Spalte ist der Zeitpunkt, weitere Spalten sind die Signale, Zeilen sind die Werte).
 
 ---
 
@@ -615,6 +630,22 @@ TODO Kurze Einführung der Nutzung von Logical and Temporal Assessments. Logical
 
 ---
 
+TODO Folie zu den unterschiedlichen bounds-check bounds-check-pattern
+
+---
+
+TODO Folie zu den unterschiedlichen trigger-response trigger-pattern
+
+---
+
+TODO Folie zu den unterschiedlichen trigger-response delay-pattern
+
+---
+
+TODO Folie zu den unterschiedlichen trigger-response response-pattern
+
+---
+
 TODO Typischer Anwendungsfall von Bounds-Check Logical Assessments, Trigger-Response Temporal Assessments, und Custom Logical Assessments.
 
 ---
@@ -630,6 +661,10 @@ Wenn die eingebauten Assessment-Möglichkeiten nicht ausreichen, können Sie mit
 ---
 
 ![](./Screenshots/Simulink_Test_Case_Custom_Criteria.png)
+
+---
+
+TODO Folie zur programmierschnittstelle für custom criteria funktionen.
 
 ---
 
