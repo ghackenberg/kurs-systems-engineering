@@ -225,95 +225,361 @@ Simulink Test organisiert Tests in einer dreistufigen Hierarchie, um Skalierbark
 
 ---
 
-![bg contain right](./Screenshots/Simulink_Test_File.png)
+<div class="columns">
+<div class="five">
 
 #### Test-Datei (`.mldatx`)
 
-TODO Kurze Übersicht der Einstellungen auf Datei-Ebene (Tags, Description, Requirements, Callbacks, Coverage Settings, Test File Options)
+Auf der obersten Ebene werden globale Konfigurationen gemacht:
+
+-   **Tags:** Schlüsselwörter zur Filterung und Gruppierung von Tests (z.B. `functional`, `regression`).
+-   **Description/Requirements:** Dokumentation des Testziels und Verknüpfung zu Anforderungsdokumenten.
+-   **Callbacks:** MATLAB-Skripte, die vor oder nach dem Ausführen aller Tests in der Datei laufen (z.B. für Setup/Teardown).
+-   **Coverage Settings:** Konfiguration der Metriken für die Modellabdeckung (z.B. Condition, Decision, MCDC).
+-   **Test File Options:** Verwaltung von externen Testdaten.
+
+</div>
+<div>
+
+![](./Diagramme/Mermaid/Simulink_Test_Hierarchie_File.svg)
+
+</div>
+</div>
 
 ---
 
-TODO Folie zu typischen Aufteilungen von Test-Dateien in Projekten.
+![](./Screenshots/Simulink_Test_File.png)
 
 ---
 
-![bg contain right](./Screenshots/Simulink_Test_Suite.png)
+#### Strategien zur Aufteilung von Test-Dateien
+
+<div class="columns top">
+<div>
+
+##### 1. Komponente
+
+Jede Hauptkomponente oder jedes Subsystem im Modell erhält eine eigene Test-Datei.
+
+**Vorteile:**
+- Sehr modular.
+- Klar definierte Verantwortlichkeiten.
+- Gut für große Teams.
+
+</div>
+<div>
+
+##### 2. Test-Ebene
+
+Tests werden nach ihrer Ebene im V-Modell gruppiert.
+
+**Vorteile:**
+- Passt gut zu formalen Prozessen.
+- Trennt Unit- von Integrations- oder Systemtests.
+
+</div>
+<div>
+
+##### 3. Anforderungssatz
+
+Tests werden basierend auf High-Level-Features oder Anforderungs-dokumenten gruppiert.
+
+**Vorteile:**
+- Sehr gute Nachverfolgbarkeit.
+- Erleichtert die Verifikation.
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="five">
 
 #### Test-Suite
 
-TODO Kurze Übersicht der Einstellungen auf Suite-Ebene (Tags, Description, Requirements, Callbacks, Coverage Settings)
+Auf Suite-Ebene können viele Einstellungen der Test-Datei überschrieben oder verfeinert werden:
+
+-   **Tags / Requirements:** Eigene Tags und Anforderungs-Links nur für diese Suite.
+-   **Callbacks:** Skripte, die vor/nach jedem Test-Case *in dieser Suite* ausgeführt werden.
+-   **Coverage Settings:** Spezifische Abdeckungseinstellungen für eine Gruppe von Tests.
+
+</div>
+<div>
+
+![](./Diagramme/Mermaid/Simulink_Test_Hierarchie_Suite.svg)
+
+</div>
+</div>
 
 ---
 
-TODO Folie zu typischen Suite-Strukturen innerhalb der Test-Dateien.
+![](./Screenshots/Simulink_Test_Suite.png)
 
 ---
 
-![bg contain right](./Screenshots/Simulink_Test_Case.png)
+#### Typische Suite-Strukturen
+
+Die folgende Suite-Struktur mit zugeordneten Testfällen würde sich z.B. für ein Antriebssystem eignen:
+
+-   **Funktionale Tests:** Überprüfen das korrekte Verhalten gemäß der Spezifikation (z.B. `Test_Anlaufverhalten` und `Test_Lastwechsel`).
+-   **Robustheitstests:** Testen das Verhalten bei ungültigen Eingaben oder an den Grenzen des Betriebsbereichs (z.B. `Test_Ueberspannung` oder `Test_Negative_Sollvorgabe`).
+-   **Regressionstests:** Stellen sicher, dass frühere Funktionalität nicht durch Änderungen beeinträchtigt wurde.
+-   **Sicherheitstests:** Überprüfen die Reaktion auf simulierte Störfälle (z.B. `Test_Motor_Blockiert`).
+
+---
+
+<div class="columns">
+<div class="five">
 
 #### Test-Case
 
-TODO Kurze Übersicht der wichtigsten Einstellungen auf Case-Ebene (Tags, Description, Requirements, System Under Test, Inputs, ...)
+Ein Test-Case besteht aus mehreren Abschnitten, die das "Was, Wie, Womit und Was-sollte-sein" eines Tests beschreiben:
+-   **Tags / Description / Requirements:** Was wird getestet und warum? Verlinkung zur Anforderung.
+-   **System Under Test:** Welches Modell oder welche Komponente wird getestet?
+-   **Inputs:** Womit wird das SUT stimuliert? (Eingangssignale)
+-   **Assessments:** Was ist das erwartete Ergebnis? (Bewertungskriterien)
+
+</div>
+<div>
+
+![](./Diagramme/Mermaid/Simulink_Test_Hierarchie_Case.svg)
+
+</div>
+</div>
 
 ---
 
-TODO Folie zu typischen Cases innerhalb einer Suite bzw. Test-Datei.
+![](./Screenshots/Simulink_Test_Case.png)
 
 ---
 
-#### Test-Case
+#### Typische Test-Cases
 
-##### System Under Test (SUT)
+<div class="columns top">
+<div>
 
-TODO Kurze Übersicht über die SUT-Einstellungen auf Case-Ebene (Model, Test Harness, Simulation Mode, Start/Stop Time)
+##### Anforderungstest
 
-![bg contain right](./Screenshots/Simulink_Test_Case_SUT.png)
+Der häufigste Fall: Ein Test-Case wird erstellt, um eine einzelne Anforder-ung zu verifizieren.
 
----
+**Beispiel:** "Verifiziere REQ-MOTOR-05: Das maximale Überschwingen der Drehzahl darf 10% nicht überschreiten."
 
-TODO Folie zu typischen SUT-Einstellungen in realen Projekten
+</div>
+<div>
 
----
+##### Grenzwertetest
 
-![bg contain right](./Screenshots/Simulink_Test_Case_Inputs.png)
+Dieser Test prüft das Verhalten des Systems an den Rändern seines spezifizierten Betriebsbereichs.
 
-#### Test-Case
+**Beispiel:** "Was passiert bei maximaler Eingangsspan-nung und maximaler Last?"
 
-##### Inputs
+</div>
+<div>
 
-TODO Kurze Übersicht der Inputs-Einstellungen auf Case-Ebene (Signal Editor Block, Test Sequence Block, MAT-Datei)
+##### Robustheitstest
 
----
+Hier wird das System gezielt mit ungültigen oder unerwarteten Eingaben konfrontiert, um seine Robustheit zu prüfen.
 
-TODO Folie zu typischen Inputs-Einstellungen in realen Projekten
+**Beispiel:** "Wie reagiert das System auf eine Sollwert-Vorgabe von -100 U/min?"
 
----
-
-![bg contain right](./Screenshots/Simulink_Test_Case_Simulation_Outputs.png)
-
-#### Test-Case
-
-##### Simulation Outputs
-
-TODO Kurze Übersicht der Simulation Outputs-Einstellungen auf Case-Ebene
+</div>
+</div>
 
 ---
 
-TODO Folie zu typischen Simulation Outputs-Einstellungen in realen Projekten
+#### Test-Case - **System Under Test (SUT)**
+
+In diesem Abschnitt wird festgelegt, welche Komponente getestet wird und in welchem Kontext.
+
+-   **Model:** Der Pfad zum Simulink-Modell (`.slx`).
+-   **Test Harness:** Wenn ein Subsystem das SUT ist, wird hier das zu verwendende Test-Harness ausgewählt.
+-   **Simulation Mode:** Legt fest, wie das Modell ausgeführt wird (z.B. `Normal`, `Accelerator`, `Software-in-the-Loop (SIL)`).
+-   **Parameter Overrides:** Erlaubt das Überschreiben von Workspace-Variablen oder Block-Parametern für diesen spezifischen Test-Case.
 
 ---
 
-![bg contain right](./Screenshots/Simulink_Test_Case_Sequence_Diagram_Assessment.png)
-
-#### Test-Case
-
-##### Sequence Diagram Assessment
-
-TODO Kurze Übersicht der Sequence Diagram Assessment-Einstellungen auf Case-Ebene
+![](./Screenshots/Simulink_Test_Case_SUT.png)
 
 ---
 
-TODO Folie zu typischen Sequence Diagram Assessment-Einstellungen in realen Projekten
+<div class="columns">
+<div class="three">
+
+#### Wahl des richtigen Simulationsmodus (1 / 2)
+
+##### Normal / Accelerator
+
+-   **Normal:** Das Modell wird interpretiert. Gut für Debugging.
+-   **Accelerator:** Das Modell wird vor der Ausführung zu C-Code kompiliert. Deutlich schneller, ideal für rechenintensive Simulationen und große Testkampagnen.
+-   Beide Modi werden für die grundlegende Verifikation der Algorithmen und Logik im Modell verwendet (**Model-in-the-Loop, MIL**).
+
+</div>
+<div>
+
+![](./Diagramme/Mermaid/MIL_SIL_PIL_1.svg)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div class="three">
+
+#### Wahl des richtigen Simulationsmodus (2 / 2)
+
+##### Software- / Processor-in-the-Loop (SIL/PIL)
+
+-   **SIL:** Der aus dem SUT generierte Code wird auf dem Host-PC kompiliert und gegen das Test-Harness ausgeführt. Verifiziert die Korrektheit der Codegenerierung.
+-   **PIL:** Der generierte Code wird auf dem Zielprozessor (z.B. einem embedded Mikrocontroller) ausgeführt. Verifiziert die Korrektheit auf der Zielhardware.
+-   Diese Modi sind essenziell, um die Konformität zwischen Modell und finaler Implementierung sicherzustellen.
+
+</div>
+<div>
+
+![](./Diagramme/Mermaid/MIL_SIL_PIL_2.svg)
+
+</div>
+</div>
+
+---
+
+#### Test-Case - **Inputs**
+
+Dieser Abschnitt definiert die Stimuli, also die Eingangssignale, mit denen das SUT während des Tests angeregt wird. Es gibt verschiedene Quellen für diese Signale:
+
+-   **Signal Editor Block:** Der Standard. Ermöglicht die grafische Definition von Signalverläufen (konstant, Rampe, Sinus, etc.) für mehrere Signale.
+-   **MAT-Datei:** Importiert Signal-Daten aus einer `.mat`-Datei. Ideal, um aufgezeichnete reale Messdaten oder komplexe, vorgenerierte Signale zu verwenden.
+-   **Test Sequence Block:** Die Eingänge können auch direkt aus einem `Test Sequence` Block kommen. Das ist nützlich, wenn die Stimuli von komplexen Zuständen im Testablauf abhängen.
+-   **From Workspace:** Lädt die Eingangsdaten aus MATLAB Workspace-Variablen.
+
+---
+
+![](./Screenshots/Simulink_Test_Case_Inputs.png)
+
+---
+
+#### Strategien für Test-Eingangssignale
+
+Die Wahl der richtigen Eingangssignale ist entscheidend für die Aussagekraft eines Tests. Hier sind drei mögliche Strategien:
+
+<div class="columns top">
+<div>
+
+##### Synthetische Signale
+
+Für die meisten funk-tionalen Tests werden einfache, synthetische Signale (Sprung, Rampe, Sinus) verwendet, um Reaktionen des Systems zu provozieren.
+
+</div>
+<div>
+
+##### Aufgezeichnete Daten
+
+Um das Verhalten unter realen Bedingungen zu prüfen, werden oft Daten aus Messfahrten oder Feldversuchen verwendet.
+
+</div>
+<div>
+
+##### Zufällige Daten
+
+Für Robustheitstests oder zur statistischen Absicherung werden oft zufällige oder pseudo-zufällige Eingangssignale verwendet (z.B. mit dem `Random Number` Block).
+
+</div>
+</div>
+
+---
+
+#### Test-Case - **Simulation Outputs**
+
+In diesem Abschnitt wird festgelegt, welche Signale aus dem Modell während der Simulation aufgezeichnet (geloggt) werden sollen.
+
+Die hier ausgewählten Signale stehen später für die Bewertung (Assessments) zur Verfügung. Es ist wichtig, alle Signale zu loggen, die zur Überprüfung der Anforderungen notwendig sind.
+
+-   **Ausgangssignale:** Die Ports am Ausgang des SUT werden standardmäßig geloggt.
+-   **Interne Signale:** Es können aber auch beliebige interne Signale innerhalb des SUT markiert und für die Aufzeichnung ausgewählt werden. Dies ist extrem nützlich für das Debugging und die Analyse von internen Zuständen des Reglers oder der Strecke.
+
+---
+
+![](./Screenshots/Simulink_Test_Case_Simulation_Outputs.png)
+
+---
+
+#### Typische zu loggende Signale
+
+Was sollte man loggen? So viel wie nötig, so wenig wie möglich.
+
+<div class="columns top">
+<div>
+
+##### Ausgänge
+
+Alle Ausgangssignale des SUT sind fast immer relevant.
+- `ist_drehzahl`
+- `ist_temperatur`
+- `status_led`
+
+</div>
+<div>
+
+##### Interne Zustände
+
+Signale, die für die Verifikation von Anforderungen oder das Debugging gebraucht werden.
+- `regler_interner_zustand`
+- `motor_strom`
+- `fehler_flag`
+
+</div>
+<div>
+
+##### Berechnete Werte
+
+Abgeleitete Größen, die im Test ausgewertet werden sollen.
+- `regel_abweichung` (soll - ist)
+- `leistung` (spannung * strom)
+
+</div>
+</div>
+
+---
+
+#### Test-Case - **Assessments (*Sequence Diagram Assessment*)**
+
+Unter `Assessments` wird die eigentliche Testlogik definiert. Eine mächtige Option hierfür ist der `Test Sequence` Block. Im Gegensatz zur reinen Stimuli-Generierung im `Inputs`-Bereich, kann ein `Test Sequence` Block hier sowohl das SUT anregen als auch dessen Reaktionen überwachen und bewerten.
+
+-   **Struktur:** Der Block verwendet eine an Stateflow angelehnte Syntax mit Schritten (`Steps`) und Übergängen.
+-   **Aktionen:** In jedem Schritt können Aktionen ausgeführt werden (z.B. Sollwerte ändern).
+-   **Bewertung:** Die `verify` Anweisung prüft, ob eine Bedingung zu einem bestimmten Zeitpunkt wahr ist. Schlägt eine `verify` Bedingung fehl, schlägt der gesamte Test-Case fehl.
+
+---
+
+![](./Screenshots/Simulink_Test_Case_Sequence_Diagram_Assessment.png)
+
+---
+
+#### Typische Anwendung für Test Sequence Assessments
+
+Test Sequences eignen sich hervorragend für die Prüfung von **kausalen und temporalen Anforderungen**, bei denen eine bestimmte Abfolge von Aktionen und Reaktionen verifiziert werden muss.
+
+**Anforderung:**
+> "Wenn der Start-Knopf gedrückt wird, soll die Power-LED innerhalb von 50ms auf 'Grün' wechseln. Erst danach darf der Motor anlaufen."
+
+**Umsetzung in Test Sequence:**
+```
+// Step 1: Initial State
+when (time > 1.0) {
+  start_button = true; // Press button
+  transition to Step 2;
+}
+
+// Step 2: Check LED
+verify(led_status == GREEN); // Check must pass immediately
+verify(elapsed(50, msec));   // Check that it happened within 50ms
+transition to Step 3;
+
+// Step 3: Check Motor
+verify(motor_speed > 0); // Motor should only start now
+```
 
 ---
 
@@ -321,13 +587,42 @@ TODO Folie zu typischen Sequence Diagram Assessment-Einstellungen in realen Proj
 
 #### Test-Case
 
-##### Baseline Criteria
+##### Assessments: Baseline Criteria
 
-TODO Kurze Übersicht der Baseline Criteria-Einstellungen auf Case-Ebene
+Ein Baseline-Test vergleicht das Verhalten des SUT mit einem zuvor aufgezeichneten "guten" Ergebnis.
+
+-   **Ablauf:**
+    1.  Man führt die Simulation einmal aus und überprüft manuell, ob die aufgezeichneten Signale (z.B. die `ist_drehzahl`) den Erwartungen entsprechen.
+    2.  Dieses Ergebnis wird als "Baseline" gespeichert.
+    3.  Für alle nachfolgenden Testläufe vergleicht Simulink Test das aktuelle Ergebnis automatisch mit der Baseline.
+-   **Toleranzen:** Es können absolute, relative oder zeitliche Toleranzen definiert werden, innerhalb derer das Signal von der Baseline abweichen darf.
 
 ---
 
-TODO Folie zu typischen Baseline Criteria-Einstellungen in realen Projekten
+#### Wann verwendet man Baseline-Tests?
+
+Baseline-Tests sind besonders nützlich in zwei Hauptszenarien:
+
+<div class="columns">
+<div class="two">
+
+##### 1. Regressionstests
+
+Wenn eine Komponente geändert oder überarbeitet wird, will man sicherstellen, dass das bestehende, korrekte Verhalten nicht unbeabsichtigt verändert wurde ("Regression").
+
+Baseline-Tests erkennen hier kleinste Abweichungen zum vorherigen Stand und schlagen Alarm.
+
+</div>
+<div class="four">
+
+##### 2. Komplexe, nicht-lineare Systeme
+
+Manchmal ist das erwartete Verhalten eines Systems zu komplex, um es mit einfachen `verify` Anweisungen zu beschreiben (z.B. das Schwingungsverhalten einer mechanischen Struktur).
+
+Hier ist es einfacher, ein Referenzergebnis von einem validierten Modell oder einer realen Messung als Baseline zu verwenden und auf Einhaltung dieser Referenz zu testen.
+
+</div>
+</div>
 
 ---
 
@@ -335,13 +630,34 @@ TODO Folie zu typischen Baseline Criteria-Einstellungen in realen Projekten
 
 #### Test-Case
 
-##### Logical and Temporal Assessments
+##### Assessments: Logical and Temporal
 
-TODO Kurze Übersicht der Logical and Temporal Assessment-Einstellungen auf Case-Ebene
+Dies ist die flexibelste und mächtigste Form der Bewertung. Sie ermöglicht die Definition von beliebigen, komplexen Testlogiken in einer eigenen Test-Beschreibungssprache, die an Stateflow erinnert.
+
+-   **Operatoren:** Eine reichhaltige Bibliothek an logischen (`&&`, `||`, `!`) und temporalen Operatoren (`after`, `before`, `elapsed`, `count`) steht zur Verfügung.
+-   **`verify` Anweisung:** Das Kernstück. `verify(condition)` prüft, ob eine Bedingung erfüllt ist.
+-   **Struktur:** Die Logik kann durch `when`-Dekomposition und Zustände strukturiert werden, um auch sehr komplexe Szenarien abzubilden.
 
 ---
 
-TODO Folie zu typischen Logical and Temporal Assessment-Einstellungen in realen Projekten
+#### Typische Anwendung für Logical and Temporal Assessments
+
+Diese Art der Bewertung wird verwendet, um explizite, textuelle Anforderungen direkt in ausführbaren Testcode umzusetzen.
+
+**Anforderung REQ-HB-02 (Überschwingen):**
+> "Beim Erreichen der Solltemperatur von 60°C darf die gemessene Temperatur das Ziel um nicht mehr als 3°C überschreiten."
+
+**Umsetzung als Assessment:**
+```
+// Definiere Soll- und Maximaltemperatur
+define soll_temp = 60;
+define max_temp = soll_temp + 3;
+
+// Überwache die Temperatur während der gesamten Simulation
+// Die verify-Anweisung wird in jedem Zeitschritt ausgewertet
+verify(ist_temperatur <= max_temp);
+```
+Diese eine Zeile genügt, um die Anforderung für den gesamten Simulationslauf zu überwachen.
 
 ---
 
@@ -349,13 +665,42 @@ TODO Folie zu typischen Logical and Temporal Assessment-Einstellungen in realen 
 
 #### Test-Case
 
-##### Custom Criteria
+##### Assessments: Custom Criteria
 
-TODO Kurze Übersicht der Logical and Custom Criteria-Einstellungen auf Case-Ebene
+Wenn die eingebauten Assessment-Möglichkeiten nicht ausreichen, können Sie mit `Custom Criteria` beliebigen MATLAB-Code zur Bewertung heranziehen.
+
+-   **Funktionsweise:** Es wird eine MATLAB-Funktion geschrieben, die am Ende der Simulation aufgerufen wird.
+-   **Übergabeparameter:** Diese Funktion erhält Zugriff auf alle geloggten Signale und Zeitdaten der Simulation.
+-   **Rückgabewert:** Die Funktion muss einen booleschen Wert zurückgeben (`true` für bestanden, `false` für fehlgeschlagen) und kann zusätzlich eine Fehlermeldung generieren.
 
 ---
 
-TODO Folie zu typischen Custom Criteria-Einstellungen in realen Projekten
+#### Typische Anwendung für Custom Criteria
+
+Custom Criteria werden für Bewertungen verwendet, die komplexe Berechnungen oder Analysen erfordern, die über eine einfache `verify` Anweisung hinausgehen.
+
+<div class="columns">
+<div class="two">
+
+##### Frequenzanalyse
+
+**Anforderung:** "Die Resonanzfrequenz im Ausgangssignal darf nicht unter 50 Hz liegen."
+
+**Umsetzung:**
+Eine MATLAB-Funktion, die das Ausgangssignal mittels `fft()` (Fast Fourier Transform) analysiert, die dominante Frequenz findet und prüft, ob diese über dem Grenzwert liegt.
+
+</div>
+<div class="four">
+
+##### Statistische Auswertung
+
+**Anforderung:** "Die Standardabweichung der Regelabweichung im stationären Zustand muss kleiner als 0.1 sein."
+
+**Umsetzung:**
+Eine MATLAB-Funktion, die den letzten Teil des Signals für die Regelabweichung extrahiert, mittels `std()` die Standardabweichung berechnet und mit dem Grenzwert vergleicht.
+
+</div>
+</div>
 
 ---
 
