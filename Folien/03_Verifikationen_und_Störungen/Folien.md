@@ -558,7 +558,7 @@ Unter `Assessments` wird die eigentliche Testlogik definiert. Eine mächtige Opt
 ---
 
 <div class="columns">
-<div>
+<div class="five">
 
 #### Typische Anwendung
 
@@ -570,25 +570,7 @@ Test Sequences eignen sich hervorragend für die Prüfung von **kausalen und tem
 </div>
 <div>
 
-```
-// Step 1: Initial State
-when (time > 1.0) {
-  start_button = true;
-  // Press button
-  transition to Step 2;
-}
-
-// Step 2: Check LED
-verify(led_status == GREEN);
-// Check must pass immediately
-verify(elapsed(50, msec));
-// Check that it happened within 50ms
-transition to Step 3;
-
-// Step 3: Check Motor
-verify(motor_speed > 0);
-// Motor should only start now
-```
+![](./Diagramme/Mermaid/Sequence_Diagram_Assessment.svg)
 
 </div>
 
