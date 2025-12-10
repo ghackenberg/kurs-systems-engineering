@@ -543,7 +543,7 @@ Abgeleitete Größen, die im Test ausgewertet werden sollen.
 
 ---
 
-#### Test-Case - **Assessments (*Sequence Diagram Assessment*)**
+#### Test-Case - **Sequence Diagram Assessment**
 
 Unter `Assessments` wird die eigentliche Testlogik definiert. Eine mächtige Option hierfür ist der `Test Sequence` Block. Im Gegensatz zur reinen Stimuli-Generierung im `Inputs`-Bereich, kann ein `Test Sequence` Block hier sowohl das SUT anregen als auch dessen Reaktionen überwachen und bewerten.
 
@@ -557,37 +557,44 @@ Unter `Assessments` wird die eigentliche Testlogik definiert. Eine mächtige Opt
 
 ---
 
-#### Typische Anwendung für Test Sequence Assessments
+<div class="columns">
+<div>
+
+#### Typische Anwendung
 
 Test Sequences eignen sich hervorragend für die Prüfung von **kausalen und temporalen Anforderungen**, bei denen eine bestimmte Abfolge von Aktionen und Reaktionen verifiziert werden muss.
 
 **Anforderung:**
 > "Wenn der Start-Knopf gedrückt wird, soll die Power-LED innerhalb von 50ms auf 'Grün' wechseln. Erst danach darf der Motor anlaufen."
 
-**Umsetzung in Test Sequence:**
+</div>
+<div>
+
 ```
 // Step 1: Initial State
 when (time > 1.0) {
-  start_button = true; // Press button
+  start_button = true;
+  // Press button
   transition to Step 2;
 }
 
 // Step 2: Check LED
-verify(led_status == GREEN); // Check must pass immediately
-verify(elapsed(50, msec));   // Check that it happened within 50ms
+verify(led_status == GREEN);
+// Check must pass immediately
+verify(elapsed(50, msec));
+// Check that it happened within 50ms
 transition to Step 3;
 
 // Step 3: Check Motor
-verify(motor_speed > 0); // Motor should only start now
+verify(motor_speed > 0);
+// Motor should only start now
 ```
+
+</div>
 
 ---
 
-![bg contain right](./Screenshots/Simulink_Test_Case_Baseline_Criteria.png)
-
-#### Test-Case
-
-##### Assessments: Baseline Criteria
+#### Test-Case - **Baseline Criteria**
 
 Ein Baseline-Test vergleicht das Verhalten des SUT mit einem zuvor aufgezeichneten "guten" Ergebnis.
 
@@ -599,38 +606,34 @@ Ein Baseline-Test vergleicht das Verhalten des SUT mit einem zuvor aufgezeichnet
 
 ---
 
+![](./Screenshots/Simulink_Test_Case_Baseline_Criteria.png)
+
+---
+
 #### Wann verwendet man Baseline-Tests?
 
 Baseline-Tests sind besonders nützlich in zwei Hauptszenarien:
 
-<div class="columns">
-<div class="two">
+<div class="columns top">
+<div>
 
 ##### 1. Regressionstests
 
 Wenn eine Komponente geändert oder überarbeitet wird, will man sicherstellen, dass das bestehende, korrekte Verhalten nicht unbeabsichtigt verändert wurde ("Regression").
 
-Baseline-Tests erkennen hier kleinste Abweichungen zum vorherigen Stand und schlagen Alarm.
-
 </div>
-<div class="four">
+<div>
 
 ##### 2. Komplexe, nicht-lineare Systeme
 
 Manchmal ist das erwartete Verhalten eines Systems zu komplex, um es mit einfachen `verify` Anweisungen zu beschreiben (z.B. das Schwingungsverhalten einer mechanischen Struktur).
-
-Hier ist es einfacher, ein Referenzergebnis von einem validierten Modell oder einer realen Messung als Baseline zu verwenden und auf Einhaltung dieser Referenz zu testen.
 
 </div>
 </div>
 
 ---
 
-![bg contain right](./Screenshots/Simulink_Test_Logical_And_Temporal_Assessment.png)
-
-#### Test-Case
-
-##### Assessments: Logical and Temporal
+#### Test-Case - **Logical and Temporal Assessments**
 
 Dies ist die flexibelste und mächtigste Form der Bewertung. Sie ermöglicht die Definition von beliebigen, komplexen Testlogiken in einer eigenen Test-Beschreibungssprache, die an Stateflow erinnert.
 
@@ -640,32 +643,43 @@ Dies ist die flexibelste und mächtigste Form der Bewertung. Sie ermöglicht die
 
 ---
 
-#### Typische Anwendung für Logical and Temporal Assessments
+![](./Screenshots/Simulink_Test_Logical_And_Temporal_Assessment.png)
+
+---
+
+<div class="columns">
+<div>
+
+#### Typische Anwendung
 
 Diese Art der Bewertung wird verwendet, um explizite, textuelle Anforderungen direkt in ausführbaren Testcode umzusetzen.
 
 **Anforderung REQ-HB-02 (Überschwingen):**
 > "Beim Erreichen der Solltemperatur von 60°C darf die gemessene Temperatur das Ziel um nicht mehr als 3°C überschreiten."
 
-**Umsetzung als Assessment:**
+</div>
+<div>
+
 ```
 // Definiere Soll- und Maximaltemperatur
 define soll_temp = 60;
 define max_temp = soll_temp + 3;
 
-// Überwache die Temperatur während der gesamten Simulation
-// Die verify-Anweisung wird in jedem Zeitschritt ausgewertet
+// Überwache die Temperatur während
+// der gesamten Simulation.
+// Die verify-Anweisung wird in jedem
+// Zeitschritt ausgewertet.
 verify(ist_temperatur <= max_temp);
 ```
-Diese eine Zeile genügt, um die Anforderung für den gesamten Simulationslauf zu überwachen.
+
+*Diese eine Zeile genügt, um die Anforderung für den gesamten Simulationslauf zu überwachen.*
+
+</div>
+</div>
 
 ---
 
-![bg contain right](./Screenshots/Simulink_Test_Case_Custom_Criteria.png)
-
-#### Test-Case
-
-##### Assessments: Custom Criteria
+#### Test-Case - **Custom Criteria**
 
 Wenn die eingebauten Assessment-Möglichkeiten nicht ausreichen, können Sie mit `Custom Criteria` beliebigen MATLAB-Code zur Bewertung heranziehen.
 
@@ -675,12 +689,14 @@ Wenn die eingebauten Assessment-Möglichkeiten nicht ausreichen, können Sie mit
 
 ---
 
+![](./Screenshots/Simulink_Test_Case_Custom_Criteria.png)
+
+---
+
 #### Typische Anwendung für Custom Criteria
 
-Custom Criteria werden für Bewertungen verwendet, die komplexe Berechnungen oder Analysen erfordern, die über eine einfache `verify` Anweisung hinausgehen.
-
 <div class="columns">
-<div class="two">
+<div>
 
 ##### Frequenzanalyse
 
@@ -690,7 +706,7 @@ Custom Criteria werden für Bewertungen verwendet, die komplexe Berechnungen ode
 Eine MATLAB-Funktion, die das Ausgangssignal mittels `fft()` (Fast Fourier Transform) analysiert, die dominante Frequenz findet und prüft, ob diese über dem Grenzwert liegt.
 
 </div>
-<div class="four">
+<div>
 
 ##### Statistische Auswertung
 
