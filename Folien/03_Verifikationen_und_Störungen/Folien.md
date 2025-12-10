@@ -545,11 +545,7 @@ Abgeleitete Größen, die im Test ausgewertet werden sollen.
 
 #### Test-Case - **Sequence Diagram Assessment**
 
-Unter `Assessments` wird die eigentliche Testlogik definiert. Eine mächtige Option hierfür ist der `Test Sequence` Block. Im Gegensatz zur reinen Stimuli-Generierung im `Inputs`-Bereich, kann ein `Test Sequence` Block hier sowohl das SUT anregen als auch dessen Reaktionen überwachen und bewerten.
-
--   **Struktur:** Der Block verwendet eine an Stateflow angelehnte Syntax mit Schritten (`Steps`) und Übergängen.
--   **Aktionen:** In jedem Schritt können Aktionen ausgeführt werden (z.B. Sollwerte ändern).
--   **Bewertung:** Die `verify` Anweisung prüft, ob eine Bedingung zu einem bestimmten Zeitpunkt wahr ist. Schlägt eine `verify` Bedingung fehl, schlägt der gesamte Test-Case fehl.
+TODO Kurze Einführung der Nutzung von System Composer Sequence Diagrams für das Testen
 
 ---
 
@@ -557,22 +553,16 @@ Unter `Assessments` wird die eigentliche Testlogik definiert. Eine mächtige Opt
 
 ---
 
-<div class="columns">
-<div class="five">
+TODO Kurze Einführung der Signal-Based und message-based Messages in System Composer Sequence Diagrams
 
-#### Typische Anwendung
+---
 
-Test Sequences eignen sich hervorragend für die Prüfung von **kausalen und temporalen Anforderungen**, bei denen eine bestimmte Abfolge von Aktionen und Reaktionen verifiziert werden muss.
+TODO Kurze Einführung der Message Label Syntax (trigger[guard]{constraint}) in System Composer Sequence Diagrams
 
-**Anforderung:**
-> "Wenn der Start-Knopf gedrückt wird, soll die Power-LED innerhalb von 50ms auf 'Grün' wechseln. Erst danach darf der Motor anlaufen."
+---
 
-</div>
-<div>
+TODO Tyischer Anwendungsfall von System Composer Sequence Diagrams (inklusive zugehörigem Mermaid-Sequenzt-Diagram)
 
-![](./Diagramme/Mermaid/Sequence_Diagram_Assessment.svg)
-
-</div>
 
 ---
 
@@ -617,11 +607,7 @@ Manchmal ist das erwartete Verhalten eines Systems zu komplex, um es mit einfach
 
 #### Test-Case - **Logical and Temporal Assessments**
 
-Dies ist die flexibelste und mächtigste Form der Bewertung. Sie ermöglicht die Definition von beliebigen, komplexen Testlogiken in einer eigenen Test-Beschreibungssprache, die an Stateflow erinnert.
-
--   **Operatoren:** Eine reichhaltige Bibliothek an logischen (`&&`, `||`, `!`) und temporalen Operatoren (`after`, `before`, `elapsed`, `count`) steht zur Verfügung.
--   **`verify` Anweisung:** Das Kernstück. `verify(condition)` prüft, ob eine Bedingung erfüllt ist.
--   **Struktur:** Die Logik kann durch `when`-Dekomposition und Zustände strukturiert werden, um auch sehr komplexe Szenarien abzubilden.
+TODO Kurze Einführung der Nutzung von Logical and Temporal Assessments. Logical Assessments (Bounds Check mit bounds-check-pattern) + Temporal Assessments (Trigger-response mit trigger, delay und response) + Custom Logical Assessments (eigener Ausdruck).
 
 ---
 
@@ -629,35 +615,7 @@ Dies ist die flexibelste und mächtigste Form der Bewertung. Sie ermöglicht die
 
 ---
 
-<div class="columns">
-<div>
-
-#### Typische Anwendung
-
-Diese Art der Bewertung wird verwendet, um explizite, textuelle Anforderungen direkt in ausführbaren Testcode umzusetzen.
-
-**Anforderung REQ-HB-02 (Überschwingen):**
-> "Beim Erreichen der Solltemperatur von 60°C darf die gemessene Temperatur das Ziel um nicht mehr als 3°C überschreiten."
-
-</div>
-<div>
-
-```
-// Definiere Soll- und Maximaltemperatur
-define soll_temp = 60;
-define max_temp = soll_temp + 3;
-
-// Überwache die Temperatur während
-// der gesamten Simulation.
-// Die verify-Anweisung wird in jedem
-// Zeitschritt ausgewertet.
-verify(ist_temperatur <= max_temp);
-```
-
-*Diese eine Zeile genügt, um die Anforderung für den gesamten Simulationslauf zu überwachen.*
-
-</div>
-</div>
+TODO Typischer Anwendungsfall von Bounds-Check Logical Assessments, Trigger-Response Temporal Assessments, und Custom Logical Assessments.
 
 ---
 
