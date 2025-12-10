@@ -204,143 +204,158 @@ Er bietet Werkzeuge zum Erstellen, Verwalten, Ausführen und Analysieren von Tes
 
 ---
 
+<div class="columns">
+<div class="five">
+
 #### Test-Hierarchie: Strukturierung von Tests
 
-Simulink Test organisiert Tests in einer dreistufigen Hierarchie, um Skalierbarkeit und Wiederverwendbarkeit zu gewährleisten.
+Simulink Test organisiert Tests in einer dreistufigen Hierarchie, um Skalierbarkeit und Wiederverwendbarkeit über Projekte hinweg zu gewährleisten.
 
--   **Test-Datei (`.mldatx`):** Der Top-Level-Container. Er speichert alle Testkonfigurationen, Suiten, Cases, Test-Parameter und Ergebnisse in einer einzigen portablen Datei.
--   **Test-Suite:** Gruppiert zusammengehörige Test-Cases. Suiten können verschachtelt werden, um eine Struktur nach Komponenten oder Testarten (z.B. Funktionstests, Fehlertests) abzubilden.
--   **Test-Case:** Die kleinste ausführbare Testeinheit. Definiert ein spezifisches Szenario mit einem zu testenden System (SUT), Eingabedaten, Pass/Fail-Kriterien (Assessments) und Konfigurationen.
+-   **Test-Datei (`.mldatx`):** Der Top-Level-Container. Er speichert allgemeine Einstellungen sowie die Test-Suites und Test-Cases.
+-   **Test-Suite:** Gruppiert zusammengehörige Test-Cases. Suiten können verschachtelt werden, um eine Struktur abzubilden.
+-   **Test-Case:** Die kleinste ausführbare Testeinheit. Definiert ein einzelnes zu testendes Szenario mit Eingaben / Ausgaben.
+
+</div>
+<div>
+
+![](./Diagramme/Mermaid/Simulink_Test_Hierarchie.svg)
+
+</div>
+</div>
 
 ---
+
+![bg contain right](./Screenshots/Simulink_Test_File.png)
 
 #### Test-Datei (`.mldatx`)
 
-- **Test-Suiten und Test-Cases:** Die vollständige Hierarchie aller definierten Tests.
-- **Konfigurationen:** Einstellungen für Simulation, Codegenerierung (für SIL/PIL) und Test-Harnesses.
-- **Test-Inputs:** Verweise auf oder eingebettete Eingangsdaten (z.B. aus Signal Editor Blöcken oder MAT-Dateien).
-- **Assessments:** Definitionen der Pass/Fail-Kriterien, einschließlich Baseline-Daten und Toleranzen.
-- **Callbacks:** MATLAB-Skripte zur Vor- und Nachbereitung der Testausführung.
-- **Ergebnisse:** Nach einer Testausführung werden die Ergebnisse (Pass/Fail, Messdaten, Abdeckungsanalysen) ebenfalls in der `.mldatx`-Datei gespeichert.
+TODO Kurze Übersicht der Einstellungen auf Datei-Ebene (Tags, Description, Requirements, Callbacks, Coverage Settings, Test File Options)
 
 ---
 
-<!-- Ein Screenshot des Test-Manager-Browsers. Eine .mldatx-Datei ist als Wurzel des Baumes markiert. Darunter sind mehrere Test-Suiten als Ordnersymbole sichtbar. Dies verdeutlicht, dass die Test-Datei der oberste Container ist. -->
-![Screenshot des Test Manager Browsers. Eine .mldatx-Datei ist als Wurzel des Baumes markiert. Darunter sind mehrere Test-Suiten als Ordnersymbole sichtbar. Dies verdeutlicht, dass die Test-Datei der oberste Container ist.](./Screenshots/Simulink_Test_File.png)
+TODO Folie zu typischen Aufteilungen von Test-Dateien in Projekten.
 
 ---
+
+![bg contain right](./Screenshots/Simulink_Test_Suite.png)
 
 #### Test-Suite
 
-Eine Test-Suite ist ein Container zur Organisation von Test-Cases und anderen Test-Suiten. Sie dient der logischen Strukturierung und Gruppierung von Tests.
-
-##### Anwendungsbeispiele für Suiten:
-- **Komponenten-Tests:** Eine Suite pro Systemkomponente (z.B. `Antriebs-Tests`, `Energieversorgungs-Tests`).
-- **Anforderungs-Tests:** Eine Suite pro übergeordneter Anforderung oder Feature.
-- **Test-Typ-Tests:** Eine Suite pro Testart (z.B. `Funktionale Tests`, `Robustheits-Tests`, `Regressions-Tests`).
-- **Workflow-Tests:** Suiten können auch den Testprozess widerspiegeln (`MIL-Tests`, `SIL-Tests`).
+TODO Kurze Übersicht der Einstellungen auf Suite-Ebene (Tags, Description, Requirements, Callbacks, Coverage Settings)
 
 ---
 
-<!-- Ein Screenshot des Test-Managers, der eine geöffnete Test-Suite hervorhebt. Man sieht, dass die Suite "Funktionale Tests" mehrere Test-Cases enthält und selbst in einer übergeordneten .mldatx-Datei liegt. Ein Test-Case innerhalb der Suite ist ausgewählt. -->
-![Ein Screenshot des Test-Managers, der eine geöffnete Test-Suite hervorhebt. Man sieht, dass die Suite "Funktionale Tests" mehrere Test-Cases enthält und selbst in einer übergeordneten .mldatx-Datei liegt. Ein Test-Case innerhalb der Suite ist ausgewählt.](./Screenshots/Simulink_Test_Suite.png)
+TODO Folie zu typischen Suite-Strukturen innerhalb der Test-Dateien.
+
+---
+
+![bg contain right](./Screenshots/Simulink_Test_Case.png)
+
+#### Test-Case
+
+TODO Kurze Übersicht der wichtigsten Einstellungen auf Case-Ebene (Tags, Description, Requirements, System Under Test, Inputs, ...)
+
+---
+
+TODO Folie zu typischen Cases innerhalb einer Suite bzw. Test-Datei.
 
 ---
 
 #### Test-Case
 
-- **System Under Test (SUT):** Eine klare Definition dessen, was getestet wird (z.B. ein spezifisches Subsystem). Oft wird dies über ein Test-Harness realisiert.
-- **Inputs:** Die Stimuli, die dem SUT während der Simulation zugeführt werden.
-- **Assessments:** Die Kriterien, die über `Pass` oder `Fail` entscheiden (z.B. Baseline-Vergleich, temporale `verify`-Logik).
-- **Konfigurationen:** Individuelle Einstellungen für den Test-Case, die globale Einstellungen der Suite oder Datei überschreiben können.
-- **Anforderungs-Links:** Verknüpfungen zu den Anforderungen, die durch diesen Test-Case verifiziert werden. Dies ist entscheidend für die Nachverfolgbarkeit (Traceability).
+##### System Under Test (SUT)
+
+TODO Kurze Übersicht über die SUT-Einstellungen auf Case-Ebene (Model, Test Harness, Simulation Mode, Start/Stop Time)
+
+![bg contain right](./Screenshots/Simulink_Test_Case_SUT.png)
 
 ---
 
-<!-- Ein Screenshot, der den Editor-Bereich eines einzelnen Test-Cases im Test-Manager zeigt. Die Abschnitte "System Under Test", "Inputs", "Baseline Criteria" und "Requirements" sind klar sichtbar und ausgefüllt. Dies illustriert die atomare Natur eines Test-Cases mit all seinen Bestandteilen. -->
-![Ein Screenshot, der den Editor-Bereich eines einzelnen Test-Cases im Test-Manager zeigt. Die Abschnitte "System Under Test", "Inputs", "Baseline Criteria" und "Requirements" sind klar sichtbar und ausgefüllt. Dies illustriert die atomare Natur eines Test-Cases mit all seinen Bestandteilen.](./Screenshots/Simulink_Test_Case.png)
+TODO Folie zu typischen SUT-Einstellungen in realen Projekten
 
 ---
 
-#### Konfiguration: System Under Test (SUT)
+![bg contain right](./Screenshots/Simulink_Test_Case_Inputs.png)
 
-In diesem Abschnitt wird die Verbindung zwischen dem Test-Case und der zu testenden Komponente hergestellt.
+#### Test-Case
 
-**Möglichkeiten zur SUT-Spezifikation:**
+##### Inputs
 
-1.  **Simulink-Modell:** Das gesamte Modell wird als SUT verwendet.
-2.  **Subsystem/Modell-Referenz:** Ein spezifisches Subsystem oder eine Modell-Referenz wird als SUT isoliert. Dies ist die häufigste Anwendung für komponentenbasierte Tests.
-3.  **Test-Harness:** Ein bereits existierendes Test-Harness wird direkt als SUT ausgewählt.
-4.  **Code (SIL/PIL):** Generierter C/C++ Code wird als SUT für SIL/PIL-Tests verwendet.
+TODO Kurze Übersicht der Inputs-Einstellungen auf Case-Ebene (Signal Editor Block, Test Sequence Block, MAT-Datei)
 
 ---
 
-![Screenshot des 'System Under Test' Bereichs im Test-Manager. Ein Dropdown-Menü zeigt die Optionen 'Model', 'Subsystem', 'Test Harness'. Ein Dateibrowser-Button zur Auswahl der MDL/SLX-Datei ist sichtbar. Ein Feld zeigt den Pfad zu einem Subsystem innerhalb eines Modells.](placeholder.jpg)
+TODO Folie zu typischen Inputs-Einstellungen in realen Projekten
 
 ---
 
-#### Konfiguration: Test-Inputs
+![bg contain right](./Screenshots/Simulink_Test_Case_Simulation_Outputs.png)
 
-Hier werden die Stimuli für das SUT während der Simulation definiert. Simulink Test bietet vielfältige Möglichkeiten, Eingangsdaten zu erstellen und zu verwalten.
+#### Test-Case
 
--   **Signal Editor Block:**
-    -   Grafische Erstellung von Signalen (Stufen, Rampen, Sinus etc.).
-    -   Import von Signaldaten aus MAT-Dateien oder dem Workspace.
-    -   Ermöglicht die Definition von Signalgruppen (Szenarien).
+##### Simulation Outputs
 
--   **MAT- oder Excel-Dateien:**
-    -   Tabellarische Definition von Zeitserien-Daten.
-    -   Besonders nützlich für komplexe oder gemessene reale Testdaten.
-    -   Die Daten müssen in einem spezifischen Format vorliegen (`timeseries` Objekte, `timetable`, etc.).
-
--   **Manuelle Eingabe:**
-    -   Erstellung einfacher Skalare oder Vektoren direkt im Test-Manager.
+TODO Kurze Übersicht der Simulation Outputs-Einstellungen auf Case-Ebene
 
 ---
 
-#### Konfiguration: Assessments (Bewertungen)
-
-Assessments definieren die Pass/Fail-Kriterien für einen Test-Case.
-
--   **Baseline Criteria:**
-    -   Vergleicht die Simulationsausgabe mit einem zuvor aufgezeichneten "goldenen Standard" (Baseline).
-    -   Toleranzen (absolut, relativ, zeitlich) können definiert werden.
-    -   Ideal für Regressions-Tests, um unbeabsichtigte Verhaltensänderungen zu erkennen.
-
--   **Logical and Temporal Assessments (Test Sequence):**
-    -   Verwendung von `verify` und anderen Operatoren zur Prüfung von komplexen logischen und zeitlichen Bedingungen (z.B. "Signal A muss innerhalb von 50ms nach Signal B auf 'true' wechseln").
-    -   Bietet die größte Flexibilität und Ausdrucksstärke.
-
--   **Custom Criteria (MATLAB-Code):**
-    -   Schreiben einer MATLAB-Funktion, die die Simulationsausgaben entgegennimmt und eine Bewertung (`pass`/`fail`) zurückgibt.
-    -   Nützlich für komplexe, domänenspezifische Auswertungen.
+TODO Folie zu typischen Simulation Outputs-Einstellungen in realen Projekten
 
 ---
 
-#### Optionen und Callbacks
+![bg contain right](./Screenshots/Simulink_Test_Case_Sequence_Diagram_Assessment.png)
 
-Callbacks sind Skripte, die an bestimmten Punkten im Testablauf automatisch ausgeführt werden. Sie sind entscheidend für die Automatisierung und die Schaffung einer reproduzierbaren Testumgebung.
+#### Test-Case
 
-<div class="columns">
-<div class="two">
+##### Sequence Diagram Assessment
 
-##### Typische Callback-Anwendungen:
+TODO Kurze Übersicht der Sequence Diagram Assessment-Einstellungen auf Case-Ebene
 
--   **`Pre-load`:** Wird vor dem Laden des Modells ausgeführt.
-    -   Laden von Model-Parametern, Bus-Objekten oder Testdaten aus MAT-Dateien in den Base Workspace.
-    -   Initialisierung von Umgebungsvariablen.
--   **`Post-load`:** Wird nach dem Laden des Modells, aber vor der Simulation ausgeführt.
-    -   Modifikation von Block-Parametern für den spezifischen Testfall.
--   **`Cleanup`:** Wird nach Abschluss des Test-Cases ausgeführt.
-    -   Schließen von Fenstern, Löschen von temporären Variablen aus dem Workspace (`clear`).
+---
 
-</div>
-<div class="four">
+TODO Folie zu typischen Sequence Diagram Assessment-Einstellungen in realen Projekten
 
-![Screenshot des 'Callbacks' Bereichs im Test-Manager. Es sind vier Textfelder sichtbar, beschriftet mit 'Pre-load function', 'Post-load function', 'Pre-start function' und 'Cleanup function'. Ein Beispiel-Code 'load_test_parameters;' ist im Pre-load Feld eingetragen.](placeholder.jpg)
+---
 
-</div>
-</div>
+![bg contain right](./Screenshots/Simulink_Test_Case_Baseline_Criteria.png)
+
+#### Test-Case
+
+##### Baseline Criteria
+
+TODO Kurze Übersicht der Baseline Criteria-Einstellungen auf Case-Ebene
+
+---
+
+TODO Folie zu typischen Baseline Criteria-Einstellungen in realen Projekten
+
+---
+
+![bg contain right](./Screenshots/Simulink_Test_Logical_And_Temporal_Assessment.png)
+
+#### Test-Case
+
+##### Logical and Temporal Assessments
+
+TODO Kurze Übersicht der Logical and Temporal Assessment-Einstellungen auf Case-Ebene
+
+---
+
+TODO Folie zu typischen Logical and Temporal Assessment-Einstellungen in realen Projekten
+
+---
+
+![bg contain right](./Screenshots/Simulink_Test_Case_Custom_Criteria.png)
+
+#### Test-Case
+
+##### Custom Criteria
+
+TODO Kurze Übersicht der Logical and Custom Criteria-Einstellungen auf Case-Ebene
+
+---
+
+TODO Folie zu typischen Custom Criteria-Einstellungen in realen Projekten
 
 ---
 
