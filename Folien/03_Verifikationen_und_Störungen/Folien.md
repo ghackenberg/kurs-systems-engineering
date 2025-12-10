@@ -573,6 +573,18 @@ Abgeleitete Größen, die im Test ausgewertet werden sollen.
 
 ---
 
+#### Test-Case - **Assessments**
+
+Für die Überprüfung der Testergebnisse stehen verschiedene Assessment-Methoden zur Auswahl:
+
+![](./Diagramme/Mermaid/Simulink_Test_Case_Assessments.svg)
+
+---
+
+![](./Illustrationen/Simulink_Test_Case_Assessments.png)
+
+---
+
 #### Test-Case - **Sequence Diagram Assessment**
 
 System Composer Sequenzdiagramme (Sequence Diagrams) können direkt in Simulink Test für die Bewertung von Test-Cases verwendet werden.
