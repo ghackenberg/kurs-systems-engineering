@@ -710,23 +710,104 @@ Simulink Test bietet leistungsstarke Mechanismen zur *formalen Bewertung* von Ze
 
 ---
 
-TODO Folie zu bounds-check-pattern (always less than, always greater than, always inside bounds, always outside bounds)
+#### Logisches Assessment: **Bounds-Check Pattern**
+
+Das **Bounds-Check Pattern** ist ein logisches Assessment, das überprüft, ob ein Signal während der gesamten Simulation innerhalb oder außerhalb definierter Grenzen bleibt. Es ist fundamental für die Verifikation von Grenzwertanforderungen.
+
+- `Always less than` - Das Signal muss immer unterhalb einer oberen Schranke bleiben.
+- `Always greater than` - Das Signal muss immer oberhalb einer unteren Schranke bleiben.
+- `Always within bounds` - Das Signal muss immer zwischen einer unteren und oberen Schranke bleiben.
+- `Always outside bounds` - Das Signal muss immer außerhalb eines Bereichs (unterhalb der unteren oder oberhalb der oberen Schranke) bleiben.
 
 ---
 
-TODO Folie zu trigger-pattern (whenever is true, becomes true, becomes true and stays true for at least, becomes true and stays true for at most, becomes true and stays true for between)
+![Grafische Darstellung eines Bounds-Check-Patterns. Ein Signalverlauf wird gezeigt, der durch eine obere und untere Schranke begrenzt ist. Die Bereiche "innerhalb" und "außerhalb" der Grenzen sind visuell hervorgehoben.](./Illustrationen/Bounds_Check_Pattern.png)
 
 ---
 
-TODO Folie zu delay-pattern (with no delay, with a delay of at most, with a delay of between)
+#### Temporales Assessment: **Trigger-Pattern**
+
+Das **Trigger-Pattern** definiert das auslösende Ereignis für eine temporale Bewertung. Es legt fest, *wann* die Beobachtung einer Systemreaktion beginnen soll.
+
+- `Whenever is true` - Löst kontinuierlich aus, solange die Bedingung wahr ist.
+- `Becomes true` - Löst bei der steigenden Flanke der Bedingung aus (wenn sie von `false` zu `true` wechselt).
+- `Stays true for at least` - Löst aus, wenn die Bedingung für eine Mindestdauer wahr bleibt.
+- `Stays true for at most` - Löst aus, wenn die Bedingung für höchstens eine Maximaldauer wahr bleibt.
+- `Stays true for between` - Löst aus, wenn die Bedingung für eine Dauer innerhalb eines Zeitfensters wahr bleibt.
 
 ---
 
-TODO Folie zu response-pattern (must be true, must stay true for at least, must stay true for at most, must stay true for between, must stay true until)
+![Grafische Darstellung eines Trigger-Patterns. Ein digitales Signal zeigt eine steigende Flanke (von 0 auf 1), die einen Trigger-Zeitpunkt markiert. Ein Pfeil mit der Beschriftung "Trigger" zeigt genau auf diesen Zeitpunkt.](./Illustrationen/Trigger_Pattern.png)
 
 ---
 
-TODO Folie zu typischen Anwendungsfällen
+#### Temporales Assessment: **Delay-Pattern**
+
+Das **Delay-Pattern** spezifiziert die zulässige Zeitverzögerung zwischen dem Trigger-Ereignis und dem Beginn der erwarteten Systemreaktion.
+
+- `With no delay` - Die Reaktion muss unmittelbar nach dem Trigger-Ereignis eintreten.
+- `With a delay of at most` - Die Reaktion muss innerhalb einer maximalen Verzögerung nach dem Trigger eintreten.
+- `With a delay of between` - Die Reaktion muss innerhalb eines definierten Zeitfensters nach dem Trigger eintreten.
+
+---
+
+![Grafische Darstellung eines Delay-Patterns. Eine Zeitachse zeigt einen 'Trigger'-Punkt und einen 'Response'-Startpunkt. Dazwischen ist ein Intervall als "zulässige Verzögerung" (Delay) markiert.](./Illustrationen/Delay_Pattern.png)
+
+</div>
+</div>
+
+---
+
+#### Temporales Assessment: **Response-Pattern**
+
+Das **Response-Pattern** definiert das erwartete Verhalten des Systems, das nach dem Trigger und der spezifizierten Verzögerung eintreten muss.
+
+- `Must be true` - Die Bedingung muss zum Zeitpunkt der Reaktion wahr sein.
+- `Must stay true for at least` - Die Bedingung muss ab dem Zeitpunkt der Reaktion für eine Mindestdauer wahr bleiben.
+- `Must stay true for at most` - Die Bedingung muss ab dem Zeitpunkt der Reaktion für höchstens eine Maximaldauer wahr bleiben.
+- `Must stay true for between` - Die Bedingung muss ab dem Zeitpunkt der Reaktion für eine Dauer innerhalb eines Zeitfensters wahr bleiben.
+- `Must stay true until` - Die Bedingung muss ab dem Zeitpunkt der Reaktion wahr bleiben, bis ein anderes Ereignis eintritt.
+
+---
+
+![Grafische Darstellung eines Response-Patterns. Nach einem Trigger und einem Delay wird ein Signal gezeigt, das für eine bestimmte, markierte Dauer ('mindestens X Sekunden') einen erwarteten Zustand (z.B. den Wert 1) einhält.](./Illustrationen/Response_Pattern.png)
+
+</div>
+</div>
+
+---
+
+#### Typische Anwendungsfälle für Logical and Temporal Assessments
+
+<div class="columns top">
+<div>
+
+##### Grenzwertüberwachung
+
+**Anforderung:** "Die Motortemperatur darf 120°C nie überschreiten."
+
+**Pattern:** `Bounds Check` (`Always less than`)
+
+</div>
+<div>
+
+##### Reaktionszeit
+
+**Anforderung:** "Nach Betätigung des Not-Aus muss der Motor innerhalb von 50ms stoppen."
+
+**Pattern:** `Trigger-Response`
+
+</div>
+<div>
+
+##### Einschwingverhalten
+
+**Anforderung:** "Nach einem Sollwertsprung muss die Drehzahl für mind. 2s im Toleranzband von +/-5% bleiben."
+
+**Pattern:** `Trigger-Response`
+
+</div>
+</div>
 
 ---
 
