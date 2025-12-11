@@ -1,7 +1,0 @@
-graph TD
-    subgraph Testablauf
-        direction TB
-        A(Warten) -- "Aktion: Start-Knopf" --> B(Prüfe LED);
-        B -- "Bedingung: LED wird grün<br/>innerhalb von 50ms" --> C(Prüfe Motor);
-        C -- "Bedingung: Motor startet<br/>nachdem LED grün ist" --> D(Bestanden);
-    end

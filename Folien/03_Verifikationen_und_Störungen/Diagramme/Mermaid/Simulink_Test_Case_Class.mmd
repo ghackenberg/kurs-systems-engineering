@@ -1,0 +1,16 @@
+classDiagram
+    direction LR
+    class matlab.unittest.TestCase {
+        +verifyEqual(actual, expected)
+        +verifyTrue(condition)
+        +verifyFalse(condition)
+        +verifyError(fun, identifier)
+        +verifyThat(actual, constraint)
+        +log(message)
+    }
+    class sltest.TestCase {
+        +sltest_simout
+        +sltest_testCase
+        +sltest_iteration_info
+    }
+    matlab.unittest.TestCase <|-- sltest.TestCase

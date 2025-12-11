@@ -1,9 +1,0 @@
-sequenceDiagram
-    participant Controller
-    participant Motor
-
-    Controller->>Motor: start_command[mode == AUTO]
-    activate Motor
-    Note over Motor: duration <= 10msec
-    Motor->>Controller: motor_running
-    deactivate Motor

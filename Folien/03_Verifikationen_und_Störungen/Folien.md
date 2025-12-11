@@ -614,7 +614,8 @@ Sequenzdiagramme sind Interaktionsdiagramme, die die Reihenfolge von Nachrichten
 
 -   **LifeLines (Lebenslinien):** Repräsentieren einzelne Komponenten, Ports oder Instanzen, die am Kommunikationsablauf beteiligt sind. Sie verlaufen vertikal.
 -   **Messages (Nachrichten):** Horizontale Pfeile, die den Austausch von Informationen oder Ereignissen zwischen LifeLines darstellen.
--   **Aktivationsbalken:** Vertikale Balken auf einer LifeLine, die die Zeitdauer anzeigen, in der eine LifeLine aktiv ist.
+    - Signal-basierte Nachrichten (`rising`, `falling`, `crossing`)
+    - Message-basierte Nachrichten
 -   **Zeitliche Abfolge:** Die Nachrichten werden von oben nach unten in chronologischer Reihenfolge dargestellt.
 
 ---
@@ -647,11 +648,11 @@ Sequenzdiagramme sind Interaktionsdiagramme, die die Reihenfolge von Nachrichten
 #### Message Label Syntax: `trigger[guard]{constraint}`
 
 -   **`trigger` (Optional):** Definiert das Ereignis, das die Nachricht auslöst (z.B. ein Signalübergang). Wenn weggelassen, wird angenommen, dass die Nachricht gesendet wird, sobald der vorherige Schritt abgeschlossen ist.
-    -   Beispiel: `send_data()`
--   **`[guard]` (Optional):** Eine boolesche Bedingung, die erfüllt sein muss, damit die Nachricht gesendet wird.
+    -   Beispiel: `rising(signal - 1)`
+-   **`[guard]` (Optional):** Eine notwendige boolesche Bedingung, die erfüllt sein muss, damit die Nachricht gesendet wird.
     -   Beispiel: `[temperature < 100]`
--   **`{constraint}` (Optional):** Eine zeitliche oder logische Einschränkung, die für die Nachricht gilt. Dies können Verzögerungen, maximale Sendezeiten oder andere temporale Bedingungen sein.
-    -   Beispiel: `{duration < 10ms}`
+-   **`{constraint}` (Optional):** Eine zusätzliche boolsche Bedingung, die zum Fehlschlagen während der Verifikation führen kann.
+    -   Beispiel: `{mode == AUTO}`
 
 ---
 
@@ -661,12 +662,12 @@ Sequenzdiagramme sind Interaktionsdiagramme, die die Reihenfolge von Nachrichten
 
 #### Typischer Anwendungsfall
 
-**Anforderung:** "Wenn der Controller den `start_command` im `AUTO`-Modus an den Motor sendet, muss der Motor innerhalb von 10 Millisekunden mit `motor_running` antworten."
+**Anforderung:** "Wenn der Controller den `start_command` an den Motor sendet, muss der Motor innerhalb von 100 Millisekunden mit `motor_running` antworten."
 
 </div>
 <div>
 
-![](./Diagramme/Mermaid/Motor_Start_Sequence.svg)
+![w:1000](./Screenshots/System_Composer_Sequence_Diagram_Example.png)
 
 </div>
 </div>
@@ -843,7 +844,11 @@ Das **Response-Pattern** definiert das erwartete Verhalten des Systems, das nach
 
 #### Test-Case - **Custom Criteria**
 
-TODO Allgemeine Beschreibung der Funktion (Parameter `test` vom Typ `matlab.unittest.TestCase` mit zusätzlichen Simulink-spezifischen Eigenschaften und Verifikationsmethoden)
+"Custom Criteria" bietet die höchste Flexibilität bei der Testbewertung. Hier können Sie eine eigene MATLAB-Funktion schreiben, um komplexe, domänenspezifische oder algorithmische Überprüfungen durchzuführen, die mit Standard-Assessments nicht möglich sind.
+
+Die Funktion erhält als Eingabeparameter ein `test`-Objekt. Dieses Objekt ist eine Instanz der Klasse `matlab.unittest.TestCase` und wird von Simulink Test um zusätzliche Eigenschaften (z.B. für den Zugriff auf Simulationsergebnisse) und Methoden erweitert.
+
+Innerhalb der Funktion nutzen Sie Verifikationsmethoden (z.B. `test.verifyEqual(...)`), um die Testergebnisse zu überprüfen und den Test als `Passed` oder `Failed` zu markieren.
 
 ---
 
@@ -856,33 +861,50 @@ TODO Allgemeine Beschreibung der Funktion (Parameter `test` vom Typ `matlab.unit
 Eine Custom Criteria Funktion ist eine einfache MATLAB-Funktion, die die Simulationsergebnisse erhält und basierend darauf einen Pass/Fail-Status berechnet.
 
 ```matlab
-% Aufgezeichnetes Signal auslesen
-signal = test.sltest_simout.get('logsout').get('mySignal')
+function customCriteria(test)
 
-% Letzten Signalwert extrahieren
-lastValue = signal.Values.Data(end);
+    % Aufgezeichnetes Signal auslesen
+    signal = test.sltest_simout.get('logsout').get('mySignal');
 
-% Signalwert prüfen
-test.verifyEqual(lastValue, 50);
+    % Letzten Signalwert extrahieren
+    lastValue = signal.Values.Data(end);
+
+    % Signalwert prüfen
+    test.verifyEqual(lastValue, 50, 'Fehldermeldung');
+
+end
 ```
 
 ---
 
 #### Programmierschnittstelle für Custom Criteria Funktionen (1 / 3)
 
-TODO Beschreibung der Basisklasse `matlab.unittest.TestCase`
+Der Parameter `test` der Funktion ist eine Instanz der Klasse `sltest.TestCase`:
+
+![](./Diagramme/Mermaid/Simulink_Test_Case_Class.svg)
 
 ---
 
 #### Programmierschnittstelle für Custom Criteria Funktionen (2 / 3)
 
-TODO Beschreibung der zusätzlichen Eigenschaften (`TestResult`, `sltest_simout`, `sltest_testCase`, ...)
+Die wichtigsten Simulink-spezifischen Eigenschaften des Objektes sind:
+
+- **`test.sltest_simout`**: Das Herzstück für die Ergebnis-Analyse. Dieses Objekt enthält die vollständigen Simulationsergebnisse, einschließlich:
+  - **`get('logsout')`**: Zugriff auf alle geloggten Signale.
+  - **`get('tout')`**: Der Zeitvektor der Simulation.
+- **`test.sltest_testCase`**: Bietet Zugriff auf die Metadaten des aktuellen Test-Cases, wie Name, Tags oder verknüpfte Anforderungen. Nützlich für kontextabhängige Logik oder detaillierte Fehlermeldungen.
+- **`test.sltest_iteration_info`**: Bei iterativen Tests enthält dieses Objekt Informationen über die aktuelle Iteration, z.B. die verwendeten Parameter-Overrides.
 
 ---
 
 #### Programmierschnittstelle für Custom Criteria Funktionen (3 / 3)
 
-TODO Beschreibung der Verifikationsmethoden (`verifyTrue`, `verifyEqual`, `verifyGreaterThan`, `verifyFail`, ...)
+Die Prüfung von Eigenschaften und Generierung von Fehlermeldungen erfolgt über eine Reihe von spezifischen Verifikationsmethoden:
+
+- `test.verifyTrue(cond, 'diag')` - Verifiziert, dass die Bedingung `cond` wahr (`true`) ist. `diag` ist eine optionale Fehlermeldung.
+- `test.verifyEqual(A, B, 'diag')` - Verifiziert, dass `A` und `B` gleich sind (mit Toleranzoptionen für numerische Vergleiche).
+- `test.verifyGreaterThan(A, B)` - Verifiziert, dass `A` größer als `B` ist. (Analog: `verifyLessThan`)
+- `test.verifyFail('diag')` - Markiert den Test explizit als fehlgeschlagen. Nützlich in `try-catch` Blöcken.
 
 ---
 
