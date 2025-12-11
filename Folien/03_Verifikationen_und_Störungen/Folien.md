@@ -843,11 +843,7 @@ Das **Response-Pattern** definiert das erwartete Verhalten des Systems, das nach
 
 #### Test-Case - **Custom Criteria**
 
-Wenn die eingebauten Assessment-Möglichkeiten nicht ausreichen, können Sie mit `Custom Criteria` beliebigen MATLAB-Code zur Bewertung heranziehen.
-
--   **Funktionsweise:** Es wird eine MATLAB-Funktion geschrieben, die am Ende der Simulation aufgerufen wird.
--   **Übergabeparameter:** Diese Funktion erhält Zugriff auf alle geloggten Signale und Zeitdaten der Simulation.
--   **Rückgabewert:** Die Funktion muss einen booleschen Wert zurückgeben (`true` für bestanden, `false` für fehlgeschlagen) und kann zusätzlich eine Fehlermeldung generieren.
+TODO Allgemeine Beschreibung der Funktion (Parameter `test` vom Typ `matlab.unittest.TestCase` mit zusätzlichen Simulink-spezifischen Eigenschaften und Verifikationsmethoden)
 
 ---
 
@@ -855,9 +851,9 @@ Wenn die eingebauten Assessment-Möglichkeiten nicht ausreichen, können Sie mit
 
 ---
 
-#### Programmierschnittstelle für Custom Criteria Funktionen
+#### Beispiel einer für Custom Criteria Funktionen
 
-Eine Custom Criteria Funktion ist eine einfache MATLAB-Funktion, die die Simulationsergebnisse erhält und basierend darauf einen Pass/Fail-Status zurückgibt.
+Eine Custom Criteria Funktion ist eine einfache MATLAB-Funktion, die die Simulationsergebnisse erhält und basierend darauf einen Pass/Fail-Status berechnet.
 
 ```matlab
 % Aufgezeichnetes Signal auslesen
@@ -869,6 +865,24 @@ lastValue = signal.Values.Data(end);
 % Signalwert prüfen
 test.verifyEqual(lastValue, 50);
 ```
+
+---
+
+#### Programmierschnittstelle für Custom Criteria Funktionen (1 / 3)
+
+TODO Beschreibung der Basisklasse `matlab.unittest.TestCase`
+
+---
+
+#### Programmierschnittstelle für Custom Criteria Funktionen (2 / 3)
+
+TODO Beschreibung der zusätzlichen Eigenschaften (`TestResult`, `sltest_simout`, `sltest_testCase`, ...)
+
+---
+
+#### Programmierschnittstelle für Custom Criteria Funktionen (3 / 3)
+
+TODO Beschreibung der Verifikationsmethoden (`verifyTrue`, `verifyEqual`, `verifyGreaterThan`, `verifyFail`, ...)
 
 ---
 
