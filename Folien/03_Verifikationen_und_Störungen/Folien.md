@@ -471,7 +471,11 @@ Der `Signal Editor` Block ist ein vielseitiges Werkzeug, um komplexe Eingangssig
 
 ---
 
-![Screenshot des Signal Editor Blocks in Simulink. Die Benutzeroberfläche zeigt eine grafische Darstellung von zwei Signalen, die über die Zeit unterschiedliche Verläufe nehmen. Links sind die Signalnamen und Szenarien aufgeführt.](placeholder/Signal_Editor_Block.png)
+![](./Screenshots/Simulink_Signal_Editor_Block.png)
+
+---
+
+![](./Screenshots/Simulink_Signal_Editor.png)
 
 ---
 
@@ -486,7 +490,7 @@ Der `Test Sequence` Block ermöglicht die Erstellung von sequenziellen oder zust
 
 ---
 
-![Screenshot eines Test Sequence Blocks in Simulink. Im Editor sind die Schritte und Übergänge einer Testsequenz grafisch dargestellt, ähnlich einem Stateflow-Chart.](placeholder/Test_Sequence_Block.png)
+![](./Screenshots/Simulink_Test_Sequence.png)
 
 ---
 
@@ -596,6 +600,10 @@ System Composer Sequenzdiagramme (Sequence Diagrams) können direkt in Simulink 
 
 ---
 
+![](./Screenshots/System_Composer_Sequence_Diagram.png)
+
+---
+
 ![](./Screenshots/Simulink_Test_Case_Sequence_Diagram_Assessment.png)
 
 ---
@@ -647,11 +655,21 @@ Sequenzdiagramme sind Interaktionsdiagramme, die die Reihenfolge von Nachrichten
 
 ---
 
-#### Typischer Anwendungsfall: Motorstart-Sequenz
+<div class="columns">
+<div>
 
-**Anforderung:** "Wenn der Controller den `start_command` im `AUTO`-Modus an den Motor sendet, muss der Motor innerhalb von 10 Millisekunden mit `motor_running` antworten, nachdem er die `current_speed` vom Sensor angefragt hat."
 
-![h:350](./Diagramme/Mermaid/Motor_Start_Sequence.svg)
+#### Typischer Anwendungsfall
+
+**Anforderung:** "Wenn der Controller den `start_command` im `AUTO`-Modus an den Motor sendet, muss der Motor innerhalb von 10 Millisekunden mit `motor_running` antworten."
+
+</div>
+<div>
+
+![](./Diagramme/Mermaid/Motor_Start_Sequence.svg)
+
+</div>
+</div>
 
 ---
 
@@ -842,19 +860,14 @@ Wenn die eingebauten Assessment-Möglichkeiten nicht ausreichen, können Sie mit
 Eine Custom Criteria Funktion ist eine einfache MATLAB-Funktion, die die Simulationsergebnisse erhält und basierend darauf einen Pass/Fail-Status zurückgibt.
 
 ```matlab
-function [result, message] = myCustomAssessment(simOutput)
+% Aufgezeichnetes Signal auslesen
+signal = test.sltest_simout.get('logsout').get('mySignal')
 
-    signal = simOutput.find('mySignal').Values.Data;
-    time = simOutput.find('mySignal').Values.Time;
+% Letzten Signalwert extrahieren
+lastValue = signal.Values.Data(end);
 
-    if all(signal <= 50)
-        result = true;
-        message = 'Bestanden';
-    else
-        result = false;
-        message = 'Nicht bestanden';
-    end
-end
+% Signalwert prüfen
+test.verifyEqual(lastValue, 50);
 ```
 
 ---

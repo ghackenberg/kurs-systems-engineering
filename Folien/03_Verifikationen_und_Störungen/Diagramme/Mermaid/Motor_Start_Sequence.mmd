@@ -1,13 +1,9 @@
 sequenceDiagram
     participant Controller
     participant Motor
-    participant Sensor
 
-    Controller->>Motor: start_command[mode==AUTO]{duration=10ms}
+    Controller->>Motor: start_command[mode == AUTO]
     activate Motor
-    Motor->>Sensor: request_speed
-    activate Sensor
-    Sensor-->>Motor: current_speed
-    deactivate Sensor
+    Note over Motor: duration <= 10msec
     Motor->>Controller: motor_running
     deactivate Motor
