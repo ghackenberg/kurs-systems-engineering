@@ -1587,7 +1587,9 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration des Konzeptes "Störung" -->
+<!-- Eine abstrakte Illustration des Konzepts 'Störung'. In einem ansonsten intakten, durchsichtigen Gehäuse eines stilisierten Getriebes ist ein einzelnes Zahnrad mit einem feinen, rot glühenden Riss zu sehen. Das umgebende System funktioniert scheinbar noch normal. Der Stil ist technisch-zeichnerisch mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg right](./Illustrationen/Fault_Analyzer_Störung.jpg)
 
 #### Terminologie: **Störung (*Fault*)**
 
@@ -1597,7 +1599,9 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration des Konzeptes "Fehler" -->
+<!-- Eine abstrakte Illustration des Konzepts 'Fehler'. Ein stilisierter, digitaler Messwert-Graph, der eigentlich eine stabile horizontale Linie zeigen sollte, weist eine plötzliche, unerwartete Zacke nach unten auf. Diese Abweichung vom Soll-Zustand ist rot hervorgehoben. Der Stil ist technisch-zeichnerisch mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg right](./Illustrationen/Fault_Analyzer_Fehler.jpg)
 
 #### Terminologie: **Fehler (Error)**
 
@@ -1606,7 +1610,9 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration des Konzeptes "Ausfall" -->
+<!-- Eine abstrakte Illustration des Konzepts 'Ausfall'. Eine stilisierte, ehemals funktionierende Maschine, dargestellt durch ineinandergreifende Zahnräder und Hebel, ist zum Stillstand gekommen. Roter Rauch steigt von einer blockierten Stelle auf, und ein großes, rotes Warnsymbol mit einem Ausrufezeichen schwebt über der gesamten Apparatur. Der Stil ist technisch-zeichnerisch mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg right](./Illustrationen/Fault_Analyzer_Ausfall.jpg)
 
 #### Terminologie: **Ausfall**
 
@@ -1615,9 +1621,13 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
+<!-- Eine schematische Darstellung einer kausalen Kette: Ein roter Pfeil geht von einer Blase mit der Aufschrift 'Störung' (Fault) zu einer Blase mit 'Fehler' (Error), von der wiederum ein roter Pfeil zu einer Blase mit 'Ausfall' (Failure) führt. Dies illustriert die Progression von einer Ursache zu einem Problemzustand und schließlich zu einem Systemversagen. -->
+
 #### Kausalkette
 
 Eine **Störung** kann einen **Fehler** verursachen, der wiederum zu einem **Ausfall** führen kann.
+
+![w:10000](./Illustrationen/Fault_Analyzer_Kausalkette.jpg)
 
 ---
 
