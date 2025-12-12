@@ -293,6 +293,89 @@ Tests werden basierend auf High-Level-Features oder Anforderungs-dokumenten grup
 
 ---
 
+#### Testabdeckung (Coverage)
+
+Die **Testabdeckung** (Coverage) ist eine Metrik, die misst, inwieweit die Struktur eines Modells oder Codes durch eine Test-Suite ausgeführt wurde.
+
+-   Sie beantwortet die quantitative Frage: "Habe ich *genug* getestet?"
+-   100% Anforderungsabdeckung ist nicht 100% Codeabdeckung. Versteckte Logikpfade oder Randbedingungen könnten ungetestet bleiben.
+-   Simulink Test ermöglicht die Sammlung verschiedener Abdeckungsmetriken, um die Gründlichkeit von Tests zu bewerten und die Testqualität objektiv zu messen.
+
+---
+
+#### Coverage Settings im Test Manager
+
+Im Test Manager können die gewünschten Abdeckungsmetriken auf Test-Datei- oder Test-Suite-Ebene aktiviert werden.
+
+-   Nach Ausführung der Tests wird ein **detaillierter Bericht** generiert, der die erreichten Abdeckungsprozentsätze anzeigt.
+-   Nicht abgedeckte Teile des Modells werden im Bericht und direkt im Modell **farblich hervorgehoben** (z.B. rot), was die Erstellung zusätzlicher Testfälle zur Erhöhung der Abdeckung erleichtert.
+
+---
+
+![Screenshot der Coverage Settings im Simulink Test Manager. Ein Fenster zeigt Checkboxen für 'Decision', 'Condition', 'MCDC', 'Lookup Table', etc.](./Screenshots/Simulink_Test_File_Coverage_Settings.png)
+
+---
+
+![bg right](./Illustrationen/Coverage_Decision.jpg)
+
+#### Abdeckungsmetriken
+
+##### **Decision Coverage**
+
+Misst, ob jeder mögliche **Ausgang** eines logischen Blocks (z.B. `if/else`, `switch`, logische Operatoren) mindestens einmal durchlaufen wurde.
+
+**Beispiel:** `if (x > 0)` muss sowohl für `true` als auch für `false` getestet werden.
+
+---
+
+![bg right](./Illustrationen/Coverage_Condition.jpg)
+
+#### Abdeckungsmetriken
+
+##### **Condition Coverage**
+
+Misst, ob jede **atomare Bedingung** in einer komplexen logischen Expression mindestens einmal zu `true` und `false` ausgewertet wurde.
+
+**Beispiel:** Für `A && B` muss `A` einmal `true` und einmal `false` sein, und `B` muss einmal `true` und einmal `false` sein.
+
+---
+
+![bg right](./Illustrationen/Coverage_Lookup.jpg)
+
+#### Abdeckungsmetriken
+
+##### **Lookup Table Coverage**
+
+Misst, wie viele der Interpolations-intervalle oder Stützpunkte in einer `n-D Lookup Table` verwendet wurden.
+
+Stellt sicher, dass alle Bereiche der Tabelle getestet werden und keine Extrapolation in nicht definierte Bereiche erfolgt.
+
+---
+
+![bg right](./Illustrationen/Coverage_Signal_Range.jpg)
+
+#### Abdeckungsmetriken
+
+##### **Signal Range Coverage**
+
+Zeichnet die Minimal- und Maximalwerte auf, die ein Signal während der Simulation erreicht.
+
+Hilft bei der Identifizierung von ungetesteten Betriebsbereichen oder unerwarteten Signalüber-schreitungen.
+
+---
+
+![bg right](./Illustrationen/Coverage_Signal_Size.jpg)
+
+#### Strukturelle Abdeckungsmetriken
+
+##### **Signal Size Coverage**
+
+Überprüft, ob die Größe (Dimensionen) von Signalen mit variabler Größe alle vorgesehenen Werte während des Tests annimmt.
+
+Wichtig für die Verifikation von Algorithmen, die mit dynamischen Datenstrukturen oder Matrizen arbeiten.
+
+---
+
 <div class="columns">
 <div class="five">
 
@@ -1371,21 +1454,86 @@ Innerhalb eines Test-Cases wird unter dem Abschnitt **"System Under Test" (SUT)*
 
 ### 3.1.5: Fallbeispiel: Akku-Schrauber
 
-Dieser Unterabschnitt wendet die Konzepte auf das Fallbeispiel des Akku-Schraubers an.
+Anwendung der Konzepte auf das Fallbeispiel des Akku-Schraubers.
 
-1. TODO Übersicht über die Inhalte
-
----
-
-TODO Beispiel einer Anforderung, die mittels einem Test Sequence Block geprüft werden kann.
-
----
-
-TODO Beschreibung des Test Sequence Block für die Stimuli
+1.  Eine Beispielanforderung für den Akku-Schrauber
+2.  Erstellung eines Test-Harness für das Motor-Subsystem
+3.  Design der Stimuli mit einem Test Sequence Block
+4.  Implementierung der Bewertung mit einem Test Sequence Block
 
 ---
 
-TODO Beschreibung des Test Sequence Block für das Assessment
+### Beispiel-Anforderung: Motordrehzahlregelung
+
+**Anforderung (REQ-DRILL-01):**
+"Nach einem Sollwertsprung von 0 auf 100 U/min muss die Motordrehzahl innerhalb von 0.5 Sekunden 90% des Sollwerts erreichen und anschließend für mindestens 3 Sekunden innerhalb eines Toleranzbands von +/- 5% des Sollwerts bleiben."
+
+**Testziele:**
+-   Überprüfung des Anfahrverhaltens (Rise Time).
+-   Überprüfung der Regelgenauigkeit im stationären Zustand (Steady-State Error).
+
+**Benötigte Signale:**
+-   **Input:** `soll_drehzahl` (vom Test Sequence Block generiert).
+-   **Output:** `ist_drehzahl` (vom Akku-Schrauber-Modell geloggt).
+
+---
+
+#### Test-Harness für das Motor-Subsystem
+
+Um das Motor-Subsystem des Akku-Schraubers isoliert und effizient testen zu können, erstellen wir ein **Test-Harness**.
+
+-   **Rechtsklick auf das "Motor"-Subsystem:** Wählen Sie im Kontextmenü `Test Harness` -> `Create for 'Motor'`.
+-   **Konfiguration:**
+    -   `Sources`: `Signal Editor` oder `Test Sequence`.
+    -   `Sinks`: `Scope` oder `Test Sequence`.
+    -   Stellen Sie sicher, dass das `Motor`-Subsystem als "System Under Test" (SUT) im Test-Case des Test-Managers ausgewählt ist und das erstellte Test-Harness zugewiesen wird.
+
+---
+
+#### Stimuli mit Test Sequence Block erzeugen (1 / 2)
+
+Wir verwenden einen `Test Sequence` Block, um das Sollwertsignal (`soll_drehzahl`) gemäß der Anforderung REQ-DRILL-01 zu generieren.
+
+-   **Schritt 1: Initialisierung**
+    -   Setze `soll_drehzahl` auf 0.
+    -   Warte eine kurze Zeit, um den Startzustand zu etablieren (z.B. `after(0.1, sec)`).
+-   **Schritt 2: Sollwertsprung**
+    -   Setze `soll_drehzahl` auf 100 (U/min).
+    -   Dieser Wert wird für den Rest der Simulation beibehalten.
+
+---
+
+#### Stimuli mit Test Sequence Block erzeugen (2 / 2)
+
+Und so könnte die auf der vorigen Folie beschriebene Logik des `Test Sequence` Blocks in der praktischem Umsetzung aussehen:
+
+| Schritt           | Aktion                   | Bedingung         | Nächster Schritt |
+| :---------------- | :----------------------- | :---------------- | :--------------- |
+| `Initialize`      | `soll_drehzahl = 0;`     | `after(0.1, sec)` | `ApplySetpoint`  |
+| `ApplySetpoint`   | `soll_drehzahl = 100;`   | *keine* | *keiner* |
+
+
+---
+
+#### Bewertung mit Test Sequence Block implementieren
+
+Ein weiterer `Test Sequence` Block oder ein `when`-Dekompositionszweig kann die Bewertung der `ist_drehzahl` übernehmen.
+
+-   **Phase 1: Anfahrverhalten überprüfen (Rise Time)**
+    -   Überwache, wann `ist_drehzahl` 95% des Sollwerts (95 U/min) erreicht.
+    -   Verifiziere, dass die hierfür benötigte Zeit maximal 0.5 Sekunden nach dem Sollwertsprung betragen hat.
+-   **Phase 2: Stationäres Verhalten überprüfen (Toleranzband)**
+    -   Überprüfe kontinuierlich, ob `ist_drehzahl` im Toleranzband (+/- 5% von 100 U/min, also 95-105 U/min) liegt.
+    -   Verifiziere, dass dies für mindestens 3 Sekunden nach dem Erreichen des Sollwerts der Fall ist.
+
+---
+
+| Schritt                 | Aktion                                                                                                                                                                          | Bedingung                                                              | Nächster Schritt             |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------- | :--------------------------- |
+| `Wait` | | `soll_drehzahl == 100` | `CheckRise` |
+| `CheckRise` | `verify(et < 0.5sec)` | `ist_drehzahl >= 0.95` | `CheckTolerance` |
+| `CheckTolerance` | `verify(ist_drehzahl / soll_drehzall >= 0.95 && ist_drehzahl / soll_drehzall <= 1.05)` | `after(3, sec)` | `Done` |
+| `Done` | *keine* | *keine* | *keiner* 
 
 ---
 
@@ -1393,23 +1541,14 @@ TODO Beschreibung des Test Sequence Block für das Assessment
 
 ![bg right](./Illustrationen/Abschnitt_1_6.jpg)
 
-### 3.1.6: Übungsaufgabe: 3D-Drucker
+### 3.1.6: Übungsaufgabe
 
-Dieser Unterabschnitt beschreibt die Übungsaufgabe zur Verifikation des 3D-Druckers.
+Anwendung auf 3D-Drucker:
 
-1. TODO Übersicht über die Inhalte
-
----
-
-TODO Aufgabe für das Anlegen der Test Harnesses für wichtige Komponenten
-
----
-
-TODO Aufgabe für Anlegen der Test-Datei inklusive Test Suites und Test Cases
-
----
-
-TODO Aufgabe für die Durchführung der Testfälle und Dokumentation der Testergebnisse
+1.  Anlegen der Test-Harnesses für wichtige Komponenten (z.B. Extruder).
+2.  Erstellung einer Test-Datei mit Test-Suiten und Test-Cases.
+3.  Implementierung von Stimuli und Assessments für definierte Anforderungen.
+4.  Durchführung der Testfälle und Analyse der Testergebnisse.
 
 ---
 
