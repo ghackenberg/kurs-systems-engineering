@@ -1289,31 +1289,47 @@ Simulink bietet einen automatisierten Prozess zur Erstellung von Test-Harnesses.
 
 ---
 
-TODO Folie zu Sources und Sinks für Test Harness (Signal Editor, Test Sequence, Test Sequence mit separatem Assessment Block)
+#### Test-Harness: Quellen (Sources) und Senken (Sinks)
+
+<div class="columns top">
+<div>
+
+##### `Signal Editor`
+
+**Anwendung:** Standard für funktionale Tests mit vordefinierten Abläufen.
+
+**Funktion:** Definiert grafisch Signalverläufe (Sprünge, Rampen, etc.) in einem oder mehreren Szenarien.
+
+</div>
+<div>
+
+##### `Test Sequence` (Quelle)
+
+**Anwendung:** Für reaktive Tests, bei denen Stimuli und Auswertung eng gekoppelt sind.
+
+**Funktion:** Ein einziger `Test Sequence` Block kann Stimuli erzeugen und die Reaktionen des SUT überwachen.
+
+</div>
+<div>
+
+##### `Test Sequence` (Senke)
+
+**Anwendung:** Formale Verifikation von Systemreaktionen auf einfache Stimuli.
+
+**Funktion:** Die Ausgänge des SUT werden mit einem `Test Sequence` Block verbunden, der ausschließlich zur Überprüfung dient.
+
+</div>
+</div>
 
 ---
+
+![bg contain right](./Screenshots/Test_Harness_Context_Menu.png)
 
 #### Management von Test-Harnesses
 
 Ein einzelnes Subsystem kann mehrere Test-Harnesses besitzen, z.B. für verschiedene Testkategorien wie funktionales Testen, Äquivalenztests oder Robustheitstests.
 
-<div class="columns">
-<div class="two">
-
--   **Öffnen:** Über das Subsystem-Kontextmenü oder direkt im Test-Manager.
--   **Aktivieren:** Man kann zwischen den verschiedenen Harnesses für ein SUT wechseln.
--   **Löschen:** Nicht mehr benötigte Harnesses können entfernt werden.
--   **Exportieren:** Ein Harness kann in ein eigenständiges Modell exportiert werden.
-
-Die Harnesses werden zusammen mit dem Hauptmodell gespeichert, aber als separate Artefakte verwaltet.
-
-</div>
-<div class="four">
-
-![Screenshot, der das Badge-Symbol an einem Simulink-Subsystem zeigt, welches anzeigt, dass Test-Harnesses vorhanden sind. Ein Klick auf das Symbol öffnet ein Menü mit einer Liste der verfügbaren Harnesses ('Functional_Tests', 'Fault_Tests') und der Option 'Manage Harnesses'.](placeholder.jpg)
-
-</div>
-</div>
+Die Harnesses können zusammen mit dem Hauptmodell gespeichert werden, werden in diesem Fall aber als separate Artefakte verwaltet.
 
 ---
 
@@ -1325,6 +1341,18 @@ Eine kritische Funktion ist die Synchronisation zwischen der Komponente im Haupt
 -   **Pull (Rebuild):** Änderungen am SUT im Hauptmodell werden in das Test-Harness übernommen. Dies ist der Standardfall, um sicherzustellen, dass immer die aktuelle Version der Komponente getestet wird.
 
 Simulink warnt den Benutzer, wenn die Komponente im Harness nicht mehr mit der im Hauptmodell synchron ist. Eine konsistente Strategie für die Synchronisation ist entscheidend für die Verlässlichkeit der Testergebnisse.
+
+---
+
+![](./Screenshots/Test_Harness_Push.png)
+
+---
+
+![](./Screenshots/Test_Harness_Rebuild.png)
+
+---
+
+TODO Folie zur Verknüpfung von Test Harness mit Test Cases im Test Manager
 
 ---
 
