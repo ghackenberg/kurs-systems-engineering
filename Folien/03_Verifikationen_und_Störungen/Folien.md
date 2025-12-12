@@ -1352,7 +1352,16 @@ Simulink warnt den Benutzer, wenn die Komponente im Harness nicht mehr mit der i
 
 ---
 
-TODO Folie zur Verknüpfung von Test Harness mit Test Cases im Test Manager
+#### Verknüpfung von Test-Harness mit Test-Cases
+
+Innerhalb eines Test-Cases wird unter dem Abschnitt **"System Under Test" (SUT)** das zu verwendende Test-Harness ausgewählt.
+
+-   **Test Harness:** Hier kann aus den verfügbaren Harnesses, die für das SUT erstellt wurden, das passende ausgewählt werden. Dies ermöglicht es, verschiedene Test-Szenarien (z.B. funktionale Tests, Robustheitstests) mit jeweils spezifisch konfigurierten Harnesses durchgeführt werden.
+-   **Vorteil:** Durch die Zuordnung des Harnesses zum Test-Case wird sichergestellt, dass jeder Test mit der korrekten Testumgebung ausgeführt wird.
+
+---
+
+![Screenshot, der die Auswahl eines Test-Harness in den Einstellungen des "System Under Test" Bereichs eines Simulink Test Cases zeigt. Ein Dropdown-Menü "Test Harness" ist geöffnet und zeigt eine Liste von verfügbaren Harnesses an.](./Screenshots/Simulink_Test_Case_SUT_Test_Harness.png)
 
 ---
 
@@ -1362,65 +1371,21 @@ TODO Folie zur Verknüpfung von Test Harness mit Test Cases im Test Manager
 
 ### 3.1.5: Fallbeispiel: Akku-Schrauber
 
-Dieser Unterabschnitt wendet die Konzepte auf das Fallbeispiel an und verifiziert eine Anforderung an das Antriebsmodell.
+Dieser Unterabschnitt wendet die Konzepte auf das Fallbeispiel des Akku-Schraubers an.
 
-1.  Anforderung definieren
-2.  Test-Case im Test-Manager anlegen
-3.  Eingangssignal (Stimulus) erstellen
-4.  Bewertung mittels Baseline-Test
+1. TODO Übersicht über die Inhalte
 
 ---
 
-#### Anforderung: Einschwingverhalten des Motors
-
-Eine funktionale Anforderung an den Antrieb des Akku-Schraubers könnte lauten:
-
-**REQ-MOTOR-01: Schnelles Anlaufverhalten**
-> "Bei einem Drehzahlsollwertsprung von 0 auf 500 U/min bei Nennlast soll die Motordrehzahl innerhalb von **1.5 Sekunden** einen Bereich von **+/- 5%** um den Sollwert erreichen und darin verbleiben."
-
-Diese Anforderung spezifiziert sowohl die **Anstiegszeit** als auch das **stationäre Verhalten** und eignet sich ideal für einen Baseline-Test.
+TODO Beispiel einer Anforderung, die mittels einem Test Sequence Block geprüft werden kann.
 
 ---
 
-<div class="columns">
-<div class="two">
-
-#### Anlegen des Test-Cases
-
-1.  **Test-Datei erstellen:** `Antriebs-Tests.mldatx`
-2.  **Test-Suite anlegen:** `Funktionale Tests`
-3.  **Test-Case anlegen:** `Test_Anlaufverhalten_REQ_MOTOR_01`
-4.  **SUT festlegen:** Das Subsystem, das den Motor und seine Regelung enthält, wird als `System Under Test` ausgewählt.
-5.  **Test-Harness erstellen:** Für das Motor-Subsystem wird ein neues Harness mit einem `Signal Builder` als Eingang und einem `Scope` als Ausgang generiert.
-
-</div>
-<div class="four">
-
-![Screenshot des Test-Managers. Links ist die Hierarchie mit 'Antriebs-Tests', 'Funktionale Tests' und 'Test_Anlaufverhalten_REQ_MOTOR_01' zu sehen. Im Editor ist das Motor-Subsystem als SUT eingetragen.](placeholder.jpg)
-
-</div>
-</div>
+TODO Beschreibung des Test Sequence Block für die Stimuli
 
 ---
 
-#### Erstellen des Eingangssignals (Stimulus)
-
-Im `Signal Builder` Block innerhalb des Test-Harness wird das Eingangssignal für den Drehzahlsollwert definiert:
-
-1.  Ein Signal `soll_drehzahl` wird erstellt.
-2.  Zum Zeitpunkt `t = 0.5s` wird ein Sprung von `0` auf `500` U/min definiert.
-3.  Ein zweites Signal `lastmoment` wird konstant auf Nennlast (z.B. `0.2 Nm`) gesetzt.
-
-![Screenshot des Signal Builder Fensters. Zwei Signale sind sichtbar: 'soll_drehzahl' zeigt einen Sprung von 0 auf 500 bei t=0.5. Das zweite Signal 'lastmoment' ist eine konstante Linie bei 0.2.](placeholder.jpg)
-
----
-
-#### Durchführung und Bewertung als Baseline-Test
-
-1.  **Baseline erstellen:** Der Test wird einmal ausgeführt. Das Ergebnis (der Zeitverlauf der `ist_drehzahl`) wird im `Results & Artifacts` Bereich inspiziert. Wenn das Verhalten den Erwartungen entspricht, wird es per Rechtsklick als Baseline gespeichert.
-2.  **Baseline-Kriterium hinzufügen:** Im Abschnitt `Assessments` des Test-Cases wird ein `Baseline` Kriterium hinzugefügt und mit der gespeicherten Baseline verknüpft. Toleranzen werden gesetzt (z.B. `Absolute Tolerance = 25` U/min, entsprechend 5% von 500).
-3.  **Test erneut ausführen:** Der Test wird erneut ausgeführt. Simulink Test vergleicht nun automatisch das aktuelle Simulationsergebnis mit der Baseline.
-4.  **Ergebnis analysieren:** Das Ergebnis wird als `Passed` oder `Failed` angezeigt. Bei `Failed` zeigt ein Plot exakt die Abweichung zwischen dem aktuellen Signal und der Baseline an.
+TODO Beschreibung des Test Sequence Block für das Assessment
 
 ---
 
@@ -1430,60 +1395,21 @@ Im `Signal Builder` Block innerhalb des Test-Harness wird das Eingangssignal fü
 
 ### 3.1.6: Übungsaufgabe: 3D-Drucker
 
-Dieser Unterabschnitt beschreibt die Übungsaufgabe zur Verifikation des Heizbett-Reglers.
+Dieser Unterabschnitt beschreibt die Übungsaufgabe zur Verifikation des 3D-Druckers.
 
-1.  Anforderungen spezifizieren
-2.  Test-Harness für Heizbett-Regler erstellen
-3.  Test-Cases implementieren (Baseline & Temporal)
-4.  Tests ausführen und dokumentieren
+1. TODO Übersicht über die Inhalte
 
 ---
 
-#### Aufgabe 1: Anforderungen an das Heizbett formulieren
-
-Definieren Sie mindestens zwei verifizierbare Anforderungen für den Temperaturregler des Heizbetts in der Anforderungsspezifikation (`.slreqx` Datei). Versehen Sie diese mit eindeutigen IDs.
-
-**Beispiel-Anforderungen:**
-
--   **REQ-HB-01: Aufheizzeit:** "Das Heizbett muss eine Solltemperatur von 60°C (ausgehend von 20°C) in weniger als 180 Sekunden erreichen."
--   **REQ-HB-02: Überschwingen:** "Beim Erreichen der Solltemperatur darf die gemessene Temperatur das Ziel um nicht mehr als 3°C überschreiten (Überschwingen < 5%)."
--   **REQ-HB-03: Stationäre Genauigkeit:** "Im stationären Zustand muss die Temperatur im Bereich von +/- 1°C um den Sollwert gehalten werden."
+TODO Aufgabe für das Anlegen der Test Harnesses für wichtige Komponenten
 
 ---
 
-#### Aufgabe 2: Test-Harness und Test-Cases anlegen
-
-1.  Erstellen Sie ein Test-Harness für die Komponente, die den Heizbett-Regler enthält. Konfigurieren Sie es mit einem `Signal Builder` für den Temperatursollwert und `Scopes` zur Beobachtung von Soll- und Ist-Temperatur.
-2.  Erstellen Sie eine Test-Datei `Heizbett_Tests.mldatx`.
-3.  Legen Sie für jede Anforderung aus Aufgabe 1 einen eigenen Test-Case an und verlinken Sie diesen mit der jeweiligen Anforderung in der `.slreqx` Datei.
-
-![Screenshot, der den 'Requirements' Bereich eines Test-Cases im Test-Manager zeigt. Eine Anforderung mit der ID 'REQ-HB-01' und der Beschreibung 'Aufheizzeit' ist mit dem Test-Case verlinkt.](placeholder.jpg)
+TODO Aufgabe für Anlegen der Test-Datei inklusive Test Suites und Test Cases
 
 ---
 
-#### Aufgabe 3: Test-Logik implementieren
-
-Implementieren Sie die Bewertungskriterien für Ihre Test-Cases.
-
--   **Für REQ-HB-01 (Aufheizzeit):**
-    -   Verwenden Sie einen `Test Sequence` Block.
-    -   Definieren Sie einen Sollwertsprung von 20°C auf 60°C.
-    -   Nutzen Sie eine `verify` Anweisung, die prüft, ob `ist_temp >= 60` innerhalb von 180 Sekunden eintritt. `verify(after(180, sec), ist_temp >= 60)`
-
--   **Für REQ-HB-02 & REQ-HB-03 (Überschwingen & Genauigkeit):**
-    -   Verwenden Sie einen `Baseline` Test. Führen Sie eine Simulation mit einem gut abgestimmten Regler durch und speichern Sie das Ergebnis als Baseline.
-    -   Definieren Sie passende Toleranzen, die das erlaubte Überschwingen und die stationäre Abweichung abdecken.
-
----
-
-#### Aufgabe 4: Testausführung und Dokumentation
-
-1.  Führen Sie alle Test-Cases im Test-Manager aus.
-2.  Sollten Tests fehlschlagen, analysieren Sie die Ergebnisse mit den von Simulink Test bereitgestellten Plots und passen Sie ggf. die Reglerparameter im Modell an.
-3.  Sobald alle Tests erfolgreich sind, generieren Sie einen Test-Report im PDF-Format über die `Report` Funktion im Test-Manager.
-4.  Dieser Report dient als Nachweis (Traceability) dafür, dass die Anforderungen durch Tests abgedeckt und erfüllt sind.
-
-![Screenshot der 'Generate Report' Vorschau im Simulink Test Manager. Es zeigt ein Deckblatt mit Metadaten und eine Zusammenfassung der Testergebnisse (z.B. '3 Passed, 0 Failed').](placeholder.jpg)
+TODO Aufgabe für die Durchführung der Testfälle und Dokumentation der Testergebnisse
 
 ---
 
