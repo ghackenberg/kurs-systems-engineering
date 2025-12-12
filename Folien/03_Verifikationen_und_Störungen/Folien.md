@@ -967,27 +967,47 @@ Der `Test Sequence` Block ist ein Werkzeug, um zustandsbasierte Testabläufe und
 
 ---
 
-TODO Folie zu den Konzepten `Input`, `Output`, `Local`, `Constant` und `Parameter` eines Test Sequence Blocks
+#### Daten im Test Sequence Block
+
+Der Test Sequence Block verwaltet verschiedene Arten von Daten, um mit dem SUT zu interagieren und interne Logik abzubilden.
+
+- **Inputs:** Schreibgeschützte Signale, die vom SUT empfangen werden. Sie dienen zur Überwachung des Systemverhaltens.
+- **Outputs:** Signale, die vom Block an das SUT gesendet werden. Sie dienen zur Generierung von Stimuli.
+- **Local:** Lokale Variablen, die nur innerhalb des Blocks für Berechnungen oder zur Speicherung von Zwischenzuständen sichtbar sind.
+- **Constants:** Im Block definierte, unveränderliche Werte (z.B. `MAX_TEMP = 120`).
+- **Parameters:** Von außen einstellbare Werte, die vor der Simulation konfiguriert werden können (z.B. über den Test-Manager oder aus dem MATLAB Workspace).
 
 ---
 
-TODO Einfaches Beispiel zu Eingaben, Ausgaben, Lokalen Variablen, Konstanten und Parametern
+TODO Beispiele für die Verwendenung der unterschiedlichen Arten von Daten (nur prosaische Beschreibung ohne Code)
 
 ---
 
-TODO Folie zu den Konzepten `Step`, `Action` und `Transition` eiens Test Sequence Blocks
+#### Konzepte: Step, Action, Transition
+
+Eine Testsequenz ist wie ein Zustandsautomat aufgebaut, der aus drei Kernelementen besteht:
+
+- **Step (Schritt):** Ein Zustand in der Testsequenz. Der Block bleibt in einem Schritt, bis eine Übergangsbedingung erfüllt ist.
+- **Action (Aktion):** Lesen und ggf. Schreiben von Eingaben, Ausgaben, lokalen Variablen, Konstanten und Parametern.
+- **Transition (Übergang):** Eine logische oder zeitliche Bedingung, die den Wechsel von einem aktiven Schritt zum nächsten steuert.
 
 ---
 
-TODO Einfaches Beispiel zu Schritten, Aktionen und Transitionen
+TODO Beispiel für die Nutzung von Schritten, Aktionen und Transitionen in Tabellenform (Spalten Schritt/Aktionen, Transitionen, Nächster Schritt)- Noch keine Verwendung von `verify`.
 
 ---
 
-TODO Folie zu dem Konzept `Sub-step` (ohne `when`-Komposition)
+#### Hierarchische Schritte (Sub-steps)
+
+Schritte können hierarchisch verschachtelt werden, um komplexe Zustandslogiken übersichtlich zu organisieren.
+
+- **Übergeordneter Schritt (Super-step):** Enthält einen oder mehrere Unterschritte. Er ist aktiv, solange einer seiner Unterschritte aktiv ist.
+- **Unterschritt (Sub-step):** Definiert eine verfeinerte Logik innerhalb eines übergeordneten Zustands. Der Übergang zwischen Unterschritten erfolgt nur, wenn der übergeordnete Schritt aktiv ist.
+- **Vorteile:** Modularität, Lesbarkeit und Wiederverwendbarkeit von Zustandslogiken.
 
 ---
 
-TODO Einfaches Beispiel zu Unterschritten
+TODO Beispiel für die Nutzung von Unterschritten in Tabellenform. Noch keine Verwendung von `verify`.
 
 ---
 
@@ -1022,31 +1042,194 @@ when (condition_B)
 
 ---
 
-![](./Screenshots/Test_Sequence_When_Decomposition.png)
+![Screenshot des Test Sequence Editors. Zwei 'when'-Blöcke sind parallel dargestellt. Der erste Block 'when (running)' steuert die Motordrehzahl. Der zweite Block 'when (monitoring)' überwacht parallel die Motortemperatur mit einer 'verify' Anweisung.](./Screenshots/Test_Sequence_When_Decomposition.png)
 
 ---
 
-TODO Folie zu Assessment-Anweisungen (`verify` und `assert`)
+#### Assessment-Anweisungen: `verify` und `assert`
+
+<div class="columns top">
+<div>
+
+##### `verify(expression)`
+
+- **Verhalten:** Prüft, ob die `expression` wahr ist.
+- **Bei Fehlschlag:** Der Testfall wird als `Failed` markiert, aber die Simulation und die Testsequenz laufen weiter.
+- **Anwendung:** Ermöglicht die Erkennung mehrerer Fehler in einem einzigen Testlauf.
+
+</div>
+<div>
+
+##### `assert(expression)`
+
+- **Verhalten:** Prüft, ob die `expression` wahr ist.
+- **Bei Fehlschlag:** Die Simulation wird sofort mit einem Fehler abgebrochen.
+- **Anwendung:** Für kritische Bedingungen, deren Verletzung die weitere Simulation sinnlos macht (z.B. instabiles Modell).
+
+</div>
+</div>
 
 ---
 
-TODO Folie zu logischen Operatoren (`~`, `&&`, `||`)
+#### **Relationale** Operatoren
+
+Relationale Operatoren werden verwendet, um Werte zu vergleichen.
+
+- `<` : Kleiner als
+- `>` : Größer als
+- `<=` : Kleiner oder gleich
+- `>=` : Größer oder gleich
+- `==` : Gleich
+- `~=` : Ungleich
+
+**Achtung bei Fließkommazahlen:** Aufgrund von Präzisionsproblemen sollte anstelle von `==` oft ein Vergleich mit einer Toleranz bevorzugt werden: `verify(abs(signal_a - signal_b) < 0.001)`
 
 ---
 
-TODO Folie zu relationalen Operatoren (`<`, `>`, `<=`, `>=`, `==`, `~=`)
+#### **Logische** Operatoren
+
+Zur Verknüpfung von Bedingungen können die Standard-Operatoren der booleschen Algebra verwendet werden.
+
+- `~` : **NOT** (Logische Negation)
+  - `verify(~signal_a)`
+- `&&` : **AND** (Logisches UND)
+  - `verify(signal_a > 5 && signal_b < 3)`
+- `||` : **OR** (Logisches ODER)
+  - `verify(status == ERROR || status == TIMEOUT)`
+
+Die Auswertung erfolgt mit Kurzschluss-Logik (Short-Circuiting).
 
 ---
 
-TODO Folie zu temporalen Operatoren (`et`, `t`, `after`, `before`, `duration`)
+#### **Temporale** Operatoren
+
+Temporale Operatoren sind das Kernstück für die Überprüfung von Zeitverhalten.
+
+- ***Zahlenwertige* temporale Operatoren**
+    - `t`: Die absolute Simulationszeit (global).
+    - `et`: Die vergangene Zeit seit der Aktivierung des aktuellen Schritts (`elapsed time`).
+- ***Wahrheitswertige* temporale Operatoren**
+    - `after(delay, unit)`: Wird wahr, nachdem `delay` Einheiten vergangen sind.
+    - `before(delay, unit)`: Ist wahr, bevor `delay` Einheiten vergangen sind.
+    - `duration(expr)`: Gibt die Zeit in Sekunden zurück, die `expr` ununterbrochen wahr war.
 
 ---
 
-TODO Folie zu Transitionsoperatoren (`hasChanged`, `hasChangedFrom`, `hasChangedTo`)
+#### **Edge-Detection** Operatoren
+
+Diese Operatoren erkennen Signaländerungen (Flanken). Sie sind sehr nützlich für ereignisgesteuerte Übergänge.
+
+- `hasChanged(signal)`: Wird für einen Zeitschritt wahr, wenn sich der Wert von `signal` geändert hat.
+- `hasChangedFrom(signal, value)`: Wird wahr, wenn sich `signal` von `value` zu einem anderen Wert geändert hat.
+- `hasChangedTo(signal, value)`: Wird wahr, wenn sich `signal` von einem anderen Wert zu `value` geändert hat.
 
 ---
 
-TODO Folie zu Funktionen für die Signalgenerierung (`sin`, `cos`, `square`, `sawtooth`, `triangle`, `ramp`)
+#### Funktionen zur Signalgenerierung
+
+Der Test Sequence Block kann auch als Signalgenerator dienen, um Stimuli direkt zu erzeugen.
+
+- `ramp(x)`: Erzeugt eine Rampe.
+- `sawtooth(x)`: Erzeugt ein Sägezahnsignal.
+- `square(x)`: Erzeugt ein Rechtecksignal.
+- `triangle(x)`: Erzeugt ein Dreiecksignal.
+- `sin(x)`: Erzeugt ein Sinussignal.
+- `cos(x)`: Erzeugt ein Kosinussignal.
+
+**Anwendung:**
+`output_signal = ramp(et/3) + sin(et);`
+
+---
+
+<div class="columns">
+<div>
+
+#### Funktion `ramp(x)`
+
+**Funktionsvorschrift**
+
+$ramp(x) = x$
+
+**Anwendungsbeispiel**
+
+`square(et/3)`
+
+</div>
+<div>
+
+![](https://de.mathworks.com/help/sltest/ref/operator_ramp_ex_2_scope.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Funktion `sawtooth(x)`
+
+**Funktionsvorschrift**
+
+$sawtooth(x) = 2(x−⌊x⌋−\frac{1}{2})$
+
+**Anwendungsbeispiel**
+
+`square(et/3)`
+
+</div>
+<div>
+
+![](https://de.mathworks.com/help/sltest/ref/operator_sawtooth_ex_1_scope.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Funktion `square(x)`
+
+**Funktionsvorschrift**
+
+$square(x) = 2(2⌊x⌋−⌊2x⌋)+1$
+
+**Anwendungsbeispiel**
+
+`square(et/5)`
+
+</div>
+<div>
+
+![](https://de.mathworks.com/help/sltest/ref/operator_square_ex_1_scope.png)
+
+</div>
+</div>
+
+---
+
+<div class="columns">
+<div>
+
+#### Funktion `triangle(x)`
+
+**Funktionsvorschrift**
+
+$triangle(x) = 2|2(x−⌊\frac{1}{2}+x⌋)|−1$
+
+**Anwendungsbeispiel**
+
+`triangle(et/5)`
+
+</div>
+<div>
+
+![](https://de.mathworks.com/help/sltest/ref/operator_triangle_ex_1_scope.png)
+
+</div>
+</div>
 
 ---
 
