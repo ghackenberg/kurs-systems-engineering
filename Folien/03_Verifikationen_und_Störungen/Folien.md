@@ -952,10 +952,7 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 #### Der Test Sequence Block
 
-Der `Test Sequence` Block ist ein mächtiges Werkzeug, um komplexe, zustandsbasierte Testabläufe und Bewertungen zu modellieren. Er nutzt eine an Stateflow angelehnte Syntax und Semantik.
-
-<div class="columns">
-<div class="three">
+Der `Test Sequence` Block ist ein Werkzeug, um zustandsbasierte Testabläufe und Bewertungen zu modellieren. Er nutzt eine an Stateflow angelehnte Syntax / Semantik:
 
 ##### Hauptmerkmale:
 
@@ -964,81 +961,92 @@ Der `Test Sequence` Block ist ein mächtiges Werkzeug, um komplexe, zustandsbasi
 -   **Stimuli-Generierung:** Kann Ausgangssignale erzeugen, um das SUT anzuregen.
 -   **Bewertung:** Kann Eingangssignale vom SUT empfangen und mit `verify` Operatoren bewerten.
 
-</div>
-<div class="three">
+---
 
-![Screenshot eines einfachen Test Sequence Blocks. Im Editor sind zwei Schritte ('Step 1: Initialize', 'Step 2: Ramp Up') mit einem Pfeil dazwischen zu sehen. Im Code-Fenster steht `output = 0;` in Step 1 und `output = output + 1;` in Step 2.](placeholder.jpg)
+![Screenshot eines einfachen Test Sequence Blocks. Im Editor sind zwei Schritte ('Step 1: Initialize', 'Step 2: Ramp Up') mit einem Pfeil dazwischen zu sehen. Im Code-Fenster steht `output = 0;` in Step 1 und `output = output + 1;` in Step 2.](./Screenshots/Simulink_Test_Sequence.png)
 
-</div>
-</div>
+---
+
+TODO Folie zu den Konzepten `Input`, `Output`, `Local`, `Constant` und `Parameter` eines Test Sequence Blocks
+
+---
+
+TODO Einfaches Beispiel zu Eingaben, Ausgaben, Lokalen Variablen, Konstanten und Parametern
+
+---
+
+TODO Folie zu den Konzepten `Step`, `Action` und `Transition` eiens Test Sequence Blocks
+
+---
+
+TODO Einfaches Beispiel zu Schritten, Aktionen und Transitionen
+
+---
+
+TODO Folie zu dem Konzept `Sub-step` (ohne `when`-Komposition)
+
+---
+
+TODO Einfaches Beispiel zu Unterschritten
 
 ---
 
 #### Strukturierung mit `when`-Dekomposition
 
+<div class="columns top">
+<div>
+
 Die `when`-Dekomposition ist ein Mechanismus zur Strukturierung von parallelen oder zustandsabhängigen Testsequenzen innerhalb eines einzigen Test Sequence Blocks.
 
-<div class="columns">
-<div class="four">
-
 Anstatt einer einzelnen, langen Sequenz von Schritten, ermöglicht `when` die Aufteilung in nebenläufige "Prozesse", die auf bestimmte Ereignisse oder Bedingungen reagieren.
+
+</div>
+<div>
 
 **Beispiel:** Ein Prozess generiert Stimuli, während ein anderer parallel dazu die Systemantwort überwacht.
 
 ```
-% Test Sequence Code
+% Test Sequence Pseudo-Code
+
 when (condition_A)
   % Sequenz für Fall A
   verify(data > 100);
+
 when (condition_B)
   % Sequenz für Fall B
   verify(response_time < 2.0);
 ```
 
 </div>
-<div class="two">
-
-![Screenshot des Test Sequence Editors mit When-Dekomposition. Links im Strukturbaum sind zwei 'when' Bedingungen ('when: high_load', 'when: low_load') unterhalb der Hauptsequenz zu sehen, was die parallele Struktur verdeutlicht.](placeholder.jpg)
-
-</div>
 </div>
 
 ---
 
-#### Logische und Temporale `verify` Operatoren
-
-Das Herzstück der Bewertung in Testsequenzen sind die `verify` Operatoren. Sie ermöglichen die formale Spezifikation von Anforderungen als überprüfbare Assertions.
-
-| Operator         | Beschreibung                                                                       | Beispiel                               |
-| ---------------- | ---------------------------------------------------------------------------------- | -------------------------------------- |
-| `verify(cond)`   | Prüft, ob die boolesche Bedingung `cond` wahr ist.                                 | `verify(temperature <= 120)`           |
-| `verify(A == B)` | Prüft auf Gleichheit. Auch `~=`, `<`, `>`, `<=`, `>=` sind möglich.                | `verify(target_speed == actual_speed)` |
-| `verify(t, E)`   | (Temporal) Prüft, ob das Ereignis `E` zum Zeitpunkt `t` eintritt.                  | `verify(after(5, sec), motor_off == 1)` |
-| `verify(in(E))`  | (Temporal) Prüft, ob das Ereignis `E` während des aktuellen Zeitschritts eintritt. | `verify(in(overheat_warning))`         |
-
-Die Kombination mit temporalen Operatoren wie `after`, `before`, `elapsed` und `count` ermöglicht die Prüfung komplexer Echtzeitanforderungen.
+![](./Screenshots/Test_Sequence_When_Decomposition.png)
 
 ---
 
-#### Beispiel: Temporale `verify` Anweisung
+TODO Folie zu Assessment-Anweisungen (`verify` und `assert`)
 
-**Anforderung:** "Nachdem der `start` Befehl gegeben wurde, muss das Signal `status` innerhalb von 200 Millisekunden den Wert 4 erreichen und dort für mindestens 1 Sekunde bleiben."
+---
 
-**Umsetzung in Test Sequence:**
+TODO Folie zu logischen Operatoren (`~`, `&&`, `||`)
 
-```
-when (in(start_command)) {
-  // Check for response within 200 ms
-  verify(after(200, msec), status == 4);
+---
 
-  // Check if status remains 4 for 1 sec
-  when (status == 4) {
-    verify(elapsed(1, sec));
-  }
-}
-```
+TODO Folie zu relationalen Operatoren (`<`, `>`, `<=`, `>=`, `==`, `~=`)
 
-Diese deklarative Art der Testspezifikation ist präzise, lesbar und direkt mit den textuellen Anforderungen verknüpfbar.
+---
+
+TODO Folie zu temporalen Operatoren (`et`, `t`, `after`, `before`, `duration`)
+
+---
+
+TODO Folie zu Transitionsoperatoren (`hasChanged`, `hasChangedFrom`, `hasChangedTo`)
+
+---
+
+TODO Folie zu Funktionen für die Signalgenerierung (`sin`, `cos`, `square`, `sawtooth`, `triangle`, `ramp`)
 
 ---
 
