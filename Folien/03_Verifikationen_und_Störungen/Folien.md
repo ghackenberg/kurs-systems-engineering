@@ -1583,24 +1583,41 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-#### Terminologie: Störung, Fehler, Ausfall (Fault, Error, Failure)
+![](./Diagramme/Mermaid/Störungsanalyse_Terminologie.svg)
 
-In der System- und Sicherheitsanalyse ist eine präzise Terminologie entscheidend.
+---
 
--   **Störung (Fault):**
-    -   Die vermutete oder tatsächliche **Ursache** eines Problems.
-    -   Eine anormale physikalische Bedingung oder ein Defekt (z.B. ein durchgebrannter Widerstand, ein Software-Bug, ein Sensor-Kurzschluss).
-    -   Eine Störung ist statisch und muss nicht zwangsläufig zu einem Problem führen.
+<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration des Konzeptes "Störung" -->
 
--   **Fehler (Error):**
-    -   Ein **Zustand** im System, der von der korrekten oder erwarteten Systemoperation abweicht.
-    -   Ein Fehler ist die Manifestation einer Störung. (z.B. ein falscher Wert wird von einem Sensor gelesen, eine Variable im Speicher wird korrumpiert).
+#### Terminologie: **Störung (*Fault*)**
 
--   **Ausfall (Failure):**
-    -   Das extern beobachtbare **Ereignis**, bei dem ein System seine spezifizierte Funktion nicht mehr erbringt.
-    -   Ein Ausfall tritt auf, wenn ein Fehler an die Systemgrenze propagiert.
+-   Die vermutete oder tatsächliche **Ursache** eines Problems.
+-   Eine anormale physikalische Bedingung oder ein Defekt (z.B. ein durchgebrannter Widerstand, ein Software-Bug, ein Sensor-Kurzschluss).
+-   Eine Störung ist statisch und muss nicht zwangsläufig zu einem Problem führen.
 
-**Kausalkette:** Eine **Störung** kann einen **Fehler** verursachen, der wiederum zu einem **Ausfall** führen kann.
+---
+
+<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration des Konzeptes "Fehler" -->
+
+#### Terminologie: **Fehler (Error)**
+
+-   Ein **Zustand** im System, der von der korrekten oder erwarteten Systemoperation abweicht.
+-   Ein Fehler ist die Manifestation einer Störung. (z.B. ein falscher Wert wird von einem Sensor gelesen, eine Variable im Speicher wird korrumpiert).
+
+---
+
+<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration des Konzeptes "Ausfall" -->
+
+#### Terminologie: **Ausfall**
+
+-   Das extern beobachtbare **Ereignis**, bei dem ein System seine spezifizierte Funktion nicht mehr erbringt.
+-   Ein Ausfall tritt auf, wenn ein Fehler an die Systemgrenze propagiert.
+
+---
+
+#### Kausalkette
+
+Eine **Störung** kann einen **Fehler** verursachen, der wiederum zu einem **Ausfall** führen kann.
 
 ---
 
