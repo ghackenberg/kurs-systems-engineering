@@ -973,13 +973,20 @@ Der Test Sequence Block verwaltet verschiedene Arten von Daten, um mit dem SUT z
 
 - **Inputs:** Schreibgeschützte Signale, die vom SUT empfangen werden. Sie dienen zur Überwachung des Systemverhaltens.
 - **Outputs:** Signale, die vom Block an das SUT gesendet werden. Sie dienen zur Generierung von Stimuli.
-- **Local:** Lokale Variablen, die nur innerhalb des Blocks für Berechnungen oder zur Speicherung von Zwischenzuständen sichtbar sind.
+- **Locals:** Lokale Variablen, die nur innerhalb des Blocks für Berechnungen oder zur Speicherung von Zwischenzuständen sichtbar sind.
 - **Constants:** Im Block definierte, unveränderliche Werte (z.B. `MAX_TEMP = 120`).
 - **Parameters:** Von außen einstellbare Werte, die vor der Simulation konfiguriert werden können (z.B. über den Test-Manager oder aus dem MATLAB Workspace).
 
 ---
 
-TODO Beispiele für die Verwendenung der unterschiedlichen Arten von Daten (nur prosaische Beschreibung ohne Code)
+
+#### Beispiele für die Verwendung unterschiedlicher Arten von Daten
+
+-   **Inputs:** Ein Beispiel wäre ein Sensorwert wie `current_temperature`, der vom Modell kommt und im Test Sequence Block gelesen wird, um eine Entscheidung zu treffen oder eine Bewertung durchzuführen.
+-   **Outputs:** Beispielsweise könnte `setpoint_speed` ein Ausgang sein, der vom Test Sequence Block auf einen bestimmten Wert gesetzt wird, um das SUT zu steuern.
+-   **Locals:** Ein Beispiel wäre eine Variable `counter`, die hochgezählt wird, um die Dauer eines Zustands zu messen, oder `temp_sum` zur Akkumulation von Werten.
+-   **Constants:** Ein Beispiel wäre `MAX_VOLTAGE = 24` oder `CALIBRATION_FACTOR = 1.5`, die als feste Referenzpunkte dienen.
+-   **Parameters:** Man könnte beispielsweise `TOLERANCE_PERCENT` als Parameter definieren, um flexible Vergleichsgrenzwerte zu realisieren.
 
 ---
 
@@ -993,7 +1000,17 @@ Eine Testsequenz ist wie ein Zustandsautomat aufgebaut, der aus drei Kernelement
 
 ---
 
-TODO Beispiel für die Nutzung von Schritten, Aktionen und Transitionen in Tabellenform (Spalten Schritt/Aktionen, Transitionen, Nächster Schritt)- Noch keine Verwendung von `verify`.
+
+#### Beispiel: Schritte, Aktionen und Transitionen
+
+Die folgenden Beispiele zeigen die Nutzung von Schritten, Aktionen und Transitionen in einem vereinfachten Szenario:
+
+| Schritt | Aktion | Bedingung | Nächster Schritt |
+|-|-|-|-|
+| `Initialize` | `output = 0;` | `after(1, sec)` | `RampUp` |
+| `RampUp` | `output = output + 0.1;` | `output >= 10` | `HoldValue` |
+| `HoldValue` | `output = 10;` | `after(5, sec)` | `RampDown` |
+| `RampDown` | `output = output - 0.2;` | `output <= 0` | `Initialize` |
 
 ---
 
@@ -1007,38 +1024,26 @@ Schritte können hierarchisch verschachtelt werden, um komplexe Zustandslogiken 
 
 ---
 
-TODO Beispiel für die Nutzung von Unterschritten in Tabellenform. Noch keine Verwendung von `verify`.
+
+#### Beispiel: Hierarchische Schritte (Sub-steps)
+
+| Schritt | Unterschritt | Aktion | Bedingung | Nächster Schritt |
+|-|-|-|-|-|
+| `MotorStart` | `Check` | `status = 'checking';` | `input_ready == true` | `Idle`|
+| | `Idle` | `status = 'idle';` | `command == 'stop'`| `MotorStop` |
+| `MotorStop` | `CoolDown` | `cool_fan_on = true;` | `temp_engine < 50` | `PowerOff` |
+| | `PowerOff` | `main_power = false;` | `et > 2` | `Complete` |
 
 ---
 
-#### Strukturierung mit `when`-Dekomposition
+#### `when`-Dekomposition (Parallelisierung)
 
-<div class="columns top">
-<div>
+Die `when`-Dekomposition ermöglicht die parallele Modellierung von unabhängigen Abläufen, die nur unter bestimmten Bedingungen ausgeführt werden. Sie funktioniert ähnlich einer `switch`-Anweisung in klassischen Programmiersprachen:
 
-Die `when`-Dekomposition ist ein Mechanismus zur Strukturierung von parallelen oder zustandsabhängigen Testsequenzen innerhalb eines einzigen Test Sequence Blocks.
-
-Anstatt einer einzelnen, langen Sequenz von Schritten, ermöglicht `when` die Aufteilung in nebenläufige "Prozesse", die auf bestimmte Ereignisse oder Bedingungen reagieren.
-
-</div>
-<div>
-
-**Beispiel:** Ein Prozess generiert Stimuli, während ein anderer parallel dazu die Systemantwort überwacht.
-
-```
-% Test Sequence Pseudo-Code
-
-when (condition_A)
-  % Sequenz für Fall A
-  verify(data > 100);
-
-when (condition_B)
-  % Sequenz für Fall B
-  verify(response_time < 2.0);
-```
-
-</div>
-</div>
+-   **Bedingte Ausführung:** Mehrere `when`-Blöcke können parallel definiert werden.
+-   **Priorität:** In jedem Zeitschritt wird der erste `when`-Block ausgeführt, dessen Bedingung von `true` ausgewertet wird.
+-   **Wiederholung:** In jedem Zeitschritt wird die Bedingung aller `when`-Blöcke neu bewertet und der entsprechende Block ausgeführt.
+-   **Anwendung:** Ideal zur Implementierung von Überwachungsaufgaben oder unabhängigen Steuerungslogiken.
 
 ---
 
