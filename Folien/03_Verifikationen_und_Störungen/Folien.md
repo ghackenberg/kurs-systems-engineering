@@ -1257,39 +1257,39 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 Ein Test-Harness ist ein separates, eigenständiges Simulink-Modell, das eine Komponente (das SUT) für Testzwecke kapselt.
 
-<div class="columns">
-<div class="two">
-
-##### Hauptvorteile:
-
 -   **Isolation:** Das SUT wird von der Komplexität des Gesamtmodells entkoppelt. Dies vereinfacht das Testen und die Analyse erheblich.
--   **Kontrollierte Umgebung:** Das Harness stellt alle notwendigen Eingaben, Ausgaben und Konfigurationen bereit, um das SUT in einer kontrollierten und reproduzierbaren Umgebung zu betreiben.
+-   **Kontrollierte Umgebung:** Das Harness stellt alle notwendigen Eingaben und Konfigurationen bereit, um das SUT in einer kontrollierten Umgebung zu betreiben.
 -   **Wiederverwendbarkeit:** Ein Harness kann für viele verschiedene Test-Cases verwendet werden.
 -   **Reduzierte Komplexität:** Da nur das SUT und die Testumgebung geladen und kompiliert werden, sind Simulationen oft schneller.
 -   **Saubere Trennung:** Hält das produktive Modell frei von Test-Logik und -Artefakten.
 
-</div>
-<div class="four">
+---
 
-![Diagramm, das das Konzept eines Test-Harness zeigt. In der Mitte ist ein Block "System Under Test". Pfeile von einem "Inputs / Stimuli" Block (z.B. Signal Builder) zeigen auf das SUT. Pfeile vom SUT zeigen auf einen "Outputs / Sinks / Assessments" Block (z.B. Scope, Test Sequence). Das Ganze ist von einem Rahmen mit der Beschriftung "Test Harness Model" umgeben.](placeholder.jpg)
-
-</div>
-</div>
+![Diagramm, das das Konzept eines Test-Harness zeigt. In der Mitte ist ein Block "System Under Test". Pfeile von einem "Inputs / Stimuli" Block (z.B. Signal Builder) zeigen auf das SUT. Pfeile vom SUT zeigen auf einen "Outputs / Sinks / Assessments" Block (z.B. Scope, Test Sequence). Das Ganze ist von einem Rahmen mit der Beschriftung "Test Harness Model" umgeben.](./Diagramme/Mermaid/Test_Harness.svg)
 
 ---
 
-#### Erstellung und Konfiguration eines Test-Harness
+![bg contain right](./Screenshots/Test_Harness_Create.png)
+
+#### Erstellung eines Test-Harness
 
 Simulink bietet einen automatisierten Prozess zur Erstellung von Test-Harnesses.
 
-1.  **Rechtsklick auf das Subsystem:** Wählen Sie im Kontextmenü `Test Harness` -> `Create for [subsystem_name]`.
-2.  **Konfigurationsdialog:**
-    -   **Name:** Geben Sie dem Harness einen aussagekräftigen Namen.
-    -   **Sources & Sinks:** Legen Sie fest, wie die Ein- und Ausgänge des SUT im Harness dargestellt werden sollen (z.B. `Inport`/`Outport` Blöcke, `Signal Builder`, `Scope`).
-    -   **Synchronisation:** Konfigurieren Sie, ob Änderungen am SUT automatisch in das Harness übernommen werden sollen.
-    -   **Post-Create Callback:** Führen Sie ein Skript aus, nachdem das Harness erstellt wurde (z.B. um Test-Parameter zu laden).
+**Rechtsklick auf das Subsystem:** Wählen Sie im Kontextmenü `Test Harness` -> `Create for [subsystem_name]`.
 
-![Screenshot des 'Create Test Harness' Dialogs in Simulink. Die Felder für Name, Sources und Sinks sind sichtbar. Unter 'Source' ist die Option 'Signal Builder' ausgewählt, unter 'Sinks' die Option 'Scope'.](placeholder.jpg)
+---
+
+![bg contain right](./Screenshots/Test_Harness_Create_Properties.png)
+
+#### Konfiguration eines Test-Harness
+
+-   **Name:** Geben Sie dem Harness einen aussagekräftigen Namen.
+-   **Sources & Sinks:** Legen Sie fest, wie die Ein- und Ausgänge des SUT im Harness dargestellt werden sollen.
+-   **Synchronisation:** Konfigurieren Sie, ob Änderungen am SUT automatisch in das Harness übernommen werden sollen.
+
+---
+
+TODO Folie zu Sources und Sinks für Test Harness (Signal Editor, Test Sequence, Test Sequence mit separatem Assessment Block)
 
 ---
 
