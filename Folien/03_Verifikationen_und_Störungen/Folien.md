@@ -1746,7 +1746,7 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-![Screenshot der Fault Analyzer App. Markiert sind drei Hauptbereiche: 1. (links) Der "Fault Table", eine Tabelle mit allen definierten Störungen, ihren Namen, Speicherorten und Aktivierungsbedingungen. 2. (Mitte) Die "Model"-Ansicht, die die Hierarchie des Simulink-Modells zeigt. 3. (rechts) Der "Simulation"-Bereich mit Buttons zum Ausführen der nominalen Simulation und der "Fault Simulation Campaign".](placeholder.jpg)
+![Screenshot der Fault Analyzer App. Markiert sind drei Hauptbereiche: 1. (links) Der "Fault Table", eine Tabelle mit allen definierten Störungen, ihren Namen, Speicherorten und Aktivierungsbedingungen. 2. (Mitte) Die "Model"-Ansicht, die die Hierarchie des Simulink-Modells zeigt. 3. (rechts) Der "Simulation"-Bereich mit Buttons zum Ausführen der nominalen Simulation und der "Fault Simulation Campaign".](./Screenshots/Simulink_Fault_Analyzer.png)
 
 ---
 
@@ -1758,7 +1758,9 @@ Der Fault Analyzer bietet drei wichtige Kernkonzepte für die Abbildung von Stö
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung zum Konzept "Störung" -->
+<!-- Eine stilisierte Darstellung eines einzelnen Fehlers. Ein Zahnrad in einem Getriebe hat einen sichtbaren, rot glühenden Riss in einem seiner Zähne, was einen mechanischen Defekt symbolisiert. Das restliche System ist noch intakt. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg right](./Illustrationen/Fault_Analyzer_Konzept_Fault.jpg)
 
 #### Störung (*Fault*)
 
@@ -1767,7 +1769,9 @@ Der Fault Analyzer bietet drei wichtige Kernkonzepte für die Abbildung von Stö
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung zum Konzept "Bedingung" -->
+<!-- Eine Illustration des Konzepts 'Bedingung'. Ein stilisiertes Thermometer zeigt, wie die Quecksilbersäule eine kritische rote Linie überschreitet. Genau an diesem Punkt schlägt ein rot leuchtender Blitz ein, der symbolisiert, dass die Bedingung (Temperatur > 100°C) erfüllt ist und eine Störung auslöst. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right](./Illustrationen/Fault_Analyzer_Konzept_Condition.jpg)
 
 #### Bedingung (*Condition*)
 
@@ -1777,7 +1781,9 @@ Der Fault Analyzer bietet drei wichtige Kernkonzepte für die Abbildung von Stö
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung zum Konzept "Störungssatz" -->
+<!-- Eine visuelle Darstellung eines 'Störungssatzes'. Ein offener, stilisierter Werkzeugkasten oder Ordner mit der Aufschrift 'Sensor-Ausfälle' enthält mehrere Icons, die einzelne Störungen repräsentieren: ein durchgebranntes Thermometer-Symbol, ein gebrochenes Tachometer-Symbol und ein Kurzschluss-Symbol. Dies symbolisiert die Gruppierung von mehreren Einzelstörungen zu einem Testszenario. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right:40%](./Illustrationen/Fault_Analyzer_Konzept_Fault_Set.jpg)
 
 #### Störungssatz (*Fault Set*)
 
