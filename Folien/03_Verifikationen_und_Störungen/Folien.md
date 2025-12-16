@@ -1583,6 +1583,10 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
+#### Terminologie
+
+Wir unterscheiden zunächst drei wichtige Begriffe:
+
 ![](./Diagramme/Mermaid/Störungsanalyse_Terminologie.svg)
 
 ---
@@ -1603,7 +1607,7 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ![bg right](./Illustrationen/Fault_Analyzer_Fehler.jpg)
 
-#### Terminologie: **Fehler (Error)**
+#### Terminologie: **Fehler (*Error*)**
 
 -   Ein **Zustand** im System, der von der korrekten oder erwarteten Systemoperation abweicht.
 -   Ein Fehler ist die Manifestation einer Störung. (z.B. ein falscher Wert wird von einem Sensor gelesen, eine Variable im Speicher wird korrumpiert).
@@ -1614,7 +1618,7 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ![bg right](./Illustrationen/Fault_Analyzer_Ausfall.jpg)
 
-#### Terminologie: **Ausfall**
+#### Terminologie: **Ausfall (*Failure*)**
 
 -   Das extern beobachtbare **Ereignis**, bei dem ein System seine spezifizierte Funktion nicht mehr erbringt.
 -   Ein Ausfall tritt auf, wenn ein Fehler an die Systemgrenze propagiert.
@@ -1631,40 +1635,48 @@ Eine **Störung** kann einen **Fehler** verursachen, der wiederum zu einem **Aus
 
 ---
 
-#### Arten von Störungen
+#### Klassifizierung von Störungen
 
 Störungen können nach verschiedenen Kriterien klassifiziert werden.
 
-<div class="columns">
-<div class="three">
+![](./Diagramme/Mermaid/Störungsarten.svg)
 
-##### Nach Dauer:
+---
+
+<!-- Eine Illustration, die drei Arten von Störungen nach ihrer Dauer darstellt. Drei Zeitachsen zeigen jeweils einen Signalverlauf. Die erste ('Permanent') zeigt ein Signal, das nach einem Defekt (symbolisiert durch ein durchgebrochenes Kabel-Icon) auf Null fällt und dort bleibt. Die zweite ('Temporär') zeigt ein Signal mit einem kurzen, einmaligen Ausreißer (symbolisiert durch ein Blitz-Icon). Die dritte ('Intermittierend') zeigt ein Signal, das sporadisch ausfällt (symbolisiert durch ein Wackelkontakt-Icon). Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg right](./Illustrationen/Fault_Analyzer_Dauer.jpg)
+
+#### Klassifizierung von Störungen **nach Dauer**
 
 -   **Permanent:** Die Störung bleibt bestehen (z.B. Kabelbruch).
 -   **Transien/Temporär:** Die Störung tritt nur für eine kurze Zeit auf (z.B. durch elektromagnetische Interferenz).
 -   **Intermittierend:** Die Störung tritt sporadisch auf und verschwindet wieder (z.B. Wackelkontakt).
 
-</div>
-<div class="three">
+---
 
-##### Nach Natur:
+<!-- Eine Illustration, die drei Arten von Störungen nach ihrer Natur darstellt, aufgeteilt in drei Panels. Links ('Hardware') ist ein Mikrochip mit einem leuchtenden roten Riss abgebildet. In der Mitte ('Software') ist ein Code-Snippet zu sehen, bei dem ein logischer Fehler rot hervorgehoben ist. Rechts ('Systematisch') wird ein fehlerhaftes technisches Diagramm oder eine Spezifikation gezeigt, bei der eine falsche Verbindung rot markiert ist. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right](./Illustrationen/Fault_Analyzer_Natur.jpg)
+
+#### Klassifizierung von Störungen **nach Natur**
 
 -   **Hardware-Störungen:** Physikalische Defekte (Alterung, Fertigungsfehler).
 -   **Software-Störungen:** Fehler im Code (logische Fehler, Speicherlecks).
 -   **Systematische Störungen:** Fehler im Entwicklungsprozess (Anforderungsfehler, Designfehler).
 
-</div>
-<div class="three">
+---
 
-##### Nach Verhalten (Beispiele):
+<!-- Eine 2x2-Matrix, die vier verschiedene Störungsverhalten illustriert. Oben links ('Stuck-at') ist ein Signal zu sehen, das auf einem Wert hängen bleibt. Oben rechts ('Offset') wird ein Signal gezeigt, das konstant über dem Sollwert liegt. Unten links ('Gain-Fehler') ist ein Signal mit überhöhter Amplitude dargestellt. Unten rechts ('Verzögerung') wird ein Signal gezeigt, das zeitlich versetzt zum Sollwert verläuft. Die Abweichungen sind jeweils rot markiert. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right](./Diagramme/Tikz/Fault_Analyzer_Verhalten.tikz.svg)
+
+#### Klassifizierung von Störungen **nach Verhalten (Beispiele)**
 
 -   **Stuck-at-Zero/One:** Signal ist permanent auf 0 oder 1 fixiert.
 -   **Offset:** Dem korrekten Wert wird ein konstanter Fehler addiert.
 -   **Gain-Fehler:** Das Signal wird mit einem falschen Faktor skaliert.
 -   **Verzögerung:** Das Signal wird verspätet geliefert.
-
-</div>
-</div>
 
 ---
 
@@ -1672,17 +1684,34 @@ Störungen können nach verschiedenen Kriterien klassifiziert werden.
 
 Sicherheitskonzepte beschreiben, wie ein System auf das Auftreten von Störungen reagieren soll, um Schaden abzuwenden.
 
--   **Fail-Safe:**
-    -   Das System geht im Fehlerfall in einen vordefinierten, sicheren Zustand über. Dieser Zustand ist typischerweise ein Zustand ohne Energie oder Bewegung.
-    -   **Beispiel:** Eine Ampelanlage schaltet bei einer Störung auf gelbes Blinklicht oder komplett ab. Ein Zugbremssystem wird bei Druckverlust automatisch aktiviert.
+![](./Diagramme/Mermaid/Sicherheitskonzepte.svg)
 
--   **Fail-Operational:**
-    -   Das System kann seine Funktion auch nach dem Eintreten einer (oder mehrerer) Störungen aufrechterhalten, möglicherweise mit reduzierter Leistung.
-    -   Dies wird üblicherweise durch Redundanz erreicht.
-    -   **Beispiel:** Ein Flugzeug mit mehreren redundanten Flugsteuerungssystemen (`Fly-by-Wire`).
+---
 
--   **Fail-Tolerant:**
-    -   Ein allgemeinerer Begriff, der die Fähigkeit eines Systems beschreibt, trotz Störungen weiterhin korrekt zu funktionieren. `Fail-Operational` ist eine spezifische Form der Fehlertoleranz.
+<!-- Platzhalter für die Bildbeschreibung einer Illustration für ein Fail-Safe-Sicherheitskonzept -->
+
+#### Sicherheitskonzepte: **Fail-Safe**
+
+-   Das System geht im Fehlerfall in einen vordefinierten, sicheren Zustand über. Dieser Zustand ist typischerweise ein Zustand ohne Energie oder Bewegung.
+-   **Beispiel:** Eine Ampelanlage schaltet bei einer Störung auf gelbes Blinklicht oder komplett ab. Ein Zugbremssystem wird bei Druckverlust automatisch aktiviert.
+
+---
+
+<!-- Platzhalter für die Bildbeschreibung einer Illustration für ein Fail-Operational-Sicherheitskonzept -->
+
+#### Sicherheitskonzepte: **Fail-Operational**
+
+-   Das System kann seine Funktion auch nach dem Eintreten einer (oder mehrerer) Störungen aufrechterhalten, möglicherweise mit reduzierter Leistung.
+-   Dies wird üblicherweise durch Redundanz erreicht.
+-   **Beispiel:** Ein Flugzeug mit mehreren redundanten Flugsteuerungssystemen (`Fly-by-Wire`).
+
+---
+
+<!-- Platzhalter für die Bildbeschreibung einer Illustration für ein Fail-Tolerant-Sicherheitskonzept -->
+
+#### Sicherheitskonzepte: **Fail-Tolerant**
+
+-   Ein allgemeinerer Begriff, der die Fähigkeit eines Systems beschreibt, trotz Störungen weiterhin korrekt zu funktionieren. `Fail-Operational` ist eine spezifische Form der Fehlertoleranz.
 
 ---
 
