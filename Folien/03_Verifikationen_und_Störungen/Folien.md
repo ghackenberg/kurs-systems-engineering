@@ -1806,58 +1806,35 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-#### Hinzufügen von Störungen zu Modellelementen
-
-Der Fault Analyzer ermöglicht es, Störungen direkt zu vielen Standard-Simulink-Blöcken hinzuzufügen, ohne das Modelllayout zu verändern.
-
-1.  **Rechtsklick auf einen Block:** Wählen Sie `Fault Analyzer` -> `Add Fault`.
-2.  **Konfiguration:** Im Fault Analyzer wird eine neue Störung erstellt, die mit diesem Block assoziiert ist.
-3.  **Fehlerverhalten definieren:** Sie können festlegen, wie sich der Block im Fehlerfall verhalten soll, z.B. einen Ausgangsport auf einen bestimmten Wert zwingen (`Force to value`).
-
-<div class="columns">
-<div class="two">
-
-**Beispiel: Gain-Block**
-Einem `Gain` Block kann eine Störung hinzugefügt werden, die seinen Gain-Parameter auf 0 setzt und so das Signal unterbricht.
-
-**Beispiel: Relational Operator**
-Einem Vergleichsoperator (`>`) kann eine Störung hinzugefügt werden, die sein Ergebnis invertiert.
-
-</div>
-<div class="four">
-
-![Screenshot, der das Kontextmenü eines 'Gain'-Blocks in Simulink zeigt. Der Mauszeiger ist auf dem Menüpunkt 'Fault Analyzer' -> 'Add Fault' positioniert. Im Hintergrund ist die Fault Analyzer App zu sehen, in der eine neue, noch unbenannte Störung in der Tabelle erscheint.](placeholder.jpg)
-
-</div>
-</div>
+TODO Folie: Signal (Linie) auswählen und Button "Add Fault" drücken
 
 ---
 
-#### Verwendung des `Fault Inport/Outport` Blocks
-
-Für komplexere Störungsmodelle oder wenn eine Störung an einer Signalleitung statt an einem Block eingefügt werden soll, werden `Fault Inport` und `Fault Outport` Blöcke verwendet.
-
--   **`Fault Inport`:** Ersetzt das nominale Signal durch ein Fehlersignal, wenn die Störung aktiv ist. Das Fehlersignal wird an einem separaten Eingang des Blocks definiert.
--   **`Fault Outport`:** Leitet das nominale Signal an einen zusätzlichen Ausgang weiter, wenn die Störung aktiv ist. Dies kann zur Modellierung von Mitigationspfaden genutzt werden.
-
-Diese Blöcke werden oft in einem `Subsystem` gekapselt, das als `Faulty_Sensor` oder `Faulty_Actuator` bezeichnet wird, um das Modell übersichtlich zu halten.
+TODO Folie: Übersicht über die Fehlereinstellungen (Fehlername, Fehlerverhalten, Fehler-Trigger, Fehlerbeschreibung)
 
 ---
 
-#### Bedingte und zeitgesteuerte Störungsinjektion
+TODO Folie zu Fehlernamen
 
-Die Aktivierung einer Störung wird über logische Bedingungen gesteuert. Dies ist entscheidend, um realistische Szenarien zu simulieren.
+---
 
-1.  **Störung auswählen:** Wählen Sie die zu konfigurierende Störung in der Fault Analyzer Tabelle aus.
-2.  **Bedingung hinzufügen:** Klicken Sie auf `Add Condition`.
-3.  **Bedingung definieren:** Geben Sie im `Condition` Feld eine MATLAB- oder Simulink-kompatible logische Expression ein.
-    -   **Zeitgesteuert:** `time >= 5.2`
-    -   **Zustandsabhängig:** `ist_drehzahl > 1000 && moment < 0.1`
-    -   **Kombiniert:** `(time > 10) && (status == 2)`
+TODO Folie zu Fehlerbeschreibung
 
-Wenn die Bedingung während der Simulation `true` wird, wird die Störung injiziert und bleibt für den Rest der Simulation aktiv (es sei denn, sie wird anders modelliert).
+---
 
-![Screenshot des "Trigger" oder "Condition" Bereichs für eine Störung in der Fault Analyzer App. Ein Textfeld ist mit der Bedingung `time > 3.5` gefüllt. Ein Dropdown-Menü bietet Optionen wie 'On time', 'On event', 'Always on'.](placeholder.jpg)
+TODO Folie zu Fehlerbibliotheken (mwfaultlib)
+
+---
+
+TODO Folie zu Fehlerverhalten (Absolute Value, Add Noise, Gain, Negate Value, Offset-by-1, Stuck-at-Constant, Stuck-at-Ground, Unit Delay)
+
+---
+
+TODO Folie zu Custom Fault Behavior (Fault Input, Fault Output)
+
+---
+
+TODO Folie zu Fehler-Triggern (Always On, Timed, Conditional, Manual)
 
 ---
 
