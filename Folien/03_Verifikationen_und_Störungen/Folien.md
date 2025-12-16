@@ -1737,20 +1737,14 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 #### Workflow der Störungsanalyse
 
-Der typische Workflow mit dem Fault Analyzer folgt einem strukturierten Prozess, um die Auswirkungen von Störungen systematisch zu untersuchen.
-
 1.  **Störungen definieren:** Identifizieren und definieren Sie potenzielle Störungen im System (z.B. Sensor fällt aus, Aktor klemmt).
 2.  **Störungen modellieren:** Fügen Sie diese Störungen an den entsprechenden Stellen im Simulink-Modell hinzu.
-3.  **Störungen aktivieren:** Legen Sie Bedingungen fest, wann eine Störung während der Simulation injiziert werden soll (z.B. zu einem bestimmten Zeitpunkt, bei Eintreten eines Ereignisses).
+3.  **Störungen aktivieren:** Legen Sie Bedingungen fest, wann eine Störung während der Simulation injiziert werden soll (z.B. zu einem bestimmten Zeitpunkt).
 4.  **Simulationen ausführen:** Führen Sie Simulationen für jedes Fehlerszenario sowie eine nominale Simulation (ohne Fehler) als Referenz durch.
 5.  **Ergebnisse analysieren:** Vergleichen Sie das Verhalten des Systems mit und ohne Störung, um die Auswirkungen zu verstehen.
-6.  **Dokumentieren:** Erstellen Sie Berichte, z.B. für eine FMEA (Failure Mode and Effects Analysis).
+6.  **Dokumentieren:** Erstellen Sie Berichte, z.B. für eine FMEA.
 
 ---
-
-#### Die Fault Analyzer UI
-
-Die App bietet eine integrierte Umgebung für diesen Workflow.
 
 ![Screenshot der Fault Analyzer App. Markiert sind drei Hauptbereiche: 1. (links) Der "Fault Table", eine Tabelle mit allen definierten Störungen, ihren Namen, Speicherorten und Aktivierungsbedingungen. 2. (Mitte) Die "Model"-Ansicht, die die Hierarchie des Simulink-Modells zeigt. 3. (rechts) Der "Simulation"-Bereich mit Buttons zum Ausführen der nominalen Simulation und der "Fault Simulation Campaign".](placeholder.jpg)
 
@@ -1758,18 +1752,37 @@ Die App bietet eine integrierte Umgebung für diesen Workflow.
 
 #### Verwaltung von Störungen und Störungssätzen
 
--   **Störung (Fault):**
-    -   Wird im Fault Analyzer erstellt und einem Modellelement (Block oder Signal) zugeordnet.
-    -   Jede Störung hat einen Namen, eine Beschreibung und ein definiertes Verhalten (z.B. "force to value 0").
+Der Fault Analyzer bietet drei wichtige Kernkonzepte für die Abbildung von Störungen in Simulink-Modellen:
 
--   **Bedingung (Condition):**
-    -   Eine logische Bedingung, die definiert, wann eine Störung aktiv wird.
-    -   Kann zeitbasiert (`time > 10`) oder zustandsbasiert (`temperature > 90`) sein.
-    -   Eine Störung, die keiner Bedingung zugeordnet ist, kann manuell aktiviert werden.
+![](./Diagramme/Mermaid/Fault_Analyzer_Konzepte.svg)
 
--   **Störungssatz (Fault Set):**
-    -   Eine benannte Sammlung von einer oder mehreren Störungen, die für eine Simulationskampagne gleichzeitig aktiviert werden.
-    -   **Beispiel:** Ein Satz "Sensor-Fehler" könnte die Störungen "Kurzschluss Temperatursensor" und "Ausfall Drehzahlsensor" enthalten. Die Kampagne würde dann eine Simulation pro Störung in diesem Satz durchführen.
+---
+
+<!-- Platzhalter für Bildbeschreibung zum Konzept "Störung" -->
+
+#### Störung (*Fault*)
+
+-   Wird im Fault Analyzer erstellt und einem Modellelement (Block oder Signal) zugeordnet.
+-   Jede Störung hat einen Namen, eine Beschreibung und ein definiertes Verhalten (z.B. "force to value 0").
+
+---
+
+<!-- Platzhalter für Bildbeschreibung zum Konzept "Bedingung" -->
+
+#### Bedingung (*Condition*)
+
+-   Eine logische Bedingung, die definiert, wann eine Störung aktiv wird.
+-   Kann zeitbasiert (`time > 10`) oder zustandsbasiert (`temperature > 90`) sein.
+-   Eine Störung, die keiner Bedingung zugeordnet ist, kann manuell aktiviert werden.
+
+---
+
+<!-- Platzhalter für Bildbeschreibung zum Konzept "Störungssatz" -->
+
+#### Störungssatz (*Fault Set*)
+
+-   Eine benannte Sammlung von einer oder mehreren Störungen, die für eine Simulationskampagne gleichzeitig aktiviert werden.
+-   **Beispiel:** Ein Satz "Sensor-Fehler" könnte die Störungen "Kurzschluss Temperatursensor" und "Ausfall Drehzahlsensor" enthalten. Die Kampagne würde dann eine Simulation pro Störung in diesem Satz durchführen.
 
 ---
 
