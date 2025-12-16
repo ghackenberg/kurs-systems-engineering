@@ -1688,7 +1688,9 @@ Sicherheitskonzepte beschreiben, wie ein System auf das Auftreten von Störungen
 
 ---
 
-<!-- Platzhalter für die Bildbeschreibung einer Illustration für ein Fail-Safe-Sicherheitskonzept -->
+<!-- Eine stilisierte, mechanische Presse. Im Fehlerfall (symbolisiert durch ein Blitz-Icon an der Steuerung) fällt ein massiver, physischer Riegel von oben in die Maschine und blockiert die Bewegung, sodass die Presse in einer offenen, sicheren Position verharrt. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right](./Illustrationen/Fail_Safe.jpg)
 
 #### Sicherheitskonzepte: **Fail-Safe**
 
@@ -1697,21 +1699,25 @@ Sicherheitskonzepte beschreiben, wie ein System auf das Auftreten von Störungen
 
 ---
 
-<!-- Platzhalter für die Bildbeschreibung einer Illustration für ein Fail-Operational-Sicherheitskonzept -->
+<!-- Eine schematische Darstellung von Redundanz. Zwei identische, parallele Pumpen versorgen ein System. Eine der Pumpen ist rot durchgestrichen und hat ein "Ausfall"-Symbol (ein Blitz). Trotzdem läuft die zweite Pumpe normal weiter (grün leuchtend), und der Flüssigkeitsfluss im System bleibt aufrechterhalten. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right](./Illustrationen/Fail_Operational.jpg)
 
 #### Sicherheitskonzepte: **Fail-Operational**
 
 -   Das System kann seine Funktion auch nach dem Eintreten einer (oder mehrerer) Störungen aufrechterhalten, möglicherweise mit reduzierter Leistung.
--   Dies wird üblicherweise durch Redundanz erreicht.
--   **Beispiel:** Ein Flugzeug mit mehreren redundanten Flugsteuerungssystemen (`Fly-by-Wire`).
+-   **Beispiel:** Autonomes Fahrzeug, das beim Ausfall des LIDAR-Sensors die Geschwindigkeit reduziert und mit einfachen Kameras weiterfährt.
 
 ---
 
-<!-- Platzhalter für die Bildbeschreibung einer Illustration für ein Fail-Tolerant-Sicherheitskonzept -->
+<!-- Eine schematische Darstellung eines Netzwerks aus verbundenen Knoten. Ein Knoten in der Mitte ist rot markiert und als "ausgefallen" gekennzeichnet. Ein Datenpfad, dargestellt durch eine leuchtende Linie, wird gezeigt, wie er den defekten Knoten intelligent umgeht und einen alternativen Weg zum Ziel findet, um die Funktion des Netzwerks sicherzustellen. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right](./Illustrationen/Fail_Tolerant.jpg)
 
 #### Sicherheitskonzepte: **Fail-Tolerant**
 
 -   Ein allgemeinerer Begriff, der die Fähigkeit eines Systems beschreibt, trotz Störungen weiterhin korrekt zu funktionieren. `Fail-Operational` ist eine spezifische Form der Fehlertoleranz.
+-   **Beispiel:** Ein Flugzeug mit vier Turbinen kann den Ausfall einer Turbine vollständig kompensieren.
 
 ---
 
