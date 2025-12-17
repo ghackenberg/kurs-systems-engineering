@@ -2092,48 +2092,23 @@ Im Test-Manager kann für jeden Test-Case die Störungssimulation aktiviert werd
 
 Dieser Unterabschnitt wendet die Störungsanalyse auf das Fallbeispiel an.
 
-1.  Fehlermodus definieren: Blockierter Motor
-2.  Störung im Modell implementieren
-3.  Simulation und Analyse der Auswirkung
+1. TODO Übersicht
 
 ---
 
-#### Fehlermodus: Blockierter Motor
-
-**Szenario:** Während des Betriebs blockiert der Antrieb des Akku-Schraubers mechanisch (z.B. die Schraube verkeilt sich).
-**Erwartetes Verhalten:** Der Motorregler sollte den hohen Strom erkennen und den Motor abschalten, um eine Überhitzung oder Beschädigung zu verhindern (Sicherheitsfunktion).
-**Fehlermodus:** Die Motordrehzahl fällt abrupt auf Null, obwohl der Regler weiterhin eine Spannung anlegt.
-**Auswirkung:** Der Motorstrom (`I_motor`) steigt rapide an (Stall Current).
+TODO Übersicht über mögliche Störungen der einzelnen Systemkomponenten eines Akku-Schraubers
 
 ---
 
-<div class="columns">
-<div class="two">
-
-#### Implementierung der Störung
-
-1.  **Störung erstellen:** Im Fault Analyzer wird eine Störung mit dem Namen `Motor_Blocked` erstellt.
-2.  **Störung zuordnen:** Die Störung wird der mechanischen Rotationsgeschwindigkeit im Simscape-Modell des Motors zugeordnet.
-3.  **Verhalten definieren:** Das Verhalten wird so eingestellt, dass die Geschwindigkeit auf den Wert `0` gezwungen wird (`Force to value`).
-4.  **Bedingung festlegen:** Die Störung wird zum Zeitpunkt `t = 2s` injiziert, nachdem der Motor normal angelaufen ist. `time >= 2.0`
-
-</div>
-<div class="four">
-
-![Screenshot, der das Simscape-Modell des Motors zeigt. Eine Störung ist mit dem "Rotational Velocity" Port des Motorblocks verbunden. In der Fault Analyzer App ist die Störung 'Motor_Blocked' mit der Bedingung 'time >= 2.0' konfiguriert.](placeholder.jpg)
-
-</div>
-</div>
+TODO Beschreibung der Modellierung des Auslösers und des Störungsverhaltens eines ersten ausgewählten Fehlers (inklusive Illustration der Störung im Stil einer technischen Zeichnung mit Comic-artiger Schattierung und weißem Hintergrund)
 
 ---
 
-#### Simulation und Analyse der Auswirkung
+TODO Beschreibung der Modellierung des Auslösers und des Störungsverhaltens eines zweiten ausgewählten Fehlers (inklusive Illustration der Störung im Stil einer technischen Zeichnung mit Comic-artiger Schattierung und weißem Hintergrund)
 
-Eine Simulationskampagne wird mit der `Motor_Blocked` Störung ausgeführt.
+---
 
-![Screenshot des Simulation Data Inspectors, der zwei Signale vergleicht: 'ist_drehzahl' und 'ist_strom'. Die nominalen Läufe (schwarz) zeigen normales Verhalten. Die fehlerhaften Läufe (rot, 'Fault: Motor_Blocked') zeigen, wie die Drehzahl bei t=2s auf Null fällt, während der Strom gleichzeitig auf einen sehr hohen Wert ansteigt und dort verbleibt, was auf eine fehlende oder fehlerhafte Schutzschaltung hindeutet.](placeholder.jpg)
-
-**Analyse:** Der Plot zeigt deutlich den gefährlichen Anstieg des Motorstroms. Dies validiert die Notwendigkeit einer Überstrom-Schutzschaltung. In einem nächsten Schritt könnte eine solche Schutzschaltung modelliert und die Analyse wiederholt werden, um zu verifizieren, dass sie den Motor im Fehlerfall korrekt abschaltet.
+TODO Beschreibung der Modellierung des Auslösers und des Störungsverhaltens eines dritten ausgewählten Fehlers (inklusive Illustration der Störung im Stil einer technischen Zeichnung mit Comic-artiger Schattierung und weißem Hintergrund)
 
 ---
 
@@ -2143,61 +2118,9 @@ Eine Simulationskampagne wird mit der `Motor_Blocked` Störung ausgeführt.
 
 ### 3.2.6: Übungsaufgabe: 3D-Drucker
 
-Dieser Unterabschnitt beschreibt die Übungsaufgabe zur Störungsanalyse am Extruder des 3D-Druckers.
+Anwendung der Störungsanalyse auf den 3D-Drucker:
 
-1.  Fehlermodi für den Extruder identifizieren
-2.  Störungen modellieren und injizieren
-3.  Auswirkungen analysieren (FMEA)
-4.  (Optional) Sicherheitsmechanismus implementieren
-
----
-
-#### Aufgabe 1: Fehlermodi identifizieren und modellieren
-
-Identifizieren und modellieren Sie mindestens zwei realistische Störungen für den Extruder-Mechanismus des 3D-Druckers.
-
-**Beispiel-Störungen:**
-
--   **`Nozzle_Clog` (Düse verstopft):**
-    -   **Modellierung:** Fügen Sie dem Extruder-Antriebsmodell eine Störung hinzu, die ein extrem hohes Lastmoment simuliert oder die Geschwindigkeit des Vorschubmotors auf Null setzt.
-    -   **Auswirkungshypothese:** Der Filamentvorschub stoppt, der Antriebsmotor könnte überlasten.
-
--   **`Heater_Sensor_Fail` (Temperatursensor defekt):**
-    -   **Modellierung:** Fügen Sie dem Temperatursignal, das vom Sensor zum Regler geht, eine Störung hinzu. Modellieren Sie zwei Fälle: `Stuck-at-20` (Sensor liefert konstant Raumtemperatur) und `Stuck-at-250` (Sensor liefert Maximaltemperatur).
-    -   **Auswirkungshypothese (`Stuck-at-20`):** Der Regler wird versuchen, ununterbrochen zu heizen, was zu einer gefährlichen Überhitzung führt (`Thermal Runaway`).
-
----
-
-#### Aufgabe 2: Simulationskampagne durchführen
-
-1.  Erstellen Sie im Fault Analyzer für jede Störung aus Aufgabe 1 ein entsprechendes `Fault` Objekt.
-2.  Legen Sie sinnvolle Injektionsbedingungen fest (z.B. nach Erreichen der Solltemperatur).
-3.  Fassen Sie die Störungen in einem Störungssatz `Extruder_Faults` zusammen.
-4.  Führen Sie eine Simulationskampagne für diesen Störungssatz durch.
-
----
-
-#### Aufgabe 3: FMEA-Analyse der Ergebnisse
-
-Analysieren Sie die Simulationsergebnisse im `Simulation Data Inspector` und füllen Sie eine FMEA-Tabelle aus (z.B. in Excel oder als Markdown-Tabelle).
-
-| Fehlermodus              | Mögliche Ursache        | Auswirkung (Lokal, System)                               | S (Severity) | Detektion                      | O (Occurrence) | D (Detection) | RPN |
-| ------------------------ | ----------------------- | -------------------------------------------------------- | ------------ | ------------------------------ | -------------- | ------------- | --- |
-| `Nozzle_Clog`            | Verunreinigtes Filament | Motor blockiert, Druckauftrag scheitert.                 | 6            | Hoher Motorstrom               | 4              | 3             | 72  |
-| `Heater_Sensor_Stuck-20` | Kabelbruch              | **Unkontrolliertes Aufheizen**, Brandgefahr, Druck scheitert | **10**       | Plausibilitäts-Check (Software) | 2              | 5             | 100 |
-| ...                      | ...                     | ...                                                      | ...          | ...                            | ...            | ...           | ... |
-
-**Diskutieren Sie:** Welche Störung stellt das größte Risiko dar und warum?
-
----
-
-#### Aufgabe 4 (Optional): Sicherheitsmechanismus implementieren
-
-Wählen Sie die kritischste Störung (`Heater_Sensor_Stuck-at-20`) und implementieren Sie einen Sicherheitsmechanismus im Modell.
-
-**Idee:** Ein einfacher `Stateflow` Chart oder MATLAB Function Block als "Watchdog".
-
-**Logik:**
-> "Wenn der Regler für mehr als 60 Sekunden eine Heizleistung von >95% ausgibt, die gemessene Temperatur sich aber um weniger als 1°C ändert, dann liegt eine Störung vor. Schalte in diesem Fall das Heizrelais ab und setze einen permanenten `Error` Status."
-
-Verifizieren Sie anschließend durch eine erneute Störungssimulation, dass Ihr Sicherheitsmechanismus die gefährliche Überhitzung wirksam verhindert.
+1. Relevante Störungen identifizieren
+2. Störungen modellieren (inklusive Auslösern)
+3. Testfälle mit zugeordneten Störungssätzen anlegen
+4. Tests durchführen und Ergebnise analyiseren
