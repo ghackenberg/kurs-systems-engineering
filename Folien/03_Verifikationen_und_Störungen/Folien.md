@@ -2084,31 +2084,63 @@ Im Test-Manager kann für jeden Test-Case die Störungssimulation aktiviert werd
 
 ---
 
-<!-- Eine abstrakte Darstellung des Fallbeispiels Akku-Schrauber. Eine stilisierte Darstellung eines Akku-Schraubers, ähnlich der vorherigen, aber diesmal mit einem leuchtenden roten Fehlersymbol, das auf seiner Motorkomponente erscheint, vor einem galaktischen Hintergrund. -->
+<!-- Eine abstrakte Darstellung des Fallbeispiels Akku-Schrauber im Kontext von Störungen. Die Silhouette eines Akku-Schraubers, geformt aus blauen und weißen Konstellationen, zeigt rote, fehlerhafte Funken an kritischen Stellen wie dem Akku, dem Motor und einem Sensor. Das Ganze ist vor einer dunklen Galaxie dargestellt. -->
 
 ![bg right](./Illustrationen/Abschnitt_2_5.jpg)
 
 ### 3.2.5: Fallbeispiel: Akku-Schrauber
 
-Dieser Unterabschnitt wendet die Störungsanalyse auf das Fallbeispiel an.
+Anwendung der Konzepte auf das Fallbeispiel des Akku-Schraubers.
 
-1. TODO Übersicht
-
----
-
-TODO Übersicht über mögliche Störungen der einzelnen Systemkomponenten eines Akku-Schraubers
-
----
-
-TODO Beschreibung der Modellierung des Auslösers und des Störungsverhaltens eines ersten ausgewählten Fehlers (inklusive Illustration der Störung im Stil einer technischen Zeichnung mit Comic-artiger Schattierung und weißem Hintergrund)
+1.  Störung 1: Temperatursensor "Stuck-at"
+2.  Störung 2: Drehzahlsensor "Stuck-at-Zero"
+3.  Störung 3: Schalter mit Wackelkontakt (Intermittierend)
+4.  Störung 4: Batterie-Tiefentladung (Bedingt)
 
 ---
 
-TODO Beschreibung der Modellierung des Auslösers und des Störungsverhaltens eines zweiten ausgewählten Fehlers (inklusive Illustration der Störung im Stil einer technischen Zeichnung mit Comic-artiger Schattierung und weißem Hintergrund)
+#### Störung 1: Temperatursensor liefert konstanten Wert
+
+-   **Szenario:** Der Temperatursensor im Akku oder Motor ist defekt und liefert permanent einen festen, ungültigen Wert.
+-   **Modellierung:** Eine `Fault`-Definition wird auf das Ausgangssignal des Temperatursensors gelegt.
+-   **Verhalten:** Das vordefinierte Verhalten `Force to value` wird verwendet.
+-   **Beispiele:**
+    -   `Temp_Stuck_At_25`: Wert wird auf `25` (°C) fixiert. **Gefahr:** Eine Überhitzung des Systems wird nicht erkannt, was zu permanentem Schaden führen kann.
+    -   `Temp_Stuck_At_130`: Wert wird auf `130` (°C) fixiert. **Folge:** Das System aktiviert den Selbstschutz und schaltet ab, obwohl keine Gefahr besteht.
 
 ---
 
-TODO Beschreibung der Modellierung des Auslösers und des Störungsverhaltens eines dritten ausgewählten Fehlers (inklusive Illustration der Störung im Stil einer technischen Zeichnung mit Comic-artiger Schattierung und weißem Hintergrund)
+#### Störung 2: Drehzahlsensor fällt aus
+
+-   **Szenario:** Der Hall-Sensor zur Messung der Motordrehzahl ist ausgefallen und liefert permanent den Wert `0`.
+-   **Modellierung:** Eine `Fault`-Definition wird auf das Signal `ist_drehzahl` gelegt.
+-   **Verhalten:** `Force to value` mit dem Wert `0`.
+-   **Trigger:** `Timed`, z.B. `time > 2`, um den Ausfall während des Betriebs zu simulieren.
+-   **Gefahr:** Der Regler "denkt", der Motor dreht sich nicht, obwohl er mit Strom versorgt wird. Er wird versuchen, die Regelabweichung zu kompensieren, indem er die Leistung massiv erhöht. Dies kann zu einer Überlastung des Motors, des Getriebes oder der Elektronik führen (Runaway-Zustand).
+
+---
+
+#### Störung 3: Schalter mit Wackelkontakt
+
+-   **Szenario:** Der Hauptschalter hat einen Wackelkontakt und erzeugt ein intermittierendes Signal, obwohl der Benutzer den Schalter konstant drückt.
+-   **Modellierung:** Hier ist ein **benutzerdefiniertes Störungsverhalten** (`Custom Behavior`) notwendig, da das Verhalten nicht standardmäßig verfügbar ist.
+-   **Implementierung des Custom Faults:**
+    -   Ein Subsystem mit `Fault Inport` und `Fault Outport` wird erstellt.
+    -   Das `Fault Inport` empfängt das ideale Schaltersignal (z.B. konstant `1`).
+    -   Die Logik dazwischen (z.B. ein `Pulse Generator`, dessen Aktivierung zufallsgesteuert ist) modifiziert das Signal.
+    -   Das `Fault Outport` gibt das fehlerhafte Signal aus.
+-   **Folge:** Der Motor stottert, was zu hohen Stromspitzen / mechanischem Stress führt.
+
+---
+
+#### Störung 4: Batterie-Tiefentladung unter Last
+
+-   **Szenario:** Eine schwache oder fast leere Batterie bricht unter Last zusammen, und ihre Spannung fällt rapide ab. Dies ist keine permanente Störung, sondern ein zustandsabhängiges Verhalten.
+-   **Modellierung:** Eine `Fault`-Definition wird auf das Signal für die Batteriespannung `V_batt` gelegt.
+-   **Verhalten:** `Add to value` mit einem starken negativen Offset (z.B. `-5V`), um den Spannungseinbruch zu simulieren.
+-   **Trigger:** Dies ist ein perfekter Anwendungsfall für ein **`Conditional`**. Die Störung soll nur unter bestimmten Bedingungen aktiv werden.
+    -   **Conditional Name:** `Low_SoC_High_Load_Condition`
+    -   **Expression:** `SoC < 0.1 && Motor_Current > 15`
 
 ---
 
