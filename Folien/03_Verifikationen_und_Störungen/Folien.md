@@ -1950,7 +1950,27 @@ Ein **Conditional** ist ein benannter, wiederverwendbarer logischer Ausdruck, de
 
 ---
 
-TODO Folie zu Symbolen vom Typ Expression und ModelElement in den Conditional-Properties
+<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration von Expressions im Stil einer technischen Zeichnung mit Comic-artiger Schattierung auf weißem Hintergrund -->
+
+#### Symbole in Conditionals: `Expression`
+
+-   **Definition:** Das Symbol wird durch einen eigenen MATLAB-Ausdruck definiert.
+-   **Anwendung:** Zur Erstellung von abgeleiteten oder abstrakten Bedingungen, die nicht direkt als Signal im Modell existieren. Ideal für die Wiederverwendung komplexer Berechnungen.
+-   **Beispiel:**
+    -   Symbol: `effective_load`
+    -   Ausdruck: `sqrt(load_x^2 + load_y^2)`
+
+---
+
+<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration von ModelElements im Stil einer technischen Zeichnung mit Comic-artiger Schattierung auf weißem Hintergrund -->
+
+#### Symbole in Conditionals: `ModelElement`
+
+-   **Definition:** Das Symbol wird direkt mit einem Element im Simulink-Modell verknüpft (z.B. einem Signal oder einem Blockparameter).
+-   **Anwendung:** Der Standardfall, um eine Bedingung direkt an den Zustand des Systems zu koppeln.
+-   **Beispiel:**
+    -   Symbol: `temp`
+    -   Modelelement: `AkkuSchrauber/Sensors/Temperature_Output`
 
 ---
 
