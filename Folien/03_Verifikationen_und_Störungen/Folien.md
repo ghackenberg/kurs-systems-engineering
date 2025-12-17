@@ -2009,12 +2009,12 @@ In dieser Simulation ist nur die manuell ausgewählte Störung aktiv, unabhängi
 
 ![bg contain right:25%](./Screenshots/Simulink_Fault_Analyzer_Dashboard_Current_Configuration.png)
 
-#### Das **Fault Dashboard**
+#### Das **Fault Dashboard** (1 / 2)
 
 Während einer Simulation bietet das **Fault Dashboard** einen Live-Überblick über den Zustand der Störungsinjektion.
 
 - **Current Configuration:** Zeigt an, welche Störungen im aktuellen Simulationslauf aktiv sind.
-- **Fault Simulation Progress:** Zeigt bei Kampagnen den Fortschritt an (welche Simulation gerade läuft, welche abgeschlossen sind).
+- **Simulation Results:** Zeigt, wieviele und welche Störungen im aktuellen Simualtionslauf tatsächlich ausgelöst wurden.
 
 Dies ist extrem nützlich, um zu überprüfen, ob Störungen wie erwartet (z.B. durch einen `Conditional` Trigger) zur richtigen Zeit aktiv werden.
 
@@ -2022,13 +2022,24 @@ Dies ist extrem nützlich, um zu überprüfen, ob Störungen wie erwartet (z.B. 
 
 ![bg contain right:25%](./Screenshots/Simulink_Fault_Analyzer_Dashboard_Simulation_Results.png)
 
-TODO Folie zum Fault Dashboard mit dem Tab Simulation Results (Faults Simulated Fortschrittsanzeige, Liste der Untriggered Faults, Liste der Triggered Faults)
+#### Das **Fault Dashboard** (2 / 2)
+
+Der Screenshot auf der rechten Seite zeigt den *Simualtion Results* Tab:
+
+- **Faults Simulated** zeigt, wieviele Störungen für den aktuellen Simulationslauf insgesamt aktiviert wurden und wieviele davon tatsächlich ausgelöst wurden.
+- **Triggered Faults** zeigt, welche der aktiven Störungen tatsächlich ausgelöst wurden.
+- **Untriggered Faults** zeigt, welche der aktiven Störungen nicht ausgelöst wurden (z.B. weil die Bedingung nicht eingetreten ist).
 
 ---
 
 ![bg contain right](./Screenshots/Simulink_Fault_Analyzer_Data_Inspector.png)
 
-TODO Screenshot des Data Inspectors mit Runs und pro Run Zeitdiagramme für Faults (aktiv/inaktiv), Outports, und geloggte (interne) Signals
+#### Der **Data Inspector**
+
+Der *Data Inspector* kann verwendet werden, um das Systemverhalten während der Simulationsläufe genauer zu analysieren:
+
+- **Einteilung** in verschiedene `Runs` mit potenziell unterschiedlichen Einstellungen
+- **Zeitreihendarstellung** für die aktiven `Faults`, die `Outports` des Modells, sowie weitere geloggte (interne) `Signale`.
 
 ---
 
@@ -2069,11 +2080,7 @@ Im Test-Manager kann für jeden Test-Case die Störungssimulation aktiviert werd
 
 ---
 
-TODO Folie zur Darstellung der Testergebnisse (Testsuite und Testfälle mit grünem Häkchen oder rotem Kreuz)
-
----
-
-TODO Folie zur Darstellung von Simulationsergebnissen mit dem Data Inspector (Zeitreihendiagramme für Baseline Criteria Results, Verify Statements, Faults, External Inputs, Sim Outputs, und geloggte (interne) Signals)
+![](./Screenshots/Simulink_Test_Case_Fault_Results.png)
 
 ---
 
