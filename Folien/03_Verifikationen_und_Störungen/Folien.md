@@ -1978,7 +1978,7 @@ Ein **Conditional** ist ein benannter, wiederverwendbarer logischer Ausdruck, de
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung: Abstrakte Illustration von Störungssimulationen über einer dunklen Galaxie. -->
+<!-- Eine abstrakte Illustration, die Störungssimulationen darstellt. Ein Netzwerk aus verbundenen Simulationsläufen, einige davon in Rot (fehlerhaft), wird über einer Galaxie dargestellt, die die verschiedenen Szenarien symbolisiert. -->
 
 ![bg right](./Illustrationen/Abschnitt_2_4.jpg)
 
@@ -1986,23 +1986,49 @@ Ein **Conditional** ist ein benannter, wiederverwendbarer logischer Ausdruck, de
 
 Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
-1. TODO Übersicht
+1.  Durchführung von Simulationen
+2.  Manuelle Aktivierung von Störungen
+3.  Simulationskampagnen mit Störungssätzen
+4.  Analyse der Ergebnisse
 
 ---
 
-TODO Folie zur Simulation einer manuellen Fehlerauswahl über die Fault Table (Faults Tab)
+![bg contain right:30%](./Screenshots/Simulink_Fault_Analyzer_Manual_Enable.png)
+
+#### Manuelle Aktivierung via **Fault Table**
+
+Für schnelle, explorative Tests können einzelne Störungen manuell für eine nominale Simulation aktiviert werden.
+
+1.  **Fault Table öffnen:** Wechseln Sie zum Tab `Faults`.
+2.  **Störung aktivieren:** Setzen Sie in der Spalte `Enabled` ein Häkchen bei der Störung, die Sie injizieren möchten.
+3.  **Simulation starten:** Klicken Sie auf `Run`.
+
+In dieser Simulation ist nur die manuell ausgewählte Störung aktiv, unabhängig von ihrem Trigger.
 
 ---
 
-TODO Folie zum Fault Dashboard mit dem Tab Current Configuration (Active Faults)
+![bg contain right:25%](./Screenshots/Simulink_Fault_Analyzer_Dashboard_Current_Configuration.png)
+
+#### Das **Fault Dashboard**
+
+Während einer Simulation bietet das **Fault Dashboard** einen Live-Überblick über den Zustand der Störungsinjektion.
+
+- **Current Configuration:** Zeigt an, welche Störungen im aktuellen Simulationslauf aktiv sind.
+- **Fault Simulation Progress:** Zeigt bei Kampagnen den Fortschritt an (welche Simulation gerade läuft, welche abgeschlossen sind).
+
+Dies ist extrem nützlich, um zu überprüfen, ob Störungen wie erwartet (z.B. durch einen `Conditional` Trigger) zur richtigen Zeit aktiv werden.
 
 ---
 
-TODO Folie zum Fault Dashboard mit dem Tab Simulation Results (Faults Simulated, Untriggered Faults)
+![bg contain right:25%](./Screenshots/Simulink_Fault_Analyzer_Dashboard_Simulation_Results.png)
+
+TODO Folie zum Fault Dashboard mit dem Tab Simulation Results (Faults Simulated Fortschrittsanzeige, Liste der Untriggered Faults, Liste der Triggered Faults)
 
 ---
 
-TODO Screenshot des Data Inspectors mit Runs und pro Run Zeitdiagramme für Faults (true/false) und Outports
+![bg contain right](./Screenshots/Simulink_Fault_Analyzer_Data_Inspector.png)
+
+TODO Screenshot des Data Inspectors mit Runs und pro Run Zeitdiagramme für Faults (aktiv/inaktiv), Outports, und geloggte (interne) Signals
 
 ---
 
@@ -2047,7 +2073,7 @@ TODO Folie zur Darstellung der Testergebnisse (Testsuite und Testfälle mit grü
 
 ---
 
-TODO Folie zur Darstellung von Simulationsergebnissen mit dem Data Inspector (Zeitreihendiagramme für Faults und andere geloggte Signale)
+TODO Folie zur Darstellung von Simulationsergebnissen mit dem Data Inspector (Zeitreihendiagramme für Baseline Criteria Results, Verify Statements, Faults, External Inputs, Sim Outputs, und geloggte (interne) Signals)
 
 ---
 
