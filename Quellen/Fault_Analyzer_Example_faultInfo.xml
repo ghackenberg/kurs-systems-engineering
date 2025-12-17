@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MF0 version="1.1" packageUris="http://schema.mathworks.com/mf0/faultinfo_datamodel/R2021a">
+  <faultinfo.FaultContainerSet type="faultinfo.FaultContainerSet" uuid="652ce4e3-6fc3-47d8-a7c6-c12c943a897c">
+    <conditionals type="faultinfo.conditional.Conditional" uuid="f03ed5db-dfbe-4723-9b2f-5e071726e78a">
+      <checksum>00000000-0000-0000-0000-000000000000</checksum>
+      <condition>x == true</condition>
+      <mustBeLogged>false</mustBeLogged>
+      <name>SampleConditional</name>
+      <resyncRefBlkID></resyncRefBlkID>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+      <symbols type="faultinfo.conditional.ExpressionSymbol" uuid="b50cfbf6-a5c6-4995-8741-c8033cd56329">
+        <expression>true</expression>
+        <name>x</name>
+      </symbols>
+    </conditionals>
+    <faultContainers type="faultinfo.FaultContainer" uuid="0fa8eb0f-0acf-48d8-9107-1fd96ae4531f">
+      <activeFault type="faultinfo.SLFault" uuid="3022fcb0-d3ea-41cc-83f8-7726fdb4aba9"/>
+      <faultedEntityID>Outport|Fault_Analyzer_Example:3|1</faultedEntityID>
+      <faultedEntityName>Fault_Analyzer_Example/Gain/Outport/1</faultedEntityName>
+      <faults type="faultinfo.SLFault" uuid="3022fcb0-d3ea-41cc-83f8-7726fdb4aba9">
+        <checksum>00000000-0000-0000-0000-000000000000</checksum>
+        <faultDescription></faultDescription>
+        <faultName>Gain_Outport1_fault</faultName>
+        <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+        <triggerOn type="faultinfo.PermanentTrigger" uuid="e32c7940-2f4b-4680-93dd-4b4de19822ae">
+          <isPersistent>true</isPersistent>
+        </triggerOn>
+      </faults>
+      <isEnabled>true</isEnabled>
+    </faultContainers>
+    <faultContainers type="faultinfo.FaultContainer" uuid="7d9acced-425e-49e0-8522-60b1447ee9c7">
+      <activeFault type="faultinfo.SLFault" uuid="90a724b6-49bb-4402-9a61-6aeab26502e8"/>
+      <faultedEntityID>Outport|Fault_Analyzer_Example:1|1</faultedEntityID>
+      <faultedEntityName>Fault_Analyzer_Example/SystemInput/Outport/1</faultedEntityName>
+      <faults type="faultinfo.SLFault" uuid="90a724b6-49bb-4402-9a61-6aeab26502e8">
+        <checksum>00000000-0000-0000-0000-000000000000</checksum>
+        <faultDescription></faultDescription>
+        <faultName>SystemInput_Outport1_fault</faultName>
+        <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+        <triggerOn type="faultinfo.PermanentTrigger" uuid="0444820e-30c2-4483-aeff-fd991669c6a3">
+          <isPersistent>true</isPersistent>
+        </triggerOn>
+      </faults>
+      <faults type="faultinfo.SLFault" uuid="9b723385-7b2e-459f-b09a-9b9829f5931f">
+        <checksum>00000000-0000-0000-0000-000000000000</checksum>
+        <faultDescription></faultDescription>
+        <faultName>SystemInput_Outport1_fault_1</faultName>
+        <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+        <triggerOn type="faultinfo.PermanentTrigger" uuid="8c626322-77e4-45ce-9df0-8bf37ddc8ff4">
+          <isPersistent>true</isPersistent>
+        </triggerOn>
+      </faults>
+      <isEnabled>true</isEnabled>
+    </faultContainers>
+    <isEnabled>true</isEnabled>
+    <lastUpdatedAt>2025-12-17T11:04:46</lastUpdatedAt>
+    <modelName>Fault_Analyzer_Example</modelName>
+    <modelUUID>64c803e1-8bcc-4403-9c82-9dd8ccdafb8c</modelUUID>
+  </faultinfo.FaultContainerSet>
+  <faultinfo.FailureModeContainer type="faultinfo.FailureModeContainer" uuid="4a518287-4f6e-4a82-bd88-25b9dd3f9061">
+    <failureModes type="faultinfo.FailureMode" uuid="1fcaaef6-0a4a-4b9d-876e-049cc37b4105">
+      <ID>1</ID>
+      <associatedFaults type="faultinfo.SLFault" uuid="3022fcb0-d3ea-41cc-83f8-7726fdb4aba9"/>
+      <faultSubsystemName>Gain_Outport1_fault</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <failureModes type="faultinfo.FailureMode" uuid="f27a62c6-dd7c-4096-a78f-69decc3334b8">
+      <ID>6</ID>
+      <associatedFaults type="faultinfo.SLFault" uuid="90a724b6-49bb-4402-9a61-6aeab26502e8"/>
+      <faultSubsystemName>SystemInput_Outport1_fault</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <failureModes type="faultinfo.FailureMode" uuid="ac472340-9169-4efb-932f-82e987bfe727">
+      <ID>10</ID>
+      <associatedFaults type="faultinfo.SLFault" uuid="9b723385-7b2e-459f-b09a-9b9829f5931f"/>
+      <faultSubsystemName>SystemInput_Outport1_fault_1</faultSubsystemName>
+      <resyncUUID>00000000-0000-0000-0000-000000000000</resyncUUID>
+    </failureModes>
+    <faultModelName>Fault_Analyzer_Example_FaultModel_4</faultModelName>
+    <faultModelUUID>3659ad67-af24-4773-8ca9-098bb60da55c</faultModelUUID>
+  </faultinfo.FailureModeContainer>
+</MF0>

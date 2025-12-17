@@ -1563,7 +1563,7 @@ Dieser Abschnitt umfasst die folgenden Inhalte:
 1. Grundlagen der Störungsanalyse
 2. Fault Analyzer App
 3. Störungsmodellierung und -injektion
-4. Sicherheitsanalyse (FMEA)
+4. Störungssimulation
 5. Fallbeispiel: Akku-Schrauber
 6. Übungsaufgabe: 3D-Drucker
 
@@ -1978,65 +1978,65 @@ Ein **Conditional** ist ein benannter, wiederverwendbarer logischer Ausdruck, de
 
 ---
 
-<!-- Eine abstrakte Darstellung der Sicherheitsanalyse (FMEA). Ein komplexes, vernetztes Netz von Knoten wird gezeigt, bei dem einige Pfade rot hervorgehoben sind, um die Ausbreitung eines Fehlers zu verfolgen. Die Darstellung ähnelt einer Himmelskarte, die Flugbahnen von Asteroiden zeigt. -->
-
+<!-- Platzhalter für Bildbeschreibung: Abstrakte Illustration von Störungssimulationen über einer dunklen Galaxie. -->
 
 ![bg right](./Illustrationen/Abschnitt_2_4.jpg)
 
-### 3.2.4: Sicherheitsanalyse (FMEA)
+### 3.2.4: Störungssimulation
 
 Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
-1.  Konzept der FMEA
-2.  Durchführung einer Simulationskampagne
-3.  Analyse der Ergebnisse im Vergleich
+1. TODO Übersicht
 
 ---
 
-#### Konzept der FMEA (Failure Mode and Effects Analysis)
-
-Die FMEA ist eine systematische, induktive Methode zur Analyse der Sicherheit und Zuverlässigkeit eines Systems.
-
--   **Failure Mode:** Die Art und Weise, wie eine Komponente ausfallen kann (z.B. Kurzschluss, Bruch, falscher Software-Zustand).
--   **Effects Analysis:** Die Untersuchung der Konsequenzen jedes Fehlermodus für das lokale System, die nächsthöhere Systemebene und das Gesamtsystem (Endbenutzer).
--   **Ziel:** Potenzielle Ausfälle frühzeitig identifizieren, ihre Auswirkungen bewerten und Maßnahmen zur Risikominderung definieren.
-
-Der Fault Analyzer ist ein Werkzeug zur **Validierung der "Effects Analysis"** durch Simulation.
+TODO Folie zur Simulation einer manuellen Fehlerauswahl über die Fault Table (Faults Tab)
 
 ---
 
-#### Durchführung einer Simulationskampagne
-
-Sobald Störungen und Störungssätze definiert sind, kann der Fault Analyzer eine "Simulation Campaign" durchführen.
-
-1.  **Störungssatz auswählen:** Wählen Sie den Satz von Störungen aus, die Sie analysieren möchten.
-2.  **Kampagne starten:** Klicken Sie auf `Run Fault Simulation(s)`.
-3.  **Ablauf:** Der Fault Analyzer führt nun automatisch mehrere Simulationen durch:
-    -   Eine **nominale Simulation** (Referenzlauf) ohne aktive Störungen.
-    -   Für **jede Störung** im ausgewählten Störungssatz eine separate Simulation, in der nur diese eine Störung gemäß ihrer Bedingung injiziert wird.
-4.  **Ergebnisspeicherung:** Alle Simulationsläufe werden aufgezeichnet und für den Vergleich gespeichert.
+TODO Folie zum Fault Dashboard mit dem Tab Current Configuration (Active Faults)
 
 ---
 
-#### Analyse der Ergebnisse im Simulation Data Inspector
+TODO Folie zum Fault Dashboard mit dem Tab Simulation Results (Faults Simulated, Untriggered Faults)
 
-Nach der Kampagne können die Ergebnisse aller Läufe im `Simulation Data Inspector` verglichen werden.
+---
+
+TODO Screenshot des Data Inspectors mit Runs und pro Run Zeitdiagramme für Faults (true/false) und Outports
+
+---
+
+![Eine schematische Darstellung, die die Integration von Simulink Fault Analyzer und Simulink Test zeigt. Links ist das Fault Analyzer Icon mit Störungssymbolen. Rechts ist das Simulink Test Icon mit Test-Case Symbolen. Ein Pfeil verbindet die beiden und zeigt, wie Störungen in Tests verwendet werden. w:10000](./Illustrationen/Simulink_Test_Fault_Analyzer.jpg)
+
+---
+
+#### Integration mit Simulink Test
+
+Die im Fault Analyzer definierten Störungen können direkt in **Simulink Test** verwendet werden, um die Reaktion des Systems auf von Fehlerszenarien zu überprüfen.
+
+-   **Systematische Aktivierung:** Anstatt Störungen manuell im Fault Analyzer zu aktivieren, werden sie gezielt innerhalb eines Test-Cases injiziert.
+-   **Kombination mit Assessments:** Das Systemverhalten unter Störungsbedingungen kann mit denselben `Assessments` bewertet werden wie das nominale Verhalten.
+-   **Automatisierung:** Ermöglicht die automatische Ausführung von Testkampagnen, die sowohl das nominale Verhalten als auch Fehlerszenarien abdecken.
+-   **Rückverfolgbarkeit:** Die Testergebnisse für Störungs-Tests können direkt mit Sicherheitsanforderungen verknüpft werden.
+
+---
 
 <div class="columns">
-<div class="two">
+<div>
 
-Der Vergleich der Zeitverläufe kritischer Signale zwischen dem nominalen und den fehlerhaften Läufen macht die **Auswirkungen (Effects)** der Störung direkt sichtbar.
+#### Faults im Test Case aktivieren
 
-##### Analysefragen:
--   Wird der sichere Zustand erreicht?
--   Wie schnell propagiert der Fehler durch das System?
--   Werden Sicherheitsgrenzen überschritten?
--   Funktionieren die implementierten Sicherheitsmechanismen wie erwartet?
+Im Test-Manager kann für jeden Test-Case die Störungssimulation aktiviert werden.
+
+1.  Wählen Sie den gewünschten **Test-Case** aus.
+2.  Navigieren Sie zum Abschnitt **`Fault Settings`**.
+3.  Legen Sie ein ein **`Fault Set`** an.
+4.  Fügen Sie dem Störungssatz die gewünschten **`Faults`** hinzu.
 
 </div>
-<div class="four">
+<div>
 
-![Screenshot des Simulation Data Inspectors. Im Anzeigebereich werden mehrere Graphen übereinandergelegt. Eine schwarze Linie zeigt das 'nominale' Verhalten eines Signals 'temperatur'. Eine rote Linie, beschriftet mit 'Fault: sensor_stuck_at_80', weicht deutlich davon ab und bleibt konstant. Eine blaue Linie ('Fault: sensor_offset') verläuft parallel zur nominalen.](placeholder.jpg)
+![Screenshot des 'Faults'-Abschnitts in einem Simulink Test Case. Ein Kontrollkästchen mit der Beschriftung 'Enable fault simulation for this test case' ist aktiviert. Darunter ist eine Schaltfläche 'Add Fault Set' zu sehen.](./Screenshots/Simulink_Test_Case_Fault_Settings.png)
 
 </div>
 </div>
