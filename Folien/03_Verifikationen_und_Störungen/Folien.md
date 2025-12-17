@@ -1773,7 +1773,7 @@ Der Fault Analyzer bietet drei wichtige Kernkonzepte für die Abbildung von Stö
 
 ![bg contain right](./Illustrationen/Fault_Analyzer_Konzept_Condition.jpg)
 
-#### Bedingung (*Condition*)
+#### Bedingung (*Conditional*)
 
 -   Eine logische Bedingung, die definiert, wann eine Störung aktiv wird.
 -   Kann zeitbasiert (`time > 10`) oder zustandsbasiert (`temperature > 90`) sein.
@@ -1835,6 +1835,26 @@ TODO Folie zu Custom Fault Behavior (Fault Input, Fault Output)
 ---
 
 TODO Folie zu Fehler-Triggern (Always On, Timed, Conditional, Manual)
+
+---
+
+TODO Folie zu Conditionals (Workspace Variable, Parameter, Signal)
+
+---
+
+TODO Folie: Übersicht über die Conditional-Einstellungen (Name, Ausdruck, Symbole)
+
+---
+
+TODO Folue zu Conditional-Name
+
+---
+
+TODO Folie zu Conditional-Ausdruck
+
+---
+
+TODO Folie zu Conditional-Symbolen
 
 ---
 
