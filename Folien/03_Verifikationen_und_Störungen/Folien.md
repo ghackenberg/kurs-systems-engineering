@@ -2043,6 +2043,14 @@ Im Test-Manager kann für jeden Test-Case die Störungssimulation aktiviert werd
 
 ---
 
+TODO Folie zur Darstellung der Testergebnisse (Testsuite und Testfälle mit grünem Häkchen oder rotem Kreuz)
+
+---
+
+TODO Folie zur Darstellung von Simulationsergebnissen mit dem Data Inspector (Zeitreihendiagramme für Faults und andere geloggte Signale)
+
+---
+
 <!-- Eine abstrakte Darstellung des Fallbeispiels Akku-Schrauber. Eine stilisierte Darstellung eines Akku-Schraubers, ähnlich der vorherigen, aber diesmal mit einem leuchtenden roten Fehlersymbol, das auf seiner Motorkomponente erscheint, vor einem galaktischen Hintergrund. -->
 
 ![bg right](./Illustrationen/Abschnitt_2_5.jpg)
