@@ -1950,7 +1950,9 @@ Ein **Conditional** ist ein benannter, wiederverwendbarer logischer Ausdruck, de
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration von Expressions im Stil einer technischen Zeichnung mit Comic-artiger Schattierung auf weißem Hintergrund -->
+<!-- Eine abstrakte Illustration, die das Konzept einer "Expression" im Kontext von Conditionals darstellt. Eine Formel, z.B. E=mc², schwebt als leuchtendes Hologramm, umgeben von Datenströmen und stilisierten Berechnungen. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right:30%](./Illustrationen/Fault_Analyzer_Conditional_Symbol_Expression.jpg)
 
 #### Symbole in Conditionals: `Expression`
 
@@ -1962,7 +1964,9 @@ Ein **Conditional** ist ein benannter, wiederverwendbarer logischer Ausdruck, de
 
 ---
 
-<!-- Platzhalter für Bildbeschreibung einer abstrakten Illustration von ModelElements im Stil einer technischen Zeichnung mit Comic-artiger Schattierung auf weißem Hintergrund -->
+<!-- Eine abstrakte Illustration, die das Konzept eines "ModelElement" im Kontext von Conditionals darstellt. Ein stilisierter, leuchtender Baustein, der ein Komponenten-Modell repräsentiert, ist mit einer Beschriftung "Motor_Regler" versehen. Datenpfeile verbinden ihn mit anderen, unscharfen Modellelementen im Hintergrund. Der Stil ist eine technische Zeichnung mit comic-artiger Schattierung auf weißem Hintergrund. -->
+
+![bg contain right:30%](./Illustrationen/Fault_Analyzer_Conditional_Symbol_ModelElement.jpg)
 
 #### Symbole in Conditionals: `ModelElement`
 
