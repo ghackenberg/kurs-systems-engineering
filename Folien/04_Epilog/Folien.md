@@ -52,7 +52,7 @@ Der Kurs ruht auf drei Säulen, die den Kern des modellbasierten Entwicklungspro
 ### Kapitel 3: Verifikationen & Störungen
 
 -   **Methodische Grundlage:** Wir nutzen etablierte Konzepte wie die testgetriebene Entwicklung (TDD) und das V-Modell (MIL, SIL, PIL, HIL), um die Qualität unserer Entwicklung sicherzustellen.
--   **Simulink Test:** Wir automatisieren die anforderungsbasierte Verifikation unserer Modelle. Mit dem Test Manager erstellen und verwalten wir Testfälle, die in isolierten Test-Harnesses ausgeführt und formal bewertet werden (Baseline, `verify`).
+-   **Simulink Test:** Wir automatisieren die anforderungsbasierte Verifikation unserer Modelle. Mit dem Test Manager verwalten wir Testfälle, die in isolierten Test-Harnesses ausgeführt und formal bewertet werden (Baseline, `verify`).
 -   **Testabdeckung (Coverage):** Wir messen objektiv die Gründlichkeit unserer Tests (z.B. Decision, Condition, MCDC), um ungetestete Logikpfade aufzudecken.
 -   **Simulink Fault Analyzer:** Wir analysieren die Systemsicherheit durch gezielte Injektion von Störungen und validieren so die Wirksamkeit unserer Sicherheitsmechanismen (FMEA).
 
