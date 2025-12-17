@@ -1806,59 +1806,156 @@ Dieser Unterabschnitt umfasst die folgenden Inhalte:
 
 ---
 
-TODO Folie: Signal (Linie) auswählen und Button "Add Fault" drücken
+<div class="columns">
+<div>
+
+#### Hinzufügen einer Störung
+
+Der erste Schritt ist, eine Störung zu einem bestimmten Element im Modell hinzuzufügen.
+
+1.  Wählen Sie eine **Signalleitung** aus, die von einer Störung betroffen sein soll.
+2.  Klicken Sie in der Symbolleiste der **Fault Analyzer** App auf **`Add Fault`**.
+
+</div>
+<div>
+
+![](./Screenshots/Simulink_Fault_Analyzer_Add_Fault.png)
+
+</div>
+</div>
 
 ---
 
-TODO Folie: Übersicht über die Fehlereinstellungen (Fehlername, Fehlerverhalten, Fehler-Trigger, Fehlerbeschreibung)
+<div class="columns">
+<div>
+
+#### Konfiguration der Störung
+
+1.  **Name:** Ein eindeutiger Name für die Störung (z.B. `Sensor_Stuck_At_Zero`).
+2.  **Description:** Detaillierte Beschrei-bung für die Nachvollziehbarkeit.
+3.  **Behavior:** Legt fest, was die Störung tut (z.B. den Signalwert auf 0 zwingen).
+4.  **Trigger:** Definiert, wann die Störung während der Simulation aktiviert wird (z.B. Zeitpunkt).
+
+</div>
+<div>
+
+![Screenshot des 'Fault Properties' Dialogs im Fault Analyzer. Wichtige Bereiche sind mit Zahlen markiert: (1) Das Textfeld 'Name', (2) das Textfeld 'Description', (3) das Dropdown-Menü 'Behavior' und (4) das Dropdown-Menü 'Trigger'.](./Screenshots/Simulink_Fault_Analyzer_Fault_Properties.png)
+
+</div>
+</div>
 
 ---
 
-TODO Folie zu Fehlernamen
+#### Name und Beschreibung der Störung
+
+Eine saubere Benennung und Dokumentation von Störungen ist entscheidend für die spätere Analyse und die Rückverfolgbarkeit zu Sicherheitsdokumenten wie einer FMEA.
+
+-   **Name:** Verwenden Sie eine konsistente Nomenklatur, die das betroffene Element und die Art der Störung widerspiegelt.
+    -   **Gut:** `TempSensor_Output_Stuck_At_120`
+    -   **Schlecht:** `Fault1`
+-   **Description:** Beschreiben Sie hier das Störungs-Szenario, die Annahmen und ggf. die ID der zugehörigen Anforderung aus der FMEA (z.B. `FMEA-ID: 12.3.4`).
 
 ---
 
-TODO Folie zu Fehlerbeschreibung
+#### Vordefinierte Störungsverhalten
+
+Simulink Fault Analyzer bietet eine Bibliothek (`mwfaultlib`) von vordefinierten, häufig auftretenden Störungsverhalten, die direkt auf Signale angewendet werden können.
+
+- **Force to value:** Zwingt das Signal auf einen konstanten Wert. (*Sensor-Ausfall (`0`), Kurzschluss (`VCC`)*)
+- **Add to value:** Addiert einen konstanten Offset zum Signal. (*Sensor-Drift*)
+- **Gain:** Multipliziert das Signal mit einem Faktor. (*Falsche Kalibrierung*)
+- **Add noise:** Fügt dem Signal ein Rauschen hinzu. (*Elektromagnetische Interferenz*).
+- **Stuck-at-Ground:** Spezialfall von `Force to value 0`. (*Kurzschluss nach Masse*)
+- **Unit Delay:** Verzögert das Signal um einen Simulationsschritt. (*Latenz im Kommunikationsbus*)
 
 ---
 
-TODO Folie zu Fehlerbibliotheken (mwfaultlib)
+<div class="columns">
+<div>
+
+#### Eigenes Störungsverhalten
+
+-   Ein Subsystem mit speziellen **`Fault Inport`** und **`Fault Outport`** Blöcken.
+-   **`Fault Inport`:** Empfängt das nominale (störungsfreie) Signal.
+-   **`Fault Outport`:** Sendet das modifizierte (fehlerhafte) Signal zurück.
+-   Dazwischen kann beliebige Simulink-Logik implementiert werden.
+
+</div>
+<div>
+
+![Screenshot eines Simulink Subsystems, das ein 'Custom Fault Behavior' modelliert. Ein 'Fault Input' Block ist mit einem 'Sine Wave' Block verbunden, der über einen 'Add' Block das Eingangssignal modifiziert. Das Ergebnis wird an einen 'Fault Output' Block weitergeleitet. Das Subsystem heißt 'Intermittent_Noise_Fault'.](./Screenshots/Simulink_Fault_Analyzer_Custom_Behavior.png)
+
+</div>
+</div>
 
 ---
 
-TODO Folie zu Fehlerverhalten (Absolute Value, Add Noise, Gain, Negate Value, Offset-by-1, Stuck-at-Constant, Stuck-at-Ground, Unit Delay)
+#### Störungs-Trigger
+
+Der Trigger legt fest, wann eine Störung während der Simulation aktiviert wird.
+
+<div class="columns top">
+<div>
+
+##### `Always On`
+Die Störung ist von Beginn der Simulation an aktiv. Nützlich für permanente Hardware-Defekte.
+
+##### `Timed`
+Die Störung wird zu einem bestimmten Zeitpunkt oder innerhalb eines Zeitintervalls aktiviert. `time >= 2.5`
+
+</div>
+<div>
+
+##### `Conditional`
+Die Störung wird durch eine Bedingung ausgelöst, die von anderen Signalen oder Zuständen abhängt. `temperature > 100`
+
+##### `Manual`
+Die Störung wird nur dann aktiviert, wenn sie manuell in einem `Fault Set` für die Simulation ausgewählt wird.
+
+</div>
+</div>
 
 ---
 
-TODO Folie zu Custom Fault Behavior (Fault Input, Fault Output)
+#### Wiederverwendbare Trigger: **Conditionals**
+
+Ein **Conditional** ist ein benannter, wiederverwendbarer logischer Ausdruck, der als Trigger für eine oder mehrere Störungen dienen kann.
+
+-   **Zentralisierung:** Anstatt komplexe Trigger-Logik in jeder einzelnen Störung zu duplizieren, wird sie einmal als `Conditional` definiert.
+-   **Lesbarkeit:** Statt `signal_A > 5 && (signal_B == 0 || signal_C < 2.3)` kann der verständliche Name des Conditionals (z.B. `High_Load_Condition`) als Trigger verwendet werden.
+-   **Management:** Conditionals werden zentral im Fault Analyzer verwaltet.
 
 ---
 
-TODO Folie zu Fehler-Triggern (Always On, Timed, Conditional, Manual)
+![Screenshot des 'Conditionals'-Bereichs im Fault Analyzer. Es ist eine Liste von definierten Conditionals zu sehen, z.B. 'Overheat_Condition' mit dem Ausdruck 'temperature > 120' und 'System_Armed' mit dem Ausdruck 'mode == 1'.](./Screenshots/Simulink_Fault_Analyzer_Conditionals.png)
 
 ---
 
-TODO Folie zu Conditionals (Workspace Variable, Parameter, Signal)
+<div class="columns">
+<div>
+
+#### Konfiguration eines Conditionals
+
+1.  **Name:** Ein eindeutiger Name (z.B. `Critical_Temp`).
+2.  **Expression:** Der logische Ausdruck, der `true` ergeben muss, um den Trigger auszulösen.
+3.  **Symbols:** Die im Ausdruck verwendeten Variablennamen (Symbole). Es werden die beiden Typen *Expression* und *ModelElement* untersützt.
+
+</div>
+<div>
+
+![Screenshot des 'Conditional Properties' Dialogs. Markiert sind: (1) das Textfeld 'Name' mit dem Wert 'High_Temp_And_Load', (2) das Feld 'Expression' mit 'temp > 100 && load > 0.9', und (3) die 'Symbols'-Tabelle, in der das Symbol 'temp' dem Signal 'EngineTemperature' und 'load' dem Signal 'EngineLoad' zugeordnet ist.](./Screenshots/Simulink_Fault_Analyzer_Conditional_Properties.png)
+
+</div>
+</div>
 
 ---
 
-TODO Folie: Übersicht über die Conditional-Einstellungen (Name, Ausdruck, Symbole)
-
----
-
-TODO Folue zu Conditional-Name
-
----
-
-TODO Folie zu Conditional-Ausdruck
-
----
-
-TODO Folie zu Conditional-Symbolen
+TODO Folie zu Symbolen vom Typ Expression und ModelElement in den Conditional-Properties
 
 ---
 
 <!-- Eine abstrakte Darstellung der Sicherheitsanalyse (FMEA). Ein komplexes, vernetztes Netz von Knoten wird gezeigt, bei dem einige Pfade rot hervorgehoben sind, um die Ausbreitung eines Fehlers zu verfolgen. Die Darstellung ähnelt einer Himmelskarte, die Flugbahnen von Asteroiden zeigt. -->
+
 
 ![bg right](./Illustrationen/Abschnitt_2_4.jpg)
 
